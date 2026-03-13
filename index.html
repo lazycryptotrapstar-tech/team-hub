@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+        <html>
+          <head>
+            <title data-id="th-modified">Web Page</title>
+            
+          <meta property="og:title" content="Web Page" data-id="th-modified" ><meta name="description" content="code" data-id="th-modified" ><meta property="og:description" content="code" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:url" content="https://mcneal-gcl-hub.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="mcneal-gcl-hub.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+          <body>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title data-id="th-modified">Team Central</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Web Page" data-id="th-modified">
+    <meta name="description" content="code" data-id="th-modified">
+    <meta property="og:description" content="code" data-id="th-modified">
+    <meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified">
+    <meta property="og:url" content="https://mcneal-gcl-hub.tiiny.site/" data-id="th-modified">
+    <meta property="og:type" content="website" data-id="th-modified">
+    
+
+    <!-- 1. TAILWIND CONFIG FOR DYNAMIC COLORS -->
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: 'var(--primary)', secondary: 'var(--secondary)' }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Fallback colors (overwritten by JS config) */
+            --primary: #00234b; 
+            --secondary: #ffcc00;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        @media print {
+            body { background-color: white; padding: 0; margin: 0; }
+            .no-print { display: none !important; }
+            .print-container { 
+                box-shadow: none !important; 
+                border: none !important; 
+                width: 100% !important; 
+                max-width: 100% !important; 
+                margin: 0 !important;
+                border-radius: 0 !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+        
+        .tactical-surface {
+            background-color: #15803d !important;
+            background-image: repeating-linear-gradient(
+                90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05) 10%, transparent 10%, transparent 20%
+            );
+        }
+
+        .engine-dot {
+            background-color: var(--secondary) !important;
+            color: #000 !important;
+            border: 2px solid var(--primary) !important;
+        }
+        
+        .progress-bar { height: 12px; background-color: #e5e7eb; border-radius: 6px; overflow: hidden; }
+        .progress-fill { height: 100%; }
+        .result-w { color: #16a34a; }
+        .result-l { color: #dc2626; }
+        .result-d { color: #4b5563; }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid var(--secondary);
+            width: 18px; height: 18px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .tab-active { border-bottom: 4px solid var(--secondary); color: var(--secondary) !important; }
+        
+        /* Tactical animations */
+        .player-dot { transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .dimmed { opacity: 0.35; transform: translate(-50%, -50%) scale(0.9) !important; filter: grayscale(50%); }
+        .highlighted { opacity: 1; transform: translate(-50%, -50%) scale(1.1) !important; z-index: 20; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
+    </style>
+</head>
+<body>
+
+    <!-- ==================================================================== -->
+    <!-- 2. MULTI-TEAM DATA CONFIGURATION                                     -->
+    <!-- ==================================================================== -->
+    <script>
+        const TEAMS = {
+            // ==========================================
+            // TEAM 1: U13 GIRLS 
+            // ==========================================
+            "u13": {
+                branding: {
+                    name: "Sting McNeal 13G",        
+                    league: "GCL U13 DIV 2",          
+                    season: "Spring 2026",            
+                    motto: "Pride • Passion • Performance", 
+                    website: "StingSoccer.com",       
+                    primaryColor: "#00234b",          
+                    secondaryColor: "#ffcc00",        
+                    sport: "Soccer",                  
+                    tacticalSystem: "4-3-3 Position Guide" 
+                },
+                lastUpdate: "Mar 02, 2026",
+                record: { wins: 6, losses: 6, draws: 1 },
+                league: { rank: 10, totalTeams: 18, points: 19, ppg: "1.46", goalDiff: "+1" },
+                goals:  { for: 21, against: 20 },
+                matches: [
+                    { date: "Aug 23", rank: "12", opp: "Frisco Fusion Blue", score: "3 - 1", res: "W" },
+                    { date: "Sep 07", rank: "8",  opp: "AD Youth Blue Colon", score: "0 - 2", res: "L" },
+                    { date: "Sep 20", rank: "18", opp: "FC Dallas Youth White", score: "5 - 1", res: "W" },
+                    { date: "Oct 04", rank: "3",  opp: "Sting Rodriguez", score: "1 - 3", res: "L" },
+                    { date: "Oct 08", rank: "13", opp: "Dallas Cosmos Red", score: "0 - 1", res: "L" },
+                    { date: "Oct 18", rank: "2",  opp: "FCD FC DIVAS XIII", score: "1 - 2", res: "L" },
+                    { date: "Oct 19", rank: "16", opp: "AD Youth Gomez", score: "3 - 1", res: "W" },
+                    { date: "Nov 01", rank: "11", opp: "FCD-ETX Premier", score: "0 - 0", res: "D" },
+                    { date: "Nov 11", rank: "1",  opp: "Coppell FC Oland Red", score: "2 - 5", res: "L" },
+                    { date: "Feb 03", rank: "6",  opp: "LC United Evans", score: "2 - 1", res: "W" },
+                    { date: "Feb 22", rank: "7",  opp: "NTX Lioness Select", score: "1 - 0", res: "W" },
+                    { date: "Feb 28", rank: "5",  opp: "ND Panthers Black 13G", score: "2 - 3", res: "L" },
+                    { date: "Mar 01", rank: "15", opp: "Ulete FC 2013G Chris", score: "1 - 0", res: "W", highlight: true }
+                ],
+                nextMatch: {
+                    oppName: "Victory SC 2013 Girls FW",
+                    date: "Sun Mar 08", time: "11:30 AM",
+                    oppRank: 9, oppTotalTeams: 18, oppRecord: "6-4-1",
+                    lastMatch: { date: "Feb 28", rank: "17", opp: "Sting Hubbard", score: "5 - 0", res: "W" }
+                },
+                remainingSchedule: [
+                    { date: "Sun Mar 08", rank: "9",  opp: "Victory SC 2013 Girls FW", time: "11:30 AM", loc: "UT Dallas #04" },
+                    { date: "Sat Mar 21", rank: "4",  opp: "Sting Attack 13G Pantoja", time: "8:00 AM", loc: "UT Dallas #06" },
+                    { date: "Tue Apr 14", rank: "17", opp: "Sting 13G Hubbard", time: "6:30 PM", loc: "UT Dallas #07" }
+                ],
+                standings: [
+                    { rank: 1, name: "Coppell FC Oland Red", mp: 13, w: 11, d: 1, l: 1, gf: 35, ga: 10, gd: "+25", pts: 34 },
+                    { rank: 2, name: "FCD FC DIVAS XIII", mp: 13, w: 10, d: 2, l: 1, gf: 30, ga: 12, gd: "+18", pts: 32 },
+                    { rank: 3, name: "Sting Rodriguez", mp: 13, w: 9, d: 2, l: 2, gf: 28, ga: 14, gd: "+14", pts: 29 },
+                    { rank: 4, name: "Sting Attack 13G Pantoja", mp: 13, w: 8, d: 3, l: 2, gf: 25, ga: 13, gd: "+12", pts: 27 },
+                    { rank: 5, name: "ND Panthers Black 13G", mp: 13, w: 8, d: 2, l: 3, gf: 22, ga: 15, gd: "+7", pts: 26 },
+                    { rank: 6, name: "LC United Evans", mp: 13, w: 7, d: 3, l: 3, gf: 20, ga: 16, gd: "+4", pts: 24 },
+                    { rank: 7, name: "NTX Lioness Select", mp: 13, w: 7, d: 2, l: 4, gf: 18, ga: 15, gd: "+3", pts: 23 },
+                    { rank: 8, name: "AD Youth Blue Colon", mp: 13, w: 6, d: 4, l: 3, gf: 19, ga: 17, gd: "+2", pts: 22 },
+                    { rank: 9, name: "Victory SC 2013 Girls FW", mp: 11, w: 6, d: 1, l: 4, gf: 17, ga: 14, gd: "+3", pts: 19 },
+                    { rank: 10, name: "Sting McNeal 13G", mp: 13, w: 6, d: 1, l: 6, gf: 21, ga: 20, gd: "+1", pts: 19 },
+                    { rank: 11, name: "FCD-ETX Premier", mp: 13, w: 5, d: 3, l: 5, gf: 16, ga: 18, gd: "-2", pts: 18 },
+                    { rank: 12, name: "Frisco Fusion Blue", mp: 13, w: 5, d: 2, l: 6, gf: 15, ga: 19, gd: "-4", pts: 17 },
+                    { rank: 13, name: "Dallas Cosmos Red", mp: 13, w: 4, d: 3, l: 6, gf: 12, ga: 18, gd: "-6", pts: 15 },
+                    { rank: 14, name: "Sting Hubbard", mp: 12, w: 4, d: 2, l: 6, gf: 10, ga: 22, gd: "-12", pts: 14 },
+                    { rank: 15, name: "Ulete FC 2013G Chris", mp: 13, w: 3, d: 2, l: 8, gf: 9, ga: 24, gd: "-15", pts: 11 },
+                    { rank: 16, name: "AD Youth Gomez", mp: 13, w: 2, d: 3, l: 8, gf: 8, ga: 25, gd: "-17", pts: 9 },
+                    { rank: 17, name: "FC Dallas Youth White", mp: 13, w: 1, d: 2, l: 10, gf: 5, ga: 28, gd: "-23", pts: 5 },
+                    { rank: 18, name: "D'Feeters Kicks 13G", mp: 13, w: 0, d: 1, l: 12, gf: 2, ga: 35, gd: "-33", pts: 1 }
+                ]
+            },
+
+            // ==========================================
+            // TEAM 2: U12 (14G) GIRLS
+            // ==========================================
+            "u12": {
+                branding: {
+                    name: "Sting McNeal 14G",        
+                    league: "GCL U12 DIV 1",          
+                    season: "Spring 2026",            
+                    motto: "Pride • Passion • Performance", 
+                    website: "StingSoccer.com",       
+                    primaryColor: "#00234b",          
+                    secondaryColor: "#ffcc00",        
+                    sport: "Soccer",                  
+                    tacticalSystem: "4-3-3 Position Guide"  
+                },
+                lastUpdate: "Mar 02, 2026",
+                record: { wins: 4, losses: 4, draws: 3 }, 
+                league: { rank: 8, totalTeams: 16, points: 15, ppg: "1.36", goalDiff: "+6" },
+                goals:  { for: 22, against: 16 },
+                matches: [
+                    { date: "Sep 07", rank: "15", opp: "Dallas Surf 14G East", score: "3 - 0", res: "W" },
+                    { date: "Sep 14", rank: "6",  opp: "Atletico Dallas Pre GA", score: "2 - 0", res: "W" },
+                    { date: "Sep 27", rank: "2",  opp: "NTX Celtic 14G Bravo", score: "1 - 2", res: "L" },
+                    { date: "Oct 11", rank: "9",  opp: "Pony Xpress 14/15G", score: "5 - 4", res: "W" },
+                    { date: "Oct 12", rank: "5",  opp: "Solar Byars 14G", score: "1 - 2", res: "L" },
+                    { date: "Oct 14", rank: "14", opp: "Sting G14 Fuentes", score: "5 - 0", res: "W" },
+                    { date: "Nov 05", rank: "3",  opp: "Solar 14G Carrillo", score: "1 - 2", res: "L" },
+                    { date: "Nov 08", rank: "1",  opp: "Juventus Premier 14G", score: "1 - 1", res: "D" },
+                    { date: "Nov 09", rank: "7",  opp: "Waco Texans 2014", score: "0 - 2", res: "L" },
+                    { date: "Feb 21", rank: "2",  opp: "NTX Celtic 14G Bravo", score: "1 - 1", res: "D" },
+                    { date: "Feb 28", rank: "7",  opp: "Waco Texans 2014", score: "2 - 2", res: "D", highlight: true }
+                ],
+                nextMatch: {
+                    oppName: "Atletico Dallas Blanton (Pre GA)",
+                    date: "Wed Mar 04", time: "6:30 PM",
+                    oppRank: 6, oppTotalTeams: 16, oppRecord: "6-5-1",
+                    lastMatch: { date: "Feb 25", rank: "14", opp: "Sting Fuentes", score: "1 - 1", res: "D" }
+                },
+                remainingSchedule: [
+                    { date: "Wed Mar 04", rank: "6", opp: "Atletico Dallas Pre GA", time: "6:30 PM", loc: "UT Dallas #10" },
+                    { date: "Sat Mar 21", rank: "16", opp: "FW All Stars FC 2014G", time: "1:00 PM", loc: "UT Dallas #06" },
+                    { date: "Sun Mar 22", rank: "12", opp: "FC Dallas Youth 14G West", time: "1:00 PM", loc: "The Athletic Club #5" },
+                    { date: "Sun Mar 29", rank: "4", opp: "Sting G14 J Salazar", time: "12:45 PM", loc: "Railroad Park #1" },
+                    { date: "Wed Apr 01", rank: "15", opp: "Dallas Surf 14G East", time: "6:30 PM", loc: "UT Dallas #09" },
+                    { date: "Sun Apr 12", rank: "11", opp: "FC Dallas Youth 14G Black", time: "9:15 AM", loc: "The Athletic Club #6" }
+                ],
+                standings: [
+                    { rank: 1, name: "Juventus Premier 14G", mp: 11, w: 8, d: 2, l: 1, gf: 28, ga: 10, gd: "+18", pts: 26 },
+                    { rank: 2, name: "NTX Celtic 14G Bravo", mp: 11, w: 7, d: 3, l: 1, gf: 25, ga: 11, gd: "+14", pts: 24 },
+                    { rank: 3, name: "Solar 14G Carrillo", mp: 11, w: 7, d: 2, l: 2, gf: 24, ga: 12, gd: "+12", pts: 23 },
+                    { rank: 4, name: "Sting G14 J Salazar", mp: 11, w: 6, d: 3, l: 2, gf: 21, ga: 11, gd: "+10", pts: 21 },
+                    { rank: 5, name: "Solar Byars 14G", mp: 11, w: 6, d: 2, l: 3, gf: 19, ga: 14, gd: "+5", pts: 20 },
+                    { rank: 6, name: "Atletico Dallas Pre GA", mp: 12, w: 6, d: 1, l: 5, gf: 18, ga: 15, gd: "+3", pts: 19 },
+                    { rank: 7, name: "Waco Texans 2014", mp: 11, w: 5, d: 3, l: 3, gf: 15, ga: 13, gd: "+2", pts: 18 },
+                    { rank: 8, name: "Sting McNeal 14G", mp: 11, w: 4, d: 3, l: 4, gf: 22, ga: 16, gd: "+6", pts: 15 },
+                    { rank: 9, name: "Pony Xpress 14/15G", mp: 11, w: 4, d: 2, l: 5, gf: 16, ga: 19, gd: "-3", pts: 14 },
+                    { rank: 10, name: "FC Dallas Youth 14G Black", mp: 11, w: 4, d: 1, l: 6, gf: 14, ga: 20, gd: "-6", pts: 13 },
+                    { rank: 11, name: "FC Dallas Youth 14G West", mp: 11, w: 3, d: 2, l: 6, gf: 12, ga: 18, gd: "-6", pts: 11 },
+                    { rank: 12, name: "Dallas Surf 14G East", mp: 11, w: 3, d: 1, l: 7, gf: 10, ga: 22, gd: "-12", pts: 10 },
+                    { rank: 13, name: "Sting G14 Fuentes", mp: 11, w: 2, d: 3, l: 6, gf: 9, ga: 21, gd: "-12", pts: 9 },
+                    { rank: 14, name: "BVB International 14G", mp: 11, w: 2, d: 2, l: 7, gf: 8, ga: 20, gd: "-12", pts: 8 },
+                    { rank: 15, name: "DKSC 14G Royal", mp: 11, w: 1, d: 2, l: 8, gf: 6, ga: 25, gd: "-19", pts: 5 },
+                    { rank: 16, name: "FW All Stars FC 2014G", mp: 11, w: 0, d: 1, l: 10, gf: 4, ga: 28, gd: "-24", pts: 1 }
+                ]
+            }
+        };
+
+        // Initialize state
+        let currentTeamId = 'u13'; 
+        let TEAM_CONFIG = TEAMS[currentTeamId];
+        let currentTab = 'stats';
+        let currentTacticView = 'overview'; // Options: overview, defense, midfield, attack
+    </script>
+    <!-- ==================================================================== -->
+
+
+    <!-- TEAM SWITCHER (Top Nav) -->
+    <div id="team-switcher" class="no-print mb-4 flex flex-wrap justify-center gap-3 w-full max-w-5xl transition-all">
+        <!-- Buttons injected by JS -->
+    </div>
+
+    <!-- COACH TOOLBOX / TAB NAV -->
+    <div id="coach-toolbox" class="no-print mb-4 bg-white p-4 rounded-xl shadow-lg border-l-4 border-secondary w-full max-w-5xl transition-all">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6">
+                <button onclick="switchTab('stats')" id="tabStats" class="font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all tab-active">Season Stats</button>
+                <button onclick="switchTab('standings')" id="tabStandings" class="font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all text-gray-400">Standings</button>
+                <button onclick="switchTab('schedule')" id="tabSchedule" class="font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all text-gray-400">Schedule</button>
+                <button onclick="switchTab('outlook')" id="tabOutlook" class="font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all text-gray-400">Season Outlook</button>
+                <button onclick="switchTab('tactics')" id="tabTactics" class="font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all text-gray-400">Tactical Guide</button>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="window.print()" class="bg-gray-800 hover:bg-black text-white font-bold py-1.5 px-3 rounded-lg transition-all text-[10px]">Save PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div id="main-content" class="print-container w-full max-w-5xl transition-all">
+        <!-- Content injected by JavaScript -->
+    </div>
+
+    <script>
+        function renderTeamSwitcher() {
+            const container = document.getElementById('team-switcher');
+            container.innerHTML = Object.keys(TEAMS).map(id => {
+                const isActive = id === currentTeamId;
+                const activeClasses = "bg-primary text-white shadow-lg border-primary";
+                const inactiveClasses = "bg-white text-gray-600 border-gray-300 hover:bg-gray-50 opacity-70 hover:opacity-100";
+                return `<button onclick="switchTeam('${id}')" class="px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest border-2 transition-all ${isActive ? activeClasses : inactiveClasses}">${TEAMS[id].branding.name}</button>`;
+            }).join('');
+        }
+
+        function switchTeam(teamId) {
+            currentTeamId = teamId;
+            TEAM_CONFIG = TEAMS[teamId];
+            applyTheme();
+            renderTeamSwitcher();
+            render();
+        }
+
+        function applyTheme() {
+            document.documentElement.style.setProperty('--primary', TEAM_CONFIG.branding.primaryColor);
+            document.documentElement.style.setProperty('--secondary', TEAM_CONFIG.branding.secondaryColor);
+            document.title = `${TEAM_CONFIG.branding.name} - Team Central`;
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            // Reset tactic view to overview when leaving tabs
+            if(tab !== 'tactics') currentTacticView = 'overview'; 
+            
+            const main = document.getElementById('main-content');
+            const toolbox = document.getElementById('coach-toolbox');
+            const switcher = document.getElementById('team-switcher');
+            
+            if (tab === 'stats' || tab === 'standings' || tab === 'schedule' || tab === 'outlook') {
+                main.className = "print-container w-full max-w-5xl transition-all";
+                toolbox.className = "no-print mb-4 bg-white p-4 rounded-xl shadow-lg border-l-4 border-secondary w-full max-w-5xl transition-all";
+                switcher.className = "no-print mb-4 flex flex-wrap justify-center gap-3 w-full max-w-5xl transition-all";
+            } else {
+                main.className = "print-container w-full max-w-4xl transition-all";
+                toolbox.className = "no-print mb-4 bg-white p-4 rounded-xl shadow-lg border-l-4 border-secondary w-full max-w-4xl transition-all";
+                switcher.className = "no-print mb-4 flex flex-wrap justify-center gap-3 w-full max-w-4xl transition-all";
+            }
+            render();
+        }
+
+        const PLAYER_CONFIG = [
+            { id: 1, type: 'gk', base: [50, 92], defense: [50, 85], midfield: [50, 92], attack: [50, 85] },
+            { id: 2, type: 'def', base: [85, 75], defense: [90, 60], midfield: [85, 60], attack: [90, 30] },
+            { id: 3, type: 'def', base: [15, 75], defense: [10, 60], midfield: [15, 60], attack: [10, 30] },
+            { id: 4, type: 'def', base: [65, 80], defense: [82, 85], midfield: [65, 75], attack: [75, 55] },
+            { id: 5, type: 'def', base: [35, 80], defense: [18, 85], midfield: [35, 75], attack: [25, 55] },
+            { id: 6, type: 'mid', base: [50, 65], defense: [50, 75], midfield: [50, 67], attack: [50, 45] },
+            { id: 8, type: 'mid', base: [30, 50], defense: [35, 55], midfield: [25, 48], attack: [35, 25] },
+            { id: 10, type: 'mid', base: [70, 50], defense: [65, 55], midfield: [75, 48], attack: [65, 25] },
+            { id: 7, type: 'att', base: [85, 30], defense: [85, 40], midfield: [88, 28], attack: [75, 15] },
+            { id: 11, type: 'att', base: [15, 30], defense: [15, 40], midfield: [12, 28], attack: [25, 15] },
+            { id: 9, type: 'att', base: [50, 20], defense: [50, 40], midfield: [50, 20], attack: [50, 10] },
+        ];
+
+        function switchTacticView(view) {
+            currentTacticView = view;
+            if (document.getElementById('tactical-board-container')) {
+                updateTacticalBoard(); 
+            } else {
+                renderTactics(document.getElementById('main-content'));
+            }
+        }
+        
+        function getPlayerClasses(p, view) {
+            let styleClass = '';
+            if (p.id === 1 || p.type === 'def') styleClass = 'bg-white text-primary border-secondary';
+            if (p.type === 'mid') styleClass = 'engine-dot text-black border-primary';
+            if (p.type === 'att') styleClass = 'bg-red-600 text-white border-white';
+
+            let extraClass = 'dimmed';
+            if (view === 'overview') extraClass = 'highlighted';
+            else if (view === 'defense' && [1, 2, 3, 4, 5, 6].includes(p.id)) extraClass = 'highlighted shadow-2xl';
+            else if (view === 'midfield' && [6, 8, 10].includes(p.id)) extraClass = 'highlighted shadow-2xl';
+            else if (view === 'midfield' && [2, 3].includes(p.id)) extraClass = 'opacity-80 scale-100';
+            else if (view === 'attack') {
+                if ([2, 3, 7, 9, 11].includes(p.id)) extraClass = 'highlighted shadow-2xl ring-4 ring-yellow-400/50';
+                else if ([4, 5, 6].includes(p.id)) extraClass = 'highlighted shadow-xl';
+            }
+            return `${styleClass} ${extraClass}`;
+        }
+
+        function getTacticalOverlays(view) {
+            const secondaryColor = TEAM_CONFIG.branding.secondaryColor;
+            if(view === 'defense') {
+                return `
+                    <path d="M 12 80 Q 12 60 12 35" fill="none" stroke="${secondaryColor}" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrowSec)"/>
+                    <path d="M 88 80 Q 88 60 88 35" fill="none" stroke="${secondaryColor}" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrowSec)"/>
+                    <path d="M 31 85 L 18 85" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="2" marker-end="url(#arrowWhite)"/>
+                    <path d="M 69 85 L 82 85" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="2" marker-end="url(#arrowWhite)"/>
+                `;
+            } else if (view === 'midfield') {
+                return `
+                    <polygon points="50,67 25,48 75,48" fill="${secondaryColor}33" stroke="${secondaryColor}" stroke-width="1.5" stroke-dasharray="2"/>
+                    <path d="M 25 48 Q 30 35 38 22" fill="none" stroke="${secondaryColor}" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrowSec)"/>
+                    <path d="M 75 48 Q 70 35 62 22" fill="none" stroke="${secondaryColor}" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrowSec)"/>
+                `;
+            } else if (view === 'attack') {
+                return `
+                    <path d="M 12 28 Q 20 15 35 12" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrowWhite)"/>
+                    <path d="M 88 28 Q 80 15 65 12" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrowWhite)"/>
+                    <path d="M 50 28 Q 50 15 50 8" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrowWhite)"/>
+                    <path d="M 25 48 L 25 35" fill="none" stroke="${secondaryColor}" stroke-width="1" stroke-dasharray="2" marker-end="url(#arrowSec)"/>
+                    <path d="M 75 48 L 75 35" fill="none" stroke="${secondaryColor}" stroke-width="1" stroke-dasharray="2" marker-end="url(#arrowSec)"/>
+                `;
+            }
+            return '';
+        }
+
+        function getTacticalDescHTML(view) {
+            if(view === 'overview') {
+                return `
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-300">
+                            <h4 class="font-black text-sm uppercase text-primary mb-1">The 4-3-3 System</h4>
+                            <p class="text-xs text-gray-700 font-medium">Select a focused flow view from the menu above to see specific movement rules and tactical responsibilities for our Defenders, Midfielders, and Forwards.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 bg-gray-100 border border-gray-300 rounded text-[9px] font-black uppercase text-gray-700 tracking-wider">Overview</span><div class="h-px flex-1 bg-gray-200"></div></div>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-primary w-12 sm:w-14 text-center shrink-0">DEF</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">The Shield</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">Maintain a high line, win 1v1 battles, and use the fullbacks to provide width in the attack.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-amber-500 w-12 sm:w-14 text-center shrink-0">MID</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">Engine Room</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">Control the center with passing triangles. The #6 anchors, while the 8 and 10 create overloads.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-red-600 w-12 sm:w-14 text-center shrink-0">FWD</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">Strike Force</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">Lead the high press. Stretch the pitch wide, isolate defenders, and finish chances in the box.</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (view === 'defense') {
+                return `
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 bg-gray-100 border border-gray-300 rounded text-[9px] font-black uppercase text-gray-700 tracking-wider">Defense Flow</span><div class="h-px flex-1 bg-gray-200"></div></div>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-primary w-12 sm:w-14 text-center shrink-0">1/4/5</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">Playing Out The Back</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">The CBs split wide to the edges of the box. The GK acts as a pivot to create passing lanes and bypass the first line of pressure.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-primary w-12 sm:w-14 text-center shrink-0">2/3</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">Fullback Expansion</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">Immediately upon winning possession, fullbacks push high and hug the touchline. This stretches the opponent and creates space inside.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-amber-500 w-12 sm:w-14 text-center shrink-0">6</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">Rest Defense</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">When our fullbacks push up, the #6 must drop centrally to form a temporary back-three, shielding us from counter-attacks.</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (view === 'midfield') {
+                return `
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 bg-yellow-100 border border-secondary rounded text-[9px] font-black uppercase text-primary tracking-wider">Midfield Flow</span><div class="h-px flex-1 bg-gray-200"></div></div>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-amber-500 w-12 sm:w-14 text-center shrink-0">6/8/10</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">The Triangle</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">The 6, 8, and 10 must never stand in a flat line. Always form dynamic triangles to ensure the ball carrier has two passing options.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-amber-500 w-12 sm:w-14 text-center shrink-0">8/10</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">Half-Space Dominance</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">The 8 and 10 push into the "half-spaces" (the channels between the opponent's wide and central defenders) to turn and create overloads.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-amber-500 w-12 sm:w-14 text-center shrink-0">6</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">The Pivot</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">The anchor dictates the tempo. If the center is blocked, the #6 receives the ball and quickly switches play to the weak side.</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (view === 'attack') {
+                return `
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 bg-red-100 border border-red-300 rounded text-[9px] font-black uppercase text-red-700 tracking-wider">Attack Flow</span><div class="h-px flex-1 bg-gray-200"></div></div>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-red-600 w-12 sm:w-14 text-center shrink-0">7/9/11</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">High Press Triggers</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">The front three trigger an aggressive press immediately when the opponent plays backward or a defender takes a bad touch.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-primary w-12 sm:w-14 text-center shrink-0">2/3</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">Auxiliary Attackers</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">When possession is secured, fullbacks push wide and high up the flanks, creating 2v1 overloads alongside our wingers.</p></div></div>
+                                <div class="flex gap-4 sm:gap-5 items-start"><span class="font-black text-lg sm:text-xl text-primary w-12 sm:w-14 text-center shrink-0">4/5/6</span><div class="flex-1"><h4 class="font-bold text-[11px] sm:text-xs uppercase text-primary mb-0.5">High Rest Defense</h4><p class="text-[13px] sm:text-sm text-gray-900 font-medium leading-tight">With fullbacks committed forward, the CBs and CDM establish a high line near midfield to cover half-spaces and suffocate clearances.</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            return '';
+        }
+
+        function updateTacticalBoard() {
+            // Update Navigation Buttons 
+            ['overview', 'defense', 'midfield', 'attack'].forEach(v => {
+                const btn = document.getElementById('btn-tactic-' + v);
+                if(btn) {
+                    btn.className = `px-4 py-1.5 rounded-md font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all ${currentTacticView === v ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:bg-gray-200'}`;
+                }
+            });
+
+            // Smoothly Update Player Dots
+            PLAYER_CONFIG.forEach(p => {
+                const dot = document.getElementById('player-dot-' + p.id);
+                if(dot) {
+                    const pos = p[currentTacticView] || p.base;
+                    dot.style.left = `${pos[0]}%`;
+                    dot.style.top = `${pos[1]}%`;
+                    dot.className = `player-dot absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full font-black text-[10px] md:text-xs border-2 shadow-lg z-20 ${getPlayerClasses(p, currentTacticView)}`;
+                }
+            });
+
+            // Replace SVG Movement Lines and Explanation Text
+            document.getElementById('tactical-svg-overlays').innerHTML = getTacticalOverlays(currentTacticView);
+            document.getElementById('tactical-desc-container').innerHTML = getTacticalDescHTML(currentTacticView);
+        }
+
+        function renderTactics(container) {
+            // Build the initial HTML framework for the Board once
+            const playersHtml = PLAYER_CONFIG.map(p => {
+                const pos = p[currentTacticView] || p.base;
+                return `<div id="player-dot-${p.id}" class="player-dot absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full font-black text-[10px] md:text-xs border-2 shadow-lg z-20 ${getPlayerClasses(p, currentTacticView)}" style="left: ${pos[0]}%; top: ${pos[1]}%;">${p.id}</div>`;
+            }).join('');
+
+            container.innerHTML = `
+                <div id="tactical-board-container" class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+                    
+                    <!-- TACTICAL SUB-NAV TRIGGERS -->
+                    <div class="bg-gray-50 border-b border-gray-200 p-3">
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <button id="btn-tactic-overview" onclick="switchTacticView('overview')" class="px-4 py-1.5 rounded-md font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all ${currentTacticView==='overview' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:bg-gray-200'}">Full Team</button>
+                            <button id="btn-tactic-defense" onclick="switchTacticView('defense')" class="px-4 py-1.5 rounded-md font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all ${currentTacticView==='defense' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:bg-gray-200'}">Defense Flow</button>
+                            <button id="btn-tactic-midfield" onclick="switchTacticView('midfield')" class="px-4 py-1.5 rounded-md font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all ${currentTacticView==='midfield' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:bg-gray-200'}">Midfield Flow</button>
+                            <button id="btn-tactic-attack" onclick="switchTacticView('attack')" class="px-4 py-1.5 rounded-md font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all ${currentTacticView==='attack' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:bg-gray-200'}">Attack Flow</button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row">
+                        <!-- LEFT COLUMN: TACTICAL FIELD -->
+                        <div class="bg-primary w-full md:w-[42%] p-5 text-white flex flex-col items-center justify-center relative">
+                            <div class="text-center w-full mb-3 z-20">
+                                <h1 class="text-3xl font-black italic uppercase leading-none tracking-tighter">${TEAM_CONFIG.branding.name}</h1>
+                                <p class="text-secondary font-bold uppercase tracking-[0.2em] text-[9px] mt-1">${TEAM_CONFIG.branding.tacticalSystem}</p>
+                            </div>
+                            
+                            <div class="relative w-full aspect-[3/4] tactical-surface border-4 border-white/80 rounded-lg overflow-hidden shadow-2xl">
+                                
+                                <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none z-10">
+                                    <defs>
+                                        <marker id="arrowSec" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="${TEAM_CONFIG.branding.secondaryColor}" />
+                                        </marker>
+                                        <marker id="arrowWhite" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff" />
+                                        </marker>
+                                    </defs>
+                                    <g id="tactical-svg-overlays">
+                                        ${getTacticalOverlays(currentTacticView)}
+                                    </g>
+                                </svg>
+
+                                <!-- Field Lines -->
+                                <div class="absolute inset-x-0 top-0 h-1/2 border-b-2 border-white/40"></div>
+                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 border-2 border-white/40 rounded-full"></div>
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-14 border-2 border-t-0 border-white/40"></div>
+                                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-14 border-2 border-b-0 border-white/40"></div>
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 border-2 border-t-0 border-white/40"></div>
+                                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-5 border-2 border-b-0 border-white/40"></div>
+                                
+                                ${playersHtml}
+                            </div>
+                            <div class="mt-4 text-[9px] font-bold text-center opacity-60 italic uppercase tracking-widest leading-none z-20">${TEAM_CONFIG.branding.motto}</div>
+                        </div>
+
+                        <!-- RIGHT COLUMN: DYNAMIC EXPLANATIONS -->
+                        <div class="w-full md:w-[58%] p-6 flex flex-col justify-between">
+                            <div id="tactical-desc-container">
+                                ${getTacticalDescHTML(currentTacticView)}
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-100 text-center"><p class="text-gray-400 text-[9px] uppercase tracking-[0.3em] font-black leading-none">${TEAM_CONFIG.branding.website}</p></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function render() {
+            const container = document.getElementById('main-content');
+            
+            document.getElementById('tabStats').className = `font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all ${currentTab === 'stats' ? 'tab-active' : 'text-gray-400'}`;
+            document.getElementById('tabStandings').className = `font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all ${currentTab === 'standings' ? 'tab-active' : 'text-gray-400'}`;
+            document.getElementById('tabSchedule').className = `font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all ${currentTab === 'schedule' ? 'tab-active' : 'text-gray-400'}`;
+            document.getElementById('tabOutlook').className = `font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all ${currentTab === 'outlook' ? 'tab-active' : 'text-gray-400'}`;
+            document.getElementById('tabTactics').className = `font-black uppercase text-xs md:text-sm tracking-widest py-2 transition-all ${currentTab === 'tactics' ? 'tab-active' : 'text-gray-400'}`;
+
+            if (currentTab === 'stats') renderStats(container);
+            else if (currentTab === 'standings') renderStandings(container);
+            else if (currentTab === 'schedule') renderSchedule(container);
+            else if (currentTab === 'outlook') renderOutlook(container);
+            else renderTactics(container);
+        }
+
+        function generateHeaderHTML(subtitle) {
+            return `
+                <div class="bg-primary p-6 md:p-8 text-white flex flex-col md:flex-row items-start md:items-center justify-between border-b-4 border-secondary gap-4">
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-black italic uppercase leading-none tracking-tighter">${TEAM_CONFIG.branding.name}</h1>
+                        <p class="text-secondary font-bold uppercase tracking-widest text-xs md:text-sm mt-1">${subtitle}</p>
+                    </div>
+                    <div class="md:text-right">
+                        <p class="text-[10px] md:text-xs uppercase opacity-70">League / Division</p>
+                        <p class="font-black text-lg md:text-xl leading-tight">${TEAM_CONFIG.branding.league}</p>
+                        <p class="text-[9px] md:text-[10px] font-bold text-secondary uppercase tracking-tighter">${TEAM_CONFIG.branding.season}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateFooterHTML(title) {
+            return `
+                <div class="bg-gray-50 p-4 md:px-8 md:py-4 border-t flex flex-col md:flex-row gap-4 items-center">
+                    <div class="flex-1 text-center md:text-left">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-0.5">${title}</p>
+                        <p class="text-[11px] font-bold text-gray-600">Report Generated (Last Update: ${TEAM_CONFIG.lastUpdate})</p>
+                    </div>
+                    <div class="md:w-1/3 flex flex-col justify-center items-center md:items-end text-center md:text-right">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase mb-0.5 leading-none">${TEAM_CONFIG.branding.motto}</p>
+                        <p class="text-primary font-black text-xs uppercase">${TEAM_CONFIG.branding.website}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStandings(container) {
+            const standingsRows = TEAM_CONFIG.standings.map(team => {
+                const isCurrentTeam = team.name === TEAM_CONFIG.branding.name;
+                const bgClass = isCurrentTeam ? 'bg-yellow-50 font-black text-gray-900 border-l-4 border-secondary' : 'border-l-4 border-transparent hover:bg-gray-50';
+                
+                return `
+                    <tr class="${bgClass} transition-colors">
+                        <td class="px-2 md:px-4 py-3 font-bold text-center border-b border-gray-100">${team.rank}</td>
+                        <td class="px-2 md:px-4 py-3 font-medium border-b border-gray-100 truncate">${team.name}</td>
+                        <td class="px-2 md:px-4 py-3 text-center border-b border-gray-100">${team.mp}</td>
+                        <td class="px-2 md:px-4 py-3 text-center border-b border-gray-100">${team.w}</td>
+                        <td class="px-2 md:px-4 py-3 text-center border-b border-gray-100">${team.d}</td>
+                        <td class="px-2 md:px-4 py-3 text-center border-b border-gray-100">${team.l}</td>
+                        <td class="px-2 md:px-4 py-3 text-center border-b border-gray-100 hidden sm:table-cell">${team.gf}</td>
+                        <td class="px-2 md:px-4 py-3 text-center border-b border-gray-100 hidden sm:table-cell">${team.ga}</td>
+                        <td class="px-2 md:px-4 py-3 text-center border-b border-gray-100 ${parseInt(team.gd) > 0 ? 'text-green-600 font-bold' : (parseInt(team.gd) < 0 ? 'text-red-500' : '')}">${team.gd}</td>
+                        <td class="px-2 md:px-4 py-3 text-center font-black text-primary border-b border-gray-100">${team.pts}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+                    ${generateHeaderHTML('Overall League Standings')}
+                    
+                    <div class="p-4 md:p-8 overflow-x-auto min-h-[400px]">
+                        <h3 class="text-primary font-black uppercase text-sm md:text-base mb-4 border-b pb-2 flex justify-between items-center">
+                            <span>League Table</span>
+                            <span class="text-[10px] md:text-xs text-gray-500 font-bold tracking-widest">${TEAM_CONFIG.league.totalTeams} Teams Total</span>
+                        </h3>
+                        <div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm min-w-[600px]">
+                            <table class="w-full text-left text-[10px] md:text-sm">
+                                <thead class="bg-gray-50 text-gray-500 font-black uppercase tracking-wider">
+                                    <tr>
+                                        <th class="px-2 md:px-4 py-3 text-center w-12">Pos</th>
+                                        <th class="px-2 md:px-4 py-3">Club</th>
+                                        <th class="px-2 md:px-4 py-3 text-center" title="Matches Played">MP</th>
+                                        <th class="px-2 md:px-4 py-3 text-center" title="Wins">W</th>
+                                        <th class="px-2 md:px-4 py-3 text-center" title="Draws">D</th>
+                                        <th class="px-2 md:px-4 py-3 text-center" title="Losses">L</th>
+                                        <th class="px-2 md:px-4 py-3 text-center hidden sm:table-cell" title="Goals For">GF</th>
+                                        <th class="px-2 md:px-4 py-3 text-center hidden sm:table-cell" title="Goals Against">GA</th>
+                                        <th class="px-2 md:px-4 py-3 text-center" title="Goal Difference">GD</th>
+                                        <th class="px-2 md:px-4 py-3 text-center text-primary" title="Points">Pts</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    ${standingsRows}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ${generateFooterHTML('Official League Standings')}
+                </div>
+            `;
+        }
+
+        function renderStats(container) {
+            const gfWidth = (TEAM_CONFIG.goals.for / (TEAM_CONFIG.goals.for + TEAM_CONFIG.goals.against)) * 100 || 50;
+            const gaWidth = (TEAM_CONFIG.goals.against / (TEAM_CONFIG.goals.for + TEAM_CONFIG.goals.against)) * 100 || 50;
+            
+            const matchRowsHtml = TEAM_CONFIG.matches.map(m => {
+                const resClass = m.res === 'W' ? 'result-w' : (m.res === 'L' ? 'result-l' : 'result-d');
+                const bgClass = m.highlight ? 'bg-yellow-50 font-bold text-gray-900' : '';
+                const rankHtml = m.rank && m.rank !== "-" ? `<span class="text-gray-400 font-black mr-1">#${m.rank}</span>` : '';
+                return `
+                    <tr class="${bgClass}">
+                        <td class="px-2 md:px-3 py-1.5 font-medium whitespace-nowrap">${m.date}</td>
+                        <td class="px-2 md:px-3 py-1.5 leading-tight">${rankHtml} ${m.opp}</td>
+                        <td class="px-2 md:px-3 py-1.5 text-center font-bold whitespace-nowrap">${m.score}</td>
+                        <td class="px-2 md:px-3 py-1.5 text-center font-black ${resClass}">${m.res}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+                    ${generateHeaderHTML('Official Team Report Card')}
+                    
+                    <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+                        <div class="flex flex-col space-y-6 h-full">
+                            <div>
+                                <h3 class="text-primary font-black uppercase text-sm mb-4 border-b pb-2 flex justify-between">
+                                    Season Record <span>${TEAM_CONFIG.record.wins}-${TEAM_CONFIG.record.losses}-${TEAM_CONFIG.record.draws}</span>
+                                </h3>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="bg-green-50 p-3 md:p-4 rounded-lg text-center border border-green-200">
+                                        <p class="text-[9px] md:text-[10px] font-bold text-green-700 uppercase">Wins</p>
+                                        <p class="text-2xl md:text-3xl font-black text-green-800">${TEAM_CONFIG.record.wins}</p>
+                                    </div>
+                                    <div class="bg-red-50 p-3 md:p-4 rounded-lg text-center border border-red-200">
+                                        <p class="text-[9px] md:text-[10px] font-bold text-red-700 uppercase">Losses</p>
+                                        <p class="text-2xl md:text-3xl font-black text-red-800">${TEAM_CONFIG.record.losses}</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 md:p-4 rounded-lg text-center border border-gray-200">
+                                        <p class="text-[9px] md:text-[10px] font-bold text-gray-700 uppercase">Draws</p>
+                                        <p class="text-2xl md:text-3xl font-black text-gray-800">${TEAM_CONFIG.record.draws}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-primary font-black uppercase text-sm mb-4 border-b pb-2">League Status</h3>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border-l-4 border-primary">
+                                        <span class="text-[11px] md:text-xs font-bold uppercase text-gray-500">League Rank</span>
+                                        <span class="text-primary font-black text-base md:text-lg">${TEAM_CONFIG.league.rank} <span class="text-[10px] md:text-xs text-gray-600 font-bold ml-0.5 md:ml-1">of ${TEAM_CONFIG.league.totalTeams}</span></span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                        <span class="text-[11px] md:text-xs font-bold uppercase text-gray-500">Total Points</span>
+                                        <span class="text-primary font-black text-base md:text-lg">${TEAM_CONFIG.league.points}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                        <span class="text-[11px] md:text-xs font-bold uppercase text-gray-500">PPG</span>
+                                        <span class="text-primary font-black text-base md:text-lg">${TEAM_CONFIG.league.ppg}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                        <span class="text-[11px] md:text-xs font-bold uppercase text-gray-500">Diff</span>
+                                        <span class="text-primary font-black text-base md:text-lg text-green-600">${TEAM_CONFIG.league.goalDiff}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-auto p-4 md:p-5 border-2 border-gray-100 rounded-xl bg-white shadow-sm flex flex-col justify-center">
+                                <h4 class="font-black text-[11px] md:text-xs uppercase text-primary mb-4 tracking-widest text-center">Scoring Breakdown</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-[11px] md:text-xs font-bold mb-1"><span>FOR</span><span class="text-green-600">${TEAM_CONFIG.goals.for}</span></div>
+                                        <div class="progress-bar"><div class="progress-fill bg-green-500" style="width: ${gfWidth}%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[11px] md:text-xs font-bold mb-1"><span>AGAINST</span><span>${TEAM_CONFIG.goals.against}</span></div>
+                                        <div class="progress-bar"><div class="progress-fill bg-blue-400" style="width: ${gaWidth}%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 flex flex-col h-full">
+                            <div class="mb-4">
+                                <h3 class="text-primary font-black uppercase text-sm mb-3 border-b pb-2">Match History</h3>
+                                <div class="overflow-hidden rounded-xl border border-gray-100 bg-white">
+                                    <table class="w-full text-left text-[10px] md:text-xs">
+                                        <thead class="bg-gray-50 text-gray-500 font-black uppercase tracking-wider">
+                                            <tr><th class="px-2 md:px-3 py-2">Date</th><th class="px-2 md:px-3 py-2">Opponent</th><th class="px-2 md:px-3 py-2 text-center">Score</th><th class="px-2 md:px-3 py-2 text-center">Res</th></tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-100">
+                                            ${matchRowsHtml}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="mt-auto p-4 sm:p-5 bg-white rounded-xl shadow-sm border-2 border-secondary flex flex-col justify-center gap-3">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
+                                    <div class="space-y-1 w-full sm:w-auto">
+                                        <p class="text-[10px] sm:text-xs font-black uppercase text-primary tracking-widest">Next Match Details</p>
+                                        <h4 class="text-lg sm:text-xl font-black uppercase text-gray-900 leading-tight">#${TEAM_CONFIG.nextMatch.oppRank} ${TEAM_CONFIG.nextMatch.oppName}</h4>
+                                        <div class="text-[10px] sm:text-xs font-bold text-gray-500 uppercase mt-1">
+                                            <span class="bg-gray-100 px-2 py-1 rounded inline-block text-gray-700">${TEAM_CONFIG.nextMatch.date} • ${TEAM_CONFIG.nextMatch.time}</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full sm:w-auto text-left sm:text-right border-t sm:border-t-0 border-gray-100 sm:border-l-2 sm:border-gray-100 pt-3 sm:pt-0 pl-0 sm:pl-6 py-1 sm:py-2">
+                                        <p class="text-[10px] sm:text-[11px] font-black text-gray-400 uppercase mb-0.5 sm:mb-1">Opponent Stats</p>
+                                        <p class="text-base sm:text-lg font-black text-primary leading-tight">Rank: ${TEAM_CONFIG.nextMatch.oppRank} <span class="text-[9px] sm:text-[10px] text-gray-500 font-bold ml-1">of ${TEAM_CONFIG.nextMatch.oppTotalTeams}</span></p>
+                                        <p class="text-[11px] sm:text-xs font-bold text-gray-600 mt-0.5 sm:mt-1">Record: ${TEAM_CONFIG.nextMatch.oppRecord}</p>
+                                    </div>
+                                </div>
+                                <div class="pt-3 border-t border-gray-100">
+                                    <p class="text-[9px] sm:text-[10px] font-bold text-gray-400 uppercase mb-1.5 tracking-widest">Opponent's Last Match</p>
+                                    <div class="flex justify-between items-center bg-gray-50 px-2 sm:px-3 py-2 rounded-lg text-[10px] sm:text-xs border border-gray-100 gap-2">
+                                        <span class="font-medium whitespace-nowrap">${TEAM_CONFIG.nextMatch.lastMatch.date}</span>
+                                        <span class="flex-1 leading-tight truncate"><span class="text-gray-400 font-black mr-1">#${TEAM_CONFIG.nextMatch.lastMatch.rank}</span> ${TEAM_CONFIG.nextMatch.lastMatch.opp}</span>
+                                        <span class="font-bold text-center whitespace-nowrap">${TEAM_CONFIG.nextMatch.lastMatch.score}</span>
+                                        <span class="font-black text-center whitespace-nowrap ${TEAM_CONFIG.nextMatch.lastMatch.res === 'W' ? 'result-w' : (TEAM_CONFIG.nextMatch.lastMatch.res === 'L' ? 'result-l' : 'result-d')}">${TEAM_CONFIG.nextMatch.lastMatch.res}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    ${generateFooterHTML('Official Data Verification')}
+                </div>
+            `;
+        }
+
+        function renderOutlook(container) {
+            const r = TEAM_CONFIG.record;
+            const l = TEAM_CONFIG.league;
+            const availablePts = TEAM_CONFIG.remainingSchedule.length * 3;
+            const maxPts = parseInt(l.points) + availablePts;
+
+            container.innerHTML = `
+                <div class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+                    ${generateHeaderHTML('Mid-Season Analysis & Outlook')}
+                    
+                    <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-primary font-black uppercase text-base md:text-lg mb-2 border-b-2 border-gray-100 pb-2">The Story So Far</h3>
+                                <p class="text-[13px] md:text-sm text-gray-700 leading-relaxed mb-4">
+                                    Sitting at a <strong>${r.wins}-${r.losses}-${r.draws}</strong> record, ${TEAM_CONFIG.branding.name} holds the #${l.rank} spot in a fiercely competitive ${l.totalTeams}-team division. All eyes are now on our upcoming clash against <strong>#${TEAM_CONFIG.nextMatch.oppRank} ${TEAM_CONFIG.nextMatch.oppName}</strong>. Securing 3 crucial points in this pivotal matchup would drastically shift the standings, potentially allowing us to leapfrog close rivals and build critical momentum for a late-season podium push.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-primary font-black uppercase text-base md:text-lg mb-2 border-b-2 border-gray-100 pb-2">The Differential Edge</h3>
+                                <p class="text-[13px] md:text-sm text-gray-700 leading-relaxed mb-4">
+                                    A true indicator of a team's strength is scoring differential. We currently hold a <strong>${l.goalDiff} Diff (${TEAM_CONFIG.goals.for} For, ${TEAM_CONFIG.goals.against} Against)</strong>, proving we are competitive in nearly every match we play.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-primary font-black uppercase text-base md:text-lg mb-2 border-b-2 border-gray-100 pb-2 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-1">
+                                    <span>Path to the Podium</span>
+                                </h3>
+                                <p class="text-[13px] md:text-sm text-gray-700 leading-relaxed mb-4">
+                                    With ${l.points} points currently secured, the math to climb the table is entirely possible. With <strong>${TEAM_CONFIG.remainingSchedule.length} matches remaining</strong>, there are ${availablePts} total points left on the table.
+                                </p>
+                                
+                                <div class="space-y-2 md:space-y-3">
+                                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border-l-4 border-gray-400">
+                                        <span class="text-[10px] md:text-xs font-bold uppercase text-gray-600 leading-tight">Current Points</span>
+                                        <span class="text-lg md:text-xl font-black text-gray-800 shrink-0">${l.points}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-yellow-50 p-3 rounded-lg border-l-4 border-secondary">
+                                        <div class="flex flex-col">
+                                            <span class="text-[10px] md:text-xs font-bold uppercase text-yellow-800 leading-tight">Available Points</span>
+                                            <span class="text-[9px] md:text-[10px] text-yellow-700 font-medium">(${TEAM_CONFIG.remainingSchedule.length} Games)</span>
+                                        </div>
+                                        <span class="text-lg md:text-xl font-black text-yellow-800 shrink-0">${availablePts}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-green-50 p-3 rounded-lg border-l-4 border-green-500 shadow-sm">
+                                        <span class="text-[10px] md:text-xs font-bold uppercase text-green-800 leading-tight">Max Potential Pts</span>
+                                        <span class="text-xl md:text-2xl font-black text-green-800 shrink-0">${maxPts}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    ${generateFooterHTML('Team Analysis & Projections')}
+                </div>
+            `;
+        }
+
+        function renderSchedule(container) {
+            const scheduleRows = TEAM_CONFIG.remainingSchedule.map((m, index) => {
+                const bgClass = index === 0 ? 'bg-yellow-50 font-bold text-gray-900' : '';
+                const rankHtml = m.rank && m.rank !== "-" ? `<span class="text-gray-400 font-black mr-1">#${m.rank}</span>` : '';
+                return `
+                    <tr class="${bgClass}">
+                        <td class="px-2 md:px-4 py-3 font-medium border-b border-gray-100 whitespace-nowrap">${m.date}</td>
+                        <td class="px-2 md:px-4 py-3 border-b border-gray-100 leading-tight">${rankHtml} ${m.opp}</td>
+                        <td class="px-2 md:px-4 py-3 text-center font-bold border-b border-gray-100 whitespace-nowrap">${m.time}</td>
+                        <td class="px-2 md:px-4 py-3 text-right font-bold text-gray-500 border-b border-gray-100 leading-tight text-[10px] md:text-xs">${m.loc}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+                    ${generateHeaderHTML('Remaining Season Schedule')}
+                    
+                    <div class="p-4 md:p-8 min-h-[400px]">
+                        <h3 class="text-primary font-black uppercase text-sm md:text-base mb-4 border-b pb-2">Upcoming Matches</h3>
+                        <div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+                            <table class="w-full text-left text-[10px] md:text-sm">
+                                <thead class="bg-gray-50 text-gray-500 font-black uppercase tracking-wider">
+                                    <tr>
+                                        <th class="px-2 md:px-4 py-3">Date</th>
+                                        <th class="px-2 md:px-4 py-3">Opponent</th>
+                                        <th class="px-2 md:px-4 py-3 text-center">Time</th>
+                                        <th class="px-2 md:px-4 py-3 text-right">Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    ${scheduleRows}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ${generateFooterHTML('Official Schedule Details')}
+                </div>
+            `;
+        }
+
+        // INITIAL RENDER
+        applyTheme();
+        renderTeamSwitcher();
+        render();
+    </script>
+</body>
+</html>
+          </body>
+        </html>
