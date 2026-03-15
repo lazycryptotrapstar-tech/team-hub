@@ -139,94 +139,170 @@
         
         /* ===== RESPONSIVE ===== */
 
-        /* Tablet — 768px */
-        @media(max-width:768px){
-            /* Stack stats grid */
-            .stats-grid{grid-template-columns:1fr !important; gap:16px !important;}
+        /* ── TABLET 860px ── */
+        @media(max-width:860px){
+            /* Stats: stack left stats above right match history */
+            .stats-grid{grid-template-columns:1fr !important; gap:0 !important;}
 
-            /* Match history: allow horizontal scroll */
+            /* Outlook 2-col: stack */
+            .outlook-grid{grid-template-columns:1fr !important; gap:0 !important;}
+
+            /* Tactical: stack field above description */
+            #tactic-board > div{flex-direction:column !important;}
+            #tactic-board > div > div:first-child{width:100% !important; padding:20px 20px 14px !important;}
+            #tactic-board > div > div:last-child{width:100% !important; padding:20px 20px !important;}
+
+            /* Match table: full width scroll */
             .match-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-            .match-table{min-width:340px;}
+            .match-table{min-width:380px;}
 
-            /* Next match: wrap top row so name doesn't get cut */
-            .nm-top-row{flex-wrap:wrap;gap:10px;}
-            .next-match-opp{font-size:17px !important;}
+            /* Messenger: stack sidebar */
+            .msg-layout{flex-direction:column;}
+            .msg-sidebar{width:100%;flex-direction:row;flex-wrap:wrap;}
+            .msg-sidebar-section{display:none;}
+            .msg-thread-btn{flex:1 1 auto;text-align:center;border-left:none;border-bottom:3px solid transparent;padding:9px 8px;min-width:70px;}
+            .msg-thread-btn .thread-sub{display:none;}
+            .msg-thread-btn.active{border-bottom-color:var(--secondary);border-left-color:transparent;}
+            .msg-feed{max-height:260px;}
 
-            /* Last match row: tighter */
-            .nm-last-row{flex-wrap:wrap;gap:6px;}
-
-            /* Right col scoring boxes: side by side */
-            .stat-item{padding:8px 10px;}
+            /* Sponsor: stack list above detail */
+            .sp-layout{flex-direction:column;}
+            .sp-list-panel{width:100%;max-height:260px;border-right:none;border-bottom:2px solid rgba(0,35,75,0.1);}
+            .sp-list-scroll{max-height:200px;overflow-y:auto;}
+            .sp-field-row{grid-template-columns:1fr;}
         }
 
-        /* Mobile — 640px */
+        /* ── MOBILE 640px ── */
         @media(max-width:640px){
-            body{padding:8px 8px 32px;}
-            .content-area{padding:16px 12px;}
-            .card-header{padding:16px 12px;}
-            .card-footer{padding:12px 12px;flex-direction:column;gap:8px;text-align:center;}
-            .footer-motto,.footer-website{text-align:center;}
-            .toolbar{padding:0 8px;}
-            .tab-nav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+            body{padding:8px 8px 40px;}
+
+            /* Site header */
+            .site-header{padding:0 0 10px;}
+
+            /* Team switcher: full width buttons */
+            #team-switcher{gap:8px !important;}
+            .team-switcher-btn{flex:1;font-size:11px;padding:9px 10px;letter-spacing:1px;}
+
+            /* Toolbar */
+            .toolbar{padding:0 !important; margin-top:8px;}
+            .tab-nav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%;}
             .tab-nav::-webkit-scrollbar{display:none;}
-            .tab-btn{padding:14px 10px;font-size:11px;letter-spacing:1px;white-space:nowrap;}
+            .tab-btn{font-size:11px !important;padding:13px 12px !important;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;}
+            .pdf-btn{font-size:10px;padding:6px 10px;}
 
-            /* Header: stack on mobile */
-            .card-header{flex-direction:column;align-items:flex-start;gap:8px;}
-            .header-right{width:100%;display:flex;justify-content:space-between;align-items:center;}
-            .header-team-name{font-size:26px;}
-            .header-division{font-size:16px;}
-            .header-record{font-size:18px;margin-top:0;}
+            /* Card header: stack */
+            .card-header{padding:16px 14px !important;flex-direction:column;align-items:flex-start;gap:10px;}
+            .header-right{width:100%;display:flex;justify-content:space-between;align-items:flex-end;}
+            .header-team-name{font-size:clamp(22px,7vw,30px) !important;}
+            .header-division{font-size:15px !important;}
+            .header-record{font-size:20px !important;margin-top:0;}
+            .header-division-label{font-size:10px;}
+            .card-header::after{display:none;}
 
-            /* Record cards: keep 3-col but tighter */
-            .record-grid{gap:6px;}
-            .record-num{font-size:32px !important;}
+            /* Content */
+            .content-area{padding:16px 14px !important;}
+            .card-footer{padding:12px 14px;flex-direction:column;gap:6px;text-align:center;}
+            .footer-motto,.footer-website{text-align:center;}
+
+            /* Stats: full single column */
+            .stats-grid{grid-template-columns:1fr !important;gap:0 !important;}
+
+            /* Record cards */
+            .record-grid{gap:6px;margin-bottom:14px;}
             .record-card{padding:10px 6px;}
-
-            /* Stats layout: single column */
-            .stats-grid{grid-template-columns:1fr !important; gap:14px !important;}
-
-            /* Match table: scrollable, readable */
-            .match-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-            .match-table{min-width:320px;font-size:12px;}
-            .match-table td{padding:7px 8px;font-size:12px;}
-            .match-table thead th{padding:8px 8px;font-size:10px;}
-            .date-cell{font-size:11px;}
-            .score-cell{font-size:13px !important;}
-
-            /* Next match: full width, no clipping */
-            .next-match-card{padding:14px 14px;}
-            .nm-top-row{flex-direction:column;gap:8px;}
-            .next-match-opp{font-size:16px !important;}
-            .opp-stats-rank{font-size:22px !important;}
-            .nm-last-row{flex-direction:column;gap:4px;align-items:flex-start;}
-            .next-match-meta{font-size:12px;}
-
-            /* Standings */
-            .standings-table td{padding:7px 6px;font-size:11px;}
-            .standings-table thead th{padding:8px 6px;font-size:9px;letter-spacing:1px;}
-            .pts-cell{font-size:14px !important;}
-
-            /* Schedule */
-            .schedule-table td{padding:8px 10px;font-size:12px;}
-            .schedule-loc{display:none;}
+            .record-num{font-size:34px !important;}
+            .record-label{font-size:10px !important;}
 
             /* Rank strip */
+            .rank-strip{padding:10px 14px;}
             .rank-num{font-size:26px !important;}
 
-            /* Team switcher */
-            .team-switcher-btn{font-size:12px;padding:7px 14px;}
+            /* Stat items */
+            .stat-item{padding:8px 10px;}
+            .stat-val{font-size:20px !important;}
+            .stat-label{font-size:11px !important;}
+
+            /* Scoring */
+            .progress-header span{font-size:11px !important;}
+
+            /* Match history table — scrollable, properly sized */
+            .match-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:3px;}
+            .match-table{min-width:360px;font-size:12px;}
+            .match-table thead th{padding:9px 8px !important;font-size:10px !important;letter-spacing:1px;}
+            .match-table td{padding:8px 8px !important;font-size:12px !important;}
+            .date-cell{font-size:11px !important;min-width:52px;}
+            .opp-rank{font-size:10px !important;}
+            .score-cell{font-size:13px !important;min-width:44px;}
+            .res-badge{width:24px;height:24px;font-size:12px;}
+
+            /* Next match card */
+            .next-match-card{padding:14px 14px;border-left-width:4px;}
+            .nm-top-row{flex-direction:column !important;gap:10px;}
+            .next-match-opp{font-size:17px !important;line-height:1.2;}
+            .next-match-eyebrow{font-size:10px;letter-spacing:2px;}
+            .next-match-meta{font-size:12px !important;}
+            .opp-stats-rank{font-size:24px !important;}
+            .opp-stats-label{font-size:10px !important;letter-spacing:1px;}
+            .nm-last-row{flex-wrap:wrap !important;gap:6px;}
+
+            /* Standings */
+            .standings-table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+            .standings-table{min-width:420px;font-size:11px;}
+            .standings-table td{padding:7px 6px !important;font-size:11px !important;}
+            .standings-table thead th{padding:8px 6px !important;font-size:9px !important;letter-spacing:1px;}
+            .pts-cell{font-size:13px !important;}
+
+            /* Schedule */
+            .schedule-table td{padding:9px 10px !important;font-size:12px !important;}
+            .schedule-loc{display:none;}
+            .schedule-date{font-size:12px !important;}
+            .schedule-time{font-size:12px !important;}
+
+            /* Outlook */
+            .outlook-grid{grid-template-columns:1fr !important;}
+            .outlook-section-title{font-size:15px !important;}
+            .outlook-prose{font-size:13px !important;}
+            .outlook-stat-row{padding:10px 12px;}
+            .outlook-stat-val{font-size:24px !important;}
+            .outlook-stat-label{font-size:11px !important;}
+
+            /* Section titles */
+            .section-title{font-size:11px !important;letter-spacing:1.5px;}
+
+            /* Tactical */
+            #tactic-board > div{flex-direction:column !important;}
+            #tactic-board > div > div:first-child{width:100% !important;padding:16px !important;}
+            #tactic-board > div > div:last-child{width:100% !important;padding:16px !important;}
+            .tactic-subnav{padding:8px 10px;gap:4px;}
+            .tactic-btn{font-size:10px !important;padding:7px 10px;letter-spacing:1px;}
+            .tactic-role{font-size:16px !important;width:42px;}
+            .tactic-body{font-size:13px !important;}
+            .tactic-heading{font-size:11px !important;}
+
+            /* Messenger mobile */
+            .msg-topbar{padding:10px 12px;}
+            .msg-topbar-name{font-size:15px;}
+            .msg-feed{max-height:220px;padding:12px;}
+            .msg-input-area{padding:8px 10px;gap:6px;}
+            .msg-ai-btn,.msg-send-btn{font-size:10px !important;padding:8px 10px;}
+            .reminder-btn{font-size:10px;padding:5px 8px;}
+
+            /* Sponsor */
+            .sp-ai-actions{flex-direction:column;}
+            .sp-ai-action-btn{width:100%;text-align:center;}
+            .sp-detail-body{padding:14px;}
         }
 
-        /* Small phones — 380px */
+        /* ── SMALL PHONE 380px ── */
         @media(max-width:380px){
-            .header-team-name{font-size:22px;}
-            .next-match-opp{font-size:15px !important;}
+            .tab-btn{font-size:10px !important;padding:12px 9px !important;}
             .record-num{font-size:28px !important;}
-            .tab-btn{font-size:10px;padding:12px 8px;}
+            .header-team-name{font-size:20px !important;}
+            .next-match-opp{font-size:15px !important;}
+            .match-table{min-width:320px;}
         }
-    
-        /* ===== MESSENGER ===== */
+
+/* ===== MESSENGER ===== */
         .msg-layout{display:flex;min-height:520px;}
         .msg-sidebar{width:220px;flex-shrink:0;background:#001530;display:flex;flex-direction:column;}
         .msg-sidebar-section{padding:14px 14px 6px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:700;}
@@ -545,7 +621,7 @@
         const r=TEAM_CONFIG.record,l=TEAM_CONFIG.league,nm=TEAM_CONFIG.nextMatch;
         const avail=TEAM_CONFIG.remainingSchedule.length*3,maxPts=parseInt(l.points)+avail;
         container.innerHTML=`${headerHTML('Mid-Season Outlook','OUTLOOK')}
-        <div class="content-area" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div class="content-area outlook-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
             <div>
                 <div class="outlook-section-title">The Story So Far</div>
                 <p class="outlook-prose">Sitting at a <strong>${r.wins}-${r.losses}-${r.draws}</strong> record, ${TEAM_CONFIG.branding.name} holds <strong>#${l.rank}</strong> in a competitive ${l.totalTeams}-team division. The upcoming clash against <strong>#${nm.oppRank} ${nm.oppName}</strong> is pivotal — 3 points here could ignite a late-season charge up the table.</p>
