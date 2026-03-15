@@ -136,7 +136,95 @@
         .tactic-section-badge.overview,.tactic-section-badge.defense{background:rgba(0,35,75,0.07);color:var(--primary);}
         .tactic-section-badge.midfield{background:rgba(255,204,0,0.18);color:#7c5900;}
         .tactic-section-badge.attack{background:rgba(220,38,38,0.07);color:#b91c1c;}
-        @media(max-width:640px){.content-area{padding:18px 14px;}.card-header{padding:18px 14px;}.card-footer{padding:12px 14px;}.toolbar{padding:0 10px;}.tab-btn{padding:14px 10px;font-size:10px;}}
+        
+        /* ===== RESPONSIVE ===== */
+
+        /* Tablet — 768px */
+        @media(max-width:768px){
+            /* Stack stats grid */
+            .stats-grid{grid-template-columns:1fr !important; gap:16px !important;}
+
+            /* Match history: allow horizontal scroll */
+            .match-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+            .match-table{min-width:340px;}
+
+            /* Next match: wrap top row so name doesn't get cut */
+            .nm-top-row{flex-wrap:wrap;gap:10px;}
+            .next-match-opp{font-size:17px !important;}
+
+            /* Last match row: tighter */
+            .nm-last-row{flex-wrap:wrap;gap:6px;}
+
+            /* Right col scoring boxes: side by side */
+            .stat-item{padding:8px 10px;}
+        }
+
+        /* Mobile — 640px */
+        @media(max-width:640px){
+            body{padding:8px 8px 32px;}
+            .content-area{padding:16px 12px;}
+            .card-header{padding:16px 12px;}
+            .card-footer{padding:12px 12px;flex-direction:column;gap:8px;text-align:center;}
+            .footer-motto,.footer-website{text-align:center;}
+            .toolbar{padding:0 8px;}
+            .tab-nav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+            .tab-nav::-webkit-scrollbar{display:none;}
+            .tab-btn{padding:14px 10px;font-size:11px;letter-spacing:1px;white-space:nowrap;}
+
+            /* Header: stack on mobile */
+            .card-header{flex-direction:column;align-items:flex-start;gap:8px;}
+            .header-right{width:100%;display:flex;justify-content:space-between;align-items:center;}
+            .header-team-name{font-size:26px;}
+            .header-division{font-size:16px;}
+            .header-record{font-size:18px;margin-top:0;}
+
+            /* Record cards: keep 3-col but tighter */
+            .record-grid{gap:6px;}
+            .record-num{font-size:32px !important;}
+            .record-card{padding:10px 6px;}
+
+            /* Stats layout: single column */
+            .stats-grid{grid-template-columns:1fr !important; gap:14px !important;}
+
+            /* Match table: scrollable, readable */
+            .match-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+            .match-table{min-width:320px;font-size:12px;}
+            .match-table td{padding:7px 8px;font-size:12px;}
+            .match-table thead th{padding:8px 8px;font-size:10px;}
+            .date-cell{font-size:11px;}
+            .score-cell{font-size:13px !important;}
+
+            /* Next match: full width, no clipping */
+            .next-match-card{padding:14px 14px;}
+            .nm-top-row{flex-direction:column;gap:8px;}
+            .next-match-opp{font-size:16px !important;}
+            .opp-stats-rank{font-size:22px !important;}
+            .nm-last-row{flex-direction:column;gap:4px;align-items:flex-start;}
+            .next-match-meta{font-size:12px;}
+
+            /* Standings */
+            .standings-table td{padding:7px 6px;font-size:11px;}
+            .standings-table thead th{padding:8px 6px;font-size:9px;letter-spacing:1px;}
+            .pts-cell{font-size:14px !important;}
+
+            /* Schedule */
+            .schedule-table td{padding:8px 10px;font-size:12px;}
+            .schedule-loc{display:none;}
+
+            /* Rank strip */
+            .rank-num{font-size:26px !important;}
+
+            /* Team switcher */
+            .team-switcher-btn{font-size:12px;padding:7px 14px;}
+        }
+
+        /* Small phones — 380px */
+        @media(max-width:380px){
+            .header-team-name{font-size:22px;}
+            .next-match-opp{font-size:15px !important;}
+            .record-num{font-size:28px !important;}
+            .tab-btn{font-size:10px;padding:12px 8px;}
+        }
     
         /* ===== MESSENGER ===== */
         .msg-layout{display:flex;min-height:520px;}
@@ -388,7 +476,7 @@
         const r=TEAM_CONFIG.record,l=TEAM_CONFIG.league,nm=TEAM_CONFIG.nextMatch;
         const matchRows=TEAM_CONFIG.matches.map(m=>`<tr class="${m.highlight?'highlight-row':''}"><td class="date-cell">${m.date}</td><td><span class="opp-rank">#${m.rank}</span>${m.opp}</td><td class="score-cell center">${m.score}</td><td class="center"><span class="res-badge res-${m.res}">${m.res}</span></td></tr>`).join('');
         container.innerHTML=`${headerHTML('Official Team Report Card')}
-        <div class="content-area" style="display:grid;grid-template-columns:1fr 2fr;gap:28px;">
+        <div class="content-area stats-grid" style="display:grid;grid-template-columns:1fr 2fr;gap:28px;">
             <div style="display:flex;flex-direction:column;gap:20px;">
                 <div>
                     <div class="section-title">Season Record <span>${r.wins}-${r.losses}-${r.draws}</span></div>
@@ -416,11 +504,11 @@
                     <div class="match-table-wrap"><table class="match-table"><thead><tr><th>Date</th><th>Opponent</th><th class="center">Score</th><th class="center">Res</th></tr></thead><tbody>${matchRows}</tbody></table></div>
                 </div>
                 <div class="next-match-card">
-                    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
+                    <div class="nm-top-row" style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
                         <div style="flex:1;"><div class="next-match-eyebrow">Next Match Details</div><div class="next-match-opp">#${nm.oppRank} ${nm.oppName}</div><div class="next-match-meta">${nm.date} &nbsp;·&nbsp; ${nm.time}</div></div>
                         <div style="text-align:right;flex-shrink:0;"><div class="opp-stats-label">Opp Rank</div><div class="opp-stats-rank">${nm.oppRank} <span style="font-size:13px;color:rgba(255,255,255,0.3);font-family:'Barlow Condensed',sans-serif;font-weight:600;">of ${nm.oppTotalTeams}</span></div><div class="opp-stats-label" style="margin-top:4px;">Record: ${nm.oppRecord}</div></div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.05);border-radius:2px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;">
+                    <div class="nm-last-row" style="background:rgba(255,255,255,0.05);border-radius:2px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;">
                         <span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:700;white-space:nowrap;">Opp Last Match</span>
                         <span style="flex:1;color:rgba(255,255,255,0.65);font-size:12px;text-align:center;">${nm.lastMatch.date} &nbsp;<span style="color:rgba(255,255,255,0.35);">#${nm.lastMatch.rank}</span> ${nm.lastMatch.opp}</span>
                         <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:white;white-space:nowrap;">${nm.lastMatch.score}</span>
