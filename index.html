@@ -326,7 +326,7 @@
         .story-ai-result{background:white;border:1px solid rgba(0,35,75,0.1);border-radius:3px;padding:16px;font-size:14px;line-height:1.7;color:#1e293b;margin-top:12px;white-space:pre-wrap;display:none;}
 
         /* ===== TACTICAL ===== */
-        .tactic-subnav{background:#001530;border-bottom:1px solid rgba(255,255,255,0.07);padding:10px 20px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+        .tactic-subnav{background:#001530;border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 12px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
         .tactic-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;padding:7px 16px;border-radius:2px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.15s;}
         .tactic-btn:hover{color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.3);}
         .tactic-btn.active{background:var(--secondary);color:var(--primary);border-color:var(--secondary);font-weight:900;}
@@ -420,8 +420,8 @@
 
 
         /* ===== STATS SUBNAV ===== */
-        .stats-subnav{background:var(--primary);border-bottom:2px solid rgba(255,204,0,0.15);padding:0 20px;display:flex;gap:0;}
-        .stats-subnav-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;color:rgba(255,255,255,0.45);background:none;border:none;padding:13px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.15s;white-space:nowrap;}
+        .stats-subnav{background:var(--primary);border-bottom:2px solid rgba(255,204,0,0.15);padding:0;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+        .stats-subnav-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;color:rgba(255,255,255,0.45);background:none;border:none;padding:13px 16px;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
         .stats-subnav-btn:hover{color:rgba(255,255,255,0.8);}
         .stats-subnav-btn.active{color:var(--secondary);border-bottom-color:var(--secondary);}
 
@@ -734,6 +734,12 @@
             .home-section-label{padding:8px 14px 0 !important;}
             .countdown-units{gap:8px !important;}
             .home-hero-rec-line{display:none;}
+            /* ── Pass 2 mobile fixes ── */
+            .home-hero-rank{font-size:32px !important;}
+            .home-hero-right{max-width:84px;}
+            .scenario-toggle-wrap{display:none;}
+            .tactic-roster-panel{padding:12px 14px !important;}
+            .standings-table{min-width:420px !important;}
         }
         @media(max-width:380px){
             .bnav-btn{padding:7px 10px 9px;min-width:50px;font-size:8px;}
@@ -753,6 +759,11 @@
             .countdown-units{gap:6px !important;}
             .countdown-num{font-size:20px !important;}
             .countdown-sep{font-size:18px !important;}
+            /* ── Pass 2 380px fixes ── */
+            .quick-action-btn{font-size:9px !important;padding:5px 8px !important;}
+            .stats-subnav-btn{font-size:11px !important;padding:10px 12px !important;}
+            .home-hero-rank{font-size:26px !important;}
+            .home-hero-right{max-width:70px;}
         }
     </style>
 </head>
