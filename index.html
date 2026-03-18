@@ -87,14 +87,14 @@
         .sticky-ack{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;cursor:pointer;border:1px solid rgba(120,53,15,0.25);background:transparent;color:#92400e;transition:all 0.15s;}
         .sticky-ack:hover{background:#fef3c7;border-color:rgba(120,53,15,0.4);}
         .sticky-ack.acked{background:#dcfce7;border-color:rgba(22,163,74,0.3);color:#15803d;cursor:default;}
-        .home-hero-col{position:relative;overflow:hidden;transition:background 0.4s ease;}
+        .home-hero-col{position:relative;overflow:hidden;transition:background 0.4s ease;padding:20px 24px;}
         .home-hero-col::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 18px,rgba(255,255,255,0.012) 18px,rgba(255,255,255,0.012) 36px);pointer-events:none;}
         .home-hero-col.match-day::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,204,0,0.08) 0%,transparent 70%);pointer-events:none;}
 
         /* ===== HOME SECTION DIVIDERS ===== */
-        .home-section-spotlight{background:linear-gradient(180deg,#001a38 0%,#002040 100%);border-bottom:1px solid rgba(255,255,255,0.06);}
+        .home-section-spotlight{background:linear-gradient(180deg,#001225 0%,#001e36 100%);border-top:2px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
         .home-section-stats{background:var(--card);}
-        .home-section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.18);padding:8px 24px 0;}
+        .home-section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:10px 20px 0;}
 
         @media(max-width:860px){
             .home-top-zone{grid-template-columns:240px 1fr;}
@@ -131,7 +131,8 @@
         .ach-dismiss:hover{background:#ffe033;}
 
         /* ===== COUNTDOWN ===== */
-        .countdown-wrap{position:relative;z-index:1;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);}
+        .countdown-wrap{position:relative;z-index:1;margin-top:16px;padding-top:18px;}
+        .countdown-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(255,204,0,0.5) 25%,rgba(255,204,0,0.75) 50%,rgba(255,204,0,0.5) 75%,transparent 100%);}
         .countdown-label{font-family:'Nunito', sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:700;margin-bottom:8px;}
         .countdown-units{display:flex;gap:16px;align-items:flex-end;}
         .countdown-unit{text-align:center;}
@@ -146,17 +147,17 @@
 
         /* ===== PLAYER SPOTLIGHT ===== */
         .spotlight-card{padding:0;background:transparent;position:relative;overflow:hidden;}
-        .spotlight-eyebrow{font-family:'Nunito',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:700;padding:0 24px 8px;display:block;}
+        .spotlight-eyebrow{font-family:'Nunito',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:800;padding:12px 20px 10px;display:block;}
         .spotlight-players{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;}
         .spotlight-player{display:flex;flex-direction:column;}
         .spotlight-player-header{padding:10px 20px 14px;display:flex;flex-direction:column;gap:4px;}
-        .spotlight-player-header.offense{background:rgba(255,204,0,0.1);border-top:3px solid var(--secondary);}
-        .spotlight-player-header.defense{background:rgba(192,200,212,0.07);border-top:3px solid var(--silver);}
+        .spotlight-player-header.offense{background:rgba(255,150,0,0.18);border-top:4px solid var(--secondary);}
+        .spotlight-player-header.defense{background:rgba(192,200,212,0.15);border-top:4px solid var(--silver);}
         .spotlight-player-badge{font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:5px;margin-bottom:2px;}
         .spotlight-player-badge.offense{color:var(--secondary);}
         .spotlight-player-badge.defense{color:var(--silver);}
         .spotlight-divider{display:none;}
-        .spotlight-name{font-family:'Nunito',sans-serif;font-weight:900;font-style:italic;font-size:17px;text-transform:uppercase;color:white;line-height:1.1;}
+        .spotlight-name{font-family:'Nunito',sans-serif;font-weight:900;font-style:italic;font-size:17px;text-transform:uppercase;color:white;line-height:1.1;;word-break:break-word;overflow-wrap:break-word;}
         .spotlight-note{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;line-height:1.5;}
         .spotlight-week{font-family:'Nunito',sans-serif;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:700;margin-top:6px;}
         /* ===== CHECK-IN STREAK ===== */
@@ -590,6 +591,10 @@
         .bnav-btn.active{color:var(--secondary);border-bottom-color:var(--secondary);}
         .bnav-icon{font-size:18px;line-height:1;}
 
+
+        /* ===== MOBILE AUDIT FIXES ===== */
+        .home-hero-rec-line{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);margin-top:5px;letter-spacing:0.5px;position:relative;z-index:1;}
+        .home-hero-rec-line span{color:rgba(255,255,255,0.6);font-weight:700;}
         /* ===== RESPONSIVE ===== */
         @media(max-width:860px){
             .stats-grid{grid-template-columns:1fr !important;gap:0 !important;}
@@ -612,6 +617,9 @@
             .sp-list-scroll{max-height:200px;overflow-y:auto;}
             .sp-field-row{grid-template-columns:1fr;}
             .home-stats-strip{grid-template-columns:repeat(2,1fr);}
+            .home-top-zone{grid-template-columns:240px 1fr;}
+            .home-sticky-col{padding:16px 18px;}
+            .home-hero-col{padding:16px 18px;}
         }
         @media(max-width:640px){
             body{padding:8px 8px 80px;}
@@ -718,6 +726,14 @@
             .home-stat-val{font-size:22px !important;}
             .home-cell{padding:14px 14px !important;border-right:none !important;border-bottom:1px solid rgba(0,35,75,0.07);}
             .season-pulse{display:none;}
+            /* ── Mobile audit fixes ── */
+            .home-hero-col{padding:16px 14px !important;}
+            .home-sticky-col{padding:14px !important;}
+            .spotlight-eyebrow{padding:10px 14px 8px !important;}
+            .spotlight-player-header{padding:10px 14px 12px !important;}
+            .home-section-label{padding:8px 14px 0 !important;}
+            .countdown-units{gap:8px !important;}
+            .home-hero-rec-line{display:none;}
         }
         @media(max-width:380px){
             .bnav-btn{padding:7px 10px 9px;min-width:50px;font-size:8px;}
@@ -734,6 +750,9 @@
             .spotlight-name{font-size:20px !important;}
             .form-dot{width:24px;height:24px;font-size:10px;}
             .announcement-pin{gap:10px !important;}
+            .countdown-units{gap:6px !important;}
+            .countdown-num{font-size:20px !important;}
+            .countdown-sep{font-size:18px !important;}
         }
     </style>
 </head>
@@ -1338,12 +1357,13 @@
                     </div>
 
                     <!-- RIGHT: Match hero + countdown + RSVP -->
-                    <div class="home-hero-col${matchDay ? ' match-day' : ''}" style="padding:20px 24px 20px;">
+                    <div class="home-hero-col${matchDay ? ' match-day' : ''}">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;position:relative;z-index:1;">
                             <div style="flex:1;">
                                 <div class="home-hero-eyebrow">${eyebrowText}</div>
                                 <div class="home-hero-opp">#${nm.oppRank} ${nm.oppName}</div>
-                                <div class="home-hero-meta">${nm.time} &nbsp;·&nbsp; ${TEAM_CONFIG.remainingSchedule[0] ? TEAM_CONFIG.remainingSchedule[0].loc : 'TBD'} &nbsp;·&nbsp; Opp Record: ${nm.oppRecord}</div>
+                                <div class="home-hero-meta">${nm.time} &nbsp;·&nbsp; ${TEAM_CONFIG.remainingSchedule[0] ? TEAM_CONFIG.remainingSchedule[0].loc : 'TBD'}</div>
+                            <div class="home-hero-rec-line">Opp Record: <span>${nm.oppRecord}</span></div>
                             </div>
                             <div class="home-hero-right">
                                 <div class="home-hero-rank-sub">Opp Rank</div>
