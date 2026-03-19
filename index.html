@@ -51,7 +51,7 @@
         .main-card.switching{opacity:0;}
 
         /* ===== CARD HEADER / FOOTER ===== */
-        .card-header{background:var(--primary);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:4px solid var(--secondary);position:relative;overflow:hidden;}
+        .card-header{background:var(--primary);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:4px solid var(--secondary);position:relative;overflow:hidden;}
         .card-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 18px,rgba(255,255,255,0.015) 18px,rgba(255,255,255,0.015) 36px);}
         .card-header::after{content:attr(data-watermark);font-family:'Nunito', sans-serif;font-weight:900;font-size:130px;line-height:1;color:rgba(255,255,255,0.03);position:absolute;right:-10px;bottom:-20px;letter-spacing:-4px;pointer-events:none;}
         .header-team-name{font-family:'Nunito', sans-serif;font-weight:900;font-style:italic;font-size:clamp(24px,4vw,36px);letter-spacing:1px;text-transform:uppercase;color:white;line-height:1;z-index:1;position:relative;}
@@ -84,7 +84,7 @@
         .sticky-ts{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(120,53,15,0.5);font-weight:600;}
         .sticky-body{padding:10px 12px 10px;font-family:'Nunito',sans-serif;font-size:13px;color:#1c1917;line-height:1.55;}
         .sticky-footer{padding:6px 12px 10px;display:flex;justify-content:flex-end;}
-        .sticky-ack{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;cursor:pointer;border:1px solid rgba(120,53,15,0.25);background:transparent;color:#92400e;transition:all 0.15s;}
+        .sticky-ack{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;padding:8px 16px;border-radius:20px;cursor:pointer;border:1px solid rgba(120,53,15,0.25);background:transparent;color:#92400e;transition:all 0.15s;min-height:36px;}
         .sticky-ack:hover{background:#fef3c7;border-color:rgba(120,53,15,0.4);}
         .sticky-ack.acked{background:#dcfce7;border-color:rgba(22,163,74,0.3);color:#15803d;cursor:default;}
         .home-hero-col{position:relative;overflow:hidden;transition:background 0.4s ease;padding:20px 24px;}
@@ -176,7 +176,7 @@
 
         /* ===== QUICK ACTIONS ===== */
         .msg-quick-actions{background:#001530;padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);}
-        .quick-action-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:7px 12px;border-radius:2px;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.55);transition:all 0.15s;white-space:nowrap;}
+        .quick-action-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-radius:2px;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.55);transition:all 0.15s;white-space:nowrap;min-height:40px;}
         .quick-action-btn:hover{background:rgba(255,204,0,0.1);border-color:rgba(255,204,0,0.3);color:var(--secondary);}
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
@@ -191,7 +191,7 @@
         .home-hero-record{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;}
         .rsvp-bar{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;position:relative;z-index:1;}
         .rsvp-label{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:700;align-self:center;margin-right:4px;}
-        .rsvp-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:2px;cursor:pointer;transition:all 0.15s;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);}
+        .rsvp-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:11px 16px;border-radius:2px;cursor:pointer;transition:all 0.15s;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);min-height:44px;}
         .rsvp-btn:hover{border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.9);}
         .rsvp-btn.active-yes{background:#16a34a;color:white;border-color:#16a34a;}
         .rsvp-btn.active-maybe{background:#ca8a04;color:white;border-color:#ca8a04;}
@@ -297,7 +297,7 @@
         .schedule-time{font-family:'Nunito', sans-serif;font-weight:700;font-size:15px;color:rgba(0,35,75,0.55);text-align:center;white-space:nowrap;}
         .schedule-loc{font-size:13px;color:rgba(0,35,75,0.45);text-align:right;}
         .sched-rsvp-cell{text-align:right;white-space:nowrap;}
-        .sched-rsvp-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:5px 10px;border-radius:2px;cursor:pointer;transition:all 0.12s;border:1px solid rgba(0,35,75,0.15);background:rgba(0,35,75,0.04);color:rgba(0,35,75,0.5);margin-left:3px;}
+        .sched-rsvp-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:8px 12px;border-radius:2px;cursor:pointer;transition:all 0.12s;border:1px solid rgba(0,35,75,0.15);background:rgba(0,35,75,0.04);color:rgba(0,35,75,0.5);margin-left:3px;}
         .sched-rsvp-btn:hover{border-color:rgba(0,35,75,0.3);color:rgba(0,35,75,0.8);}
         .sched-rsvp-btn.active-yes{background:#dcfce7;color:#15803d;border-color:#16a34a;}
         .sched-rsvp-btn.active-maybe{background:#fef3c7;color:#92400e;border-color:#ca8a04;}
@@ -327,7 +327,7 @@
 
         /* ===== TACTICAL ===== */
         .tactic-subnav{background:#001530;border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 12px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-        .tactic-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;padding:7px 16px;border-radius:2px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.15s;}
+        .tactic-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;padding:10px 14px;border-radius:2px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.15s;min-height:40px;}
         .tactic-btn:hover{color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.3);}
         .tactic-btn.active{background:var(--secondary);color:var(--primary);border-color:var(--secondary);font-weight:900;}
         .tactical-field{background-color:#1a6b35;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.04),rgba(255,255,255,0.04) 10%,transparent 10%,transparent 20%);border:3px solid rgba(255,255,255,0.65);border-radius:4px;position:relative;overflow:hidden;}
@@ -783,6 +783,65 @@
             .badges-row{border-bottom:1px solid rgba(255,255,255,0.07) !important;}
             .home-stats-strip{border-top:1px solid rgba(255,255,255,0.07) !important;}
             .record-pill-sub{color:rgba(0,35,75,0.6);}
+            /* ══════════════════════════════════════════════════════
+               UX AUDIT PASS 3 — Mobile clarity and spacing
+               ══════════════════════════════════════════════════════ */
+
+            /* ── Header: compact on mobile, reduce height by ~35% ── */
+            .card-header{padding:14px 14px !important;}
+            .header-team-name{font-size:clamp(18px,6vw,26px) !important;}
+            .header-division{font-size:16px !important;}
+            .header-record{font-size:20px !important;margin-top:2px;}
+            .header-badge{font-size:10px !important;padding:3px 8px;}
+            .header-subtitle{font-size:12px !important;margin-top:2px;}
+            /* ── Home stat strip: 2x2 breathing room ── */
+            .home-stats-strip{grid-template-columns:repeat(2,1fr) !important;}
+            .home-stat{padding:14px 12px !important;}
+            .home-stat-val{font-size:24px !important;}
+            .home-stat-label{font-size:9px !important;letter-spacing:1px;}
+            .home-cell{padding:14px 14px !important;}
+            .badge-chip{font-size:11px !important;padding:5px 10px !important;}
+            /* ── Tap targets ≥44px ── */
+            .rsvp-btn{min-height:44px !important;flex:1;}
+            .tactic-btn{min-height:44px !important;padding:10px 12px !important;}
+            .roster-filter-btn{min-height:40px !important;padding:8px 14px !important;}
+            .sp-add-btn{min-height:40px !important;padding:8px 14px !important;}
+            .sticky-ack{min-height:40px !important;padding:10px 18px !important;}
+            .bnav-btn{min-height:52px !important;padding:10px 14px 12px !important;}
+            /* ── Tactic subnav: left-align wrapping 5 buttons ── */
+            .tactic-subnav{padding:6px 10px !important;gap:4px !important;justify-content:flex-start !important;}
+            .tactic-btn{font-size:10px !important;padding:8px 10px !important;}
+            /* ── Messenger quick-actions: 2x2 grid ── */
+            .msg-quick-actions{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px !important;padding:10px 12px !important;}
+            .quick-action-btn{min-height:44px !important;font-size:10px !important;padding:8px 10px !important;white-space:normal !important;text-align:center;line-height:1.3;}
+            /* ── Schedule cells ── */
+            .schedule-table td{padding:12px 10px !important;}
+            /* ── Stats subnav ── */
+            .stats-subnav{padding:0 !important;}
+            .stats-subnav-btn{padding:13px 14px !important;font-size:12px !important;}
+            /* ── Story ── */
+            .story-section-title{font-size:14px !important;}
+            .story-narrative{font-size:13px !important;line-height:1.7 !important;}
+            /* ── Roster ── */
+            .roster-grid{gap:10px !important;padding:12px !important;}
+            .roster-upload-hint{margin:0 12px 14px !important;padding:10px 14px !important;}
+            .roster-filter-bar{padding:16px 12px 12px !important;}
+            /* ── Sponsors ── */
+            .sp-detail-topbar{padding:12px 14px !important;}
+            .sp-detail-name{font-size:18px !important;}
+            /* ── Countdown ── */
+            .countdown-num{font-size:28px !important;}
+            .countdown-sublabel{font-size:9px !important;}
+            .countdown-label{font-size:9px !important;margin-bottom:6px;}
+            .countdown-wrap{margin-top:14px !important;padding-top:14px !important;}
+            /* ── Hero ── */
+            .home-hero-eyebrow{font-size:10px !important;margin-bottom:4px;}
+            .home-hero-meta{font-size:12px !important;margin-top:4px !important;}
+            /* ── Spotlight ── */
+            .spotlight-name{font-size:16px !important;}
+            .spotlight-note{font-size:11px !important;}
+            /* ── Content area ── */
+            .content-area{padding:14px 12px !important;}
         }
         @media(max-width:380px){
             .bnav-btn{padding:7px 10px 9px;min-width:50px;font-size:8px;}
