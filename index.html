@@ -197,21 +197,21 @@
         .rsvp-btn.active-maybe{background:#ca8a04;color:white;border-color:#ca8a04;}
         .rsvp-btn.active-no{background:#dc2626;color:white;border-color:#dc2626;}
         .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid rgba(0,35,75,0.07);}
-        .home-cell{padding:20px 24px;border-right:1px solid rgba(0,35,75,0.07);}
+        .home-cell{padding:20px 24px;border-right:1px solid rgba(0,35,75,0.07);text-align:center;}
         .home-cell:last-child{border-right:none;}
         .home-cell-label{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(0,35,75,0.4);font-weight:700;margin-bottom:10px;}
-        .record-pills{display:flex;gap:8px;flex-wrap:wrap;}
+        .record-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
         .record-pill{font-family:'Nunito', sans-serif;font-weight:900;font-size:20px;padding:6px 14px;border-radius:3px;line-height:1;}
         .record-pill.w{background:#dcfce7;color:#15803d;}
         .record-pill.l{background:#fee2e2;color:#991b1b;}
         .record-pill.d{background:#fef3c7;color:#78350f;}
         .record-pill-sub{font-size:10px;letter-spacing:0.5px;font-weight:700;display:block;text-align:center;margin-top:2px;}
-        .form-dots{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+        .form-dots{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;}
         .form-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito', sans-serif;font-weight:900;font-size:13px;}
         .form-dot.W{background:#16a34a;color:white;}
         .form-dot.L{background:#dc2626;color:white;}
         .form-dot.D{background:#ca8a04;color:white;}
-        .badges-row{padding:16px 24px;border-bottom:1px solid rgba(0,35,75,0.07);display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+        .badges-row{padding:16px 24px;border-bottom:1px solid rgba(0,35,75,0.07);display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;}
         .badge-chip{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;padding:6px 12px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
         .badge-chip.hot{background:rgba(234,88,12,0.12);color:#ea580c;border:1px solid rgba(234,88,12,0.25);}
         .badge-chip.blue{background:rgba(37,99,235,0.1);color:#2563eb;border:1px solid rgba(37,99,235,0.2);}
@@ -313,10 +313,10 @@
         .tl-dot.W{background:#16a34a;color:white;}
         .tl-dot.L{background:#dc2626;color:white;}
         .tl-dot.D{background:#ca8a04;color:white;}
-        .tl-dot.future{background:rgba(0,35,75,0.08);color:rgba(0,35,75,0.3);border:2px dashed rgba(0,35,75,0.15);}
+        .tl-dot.future{background:rgba(0,35,75,0.06);color:rgba(0,35,75,0.4);border:2px dashed rgba(0,35,75,0.3);}
         .story-stat-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-radius:3px;margin-bottom:6px;}
-        .story-stat-row.pts{background:white;border-left:4px solid rgba(0,35,75,0.2);}
-        .story-stat-row.avail{background:rgba(255,204,0,0.1);border-left:4px solid var(--secondary);}
+        .story-stat-row.pts{background:white;border-left:4px solid var(--primary);}
+        .story-stat-row.avail{background:rgba(255,204,0,0.22);border-left:4px solid var(--secondary);}
         .story-stat-row.max{background:#e8f5ee;border-left:4px solid #16a34a;}
         .story-stat-label{font-family:'Nunito', sans-serif;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;}
         .story-stat-val{font-family:'Nunito', sans-serif;font-weight:900;font-size:30px;}
@@ -629,7 +629,7 @@
             .section-title{color:white !important;}
             .section-title span{color:rgba(255,255,255,0.4) !important;font-weight:600;}
             /* ── Content area: base text white on dark mobile bg ── */
-            .content-area{color:rgba(255,255,255,0.75);}
+            .content-area{background:var(--card);border-radius:0;}
             /* ── White table wrappers keep their own text colors ── */
             .match-table-wrap,.standings-table-scroll,.schedule-table{color:var(--primary);}
             /* ── Story narrative: readable on dark ── */
@@ -684,9 +684,12 @@
             .schedule-table td{padding:9px 10px !important;font-size:12px !important;}
             .schedule-loc{display:none;}
             .schedule-date{font-size:12px !important;}
+            .sched-rsvp-cell{white-space:nowrap;}
+            .schedule-table thead th:last-child{font-size:10px !important;padding:8px 4px !important;}
+            .schedule-time{font-size:11px !important;min-width:52px;}
             .schedule-time{font-size:12px !important;}
-            .sched-rsvp-cell{display:none;}
-            .schedule-table thead th:last-child{display:none;}
+            .sched-rsvp-cell{text-align:center;padding:8px 4px !important;}
+            .sched-rsvp-btn{font-size:10px !important;padding:5px 6px !important;margin:2px 1px !important;display:inline-block;}
             .story-grid{grid-template-columns:1fr !important;}
             .story-section-title{font-size:15px !important;}
             .story-narrative{font-size:13px !important;}
@@ -809,7 +812,7 @@
             .sticky-ack{min-height:40px !important;padding:10px 18px !important;}
             .bnav-btn{min-height:52px !important;padding:10px 14px 12px !important;}
             /* ── Tactic subnav: left-align wrapping 5 buttons ── */
-            .tactic-subnav{padding:6px 10px !important;gap:4px !important;justify-content:flex-start !important;}
+            .tactic-subnav{padding:6px 10px !important;gap:4px !important;justify-content:center !important;}
             .tactic-btn{font-size:10px !important;padding:8px 10px !important;}
             /* ── Messenger quick-actions: 2x2 grid ── */
             .msg-quick-actions{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px !important;padding:10px 12px !important;}
@@ -842,6 +845,24 @@
             .spotlight-note{font-size:11px !important;}
             /* ── Content area ── */
             .content-area{padding:14px 12px !important;}
+            /* ── Home cell centering on mobile ── */
+            .home-cell{text-align:center !important;}
+            .home-cell-label{text-align:center !important;}
+            .record-pills{justify-content:center !important;}
+            .form-dots{justify-content:center !important;}
+            .badges-row{justify-content:center !important;}
+            .home-grid{border-bottom:1px solid rgba(255,255,255,0.08) !important;}
+            .checkin-streak-row{justify-content:center !important;}
+            /* ── Story: readable section titles on card bg ── */
+            .story-section-title{color:var(--primary) !important;font-size:14px !important;}
+            .story-section-title span{color:rgba(0,35,75,0.45) !important;}
+            /* ── Story timeline legend ── */
+            .story-timeline + div{color:rgba(0,35,75,0.65) !important;}
+            /* ── Story stat rows ── */
+            .story-stat-val{font-size:26px !important;}
+            .story-stat-label{font-size:11px !important;}
+            /* ── Schedule RSVP visible ── */
+            .sched-rsvp-btn{font-size:9px !important;padding:5px 5px !important;margin-left:1px !important;letter-spacing:0;}
         }
         @media(max-width:380px){
             .bnav-btn{padding:7px 10px 9px;min-width:50px;font-size:8px;}
@@ -1518,12 +1539,12 @@
                                 <div class="record-pill l">${r.losses}<span class="record-pill-sub">L</span></div>
                                 <div class="record-pill d">${r.draws}<span class="record-pill-sub">D</span></div>
                             </div>
-                            ${streakLabel ? `<div style="margin-top:8px;font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:1px;color:rgba(0,35,75,0.45);font-weight:700;text-transform:uppercase;">${streakLabel}</div>` : ''}
+                            ${streakLabel ? `<div style="margin-top:8px;font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:1px;color:rgba(0,35,75,0.45);font-weight:700;text-transform:uppercase;text-align:center;">${streakLabel}</div>` : ''}
                         </div>
                         <div class="home-cell">
                             <div class="home-cell-label">Recent Form (Last 5)</div>
                             <div class="form-dots">${formDotsHtml}</div>
-                            <div style="margin-top:8px;font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:1px;color:rgba(0,35,75,0.45);font-weight:700;text-transform:uppercase;">
+                            <div style="margin-top:8px;font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:1px;color:rgba(0,35,75,0.45);font-weight:700;text-transform:uppercase;text-align:center;">
                                 ${form.filter(x => x === 'W').length}W · ${form.filter(x => x === 'L').length}L · ${form.filter(x => x === 'D').length}D
                             </div>
                         </div>
@@ -1540,12 +1561,6 @@
                         <div><span class="streak-num">${checkinStreak}-Day</span> <span class="streak-text">Check-in Streak — keep it going!</span></div>
                     </div>` : ''}
 
-                    <div class="home-stats-strip">
-                        <div class="home-stat"><div class="home-stat-val">#${l.rank}</div><div class="home-stat-label">Rank of ${l.totalTeams}</div></div>
-                        <div class="home-stat"><div class="home-stat-val gold">${l.points}</div><div class="home-stat-label">Points</div></div>
-                        <div class="home-stat"><div class="home-stat-val">${TEAM_CONFIG.goals.for}</div><div class="home-stat-label">Goals For</div></div>
-                        <div class="home-stat"><div class="home-stat-val gold">${l.goalDiff}</div><div class="home-stat-label">Goal Diff</div></div>
-                    </div>
 
                 </div>
 
