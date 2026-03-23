@@ -158,6 +158,16 @@
         .momentum-fill{height:100%;border-radius:6px;transition:width 1s cubic-bezier(0.34,1.56,0.64,1);}
         .momentum-sublabel{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:8px;}
 
+
+        /* ===== LAST MATCH CELL ===== */
+        .lm-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;}
+        .lm-score-row{display:flex;align-items:center;justify-content:center;gap:8px;}
+        .lm-score{font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;color:var(--primary);letter-spacing:1px;}
+        .lm-badge{font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;padding:3px 9px;border-radius:3px;letter-spacing:1px;}
+        .lm-opp{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:rgba(0,35,75,0.55);text-align:center;line-height:1.4;}
+        .lm-date{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.35);letter-spacing:0.5px;text-transform:uppercase;}
+        .lm-empty{color:rgba(0,35,75,0.3);font-size:12px;font-family:'Nunito',sans-serif;}
+
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -310,6 +320,13 @@
         .tactic-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;padding:10px 14px;border-radius:2px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.15s;min-height:40px;}
         .tactic-btn:hover{color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.3);}
         .tactic-btn.active{background:var(--secondary);color:var(--primary);border-color:var(--secondary);font-weight:900;}
+        /* ===== STORY SUBNAV ===== */
+        .stats-subnav{display:flex;background:var(--primary);border-bottom:2px solid rgba(255,255,255,0.06);padding:0 16px;gap:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+        .stats-subnav::-webkit-scrollbar{display:none;}
+        .stats-subnav-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:none;border:none;border-bottom:3px solid transparent;padding:12px 18px;cursor:pointer;white-space:nowrap;transition:color 0.15s,border-color 0.15s;margin-bottom:-2px;}
+        .stats-subnav-btn:hover{color:rgba(255,255,255,0.7);}
+        .stats-subnav-btn.active{color:white;border-bottom-color:var(--secondary);font-weight:900;}
+
         .tactical-field{background-color:#1a6b35;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.04),rgba(255,255,255,0.04) 10%,transparent 10%,transparent 20%);border:3px solid rgba(255,255,255,0.65);border-radius:4px;position:relative;overflow:hidden;}
         .player-dot{position:absolute;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito', sans-serif;font-weight:900;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.4);transition:opacity 0.25s ease;z-index:20;}
         .dimmed{opacity:0.28;transform:translate(-50%,-50%) scale(0.82)!important;filter:grayscale(60%);}
@@ -507,7 +524,11 @@
             .rsvp-label{display:none;}
             .badges-row{padding:12px 14px !important;}
             .home-stat-val{font-size:22px !important;}
-            .home-cell{padding:14px 14px !important;border-right:none !important;border-bottom:1px solid rgba(0,35,75,0.07);}
+            .home-cell{padding:14px 14px !important;border-right:none !important;border-bottom:1px solid rgba(255,255,255,0.07);}
+            .lm-score{color:white !important;}
+            .lm-opp{color:rgba(255,255,255,0.7) !important;}
+            .lm-date{color:rgba(255,255,255,0.4) !important;}
+            .lm-empty{color:rgba(255,255,255,0.3) !important;}
             .season-pulse{display:none !important;}
             /* ── Mobile audit fixes ── */
             .home-hero-col{padding:16px 14px !important;}
@@ -519,51 +540,6 @@
             .home-hero-right{max-width:84px;}
             .scenario-toggle-wrap{display:none;}
     
-        /* ===== SCENARIO EXERCISES ===== */
-        .scenarios-wrap{padding:0 24px 28px;}
-        .scenarios-intro{background:linear-gradient(135deg,var(--primary) 0%,#002a5c 100%);border-radius:4px;padding:16px 20px;margin-bottom:20px;margin-top:16px;border-left:4px solid var(--secondary);}
-        .scenarios-intro-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;margin-bottom:4px;}
-        .scenarios-intro-sub{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(255,255,255,0.55);line-height:1.55;}
-        .scenario-card{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.09);overflow:hidden;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,35,75,0.07);}
-        .scenario-header{background:var(--primary);padding:12px 18px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:3px solid var(--secondary);}
-        .scenario-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--secondary);line-height:1;flex-shrink:0;margin-top:2px;}
-        .scenario-title-block{flex:1;min-width:0;}
-        .scenario-title{font-family:'Nunito',sans-serif;font-weight:900;font-style:italic;font-size:14px;text-transform:uppercase;color:white;line-height:1.2;}
-        .scenario-trigger{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(255,255,255,0.45);margin-top:3px;line-height:1.4;}
-        .scenario-toggle-wrap{display:flex;align-items:center;gap:0;background:rgba(255,255,255,0.07);border-radius:20px;padding:2px;flex-shrink:0;}
-        .scenario-toggle-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;padding:5px 11px;border-radius:18px;border:none;cursor:pointer;transition:all 0.15s;background:transparent;color:rgba(255,255,255,0.45);}
-        .scenario-toggle-btn.active{background:var(--secondary);color:var(--primary);}
-        .scenario-body{display:grid;grid-template-columns:5fr 6fr;height:280px;}
-        .scenario-field-wrap{background:#1a6b35;position:relative;overflow:hidden;}
-        .scenario-field-label{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-family:'Nunito',sans-serif;font-weight:900;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);background:rgba(0,0,0,0.35);padding:2px 8px;border-radius:10px;z-index:20;white-space:nowrap;}
-        .scenario-field-wrap svg{position:absolute;inset:0;width:100%;height:100%;}
-        .scenario-analysis{padding:14px 16px;display:flex;flex-direction:column;gap:8px;border-left:1px solid rgba(0,35,75,0.08);overflow-y:auto;height:100%;box-sizing:border-box;}
-        .scenario-analysis-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);border-bottom:2px solid var(--secondary);padding-bottom:4px;margin-bottom:2px;}
-        .scenario-move-row{display:flex;gap:8px;align-items:flex-start;}
-        .scenario-move-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px;font-family:'Nunito',sans-serif;font-weight:900;}
-        .scenario-move-icon.moved{background:rgba(255,204,0,0.18);border:2px solid var(--secondary);color:var(--primary);}
-        .scenario-move-icon.stable{background:rgba(0,35,75,0.06);border:2px solid rgba(0,35,75,0.14);color:var(--primary);}
-        .scenario-move-text{font-family:'Nunito',sans-serif;font-size:11px;color:#374151;line-height:1.5;}
-        .scenario-move-text strong{color:var(--primary);font-weight:800;}
-        .scenario-principle{background:rgba(0,35,75,0.04);border-left:3px solid var(--secondary);padding:8px 12px;border-radius:0 4px 4px 0;margin-top:2px;}
-        .scenario-principle-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,35,75,0.4);margin-bottom:3px;}
-        .scenario-principle-text{font-family:'Nunito',sans-serif;font-size:11px;color:#374151;line-height:1.5;}
-
-        @media(max-width:860px){
-            .scenario-body{grid-template-columns:1fr 1fr;}
-            .scenario-field-wrap{min-height:240px;}
-            .scenarios-wrap{padding:0 16px 24px;}
-        }
-        @media(max-width:640px){
-            .scenario-body{grid-template-columns:1fr;grid-template-rows:260px auto;}
-            .scenario-field-wrap{min-height:260px;}
-            .scenarios-wrap{padding:0 12px 20px;}
-            .scenario-header{flex-wrap:wrap;padding:10px 14px 8px;}
-            .scenario-toggle-wrap{display:none;}
-            .scenario-analysis{padding:14px 14px;}
-            .scenario-move-text{font-size:11px;}
-        }
-
         .tactic-roster-panel{padding:12px 14px !important;}
             .standings-table{min-width:420px !important;}
             /* ── CASCADE FIX: home-top-zone must stack AFTER main 860px block ── */
@@ -582,8 +558,7 @@
             .rsvp-btn{flex:1;min-width:80px;text-align:center;font-size:11px !important;padding:10px 8px !important;}
             /* ── Schedule: opponent wraps cleanly, not overflow ── */
             .schedule-table td:nth-child(2){max-width:160px;word-break:break-word;}
-            /* ── Stats subnav: scrolls horizontally ── */
-            .stats-subnav{overflow-x:auto !important;}
+            /* stats-subnav handled in base */
             /* ── Dark theme for home-section-stats on mobile ── */
             .home-section-stats{background:var(--primary) !important;}
             .home-cell-label{color:rgba(255,255,255,0.45) !important;}
@@ -632,8 +607,8 @@
             /* ── Schedule cells ── */
             .schedule-table td{padding:12px 10px !important;}
             /* ── Stats subnav ── */
-            .stats-subnav{padding:0 !important;}
-            .stats-subnav-btn{padding:8px 14px !important;font-size:12px !important;}
+            .stats-subnav{padding:0 8px !important;}
+            .stats-subnav-btn{padding:10px 14px !important;font-size:11px !important;}
             /* ── Story ── */
             .story-section-title{font-size:14px !important;}
             .story-narrative{font-size:13px !important;line-height:1.7 !important;}
@@ -722,7 +697,7 @@
             .countdown-sep{font-size:18px !important;}
             /* ── Pass 2 380px fixes ── */
             .quick-action-btn{font-size:9px !important;padding:5px 8px !important;}
-            .stats-subnav-btn{font-size:11px !important;padding:10px 12px !important;}
+            .stats-subnav-btn{font-size:10px !important;padding:10px 12px !important;}
             .home-hero-rank{font-size:26px !important;}
             .home-hero-right{max-width:70px;}
         }
@@ -1251,14 +1226,14 @@
         const lmResColor = !lastMatch ? '' : lastMatch.res === 'W' ? '#16a34a' : lastMatch.res === 'L' ? '#dc2626' : '#ca8a04';
         const lmResBg    = !lastMatch ? '' : lastMatch.res === 'W' ? '#dcfce7' : lastMatch.res === 'L' ? '#fee2e2' : '#fef3c7';
         const lmResLabel = !lastMatch ? '' : lastMatch.res === 'W' ? 'WIN' : lastMatch.res === 'L' ? 'LOSS' : 'DRAW';
-        const lmHtml = !lastMatch ? '<div style="color:rgba(0,35,75,0.3);font-size:12px;font-family:Nunito,sans-serif;">No matches yet</div>' :
-            '<div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;">' +
-            '<div style="display:flex;align-items:center;justify-content:center;gap:10px;">' +
-            '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:26px;color:var(--primary);letter-spacing:1px;">' + lastMatch.score + '</span>' +
-            '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:12px;background:' + lmResBg + ';color:' + lmResColor + ';padding:4px 10px;border-radius:3px;letter-spacing:1px;">' + lmResLabel + '</span>' +
+        const lmHtml = !lastMatch ? '<div class="lm-empty">No matches yet</div>' :
+            '<div class="lm-wrap">' +
+            '<div class="lm-score-row">' +
+            '<span class="lm-score">' + lastMatch.score + '</span>' +
+            '<span class="lm-badge" style="background:' + lmResBg + ';color:' + lmResColor + ';">' + lmResLabel + '</span>' +
             '</div>' +
-            '<div style="font-family:Nunito,sans-serif;font-weight:700;font-size:12px;color:rgba(0,35,75,0.55);text-align:center;line-height:1.4;">#' + lastMatch.rank + ' ' + lastMatch.opp + '</div>' +
-            '<div style="font-family:Nunito,sans-serif;font-size:10px;color:rgba(0,35,75,0.35);letter-spacing:0.5px;text-transform:uppercase;">' + lastMatch.date + '</div>' +
+            '<div class="lm-opp">#' + lastMatch.rank + ' ' + lastMatch.opp + '</div>' +
+            '<div class="lm-date">' + lastMatch.date + '</div>' +
             '</div>';
 
         container.innerHTML = `
@@ -1527,7 +1502,7 @@
         } else if (streak.type === 'W' && streak.count === 2) {
             opener = `Back-to-back wins have ${team.branding.name} finding their rhythm at exactly the right moment in the season.`;
         } else if (streak.type === 'L' && streak.count >= 2) {
-            opener = `After a difficult ${streak.count}-match run, ${team.branding.name} faces a pivotal moment — bounce back or fall further behind.`;
+            opener = `Knocked down but not out — ${team.branding.name} absorbs a ${streak.count}-game skid and now faces a defining moment. The response to adversity separates teams. How they answer here will define this season.`;
         } else if (recentWins >= 3) {
             opener = `${team.branding.name} is finding their groove at the right time — ${recentWins} wins in the last 5 matches with the finish line in sight.`;
         } else {
@@ -1536,7 +1511,7 @@
 
         const rankContext = l.rank <= Math.ceil(l.totalTeams / 2)
             ? `Holding down the #${l.rank} spot — comfortably in the top half of a ${l.totalTeams}-team division —`
-            : `Sitting at #${l.rank} of ${l.totalTeams} and hungry to climb,`;
+            : `Sitting at #${l.rank} of ${l.totalTeams} with games left to play and plenty of room to climb,`;
 
         const diffContext = parseInt(l.goalDiff) > 0
             ? `A positive ${l.goalDiff} goal differential (${team.goals.for} scored, ${team.goals.against} conceded) shows this team competes hard on both ends of the pitch.`
@@ -1547,7 +1522,7 @@
         const nextContext = l.rank < nm.oppRank
             ? `Next up: a favorable matchup against #${nm.oppRank} ${nm.oppName} — a chance to pile on points and push up the table.`
             : l.rank > nm.oppRank
-            ? `The upcoming clash with #${nm.oppRank} ${nm.oppName} is the biggest test remaining — a result here could define the season.`
+            ? `Next up is #${nm.oppRank} ${nm.oppName} — a true measuring stick. A result here would silence the doubters and signal that this group is ready to fight back.`
             : `A leveled matchup against #${nm.oppRank} ${nm.oppName} awaits — three points from this one could be the catalyst for a strong finish.`;
 
         return `${opener}\n\n${rankContext} the team has accumulated ${l.points} points across ${total} matches. ${diffContext}\n\n${nextContext} With ${team.remainingSchedule.length} games remaining and ${avail} points still available, a maximum tally of ${maxPts} is mathematically on the table. The final push starts now.`;
@@ -1848,349 +1823,6 @@
     // ── Main animation entry point ────────────────────────────────────────────
 
 
-    /* ============================================================
-       TACTICAL SCENARIOS
-    ============================================================ */
-    let scenarioStates = {}; // keyed by scenario id: 'before' or 'after'
-
-    function toggleScenario(id, state) {
-        scenarioStates[id] = state;
-        const field = document.getElementById('sfield_' + id);
-        const beforeBtn = document.getElementById('stbefore_' + id);
-        const afterBtn  = document.getElementById('stafter_' + id);
-        if (!field) return;
-        field.innerHTML = state === 'before' ? SCENARIO_DATA[id].beforeSVG : SCENARIO_DATA[id].afterSVG;
-        const lbl = document.getElementById('sflabel_' + id);
-        if (lbl) lbl.textContent = state === 'before' ? 'BASE FORMATION' : 'ADAPTED FORMATION';
-        if (beforeBtn) beforeBtn.className = 'scenario-toggle-btn' + (state === 'before' ? ' active' : '');
-        if (afterBtn)  afterBtn.className  = 'scenario-toggle-btn' + (state === 'after'  ? ' active' : '');
-    }
-
-    // ── SVG Field Builder ─────────────────────────────────────────────────────
-    // p = array of { x, y, label, type, moved, faded, arrow }
-    // arrow = { x2, y2, cx, cy } optional bezier arrow
-    // type: 'gk'|'def'|'mid'|'fwd'
-    function buildFieldSVG(players) {
-        const sec = '#ffcc00';
-        const fieldLines = `
-            <rect x="0" y="0" width="100" height="160" fill="#1a6b35"/>
-            <rect x="0" y="0" width="100" height="160" fill="url(#grassStripe)" opacity="0.4"/>
-            <!-- pitch markings -->
-            <rect x="4" y="4" width="92" height="152" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
-            <line x1="4" y1="80" x2="96" y2="80" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
-            <circle cx="50" cy="80" r="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
-            <circle cx="50" cy="80" r="0.8" fill="rgba(255,255,255,0.5)"/>
-            <!-- penalty areas -->
-            <rect x="22" y="4" width="56" height="22" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
-            <rect x="22" y="134" width="56" height="22" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
-            <rect x="34" y="4" width="32" height="9" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
-            <rect x="34" y="147" width="32" height="9" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
-            <!-- zone boundaries -->
-            <line x1="4" y1="53" x2="96" y2="53" stroke="rgba(255,204,0,0.4)" stroke-width="0.7" stroke-dasharray="2,2"/>
-            <line x1="4" y1="107" x2="96" y2="107" stroke="rgba(255,204,0,0.4)" stroke-width="0.7" stroke-dasharray="2,2"/>
-            <!-- zone labels -->
-            <text x="97" y="30" font-family="Nunito" font-size="4" font-weight="700" fill="rgba(255,204,0,0.5)" text-anchor="end" transform="rotate(-90,97,30)" letter-spacing="1">ATTACK</text>
-            <text x="97" y="83" font-family="Nunito" font-size="4" font-weight="700" fill="rgba(255,204,0,0.5)" text-anchor="end" transform="rotate(-90,97,83)" letter-spacing="1">MID</text>
-            <text x="97" y="135" font-family="Nunito" font-size="4" font-weight="700" fill="rgba(255,204,0,0.5)" text-anchor="end" transform="rotate(-90,97,135)" letter-spacing="1">DEFEND</text>
-            <defs>
-                <pattern id="grassStripe" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-                    <rect width="8" height="16" fill="rgba(0,0,0,0.05)"/>
-                </pattern>
-                <marker id="arrowGold" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 Z" fill="${sec}"/>
-                </marker>
-                <marker id="arrowWhiteS" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="4" markerHeight="4" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.7)"/>
-                </marker>
-            </defs>`;
-
-        const typeColors = {
-            gk:  { bg: '#5b21b6', fg: 'white',  border: '#7c3aed' },
-            def: { bg: 'white',   fg: '#00234b', border: sec },
-            mid: { bg: sec,       fg: '#00234b', border: '#00234b' },
-            fwd: { bg: '#dc2626', fg: 'white',   border: 'rgba(255,255,255,0.6)' },
-        };
-
-        const arrows = players.filter(p => p.arrow).map(p => {
-            const c = p.arrow;
-            const col = p.moved ? sec : 'rgba(255,255,255,0.5)';
-            const mk  = p.moved ? 'arrowGold' : 'arrowWhiteS';
-            return `<path d="M${p.x},${p.y} Q${c.cx},${c.cy} ${c.x2},${c.y2}" fill="none" stroke="${col}" stroke-width="1.2" stroke-dasharray="${p.moved?'none':'3,2'}" marker-end="url(#${mk})" opacity="0.9"/>`;
-        }).join('');
-
-        const dots = players.map(p => {
-            const tc = typeColors[p.type] || typeColors.def;
-            const bg = p.moved ? sec : tc.bg;
-            const fg = p.moved ? '#00234b' : tc.fg;
-            const brd = p.moved ? '#b45309' : tc.border;
-            const r = 5.8;
-            const opacity = p.faded ? '0.3' : '1';
-            const ring = p.moved ? `<circle cx="${p.x}" cy="${p.y}" r="${r+2.8}" fill="none" stroke="${sec}" stroke-width="0.9" opacity="0.55"/>` : '';
-            // label format: "POS|NUM" e.g. "GK|31" or "LW|7"
-            const parts = p.label.split('|');
-            const posLabel = parts[0] || '';
-            const numLabel = parts[1] || '';
-            const labelY = p.y > 148 ? p.y - 8.5 : p.y + 9.5;
-            const numFontSize = numLabel.length > 2 ? '3.2' : '3.8';
-            return `${ring}
-                <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${bg}" stroke="${brd}" stroke-width="1.3" opacity="${opacity}"/>
-                <text x="${p.x}" y="${p.y + 0.6}" font-family="Nunito" font-size="${numFontSize}" font-weight="900" fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="${opacity}">${numLabel}</text>
-                <text x="${p.x}" y="${labelY}" font-family="Nunito" font-size="3" font-weight="800" fill="rgba(255,255,255,${p.moved ? '1' : '0.8'})" text-anchor="middle" opacity="${opacity}" letter-spacing="0.3">${posLabel}</text>`;
-        }).join('');
-
-        return `<svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">${fieldLines}${arrows}${dots}</svg>`;
-    }
-
-    // ── Scenario Definitions ──────────────────────────────────────────────────
-    // Field coords: x=0-100 (left-right), y=0-160 (attack top → defend bottom)
-    // Our team defends BOTTOM (y=130-160 area), attacks TOP
-    const SCENARIO_DATA = {
-
-        // ── Scenario 1: Tailynn drops to midfield coverage ────────────────────
-        '1': {
-            beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:25, y:128, label:'LB|5',   type:'def', moved:false },
-                { x:44, y:122, label:'LCB|25',    type:'def', moved:false },
-                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
-                { x:35, y:95,  label:'CDM|47',   type:'mid', moved:false },
-                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
-                { x:65, y:95,  label:'CM|27',     type:'mid', moved:false },
-                { x:20, y:45,  label:'LW|7',     type:'fwd', moved:false },
-                { x:50, y:38,  label:'ST|29',    type:'fwd', moved:false },
-                { x:80, y:45,  label:'RW|14',   type:'fwd', moved:false },
-            ]),
-            afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:25, y:128, label:'LB|5',   type:'def', moved:false },
-                { x:44, y:122, label:'LCB|25',    type:'def', moved:false },
-                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
-                { x:28, y:88,  label:'CDM|47',   type:'mid', moved:false },
-                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
-                { x:68, y:88,  label:'CM|27',     type:'mid', moved:false },
-                { x:82, y:72,  label:'RW|14',   type:'mid', moved:true,
-                  arrow:{ x2:82, y2:72, cx:84, cy:58 } },
-                { x:20, y:42,  label:'LW|7',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
-                { x:65, y:55,  label:'RW|97',     type:'fwd', moved:false, faded:false },
-            ]),
-        },
-
-        // ── Scenario 2: Sarai shifts to pure defense ──────────────────────────
-        '2': {
-            beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
-                { x:44, y:122, label:'LCB|25',    type:'def', moved:false },
-                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
-                { x:35, y:92,  label:'CDM|47',   type:'mid', moved:false },
-                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
-                { x:65, y:92,  label:'CM|27',     type:'mid', moved:false },
-                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
-                { x:82, y:42,  label:'RW|14',   type:'fwd', moved:false },
-            ]),
-            afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
-                { x:38, y:118, label:'LCB|25',    type:'def', moved:false },
-                { x:62, y:118, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:128, label:'RB|24',   type:'def', moved:false },
-                { x:22, y:108, label:'LW|7',     type:'def', moved:true,
-                  arrow:{ x2:22, y2:108, cx:18, cy:75 } },
-                { x:40, y:90,  label:'CDM|47',   type:'mid', moved:false },
-                { x:60, y:90,  label:'CM|23',    type:'mid', moved:false },
-                { x:65, y:72,  label:'CM|27',     type:'mid', moved:false },
-                { x:50, y:38,  label:'ST|29',    type:'fwd', moved:false },
-                { x:80, y:42,  label:'RW|14',   type:'fwd', moved:false },
-            ]),
-        },
-
-        // ── Scenario 3: Quinn + Aaditri respond to right-flank overload ───────
-        '3': {
-            beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
-                { x:42, y:122, label:'LCB|25',    type:'def', moved:false },
-                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
-                { x:30, y:92,  label:'CDM|47',   type:'mid', moved:false },
-                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
-                { x:65, y:92,  label:'CM|27',     type:'mid', moved:false },
-                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
-                { x:82, y:42,  label:'RW|97',     type:'fwd', moved:false },
-            ]),
-            afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
-                { x:42, y:122, label:'LCB|25',    type:'def', moved:false },
-                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
-                { x:30, y:92,  label:'CM|23',    type:'mid', moved:false },
-                { x:52, y:88,  label:'CM|33',   type:'mid', moved:false },
-                { x:68, y:105, label:'CDM|47',   type:'def', moved:true,
-                  arrow:{ x2:68, y2:105, cx:72, cy:98 } },
-                { x:78, y:108, label:'RW|97',     type:'def', moved:true,
-                  arrow:{ x2:78, y2:108, cx:85, cy:75 } },
-                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
-                { x:75, y:55,  label:'CM|27',     type:'mid', moved:false },
-            ]),
-        },
-
-        // ── Scenario 4: Sarah pushes to striker — chasing a goal ─────────────
-        '4': {
-            beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
-                { x:42, y:122, label:'LCB|25',    type:'def', moved:false },
-                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
-                { x:30, y:90,  label:'CDM|47',   type:'mid', moved:false },
-                { x:50, y:86,  label:'CM|23',    type:'mid', moved:false },
-                { x:65, y:90,  label:'CM|33',   type:'mid', moved:false },
-                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
-                { x:82, y:42,  label:'RW|97',     type:'fwd', moved:false },
-            ]),
-            afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
-                { x:22, y:130, label:'LB|5',   type:'def', moved:false },
-                { x:42, y:124, label:'LCB|25',    type:'def', moved:false },
-                { x:65, y:124, label:'RCB|86', type:'def', moved:false },
-                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
-                { x:35, y:95,  label:'CDM|47',   type:'mid', moved:false },
-                { x:60, y:95,  label:'CM|23',    type:'mid', moved:false },
-                { x:18, y:35,  label:'LW|7',     type:'fwd', moved:false },
-                { x:40, y:28,  label:'CM|33',   type:'fwd', moved:true,
-                  arrow:{ x2:40, y2:28, cx:52, cy:58 } },
-                { x:60, y:28,  label:'ST|29',    type:'fwd', moved:false },
-                { x:82, y:35,  label:'RW|97',     type:'fwd', moved:false },
-            ]),
-        },
-    };
-
-    function renderTacticScenarios(container) {
-        const cards = [
-            {
-                id: '1',
-                num: '01',
-                title: "Winger Drops to Midfield",
-                trigger: "🔴 Trigger: Opponent pressing high — midfield triangle losing shape in central zone",
-                moves: [
-                    { icon: '#7',  type: 'moved',  text: '<strong>RW (#7)</strong> drops from right wing into the right midfield channel. With the high press cutting off the central CM triangle, #7 provides a deeper outlet and restores numerical balance in the midfield line.' },
-                    { icon: '#10', type: 'stable', text: '<strong>CM (#10)</strong> slides wide to cover the vacated right channel, maintaining width without committing a dedicated winger.' },
-                    { icon: '#11', type: 'stable', text: '<strong>LW (#11) and ST (#9)</strong> hold their forward positions. The press is absorbed in midfield — the front two don\'t retreat.' },
-                ],
-                principle: 'The midfield line shifts from a triangle to a flat four — temporarily. Zone separation holds: defenders don\'t push into midfield, forwards don\'t drop to help. #7 fills the gap while staying within the midfield zone boundary.',
-            },
-            {
-                id: '2',
-                num: '02',
-                title: "Winger Becomes 5th Defender",
-                trigger: "🕐 Trigger: 75th minute, holding a 1-0 lead — opponent forcing play down our left flank",
-                moves: [
-                    { icon: '#11', type: 'moved',  text: '<strong>LW (#11)</strong> drops from left wing all the way to left back, creating a back 5. This overloads our defensive shape on the side the opponent is exploiting.' },
-                    { icon: '#6',  type: 'stable', text: '<strong>CDM (#6)</strong> shifts left in midfield to cover the space #11 vacated, maintaining a 3-person midfield line without gaps.' },
-                    { icon: '#9',  type: 'stable', text: '<strong>ST (#9) and RW (#7)</strong> remain as the attacking outlet — now a front two instead of three. The team compacts vertically to protect the result.' },
-                ],
-                principle: 'The foundational principle of zone separation stays intact — #11 simply drops an entire zone. The midfield line, though narrower, holds its horizontal integrity. This is "parking the bus" done intelligently: structure over chaos.',
-            },
-            {
-                id: '3',
-                num: '03',
-                title: "Right Flank Overload Response",
-                trigger: "⚠️ Trigger: Opponent attacking with 3v2 overload down our right side — need immediate cover",
-                moves: [
-                    { icon: '#7',  type: 'moved',  text: '<strong>RW (#7)</strong> drops from right wing to a wide defensive midfield position, forming a temporary 4-4-2 shift and providing the third body in the threatened zone.' },
-                    { icon: '#6',  type: 'moved',  text: '<strong>CDM (#6)</strong> slides right in midfield to compress the lane, plugging the channel between #7\'s new position and RCB (#4).' },
-                    { icon: '#10', type: 'stable', text: '<strong>CM (#10)</strong> rotates into the vacated central position, maintaining 3 in midfield. Formation becomes a 4-4-2 shape instead of 4-3-3.' },
-                ],
-                principle: 'The midfield line doesn\'t collapse — it shifts laterally and gains a player via #7\'s drop. The zone boundary is respected: no CB steps into midfield. Pressure is absorbed in the zone it arrives in.',
-            },
-            {
-                id: '4',
-                num: '04',
-                title: "Midfield Pushed to Striker",
-                trigger: "⚡ Trigger: 80th minute, trailing by 1 — need a goal; coach switches to 4-2-4 for 10 minutes",
-                moves: [
-                    { icon: '#10', type: 'moved',  text: '<strong>CM (#10)</strong> pushes from central midfield to second striker, joining LW, ST, and RW in a four-attacker shape. #10\'s range across the front means she understands final-third spacing.' },
-                    { icon: '#6',  type: 'stable', text: '<strong>CDM (#6) and CM (#8)</strong> hold a double pivot — two defensive mids covering the attacking surge. They must stay disciplined and compact, not follow the press forward.' },
-                    { icon: '→',   type: 'stable', text: '<strong>Back four holds their line.</strong> Risk is absorbed in midfield, not by exposing the defensive shape. If possession is lost, #6 and #8 form an immediate defensive screen.' },
-                ],
-                principle: 'The most aggressive scenario — temporarily trading midfield depth for attacking width. The key teaching point: even in chaos mode, the defensive block is non-negotiable. Four up top only works if the double pivot holds.',
-            },
-        ];
-        const cardsHTML = cards.map(c => {
-            const movesHTML = c.moves.map(m =>
-                `<div class="scenario-move-row">
-                    <div class="scenario-move-icon ${m.type}">${m.icon}</div>
-                    <div class="scenario-move-text">${m.text}</div>
-                </div>`
-            ).join('');
-            return `<div class="scenario-card">
-                <div class="scenario-header">
-                    <div class="scenario-num">${c.num}</div>
-                    <div class="scenario-title-block">
-                        <div class="scenario-title">${c.title}</div>
-                        <div class="scenario-trigger">${c.trigger}</div>
-                    </div>
-                    <div class="scenario-toggle-wrap">
-                        <button id="stbefore_${c.id}" class="scenario-toggle-btn active" onclick="toggleScenario('${c.id}','before')">Before</button>
-                        <button id="stafter_${c.id}"  class="scenario-toggle-btn"        onclick="toggleScenario('${c.id}','after')">After</button>
-                    </div>
-                </div>
-                <div class="scenario-body">
-                    <div class="scenario-field-wrap">
-                        <div class="scenario-field-label" id="sflabel_${c.id}">BASE FORMATION</div>
-                        <div id="sfield_${c.id}">${SCENARIO_DATA[c.id].beforeSVG}</div>
-                    </div>
-                    <div class="scenario-analysis">
-                        <div class="scenario-analysis-title">Tactical Breakdown</div>
-                        ${movesHTML}
-                        <div class="scenario-principle">
-                            <div class="scenario-principle-label">⚙ Core Principle Preserved</div>
-                            <div class="scenario-principle-text">${c.principle}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-        }).join('');
-
-        container.innerHTML = `${headerHTML(TEAM_CONFIG.branding.tacticalSystem, 'TACTICS')}
-        <div class="tactic-subnav">
-            <button id="tbtn-overview" onclick="switchTacticView('overview')" class="tactic-btn">Full Team</button>
-            <button id="tbtn-defense"  onclick="switchTacticView('defense')"  class="tactic-btn">Defense Flow</button>
-            <button id="tbtn-midfield" onclick="switchTacticView('midfield')" class="tactic-btn">Midfield Flow</button>
-            <button id="tbtn-attack"   onclick="switchTacticView('attack')"   class="tactic-btn">Attack Flow</button>
-            <button id="tbtn-scenarios" onclick="showScenarios()" class="tactic-btn active">Scenarios</button>
-        </div>
-        <div style="background:var(--card);">
-            <div class="scenarios-wrap">
-                <div class="scenarios-intro">
-                    <div class="scenarios-intro-title">Positional Flexibility · 4-3-3 Adaptive Scenarios</div>
-                    <div class="scenarios-intro-sub">Each card shows how the 4-3-3 adapts to a live game situation. Toggle Before / After to compare the base formation vs. the adjustment. Gold highlights show which positions moved and where.</div>
-                </div>
-                ${cardsHTML}
-            </div>
-        </div>
-        ${footerHTML('Tactical Scenarios')}`;
-
-        // Initialize all scenarios to 'before' state
-        Object.keys(SCENARIO_DATA).forEach(id => { scenarioStates[id] = 'before'; });
-    }
-
-    function showScenarios() {
-        if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
-        currentTacticView = 'scenarios';
-        const c = document.getElementById('main-content');
-        c.classList.add('switching');
-        setTimeout(() => { renderTacticScenarios(c); c.classList.remove('switching'); }, 120);
-    }
 
     function switchTacticView(toView) {
         if (!document.getElementById('tactic-board')) {
@@ -2308,7 +1940,6 @@
             <button id="tbtn-defense"   onclick="switchTacticView('defense')"   class="tactic-btn ${currentTacticView==='defense'?'active':''}">Defense Flow</button>
             <button id="tbtn-midfield"  onclick="switchTacticView('midfield')"  class="tactic-btn ${currentTacticView==='midfield'?'active':''}">Midfield Flow</button>
             <button id="tbtn-attack"    onclick="switchTacticView('attack')"    class="tactic-btn ${currentTacticView==='attack'?'active':''}">Attack Flow</button>
-            <button id="tbtn-scenarios" onclick="showScenarios()"               class="tactic-btn">Scenarios</button>
         </div>
         <div id="tactic-board" style="display:flex;flex-direction:row;min-height:460px;">
             <div style="background:var(--primary);width:44%;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
