@@ -1428,7 +1428,7 @@
         <div class="stats-subnav"><button class="stats-subnav-btn ${storyView==='narrative'||storyView==='story'?'active':''}" onclick="switchStoryView('narrative')">📖 Story</button><button class="stats-subnav-btn ${storyView==='stats'?'active':''}" onclick="switchStoryView('stats')">📊 Team Stats</button><button class="stats-subnav-btn ${storyView==='standings'?'active':''}" onclick="switchStoryView('standings')">🏆 Standings</button></div>
         <div class="content-area">
             <div class="section-title" style="margin-bottom:16px;">League Table <span>${TEAM_CONFIG.league.totalTeams} Teams</span></div>
-            <div class="standings-table-scroll" style="background:white;border-radius:3px;overflow:hidden;">
+            <div class="standings-table-scroll" style="background:white;border-radius:3px;overflow-x:auto;">
                 <table class="standings-table" style="min-width:520px;">
                     <thead><tr>
                         <th style="width:44px;">Pos</th><th style="text-align:left;">Club</th>
@@ -1580,7 +1580,7 @@
                     <div class="story-section-title">The Story So Far</div>
                     <p class="story-narrative" id="storyNarrativeText">${narrative.replace(/\n\n/g, '</p><p class="story-narrative" style="margin-top:12px;">')}</p>
 
-                    <button class="ai-story-btn" id="aiStoryBtn" onclick="withApiKey(enhanceStoryWithAI)">
+                    <button class="ai-story-btn" id="aiStoryBtn" onclick="enhanceStoryWithAI()">
                         ✦ Enhance with AI
                     </button>
                     <div class="story-ai-result" id="storyAiResult"></div>
@@ -1646,7 +1646,10 @@
             btn.disabled = false;
             btn.innerHTML = '✦ Regenerate';
         }).catch(err => {
-            resultBox.textContent = 'Error: ' + err.message;
+            const msg = err.message && err.message.includes('API key') 
+                ? 'AI key not set. Tap ⚙ AI Settings in the Messages tab to configure.'
+                : 'Error: ' + err.message;
+            resultBox.textContent = msg;
             resultBox.style.display = 'block';
             btn.disabled = false;
             btn.innerHTML = '✦ Enhance with AI';
@@ -2008,7 +2011,7 @@
        AI UTILITY
     ============================================================ */
     async function callAI(systemPrompt, userPrompt) {
-        const key = getApiKey(); if (!key) throw new Error('No API key');
+        const key = getApiKey(); if (!key) throw new Error('API key not configured');
         const res = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
