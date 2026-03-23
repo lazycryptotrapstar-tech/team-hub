@@ -310,10 +310,8 @@
         .story-stat-row.max{background:#e8f5ee;border-left:4px solid #16a34a;}
         .story-stat-label{font-family:'Nunito', sans-serif;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;}
         .story-stat-val{font-family:'Nunito', sans-serif;font-weight:900;font-size:30px;}
-        .ai-story-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;background:var(--secondary);color:var(--primary);border:none;padding:9px 18px;border-radius:2px;cursor:pointer;margin-top:16px;display:inline-flex;align-items:center;gap:6px;}
         .ai-story-btn:hover{background:#ffe033;}
         .ai-story-btn:disabled{opacity:0.5;cursor:not-allowed;}
-        .story-ai-result{background:white;border:1px solid rgba(0,35,75,0.1);border-radius:3px;padding:16px;font-size:14px;line-height:1.7;color:#1e293b;margin-top:12px;white-space:pre-wrap;display:none;}
 
         /* ===== TACTICAL ===== */
         .tactic-subnav{background:#001530;border-bottom:1px solid rgba(255,255,255,0.07);padding:8px 12px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
@@ -866,7 +864,9 @@
     ============================================================ */
     let currentTeamId = 'u13', TEAM_CONFIG = TEAMS['u13'], currentTab = 'home', currentTacticView = 'overview', storyView = 'story';
     let RSVP_STATE = JSON.parse(localStorage.getItem('hub_rsvp') || '{}');
-    let storyAiText = {}; // keyed by teamId
+    let storyAiText = {
+        'u13': `Saturday's 2-5 loss to #4 Sting Attack was a gut punch — no other way to say it. Against one of the division's best, McNeal gave up three in the second half when it mattered most. That stings.\n\nBut here's what doesn't change: 6 wins, 19 points, and one game left. This team has beaten teams ranked ahead of them all season. They've come back from multi-match losing skids before. The record shows a squad that competes — 23 goals scored, a win over #6 LC United, back-to-back wins in February when the season needed it most.\n\nThe final opponent is #17 Sting G13 Hubbard. On paper, this is a winnable game. But the only way it matters is if this team shows up with something to prove. A loss on Saturday can't define the season — the response to it can.\n\nSit at #11 of 18 with 19 points, and 3 more on the table Tuesday night. One game. One chance to finish with your head up.\n\nThe season isn't over. Write a better ending.`
+    }; // keyed by teamId
     let countdownInterval = null;
 
     /* ============================================================
@@ -1580,10 +1580,7 @@
                     <div class="story-section-title">The Story So Far</div>
                     <p class="story-narrative" id="storyNarrativeText">${narrative.replace(/\n\n/g, '</p><p class="story-narrative" style="margin-top:12px;">')}</p>
 
-                    <button class="ai-story-btn" id="aiStoryBtn" onclick="enhanceStoryWithAI()">
-                        ✦ Enhance with AI
-                    </button>
-                    <div class="story-ai-result" id="storyAiResult"></div>
+
                 </div>
                 <div>
                     <div class="story-section-title">By The Numbers</div>
@@ -1615,45 +1612,6 @@
             </div>
         </div>${footerHTML('Season Analysis & Projections')}`;
         setTimeout(() => { const f = document.getElementById('momentumFill'); if (f) f.style.width = momentum.pct + '%'; }, 200);
-    }
-
-    function enhanceStoryWithAI() {
-        const btn = document.getElementById('aiStoryBtn');
-        const resultBox = document.getElementById('storyAiResult');
-        if (!btn || !resultBox) return;
-        btn.disabled = true;
-        btn.innerHTML = '<span class="ai-spinner"></span> Writing...';
-        resultBox.style.display = 'none';
-
-        const r = TEAM_CONFIG.record;
-        const l = TEAM_CONFIG.league;
-        const nm = TEAM_CONFIG.nextMatch;
-        const streak = getStreak(TEAM_CONFIG.matches);
-        const avail = TEAM_CONFIG.remainingSchedule.length * 3;
-
-        callAI(
-            `You are a sports broadcast journalist writing dramatic weekly season recaps for youth soccer teams. Write in an energetic, narrative style — like a Friday Night Lights broadcast recap. Use vivid language, build tension, and make it feel cinematic. Keep it under 200 words. Plain text, no bullet points.`,
-            `Team: ${TEAM_CONFIG.branding.name}. Division: ${TEAM_CONFIG.branding.league}. Record: ${r.wins}W-${r.losses}L-${r.draws}D. Rank: #${l.rank} of ${l.totalTeams}. Points: ${l.points}. PPG: ${l.ppg}. Goal differential: ${l.goalDiff}. Goals: ${TEAM_CONFIG.goals.for} for, ${TEAM_CONFIG.goals.against} against. Current streak: ${streak.count}-match ${streak.type === 'W' ? 'win' : streak.type === 'L' ? 'losing' : 'unbeaten'} streak. Remaining games: ${TEAM_CONFIG.remainingSchedule.length} (${avail} pts available). Next opponent: #${nm.oppRank} ${nm.oppName} (${nm.oppRecord}).\n\nWrite a dramatic broadcast-style season story.`
-        ).then(result => {
-            storyAiText[currentTeamId] = result;
-            // Replace the narrative body text directly
-            const narrativeEl = document.getElementById('storyNarrativeText');
-            if (narrativeEl) {
-                const formatted = result.replace(/\n\n/g, '</p><p class="story-narrative" style="margin-top:12px;">');
-                narrativeEl.innerHTML = formatted;
-            }
-            resultBox.style.display = 'none';
-            btn.disabled = false;
-            btn.innerHTML = '✦ Regenerate';
-        }).catch(err => {
-            const msg = err.message && err.message.includes('API key') 
-                ? 'AI key not set. Tap ⚙ AI Settings in the Messages tab to configure.'
-                : 'Error: ' + err.message;
-            resultBox.textContent = msg;
-            resultBox.style.display = 'block';
-            btn.disabled = false;
-            btn.innerHTML = '✦ Enhance with AI';
-        });
     }
 
     /* ============================================================
