@@ -28,13 +28,13 @@
 
 
         /* ===== SEASON PULSE BAR ===== */
-        .season-pulse{width:100%;max-width:1000px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:9px 20px;display:flex;align-items:center;gap:0;overflow:hidden;margin-top:10px;}
-        .pulse-item{display:flex;align-items:center;gap:7px;padding:0 18px;border-right:1px solid rgba(255,255,255,0.08);}
+        .season-pulse{width:100%;max-width:1000px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:8px 12px;display:flex;align-items:center;gap:0;overflow:hidden;margin-top:10px;flex-wrap:nowrap;}
+        .pulse-item{display:flex;align-items:center;gap:5px;padding:0 10px;border-right:1px solid rgba(255,255,255,0.08);flex:1;min-width:0;}
         .pulse-item:first-child{padding-left:0;}
         .pulse-item:last-child{border-right:none;}
         .pulse-icon{font-size:13px;}
         .pulse-label{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
-        .pulse-val{font-family:'Nunito', sans-serif;font-weight:900;font-size:14px;color:var(--secondary);letter-spacing:0.5px;}
+        .pulse-val{font-family:'Nunito', sans-serif;font-weight:900;font-size:12px;color:var(--secondary);line-height:1.25;word-break:break-word;}
         .pulse-val.silver{color:var(--silver);}
         .pulse-val.white{color:white;}
         /* ===== TOOLBAR (desktop) ===== */
@@ -92,8 +92,7 @@
         .home-hero-col.match-day::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,204,0,0.08) 0%,transparent 70%);pointer-events:none;}
 
         /* ===== HOME SECTION DIVIDERS ===== */
-        .home-section-spotlight{background:linear-gradient(180deg,#001225 0%,#001e36 100%);border-top:2px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
-        .home-section-stats{background:var(--card);}
+
         .home-section-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:10px 20px 0;}
 
         @media(max-width:860px){
@@ -145,21 +144,6 @@
         .home-hero.match-day{background:#060e1c;border-bottom-color:rgba(255,204,0,0.4);}
         .home-hero.match-day::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,204,0,0.08) 0%,transparent 70%);pointer-events:none;}
 
-        /* ===== PLAYER SPOTLIGHT ===== */
-        .spotlight-card{padding:0;background:transparent;position:relative;overflow:hidden;}
-        .spotlight-eyebrow{font-family:'Nunito',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:800;padding:12px 20px 10px;display:block;}
-        .spotlight-players{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;}
-        .spotlight-player{display:flex;flex-direction:column;}
-        .spotlight-player-header{padding:10px 20px 14px;display:flex;flex-direction:column;gap:4px;}
-        .spotlight-player-header.offense{background:rgba(255,150,0,0.18);border-top:4px solid var(--secondary);}
-        .spotlight-player-header.defense{background:rgba(192,200,212,0.15);border-top:4px solid var(--silver);}
-        .spotlight-player-badge{font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:5px;margin-bottom:2px;}
-        .spotlight-player-badge.offense{color:var(--secondary);}
-        .spotlight-player-badge.defense{color:var(--silver);}
-        .spotlight-divider{display:none;}
-        .spotlight-name{font-family:'Nunito',sans-serif;font-weight:900;font-style:italic;font-size:17px;text-transform:uppercase;color:white;line-height:1.1;;word-break:break-word;overflow-wrap:break-word;}
-        .spotlight-note{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;line-height:1.5;}
-        .spotlight-week{font-family:'Nunito',sans-serif;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:700;margin-top:6px;}
         /* ===== CHECK-IN STREAK ===== */
         .checkin-streak-row{padding:12px 24px;background:rgba(0,35,75,0.03);border-bottom:1px solid rgba(0,35,75,0.07);display:flex;align-items:center;gap:10px;}
         .streak-num{font-family:'Nunito', sans-serif;font-weight:900;font-size:18px;color:#ea580c;}
@@ -174,10 +158,6 @@
         .momentum-fill{height:100%;border-radius:6px;transition:width 1s cubic-bezier(0.34,1.56,0.64,1);}
         .momentum-sublabel{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:8px;}
 
-        /* ===== QUICK ACTIONS ===== */
-        .msg-quick-actions{background:#001530;padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);}
-        .quick-action-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-radius:2px;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.55);transition:all 0.15s;white-space:nowrap;min-height:40px;}
-        .quick-action-btn:hover{background:rgba(255,204,0,0.1);border-color:rgba(255,204,0,0.3);color:var(--secondary);}
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -343,245 +323,6 @@
         .tactic-section-badge.midfield{background:rgba(255,204,0,0.18);color:#7c5900;}
         .tactic-section-badge.attack{background:rgba(220,38,38,0.07);color:#b91c1c;}
 
-        /* ===== MESSENGER ===== */
-        .msg-layout{display:flex;min-height:460px;}
-        .msg-sidebar{width:220px;flex-shrink:0;background:var(--primary);display:flex;flex-direction:column;}
-        .msg-sidebar-section{font-family:'Nunito', sans-serif;font-weight:700;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:14px 14px 6px;}
-        .msg-thread-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:none;color:rgba(255,255,255,0.55);background:none;border:none;padding:10px 14px;cursor:pointer;text-align:left;width:100%;border-left:3px solid transparent;transition:all 0.1s;}
-        .msg-thread-btn:hover{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.85);}
-        .msg-thread-btn.active{background:rgba(255,204,0,0.08);color:var(--secondary);border-left-color:var(--secondary);}
-        .msg-thread-btn .thread-name{font-weight:600;display:block;}
-        .msg-thread-btn .thread-sub{font-size:11px;color:rgba(255,255,255,0.3);display:block;margin-top:1px;}
-        .msg-thread-btn.active .thread-sub{color:rgba(255,204,0,0.5);}
-        .msg-main{flex:1;background:var(--card);display:flex;flex-direction:column;}
-        .msg-topbar{background:var(--primary);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--secondary);}
-        .msg-topbar-name{font-family:'Nunito', sans-serif;font-weight:900;font-style:italic;font-size:18px;text-transform:uppercase;color:white;letter-spacing:1px;}
-        .msg-topbar-sub{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:2px;}
-        .msg-feed{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:10px;max-height:340px;}
-        .msg-bubble{display:flex;flex-direction:column;gap:3px;max-width:80%;}
-        .msg-bubble.mine{align-self:flex-end;align-items:flex-end;}
-        .msg-bubble.theirs{align-self:flex-start;align-items:flex-start;}
-        .msg-meta{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:1px;color:rgba(0,35,75,0.4);font-weight:700;}
-        .msg-text{padding:10px 14px;border-radius:3px;font-size:13px;line-height:1.5;color:#1e293b;}
-        .msg-bubble.mine .msg-text{background:var(--primary);color:white;border-radius:12px 3px 12px 12px;}
-        .msg-bubble.theirs .msg-text{background:white;border:1px solid rgba(0,35,75,0.08);border-radius:3px 12px 12px 12px;}
-        .msg-bubble.system .msg-text{background:rgba(255,204,0,0.12);border:1px solid rgba(255,204,0,0.3);color:#7c5900;font-style:italic;border-radius:3px;align-self:center;}
-        .msg-bubble.system{align-self:center;align-items:center;max-width:90%;}
-        .msg-input-area{padding:12px 16px;background:white;border-top:1px solid rgba(0,35,75,0.08);display:flex;gap:10px;align-items:flex-end;}
-        .msg-input{flex:1;border:1px solid rgba(0,35,75,0.15);border-radius:3px;padding:10px 12px;font-family:'Nunito', sans-serif;font-size:13px;resize:none;outline:none;min-height:40px;max-height:100px;color:#1e293b;}
-        .msg-input:focus{border-color:var(--primary);}
-        .msg-send-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;background:var(--primary);color:white;border:none;padding:10px 16px;border-radius:3px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-        .msg-send-btn:hover{background:#001d3d;}
-        .msg-ai-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;background:var(--secondary);color:var(--primary);border:none;padding:10px 14px;border-radius:3px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-        .msg-ai-btn:hover{background:#ffe033;}
-        .reminder-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;background:rgba(255,204,0,0.15);color:#7c5900;border:1px solid rgba(255,204,0,0.4);padding:6px 12px;border-radius:2px;cursor:pointer;white-space:nowrap;}
-        .reminder-btn:hover{background:rgba(255,204,0,0.25);}
-
-        /* ===== SPONSORS ===== */
-        .sp-layout{display:flex;min-height:520px;}
-        .sp-list-panel{width:300px;flex-shrink:0;background:#f0ece3;border-right:2px solid rgba(0,35,75,0.08);display:flex;flex-direction:column;}
-        .sp-list-header{background:var(--primary);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
-        .sp-list-title{font-family:'Nunito', sans-serif;font-weight:900;font-size:14px;letter-spacing:0.5px;text-transform:uppercase;color:white;}
-        .sp-add-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:var(--secondary);color:var(--primary);border:none;padding:5px 12px;border-radius:2px;cursor:pointer;}
-        .sp-list-scroll{flex:1;overflow-y:auto;}
-        .sp-card{padding:12px 16px;border-bottom:1px solid rgba(0,35,75,0.07);cursor:pointer;transition:background 0.1s;border-left:3px solid transparent;}
-        .sp-card:hover{background:rgba(0,35,75,0.04);}
-        .sp-card.active{background:rgba(255,204,0,0.1);border-left-color:var(--secondary);}
-        .sp-card-name{font-family:'Nunito', sans-serif;font-weight:700;font-size:15px;color:var(--primary);}
-        .sp-card-contact{font-size:12px;color:rgba(0,35,75,0.5);margin-top:2px;}
-        .sp-status-pill{display:inline-block;font-family:'Nunito', sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-top:4px;}
-        .sp-status-pill.Active{background:#dcfce7;color:#15803d;}
-        .sp-status-pill.Prospect{background:#e0f2fe;color:#0369a1;}
-        .sp-status-pill.Contacted{background:#fef3c7;color:#92400e;}
-        .sp-status-pill.Negotiating{background:#ede9fe;color:#5b21b6;}
-        .sp-status-pill.Declined{background:#fee2e2;color:#b91c1c;}
-        .sp-detail-panel{flex:1;background:var(--card);display:flex;flex-direction:column;overflow-y:auto;}
-        .sp-detail-topbar{background:var(--primary);padding:14px 24px;border-bottom:2px solid var(--secondary);}
-        .sp-detail-name{font-family:'Nunito', sans-serif;font-weight:900;font-style:italic;font-size:22px;text-transform:uppercase;color:white;letter-spacing:1px;}
-        .sp-detail-meta{font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:3px;}
-        .sp-detail-body{padding:20px 24px;flex:1;}
-        .sp-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-        .sp-field{display:flex;flex-direction:column;gap:4px;}
-        .sp-field-label{font-family:'Nunito', sans-serif;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(0,35,75,0.45);font-weight:700;}
-        .sp-field-val{font-family:'Nunito', sans-serif;font-size:13px;color:#1e293b;font-weight:500;}
-        .sp-field-input{font-family:'Nunito', sans-serif;font-size:13px;color:#1e293b;border:1px solid rgba(0,35,75,0.15);border-radius:3px;padding:7px 10px;outline:none;width:100%;}
-        .sp-field-input:focus{border-color:var(--primary);}
-        .sp-field-select{font-family:'Nunito', sans-serif;font-size:13px;font-weight:700;color:var(--primary);border:1px solid rgba(0,35,75,0.15);border-radius:3px;padding:7px 10px;outline:none;width:100%;background:white;}
-        .sp-ai-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:2px solid rgba(0,35,75,0.08);}
-        .sp-ai-action-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;padding:10px 18px;border-radius:3px;cursor:pointer;border:none;transition:all 0.15s;}
-        .sp-ai-action-btn.primary{background:var(--secondary);color:var(--primary);}
-        .sp-ai-action-btn.primary:hover{background:#ffe033;}
-        .sp-ai-action-btn.secondary{background:var(--primary);color:white;}
-        .sp-ai-action-btn.secondary:hover{background:#001d3d;}
-        .sp-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:40px;text-align:center;}
-        .sp-empty-title{font-family:'Nunito', sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:0.5px;color:rgba(0,35,75,0.25);margin-bottom:8px;}
-        .sp-empty-sub{font-family:'Nunito', sans-serif;font-size:13px;color:rgba(0,35,75,0.35);}
-
-
-
-        /* ===== STATS SUBNAV ===== */
-        .stats-subnav{background:var(--primary);border-bottom:2px solid rgba(255,204,0,0.15);padding:0;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-        .stats-subnav-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;color:rgba(255,255,255,0.45);background:none;border:none;padding:13px 16px;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
-        .stats-subnav-btn:hover{color:rgba(255,255,255,0.8);}
-        .stats-subnav-btn.active{color:var(--secondary);border-bottom-color:var(--secondary);}
-
-        /* ===== TACTICS ROSTER PANEL ===== */
-
-        /* ===== SCENARIO EXERCISES ===== */
-        .scenarios-wrap{padding:0 32px 32px;}
-        .scenarios-intro{background:linear-gradient(135deg,var(--primary) 0%,#002a5c 100%);border-radius:4px;padding:20px 24px;margin-bottom:24px;margin-top:20px;border-left:4px solid var(--secondary);}
-        .scenarios-intro-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:17px;color:white;margin-bottom:6px;}
-        .scenarios-intro-sub{font-family:'Nunito',sans-serif;font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;}
-        .scenario-card{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.09);overflow:hidden;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,35,75,0.07);}
-        .scenario-header{background:var(--primary);padding:14px 20px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:3px solid var(--secondary);}
-        .scenario-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:var(--secondary);line-height:1;flex-shrink:0;margin-top:2px;}
-        .scenario-title-block{flex:1;}
-        .scenario-title{font-family:'Nunito',sans-serif;font-weight:900;font-style:italic;font-size:16px;text-transform:uppercase;color:white;line-height:1.2;}
-        .scenario-trigger{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);margin-top:4px;line-height:1.4;}
-        .scenario-toggle-wrap{display:flex;align-items:center;gap:0;background:rgba(255,255,255,0.07);border-radius:20px;padding:2px;flex-shrink:0;}
-        .scenario-toggle-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;padding:5px 12px;border-radius:18px;border:none;cursor:pointer;transition:all 0.15s;background:transparent;color:rgba(255,255,255,0.45);}
-        .scenario-toggle-btn.active{background:var(--secondary);color:var(--primary);}
-        .scenario-body{display:grid;grid-template-columns:1fr 1fr;min-height:340px;}
-        .scenario-field-wrap{background:#1a6b35;position:relative;overflow:hidden;min-height:340px;}
-        .scenario-field-label{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);background:rgba(0,0,0,0.35);padding:3px 10px;border-radius:10px;z-index:20;white-space:nowrap;}
-        .scenario-field-wrap svg{position:absolute;inset:0;width:100%;height:100%;}
-        .scenario-analysis{padding:20px 22px;display:flex;flex-direction:column;gap:12px;border-left:1px solid rgba(0,35,75,0.08);}
-        .scenario-analysis-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);border-bottom:2px solid var(--secondary);padding-bottom:5px;margin-bottom:2px;}
-        .scenario-move-row{display:flex;gap:10px;align-items:flex-start;}
-        .scenario-move-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;font-family:'Nunito',sans-serif;font-weight:900;}
-        .scenario-move-icon.moved{background:rgba(255,204,0,0.18);border:2px solid var(--secondary);color:var(--primary);}
-        .scenario-move-icon.stable{background:rgba(0,35,75,0.06);border:2px solid rgba(0,35,75,0.14);color:var(--primary);}
-        .scenario-move-icon.gk{background:#ede9fe;border:2px solid #7c3aed;color:#5b21b6;}
-        .scenario-move-text{font-family:'Nunito',sans-serif;font-size:12px;color:#374151;line-height:1.55;}
-        .scenario-move-text strong{color:var(--primary);font-weight:800;}
-        .scenario-principle{background:rgba(0,35,75,0.04);border-left:3px solid var(--secondary);padding:10px 14px;border-radius:0 4px 4px 0;margin-top:2px;}
-        .scenario-principle-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,35,75,0.4);margin-bottom:3px;}
-        .scenario-principle-text{font-family:'Nunito',sans-serif;font-size:12px;color:#374151;line-height:1.55;}
-
-        @media(max-width:860px){
-            .scenario-body{grid-template-columns:1fr;}
-            .scenario-field-wrap{min-height:260px;}
-            .scenarios-wrap{padding:0 20px 24px;}
-        }
-        @media(max-width:640px){
-            .scenarios-wrap{padding:0 14px 20px;}
-            .scenario-header{flex-wrap:wrap;}
-        }
-
-        .tactic-roster-panel{background:rgba(0,35,75,0.04);border-top:2px solid rgba(0,35,75,0.08);padding:16px 24px;margin-top:16px;}
-        .tactic-roster-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(0,35,75,0.4);margin-bottom:10px;}
-        .tactic-roster-group{display:flex;flex-direction:column;gap:3px;margin-bottom:10px;}
-        .tactic-roster-group:last-child{margin-bottom:0;}
-        .tactic-roster-pos-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);margin-bottom:4px;}
-        .tactic-roster-pos-label.mid{color:#92400e;}
-        .tactic-roster-pos-label.att{color:#b91c1c;}
-        .tactic-roster-pos-label.gk{color:#6d28d9;}
-        .tactic-roster-players{display:flex;flex-wrap:wrap;gap:4px;}
-        .tactic-player-chip{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;background:white;border:1px solid rgba(0,35,75,0.12);border-radius:20px;padding:3px 10px;color:var(--primary);white-space:nowrap;display:inline-flex;align-items:center;gap:4px;}
-        .tactic-player-chip .chip-num{font-weight:900;font-size:10px;color:rgba(0,35,75,0.35);}
-        .tactic-player-chip.mid{background:#fef3c7;border-color:rgba(202,138,4,0.25);color:#78350f;}
-        .tactic-player-chip.mid .chip-num{color:rgba(120,53,15,0.45);}
-        .tactic-player-chip.att{background:#fee2e2;border-color:rgba(220,38,38,0.2);color:#991b1b;}
-        .tactic-player-chip.att .chip-num{color:rgba(153,27,27,0.45);}
-        .tactic-player-chip.gk{background:#ede9fe;border-color:rgba(109,40,217,0.2);color:#5b21b6;}
-        .tactic-player-chip.gk .chip-num{color:rgba(91,33,182,0.45);}
-        .tactic-player-chip.spotlight{box-shadow:0 0 0 2px var(--secondary);}
-        /* ===== ROSTER TAB ===== */
-        .roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:28px 32px;}
-        .roster-card{background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,35,75,0.07);transition:transform 0.15s ease,box-shadow 0.15s ease;cursor:default;border:1px solid rgba(0,35,75,0.06);position:relative;}
-        .roster-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,35,75,0.12);}
-        .roster-card.spotlight-off{border:2px solid var(--secondary);box-shadow:0 0 0 1px var(--secondary),0 4px 16px rgba(255,204,0,0.2);}
-        .roster-card.spotlight-def{border:2px solid var(--secondary);box-shadow:0 0 0 1px var(--secondary),0 4px 16px rgba(255,204,0,0.2);}
-        .roster-photo-wrap{width:100%;aspect-ratio:1/1;background:var(--primary);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-        .roster-photo{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
-        .roster-initials{font-family:'Nunito',sans-serif;font-weight:900;font-size:36px;color:rgba(255,255,255,0.25);letter-spacing:-1px;user-select:none;}
-        .roster-num-badge{position:absolute;top:8px;left:8px;font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;background:var(--secondary);color:var(--primary);padding:2px 8px;border-radius:12px;line-height:1.4;z-index:2;}
-        .roster-pos-badge{position:absolute;bottom:8px;right:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;padding:2px 7px;border-radius:10px;line-height:1.5;z-index:2;}
-        .roster-pos-badge.GK{background:rgba(234,88,12,0.18);color:#ea580c;}
-        .roster-pos-badge.DEF{background:rgba(37,99,235,0.14);color:#2563eb;}
-        .roster-pos-badge.MID{background:rgba(202,138,4,0.16);color:#92400e;}
-        .roster-pos-badge.FWD{background:rgba(220,38,38,0.13);color:#dc2626;}
-        .roster-info{padding:10px 12px 12px;}
-        .roster-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--primary);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-        .roster-spotlight-tag{font-family:'Nunito',sans-serif;font-weight:800;font-size:9px;letter-spacing:0.5px;text-transform:uppercase;margin-top:5px;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:3px;}
-        .roster-spotlight-tag.off{color:#78350f;background:rgba(255,204,0,0.18);}
-        .roster-spotlight-tag.def{color:#78350f;background:rgba(255,204,0,0.18);}
-        .roster-playup-badge{position:absolute;top:8px;right:8px;font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:0.5px;text-transform:uppercase;background:rgba(124,58,237,0.85);color:white;padding:2px 6px;border-radius:10px;line-height:1.5;z-index:3;}
-        .roster-upload-hint{background:rgba(0,35,75,0.03);border:1.5px dashed rgba(0,35,75,0.12);border-radius:3px;padding:12px 16px;margin:0 32px 24px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.15s;}
-        .roster-upload-hint:hover{background:rgba(0,35,75,0.06);border-color:rgba(0,35,75,0.2);}
-        .roster-upload-icon{font-size:22px;flex-shrink:0;}
-        .roster-upload-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--primary);}
-        .roster-upload-sub{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(0,35,75,0.45);margin-top:2px;line-height:1.4;}
-        .roster-filter-bar{padding:0 32px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-        .roster-filter-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:6px 14px;border-radius:20px;cursor:pointer;border:1px solid rgba(0,35,75,0.15);background:transparent;color:rgba(0,35,75,0.5);transition:all 0.12s;}
-        .roster-filter-btn:hover{border-color:var(--primary);color:var(--primary);}
-        .roster-filter-btn.active{background:var(--primary);color:white;border-color:var(--primary);}
-        .roster-count{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(0,35,75,0.35);font-weight:600;margin-left:auto;}
-        .photo-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;}
-        .photo-modal{background:var(--card);border-radius:8px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.5);}
-        .photo-modal-header{background:var(--primary);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--secondary);}
-        .photo-modal-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;letter-spacing:0.5px;text-transform:uppercase;color:white;}
-        .photo-modal-close{font-family:'Nunito',sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;line-height:1;padding:0 4px;}
-        .photo-modal-body{padding:20px;}
-        .photo-drop-zone{border:2px dashed rgba(0,35,75,0.2);border-radius:6px;padding:32px 20px;text-align:center;cursor:pointer;transition:all 0.15s;background:rgba(0,35,75,0.02);}
-        .photo-drop-zone:hover,.photo-drop-zone.drag-over{border-color:var(--primary);background:rgba(0,35,75,0.05);}
-        .photo-drop-zone input{display:none;}
-        .photo-drop-icon{font-size:36px;display:block;margin-bottom:10px;}
-        .photo-drop-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--primary);margin-bottom:4px;}
-        .photo-drop-sub{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.45);}
-        .photo-preview-wrap{margin-top:16px;text-align:center;display:none;}
-        .photo-preview-img{width:120px;height:120px;object-fit:cover;object-position:top;border-radius:6px;border:2px solid var(--secondary);}
-        .photo-save-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;background:var(--secondary);color:var(--primary);border:none;padding:11px;border-radius:3px;cursor:pointer;width:100%;margin-top:14px;}
-        .photo-save-btn:hover{background:#ffe033;}
-        .photo-url-row{display:flex;gap:8px;margin-top:12px;}
-        .photo-url-input{flex:1;border:1px solid rgba(0,35,75,0.15);border-radius:3px;padding:9px 12px;font-family:'Nunito',sans-serif;font-size:13px;outline:none;color:var(--primary);}
-        .photo-url-input:focus{border-color:var(--primary);}
-        .photo-url-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;background:var(--primary);color:white;border:none;padding:9px 14px;border-radius:3px;cursor:pointer;white-space:nowrap;}
-
-        @media(max-width:860px){
-            .roster-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;padding:20px;}
-            .roster-filter-bar{padding:0 20px 14px;}
-            .roster-upload-hint{margin:0 20px 20px;}
-        }
-        @media(max-width:640px){
-            .roster-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;padding:14px;}
-            .roster-filter-bar{padding:0 14px 12px;}
-            .roster-upload-hint{margin:0 14px 16px;}
-            .roster-initials{font-size:28px !important;}
-        }
-        /* ===== AI MODAL ===== */
-        .ai-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
-        .ai-modal{background:var(--card);border-radius:4px;width:100%;max-width:560px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.5);}
-        .ai-modal-header{background:var(--primary);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--secondary);}
-        .ai-modal-title{font-family:'Nunito', sans-serif;font-weight:900;font-size:16px;letter-spacing:0.5px;text-transform:uppercase;color:white;}
-        .ai-modal-close{font-family:'Nunito', sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;line-height:1;padding:0 4px;}
-        .ai-modal-close:hover{color:white;}
-        .ai-modal-body{padding:20px;}
-        .ai-prompt-label{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(0,35,75,0.5);font-weight:700;margin-bottom:6px;display:block;}
-        .ai-prompt-input{width:100%;border:1px solid rgba(0,35,75,0.15);border-radius:3px;padding:10px 12px;font-family:'Nunito', sans-serif;font-size:14px;resize:vertical;outline:none;min-height:80px;color:#1e293b;}
-        .ai-prompt-input:focus{border-color:var(--primary);}
-        .ai-result-box{background:white;border:1px solid rgba(0,35,75,0.1);border-radius:3px;padding:14px;font-family:'Nunito', sans-serif;font-size:13px;line-height:1.6;color:#1e293b;min-height:80px;white-space:pre-wrap;margin-top:14px;}
-        .ai-modal-actions{display:flex;gap:10px;margin-top:14px;justify-content:flex-end;}
-        .ai-gen-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;background:var(--secondary);color:var(--primary);border:none;padding:10px 20px;border-radius:3px;cursor:pointer;}
-        .ai-gen-btn:hover{background:#ffe033;}
-        .ai-gen-btn:disabled{opacity:0.5;cursor:not-allowed;}
-        .ai-use-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;background:var(--primary);color:white;border:none;padding:10px 20px;border-radius:3px;cursor:pointer;}
-        .ai-use-btn:hover{background:#001d3d;}
-        .ai-cancel-btn{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;background:transparent;color:rgba(0,35,75,0.5);border:1px solid rgba(0,35,75,0.2);padding:10px 20px;border-radius:3px;cursor:pointer;}
-        .ai-spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(0,35,75,0.2);border-top:2px solid var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:6px;}
-        @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-
-        /* ===== API KEY MODAL ===== */
-        .apikey-modal{background:var(--card);border-radius:4px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.5);}
-        .apikey-modal-header{background:var(--primary);padding:16px 20px;border-bottom:3px solid var(--secondary);}
-        .apikey-modal-title{font-family:'Nunito', sans-serif;font-weight:900;font-size:16px;letter-spacing:0.5px;text-transform:uppercase;color:white;}
-        .apikey-modal-sub{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:3px;}
-        .apikey-modal-body{padding:20px;}
-        .apikey-input{width:100%;border:1px solid rgba(0,35,75,0.15);border-radius:3px;padding:10px 12px;font-family:'Nunito', sans-serif;font-size:13px;outline:none;color:#1e293b;}
-        .apikey-input:focus{border-color:var(--primary);}
-        .apikey-hint{font-size:11px;color:rgba(0,35,75,0.45);margin-top:6px;}
-        .apikey-submit{font-family:'Nunito', sans-serif;font-weight:700;font-size:13px;letter-spacing:0.5px;text-transform:uppercase;background:var(--secondary);color:var(--primary);border:none;padding:10px 24px;border-radius:3px;cursor:pointer;margin-top:14px;width:100%;}
-
         /* ===== BOTTOM NAV (mobile only) ===== */
         .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--primary);border-top:3px solid var(--secondary);z-index:200;padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
         .bottom-nav::-webkit-scrollbar{display:none;}
@@ -620,6 +361,11 @@
             .home-top-zone{grid-template-columns:240px 1fr;}
             .home-sticky-col{padding:16px 18px;}
             .home-hero-col{padding:16px 18px;}
+            .season-pulse{padding:5px 6px;}
+            .pulse-item{padding:0 6px;}
+            .pulse-label{font-size:10px;}
+            .pulse-val{font-size:11px !important;}
+            .pulse-icon{font-size:11px;}
         }
         @media(max-width:640px){
             body{padding:8px 8px 80px;}
@@ -727,9 +473,6 @@
             .countdown-num.match-day-cd{font-size:38px !important;}
             .countdown-sep{font-size:22px !important;}
             .announcement-pin{padding:12px 14px !important;}
-            .spotlight-card{padding:14px 14px !important;}
-            .spotlight-players{grid-template-columns:1fr;}
-            .spotlight-player-header{padding:10px 16px 12px !important;}
             .spotlight-name{font-size:15px !important;}
             .checkin-streak-row{padding:10px 14px !important;}
             .momentum-wrap{padding:14px 14px !important;}
@@ -743,16 +486,59 @@
             /* ── Mobile audit fixes ── */
             .home-hero-col{padding:16px 14px !important;}
             .home-sticky-col{padding:14px !important;}
-            .spotlight-eyebrow{padding:10px 14px 8px !important;}
-            .spotlight-player-header{padding:10px 14px 12px !important;}
-            .home-section-label{padding:8px 14px 0 !important;}
             .countdown-units{gap:8px !important;}
             .home-hero-rec-line{display:none;}
             /* ── Pass 2 mobile fixes ── */
             .home-hero-rank{font-size:32px !important;}
             .home-hero-right{max-width:84px;}
             .scenario-toggle-wrap{display:none;}
-            .tactic-roster-panel{padding:12px 14px !important;}
+    
+        /* ===== SCENARIO EXERCISES ===== */
+        .scenarios-wrap{padding:0 24px 28px;}
+        .scenarios-intro{background:linear-gradient(135deg,var(--primary) 0%,#002a5c 100%);border-radius:4px;padding:16px 20px;margin-bottom:20px;margin-top:16px;border-left:4px solid var(--secondary);}
+        .scenarios-intro-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;margin-bottom:4px;}
+        .scenarios-intro-sub{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(255,255,255,0.55);line-height:1.55;}
+        .scenario-card{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.09);overflow:hidden;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,35,75,0.07);}
+        .scenario-header{background:var(--primary);padding:12px 18px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:3px solid var(--secondary);}
+        .scenario-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--secondary);line-height:1;flex-shrink:0;margin-top:2px;}
+        .scenario-title-block{flex:1;min-width:0;}
+        .scenario-title{font-family:'Nunito',sans-serif;font-weight:900;font-style:italic;font-size:14px;text-transform:uppercase;color:white;line-height:1.2;}
+        .scenario-trigger{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(255,255,255,0.45);margin-top:3px;line-height:1.4;}
+        .scenario-toggle-wrap{display:flex;align-items:center;gap:0;background:rgba(255,255,255,0.07);border-radius:20px;padding:2px;flex-shrink:0;}
+        .scenario-toggle-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;padding:5px 11px;border-radius:18px;border:none;cursor:pointer;transition:all 0.15s;background:transparent;color:rgba(255,255,255,0.45);}
+        .scenario-toggle-btn.active{background:var(--secondary);color:var(--primary);}
+        .scenario-body{display:grid;grid-template-columns:5fr 6fr;min-height:300px;}
+        .scenario-field-wrap{background:#1a6b35;position:relative;overflow:hidden;min-height:300px;}
+        .scenario-field-label{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-family:'Nunito',sans-serif;font-weight:900;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);background:rgba(0,0,0,0.35);padding:2px 8px;border-radius:10px;z-index:20;white-space:nowrap;}
+        .scenario-field-wrap svg{position:absolute;inset:0;width:100%;height:100%;}
+        .scenario-analysis{padding:16px 18px;display:flex;flex-direction:column;gap:10px;border-left:1px solid rgba(0,35,75,0.08);overflow-y:auto;}
+        .scenario-analysis-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);border-bottom:2px solid var(--secondary);padding-bottom:4px;margin-bottom:2px;}
+        .scenario-move-row{display:flex;gap:8px;align-items:flex-start;}
+        .scenario-move-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px;font-family:'Nunito',sans-serif;font-weight:900;}
+        .scenario-move-icon.moved{background:rgba(255,204,0,0.18);border:2px solid var(--secondary);color:var(--primary);}
+        .scenario-move-icon.stable{background:rgba(0,35,75,0.06);border:2px solid rgba(0,35,75,0.14);color:var(--primary);}
+        .scenario-move-text{font-family:'Nunito',sans-serif;font-size:11px;color:#374151;line-height:1.5;}
+        .scenario-move-text strong{color:var(--primary);font-weight:800;}
+        .scenario-principle{background:rgba(0,35,75,0.04);border-left:3px solid var(--secondary);padding:8px 12px;border-radius:0 4px 4px 0;margin-top:2px;}
+        .scenario-principle-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,35,75,0.4);margin-bottom:3px;}
+        .scenario-principle-text{font-family:'Nunito',sans-serif;font-size:11px;color:#374151;line-height:1.5;}
+
+        @media(max-width:860px){
+            .scenario-body{grid-template-columns:1fr 1fr;}
+            .scenario-field-wrap{min-height:240px;}
+            .scenarios-wrap{padding:0 16px 24px;}
+        }
+        @media(max-width:640px){
+            .scenario-body{grid-template-columns:1fr;grid-template-rows:260px auto;}
+            .scenario-field-wrap{min-height:260px;}
+            .scenarios-wrap{padding:0 12px 20px;}
+            .scenario-header{flex-wrap:wrap;padding:10px 14px 8px;}
+            .scenario-toggle-wrap{display:none;}
+            .scenario-analysis{padding:14px 14px;}
+            .scenario-move-text{font-size:11px;}
+        }
+
+        .tactic-roster-panel{padding:12px 14px !important;}
             .standings-table{min-width:420px !important;}
             /* ── CASCADE FIX: home-top-zone must stack AFTER main 860px block ── */
             .home-top-zone{grid-template-columns:1fr !important;grid-template-rows:auto auto;}
@@ -841,8 +627,6 @@
             .home-hero-eyebrow{font-size:10px !important;margin-bottom:4px;}
             .home-hero-meta{font-size:12px !important;margin-top:4px !important;}
             /* ── Spotlight ── */
-            .spotlight-name{font-size:16px !important;}
-            .spotlight-note{font-size:11px !important;}
             /* ── Content area ── */
             .content-area{padding:14px 12px !important;}
             /* ── Home cell centering on mobile ── */
@@ -950,18 +734,14 @@
                 features: { standings: true, goalTracking: true, tactics: true },
                 terms: { match: "Match", goalsFor: "Goals", goalsAgainst: "GA" }
             },
-            lastUpdate: "Mar 18, 2026",
-            spotlight: {
-                week: "Week 14",
-                offense: { name: "#14 Tailynn Chitman", note: "Unstoppable in the final third · Clinical finisher · Forces defenders into mistakes" },
-                defense: { name: "#86 Charlotte Holloway", note: "Reads the game early · Dominant in the air · Sets the defensive line" }
-            },
+            lastUpdate: "Mar 23, 2026",
+
             announcements: [
-                { id: 1, from: "Coach Keri", text: "Saturday's game is ON — meet at Field #06 at 7:30 AM for warmup. Wear full blue kit. Let's get those 3 points! 💪", ts: "Thu Mar 18", pinned: true }
+                { id: 2, from: "Coach Keri", text: "Next up: Tue Apr 14 vs #17 Sting G13 Hubbard · 6:30 PM · UT Dallas #07. Let's finish the season strong — full kit, arrive 30 min early! 💪", ts: "Sun Mar 23", pinned: true }
             ],
-            record: { wins: 6, losses: 6, draws: 1 },
-            league: { rank: 10, totalTeams: 18, points: 19, ppg: "1.46", goalDiff: "+1" },
-            goals: { for: 21, against: 20 },
+            record: { wins: 6, losses: 7, draws: 1 },
+            league: { rank: 11, totalTeams: 18, points: 19, ppg: "1.36", goalDiff: "-2" },
+            goals: { for: 23, against: 25 },
             matches: [
                 { date: "Aug 23", rank: "12", opp: "Frisco Fusion 13G NPL NTX Blue", score: "3 - 1", res: "W" },
                 { date: "Sep 07", rank: "8",  opp: "Atletico Dallas Youth 13G Blue Colon", score: "0 - 2", res: "L" },
@@ -975,53 +755,37 @@
                 { date: "Feb 03", rank: "6",  opp: "LC United 13G Evans", score: "2 - 1", res: "W" },
                 { date: "Feb 22", rank: "7",  opp: "NTX Lioness Select 13G", score: "1 - 0", res: "W" },
                 { date: "Feb 28", rank: "5",  opp: "Panthers Black 13G", score: "2 - 3", res: "L" },
-                { date: "Mar 01", rank: "15", opp: "ULETE FC 2013G Chris", score: "1 - 0", res: "W", highlight: true }
+                { date: "Mar 01", rank: "15", opp: "ULETE FC 2013G Chris", score: "1 - 0", res: "W" },
+                { date: "Mar 21", rank: "4",  opp: "Sting Attack G13 H Pantoja", score: "2 - 5", res: "L", highlight: true }
             ],
             nextMatch: {
-                oppName: "Sting Attack G13 H Pantoja", date: "Sat Mar 21", time: "8:00 AM",
-                oppRank: 4, oppTotalTeams: 18, oppRecord: "8-4-0",
-                lastMatch: { date: "Feb 28", rank: "8", opp: "Atletico Dallas Blue Colon", score: "2 - 1", res: "W" }
+                oppName: "Sting G13 Hubbard", date: "Tue Apr 14", time: "6:30 PM",
+                oppRank: 17, oppTotalTeams: 18, oppRecord: "1-11-0",
+                lastMatch: { date: "Feb 28", rank: 10, opp: "Victory SC", score: "0 - 5", res: "L" }
             },
             remainingSchedule: [
-                { date: "Sat Mar 21", rank: "4",  opp: "Sting Attack G13 H Pantoja",    time: "8:00 AM",  loc: "UT Dallas #06" },
                 { date: "Tue Apr 14", rank: "17", opp: "Sting G13 Hubbard",              time: "6:30 PM",  loc: "UT Dallas #07" }
             ],
-            roster: [
-                { num: "5",  name: "Kennedi Howard",     pos: "DEF", role: "LB / LM",             dob: "05/13", photo: "" },
-                { num: "7",  name: "Sarai Robertson",    pos: "FWD", role: "L/R Winger",           dob: "10/13", photo: "" },
-                { num: "14", name: "Tailynn Chitman",    pos: "FWD", role: "Winger / LB",          dob: "04/14", photo: "" },
-                { num: "17", name: "Evelynn Kurz",       pos: "MID", role: "Midfielder",           dob: "09/14", photo: "" },
-                { num: "23", name: "Ella Socha",         pos: "MID", role: "Midfielder",           dob: "05/13", photo: "" },
-                { num: "24", name: "Madelyn Conde",      pos: "DEF", role: "Defender",             dob: "04/13", photo: "" },
-                { num: "25", name: "Hadley Querin",      pos: "DEF", role: "Defense / Mid",        dob: "02/13", photo: "" },
-                { num: "27", name: "Avery Brunton",      pos: "FWD", role: "ST / CAM",             dob: "11/13", photo: "" },
-                { num: "29", name: "Olivia Carmichael",  pos: "FWD", role: "Striker / MF",         dob: "04/13", photo: "" },
-                { num: "31", name: "Ella Appino",        pos: "GK",  role: "Goalkeeper",           dob: "08/13", photo: "" },
-                { num: "33", name: "Sarah Ehrlich",      pos: "FWD", role: "Winger / MF",          dob: "12/13", photo: "" },
-                { num: "47", name: "Aaditri Dutta",      pos: "MID", role: "Center MF",            dob: "11/13", photo: "" },
-                { num: "77", name: "Hannah Grosskopf",   pos: "FWD", role: "Forward",              dob: "12/13", photo: "" },
-                { num: "86", name: "Charlotte Holloway", pos: "DEF", role: "Defender",             dob: "08/13", photo: "" },
-                { num: "97", name: "Quinn Kurz",         pos: "FWD", role: "Winger",               dob: "05/13", photo: "" }
-            ],
+
             standings: [
-                { rank: 1,  name: "Coppell FC 13G Oland Red",                mp: 12, w: 10, d: 0, l: 2,  gf: 41, ga: 12, gd: "+29", pts: 30 },
-                { rank: 2,  name: "FCD FC DIVAS XIII",                        mp: 12, w: 9,  d: 1, l: 2,  gf: 29, ga: 13, gd: "+16", pts: 28 },
-                { rank: 3,  name: "Sting G13 E Rodriguez",                    mp: 13, w: 8,  d: 4, l: 1,  gf: 39, ga: 13, gd: "+26", pts: 28 },
-                { rank: 4,  name: "Sting Attack G13 H Pantoja",               mp: 12, w: 8,  d: 0, l: 4,  gf: 30, ga: 8,  gd: "+22", pts: 24 },
-                { rank: 5,  name: "Panthers Black 13G",                       mp: 11, w: 7,  d: 0, l: 4,  gf: 17, ga: 16, gd: "+1",  pts: 21 },
+                { rank: 1,  name: "Coppell FC 13G Oland Red",                mp: 13, w: 11, d: 0, l: 2,  gf: 47, ga: 12, gd: "+35", pts: 33 },
+                { rank: 2,  name: "FCD FC DIVAS XIII",                        mp: 13, w: 10, d: 1, l: 2,  gf: 34, ga: 14, gd: "+20", pts: 31 },
+                { rank: 3,  name: "Sting G13 E Rodriguez",                    mp: 14, w: 9,  d: 4, l: 1,  gf: 43, ga: 13, gd: "+30", pts: 31 },
+                { rank: 4,  name: "Sting Attack G13 H Pantoja",               mp: 13, w: 9,  d: 0, l: 4,  gf: 35, ga: 10, gd: "+25", pts: 27 },
+                { rank: 5,  name: "Panthers Black 13G",                       mp: 12, w: 7,  d: 0, l: 5,  gf: 17, ga: 20, gd: "-3",  pts: 21 },
                 { rank: 6,  name: "LC United 13G Evans",                      mp: 12, w: 6,  d: 2, l: 4,  gf: 27, ga: 17, gd: "+10", pts: 20 },
                 { rank: 7,  name: "NTX Lioness Select 13G",                   mp: 12, w: 6,  d: 2, l: 4,  gf: 26, ga: 18, gd: "+8",  pts: 20 },
                 { rank: 8,  name: "Atletico Dallas Youth 13G Blue Colon",     mp: 11, w: 6,  d: 1, l: 4,  gf: 24, ga: 17, gd: "+7",  pts: 19 },
-                { rank: 9,  name: "Victory SC 2013 Girls Fort Worth",          mp: 11, w: 6,  d: 1, l: 4,  gf: 35, ga: 15, gd: "+20", pts: 19 },
-                { rank: 10, name: "Sting McNeal 13G",                         mp: 13, w: 6,  d: 1, l: 6,  gf: 21, ga: 20, gd: "+1",  pts: 19 },
-                { rank: 11, name: "FCD-ETX '13G Premier",                     mp: 11, w: 5,  d: 2, l: 4,  gf: 14, ga: 10, gd: "+4",  pts: 17 },
-                { rank: 12, name: "Frisco Fusion 13G NPL NTX Blue",           mp: 13, w: 4,  d: 1, l: 8,  gf: 15, ga: 29, gd: "-14", pts: 13 },
+                { rank: 10, name: "Victory SC 2013 Girls Fort Worth",          mp: 12, w: 6,  d: 1, l: 5,  gf: 35, ga: 20, gd: "+15", pts: 19 },
+                { rank: 11, name: "Sting McNeal 13G",                         mp: 14, w: 6,  d: 1, l: 7,  gf: 23, ga: 25, gd: "-2",  pts: 19 },
+                { rank: 8,  name: "FCD-ETX '13G Premier",                     mp: 12, w: 6,  d: 2, l: 4,  gf: 19, ga: 10, gd: "+9",  pts: 20 },
+                { rank: 12, name: "Frisco Fusion 13G NPL NTX Blue",           mp: 14, w: 4,  d: 1, l: 9,  gf: 16, ga: 34, gd: "-18", pts: 13 },
                 { rank: 13, name: "Dallas Cosmos 13G Red",                    mp: 10, w: 3,  d: 1, l: 6,  gf: 10, ga: 29, gd: "-19", pts: 10 },
                 { rank: 14, name: "Atletico Dallas Youth 13-GA Blanton",      mp: 3,  w: 3,  d: 0, l: 0,  gf: 17, ga: 3,  gd: "+14", pts: 9  },
                 { rank: 15, name: "ULETE FC 2013G Chris",                     mp: 11, w: 2,  d: 0, l: 9,  gf: 10, ga: 24, gd: "-14", pts: 6  },
                 { rank: 16, name: "Atletico Dallas Youth 14G Gomez",          mp: 9,  w: 1,  d: 0, l: 8,  gf: 6,  ga: 39, gd: "-33", pts: 3  },
                 { rank: 17, name: "Sting G13 Hubbard",                        mp: 12, w: 1,  d: 0, l: 11, gf: 10, ga: 49, gd: "-39", pts: 3  },
-                { rank: 18, name: "FC Dallas Youth 13G White",                mp: 12, w: 1,  d: 0, l: 11, gf: 14, ga: 53, gd: "-39", pts: 3  }
+                { rank: 18, name: "FC Dallas Youth 13G White",                mp: 13, w: 1,  d: 0, l: 12, gf: 14, ga: 59, gd: "-45", pts: 3  }
             ]
         },
         "u12": {
@@ -1034,18 +798,14 @@
                 features: { standings: true, goalTracking: true, tactics: true },
                 terms: { match: "Match", goalsFor: "Goals", goalsAgainst: "GA" }
             },
-            lastUpdate: "Mar 18, 2026",
-            spotlight: {
-                week: "Week 11",
-                offense: { name: "#14 Tailynn Chitman", note: "Unstoppable in the final third · Clinical finisher · Forces defenders into mistakes" },
-                defense: { name: "#86 Charlotte Holloway", note: "Reads the game early · Dominant in the air · Sets the defensive line" }
-            },
+            lastUpdate: "Mar 23, 2026",
+
             announcements: [
-                { id: 1, from: "Coach Keri", text: "Double-header weekend! Sat Mar 21 at 1PM + Sun Mar 22 at 1PM. Pack snacks, water, and extra socks. Full kit both days.", ts: "Wed Mar 18", pinned: true }
+                { id: 3, from: "Coach Keri", text: "Big wins this weekend — 6-0 and 1-0! Next up: Sun Mar 29 vs #4 Sting G14 J Salazar at Railroad Park, 12:45 PM. It's a big one — full kit, arrive early! 💛", ts: "Sun Mar 23", pinned: true }
             ],
-            record: { wins: 4, losses: 4, draws: 3 },
-            league: { rank: 8, totalTeams: 16, points: 15, ppg: "1.36", goalDiff: "+6" },
-            goals: { for: 22, against: 16 },
+            record: { wins: 6, losses: 4, draws: 3 },
+            league: { rank: 7, totalTeams: 16, points: 21, ppg: "1.62", goalDiff: "+13" },
+            goals: { for: 29, against: 16 },
             matches: [
                 { date: "Sep 07", rank: "15", opp: "Dallas Surf 14G East Silver",                  score: "3 - 0", res: "W" },
                 { date: "Sep 14", rank: "6",  opp: "Atletico Dallas Youth Pre ECNL G15 Blanton",   score: "2 - 0", res: "W" },
@@ -1057,52 +817,45 @@
                 { date: "Nov 08", rank: "1",  opp: "Juventus Premier FC 2014G Cantu",              score: "1 - 1", res: "D" },
                 { date: "Nov 09", rank: "7",  opp: "Waco Texans 2014 Girls Andrade",               score: "0 - 2", res: "L" },
                 { date: "Feb 21", rank: "2",  opp: "NTX Celtic 14G Bravo South",                   score: "1 - 1", res: "D" },
-                { date: "Feb 28", rank: "7",  opp: "Waco Texans 2014 Girls Andrade",               score: "2 - 2", res: "D", highlight: true }
+                { date: "Feb 28", rank: "7",  opp: "Waco Texans 2014 Girls Andrade",               score: "2 - 2", res: "D" },
+                { date: "Mar 21", rank: "16", opp: "FW All Stars FC 2014G",                           score: "6 - 0", res: "W" },
+                { date: "Mar 22", rank: "10", opp: "FC Dallas Youth 14G West",                        score: "1 - 0", res: "W", highlight: true }
             ],
             nextMatch: {
-                oppName: "FW All Stars FC 2014G", date: "Sat Mar 21", time: "1:00 PM",
-                oppRank: 16, oppTotalTeams: 16, oppRecord: "1-10-2",
-                lastMatch: { date: "Feb 22", rank: "11", opp: "FC Dallas Youth 14G Black", score: "0 - 2", res: "L" }
+                oppName: "Sting G14 J Salazar", date: "Sun Mar 29", time: "12:45 PM",
+                oppRank: 4, oppTotalTeams: 16, oppRecord: "6-2-5",
+                lastMatch: { date: "Mar 21", rank: 4, opp: "Atletico Dallas Pre ECNL G15", score: "0 - 2", res: "L" }
             },
             remainingSchedule: [
-                { date: "Sat Mar 21", rank: "16", opp: "FW All Stars FC 2014G",         time: "1:00 PM",  loc: "UT Dallas #06" },
-                { date: "Sun Mar 22", rank: "12", opp: "FC Dallas Youth 14G West",      time: "1:00 PM",  loc: "The Athletic Club #5" },
                 { date: "Sun Mar 29", rank: "4",  opp: "Sting G14 J Salazar",           time: "12:45 PM", loc: "Railroad Park RR #1" },
-                { date: "Wed Apr 01", rank: "15", opp: "Dallas Surf 14G East Silver",   time: "6:30 PM",  loc: "UT Dallas #09" },
-                { date: "Sun Apr 12", rank: "11", opp: "FC Dallas Youth 14G Black",     time: "9:15 AM",  loc: "The Athletic Club #6" }
+                { date: "Wed Apr 01", rank: "11", opp: "Dallas Surf 14G East Silver",   time: "6:30 PM",  loc: "UT Dallas #09" },
+                { date: "Sun Apr 12", rank: "12", opp: "FC Dallas Youth 14G Black",     time: "9:15 AM",  loc: "The Athletic Club #6" }
             ],
-            roster: [
-                { num: "1",  name: "Grace Kim",          pos: "GK",  photo: "" },
-                { num: "2",  name: "Ella Torres",        pos: "DEF", photo: "" },
-                { num: "3",  name: "Mia Washington",     pos: "DEF", photo: "" },
-                { num: "4",  name: "Jade Peters",        pos: "DEF", photo: "" },
-                { num: "5",  name: "Chloe Benson",       pos: "DEF", photo: "" },
-                { num: "6",  name: "Destiny Okafor",     pos: "MID", photo: "" },
-                { num: "8",  name: "Zoe Castillo",       pos: "MID", photo: "" },
-                { num: "10", name: "Hailey Monroe",      pos: "MID", photo: "" },
-                { num: "7",  name: "Paige Alvarez",      pos: "FWD", photo: "" },
-                { num: "11", name: "Aria Patel",         pos: "FWD", photo: "" },
-                { num: "14", name: "Tailynn Chitman",    pos: "FWD", photo: "" },
-                { num: "86", name: "Char Holloway",      pos: "DEF", photo: "" },
-                { num: "9",  name: "Simone Dubois",      pos: "FWD", photo: "" }
-            ],
+
             standings: [
-                { rank: 1,  name: "Juventus Premier FC 2014G Cantu",              mp: 13, w: 10, d: 2, l: 1,  gf: 42, ga: 12, gd: "+30", pts: 32 },
-                { rank: 2,  name: "NTX Celtic 14G Bravo South",                   mp: 13, w: 9,  d: 2, l: 2,  gf: 44, ga: 17, gd: "+27", pts: 29 },
-                { rank: 3,  name: "Solar 14G Carrillo.E",                         mp: 11, w: 7,  d: 3, l: 1,  gf: 29, ga: 18, gd: "+11", pts: 24 },
-                { rank: 4,  name: "Sting G14 J Salazar",                          mp: 12, w: 6,  d: 5, l: 1,  gf: 26, ga: 13, gd: "+13", pts: 23 },
+                { rank: 1,  name: "Juventus Premier FC 2014G Cantu",              mp: 13, w: 10, d: 1, l: 2,  gf: 42, ga: 12, gd: "+30", pts: 31 },
+                { rank: 2,  name: "NTX Celtic 14G Bravo South",                   mp: 14, w: 9,  d: 2, l: 3,  gf: 44, ga: 17, gd: "+27", pts: 29 },
+                { rank: 3,  name: "Solar 14G Carrillo.E",                         mp: 11, w: 7,  d: 1, l: 3,  gf: 29, ga: 18, gd: "+11", pts: 22 },
+                { rank: 4,  name: "Sting G14 J Salazar",                          mp: 13, w: 6,  d: 2, l: 5,  gf: 26, ga: 15, gd: "+11", pts: 20 },
                 { rank: 5,  name: "Solar Byars 14G",                              mp: 11, w: 7,  d: 0, l: 4,  gf: 25, ga: 18, gd: "+7",  pts: 21 },
                 { rank: 6,  name: "Atletico Dallas Youth Pre ECNL G15 Blanton",   mp: 12, w: 6,  d: 1, l: 5,  gf: 16, ga: 18, gd: "-2",  pts: 19 },
                 { rank: 7,  name: "Waco Texans 2014 Girls Andrade",               mp: 12, w: 5,  d: 4, l: 3,  gf: 20, ga: 14, gd: "+6",  pts: 19 },
                 { rank: 8,  name: "Sting McNeal 14G",                             mp: 11, w: 4,  d: 3, l: 4,  gf: 22, ga: 16, gd: "+6",  pts: 15 },
-                { rank: 9,  name: "Pony Xpress 14/15G Castillo",                  mp: 12, w: 5,  d: 0, l: 7,  gf: 16, ga: 27, gd: "-11", pts: 15 },
+                { rank: 9,  name: "Pony Xpress 14/15G Castillo",                  mp: 13, w: 5,  d: 0, l: 8,  gf: 16, ga: 28, gd: "-12", pts: 15 },
                 { rank: 10, name: "Dallas Surf 14G North",                        mp: 12, w: 3,  d: 2, l: 7,  gf: 14, ga: 22, gd: "-8",  pts: 11 },
-                { rank: 11, name: "FC Dallas Youth 14G Black",                    mp: 13, w: 3,  d: 2, l: 8,  gf: 14, ga: 28, gd: "-14", pts: 11 },
+                { rank: 12, name: "FC Dallas Youth 14G Black",                    mp: 13, w: 3,  d: 2, l: 8,  gf: 14, ga: 28, gd: "-14", pts: 11 },
                 { rank: 12, name: "FC Dallas Youth 14G West",                     mp: 9,  w: 3,  d: 1, l: 5,  gf: 7,  ga: 20, gd: "-13", pts: 10 },
                 { rank: 13, name: "NTX Celtic FC Pre-ECNL G14 McCallum",          mp: 4,  w: 3,  d: 0, l: 1,  gf: 8,  ga: 2,  gd: "+6",  pts: 9  },
-                { rank: 14, name: "Sting G14 Fuentes",                            mp: 14, w: 2,  d: 3, l: 9,  gf: 10, ga: 25, gd: "-15", pts: 9  },
-                { rank: 15, name: "Dallas Surf 14G East Silver",                  mp: 12, w: 2,  d: 2, l: 8,  gf: 10, ga: 31, gd: "-21", pts: 8  },
-                { rank: 16, name: "FW All Stars FC 2014G",                        mp: 13, w: 1,  d: 2, l: 10, gf: 10, ga: 32, gd: "-22", pts: 5  }
+                { rank: 14, name: "Sting G14 Fuentes",                            mp: 15, w: 2,  d: 4, l: 9,  gf: 10, ga: 25, gd: "-15", pts: 10 },
+                { rank: 11, name: "Dallas Surf 14G East Silver",                  mp: 13, w: 3,  d: 2, l: 8,  gf: 12, ga: 32, gd: "-20", pts: 11 },
+                { rank: 5,  name: "Atletico Dallas Pre ECNL G15 Blanton",       mp: 13, w: 7,  d: 1, l: 5,  gf: 18, ga: 18, gd: "0",   pts: 22 },
+                { rank: 6,  name: "Solar Byars 14G",                              mp: 11, w: 7,  d: 0, l: 4,  gf: 25, ga: 18, gd: "+7",  pts: 21 },
+                { rank: 7,  name: "Sting Pre-ECNL G14 McNeal",                    mp: 13, w: 6,  d: 3, l: 4,  gf: 29, ga: 16, gd: "+13", pts: 21 },
+                { rank: 8,  name: "Waco Texans 2014 Girls Andrade",               mp: 12, w: 5,  d: 3, l: 4,  gf: 20, ga: 14, gd: "+6",  pts: 18 },
+                { rank: 10, name: "FC Dallas Youth 14G West",                     mp: 11, w: 4,  d: 1, l: 6,  gf: 8,  ga: 21, gd: "-13", pts: 13 },
+                { rank: 13, name: "Dallas Surf 14G North",                        mp: 13, w: 3,  d: 2, l: 8,  gf: 15, ga: 24, gd: "-9",  pts: 11 },
+                { rank: 15, name: "NTX Celtic Pre-ECNL G14 McCallum",             mp: 4,  w: 3,  d: 0, l: 1,  gf: 8,  ga: 2,  gd: "+6",  pts: 9  },
+                { rank: 16, name: "FW All Stars FC 2014G",                        mp: 14, w: 1,  d: 2, l: 11, gf: 10, ga: 38, gd: "-28", pts: 5  }
             ]
         }
     };
@@ -1318,9 +1071,6 @@
             { id: 'story',     label: 'Story',     icon: '📖' },
             { id: 'schedule',  label: 'Schedule',  icon: '📅' },
             { id: 'tactics',   label: 'Tactics',   icon: '⚽' },
-            { id: 'messenger', label: 'Messages',  icon: '💬' },
-            { id: 'roster',    label: 'Roster',    icon: '👥' },
-            { id: 'sponsors',  label: 'Sponsors',  icon: '🤝' },
         ];
         return all.filter(t => t.id !== 'tactics' || TEAM_CONFIG.branding.tacticsEnabled);
     }
@@ -1334,10 +1084,10 @@
         const el = document.getElementById('seasonPulse');
         if (!el) return;
         el.innerHTML = `
-            <div class="pulse-item"><span class="pulse-icon">📍</span><span class="pulse-label">Rank&nbsp;</span><span class="pulse-val">#${l.rank} of ${l.totalTeams}</span></div>
-            <div class="pulse-item"><span class="pulse-icon">⭐</span><span class="pulse-label">Points&nbsp;</span><span class="pulse-val">${l.points} pts</span></div>
-            <div class="pulse-item"><span class="pulse-icon">🏃</span><span class="pulse-label">Form&nbsp;</span><span class="pulse-val white">${streakLabel}</span></div>
-            <div class="pulse-item"><span class="pulse-icon">📅</span><span class="pulse-label">Next&nbsp;</span><span class="pulse-val silver">${nm.date} · ${nm.time} vs #${nm.oppRank}</span></div>`;
+            <div class="pulse-item" style="flex:1;"><span class="pulse-icon">📍</span><span class="pulse-label">Rank&nbsp;</span><span class="pulse-val">#${l.rank} of ${l.totalTeams}</span></div>
+            <div class="pulse-item" style="flex:1;"><span class="pulse-icon">⭐</span><span class="pulse-label">Pts&nbsp;</span><span class="pulse-val">${l.points}</span></div>
+            <div class="pulse-item" style="flex:2;"><span class="pulse-icon">🏃</span><span class="pulse-label">Form&nbsp;</span><span class="pulse-val white">${streakLabel}</span></div>
+            <div class="pulse-item" style="flex:3;border-right:none;"><span class="pulse-icon">📅</span><span class="pulse-label">Next&nbsp;</span><span class="pulse-val silver">${nm.date} · ${nm.time} · vs #${nm.oppRank} ${nm.oppName}</span></div>`;
     }
 
     function renderTeamSwitcher() {
@@ -1469,27 +1219,7 @@
             </div>`).join('');
 
         const eyebrowText = matchDay ? '⚡ MATCH DAY · ' + nm.date : 'Next Match · ' + nm.date;
-        const sp = TEAM_CONFIG.spotlight;
-        const spotlightHtml = sp ? `
-            <div class="spotlight-card">
-                <div class="spotlight-eyebrow">⭐ Player Spotlight · ${sp.week}</div>
-                <div class="spotlight-players">
-                    <div class="spotlight-player">
-                        <div class="spotlight-player-header offense">
-                            <div class="spotlight-player-badge offense">⚡ Offense</div>
-                            <div class="spotlight-name">${sp.offense.name}</div>
-                            <div class="spotlight-note">${sp.offense.note}</div>
-                        </div>
-                    </div>
-                    <div class="spotlight-player">
-                        <div class="spotlight-player-header defense">
-                            <div class="spotlight-player-badge defense">🛡️ Defense</div>
-                            <div class="spotlight-name">${sp.defense.name}</div>
-                            <div class="spotlight-note">${sp.defense.note}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>` : '';
+
 
         container.innerHTML = `
             ${headerHTML(matchDay ? '⚡ Match Day' : 'Season Dashboard', 'HOME')}
@@ -1549,25 +1279,28 @@
                     </div>
                 </div>
 
-                <!-- ── SECTION 2: Player Spotlight ── -->
-                ${spotlightHtml ? `
-                <div class="home-section-spotlight">
-                    <div class="home-section-label">Player Spotlight</div>
-                    ${spotlightHtml}
-                </div>` : ''}
 
                 <!-- ── SECTION 3: Stats, Badges, Strip ── -->
                 <div class="home-section-stats">
 
                     <div class="home-grid">
                         <div class="home-cell">
-                            <div class="home-cell-label">Season Record</div>
-                            <div class="record-pills">
-                                <div class="record-pill w">${r.wins}<span class="record-pill-sub">W</span></div>
-                                <div class="record-pill l">${r.losses}<span class="record-pill-sub">L</span></div>
-                                <div class="record-pill d">${r.draws}<span class="record-pill-sub">D</span></div>
-                            </div>
-                            ${streakLabel ? `<div style="margin-top:8px;font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:1px;color:rgba(0,35,75,0.45);font-weight:700;text-transform:uppercase;text-align:center;">${streakLabel}</div>` : ''}
+                            <div class="home-cell-label">Last Match</div>
+                            ${(() => {
+                                const last = TEAM_CONFIG.matches[TEAM_CONFIG.matches.length - 1];
+                                if (!last) return '';
+                                const resColor = last.res === 'W' ? '#16a34a' : last.res === 'L' ? '#dc2626' : '#ca8a04';
+                                const resBg = last.res === 'W' ? '#dcfce7' : last.res === 'L' ? '#fee2e2' : '#fef3c7';
+                                const resLabel = last.res === 'W' ? 'WIN' : last.res === 'L' ? 'LOSS' : 'DRAW';
+                                return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;">
+                                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+                                        <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:28px;color:var(--primary);letter-spacing:1px;">${last.score}</span>
+                                        <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;background:${resBg};color:${resColor};padding:4px 10px;border-radius:3px;letter-spacing:1px;">${resLabel}</span>
+                                    </div>
+                                    <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:rgba(0,35,75,0.55);text-align:center;line-height:1.4;">#${last.rank} ${last.opp}</div>
+                                    <div style="font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.35);letter-spacing:0.5px;text-transform:uppercase;">${last.date}</div>
+                                </div>`;
+                            })()}
                         </div>
                         <div class="home-cell">
                             <div class="home-cell-label">Recent Form (Last 5)</div>
@@ -1619,10 +1352,7 @@
         ).join('');
 
         container.innerHTML = `${headerHTML('Stats & Standings')}
-        <div class="stats-subnav">
-            <button class="stats-subnav-btn ${storyView==='story'?'active':''}" onclick="switchStoryView('stats')">📊 Team Stats</button>
-            <button class="stats-subnav-btn ${storyView==='standings'?'active':''}" onclick="switchStoryView('standings')">🏆 Standings</button>
-        </div>
+        <div class="stats-subnav"><button class="stats-subnav-btn ${storyView==='narrative'||storyView==='story'?'active':''}" onclick="switchStoryView('narrative')">📖 Story</button><button class="stats-subnav-btn ${storyView==='stats'?'active':''}" onclick="switchStoryView('stats')">📊 Team Stats</button><button class="stats-subnav-btn ${storyView==='standings'?'active':''}" onclick="switchStoryView('standings')">🏆 Standings</button></div>
         <div class="content-area stats-grid" style="display:grid;grid-template-columns:1fr 2fr;gap:28px;">
             <div style="display:flex;flex-direction:column;gap:20px;">
                 <div>
@@ -1905,8 +1635,13 @@
             `Team: ${TEAM_CONFIG.branding.name}. Division: ${TEAM_CONFIG.branding.league}. Record: ${r.wins}W-${r.losses}L-${r.draws}D. Rank: #${l.rank} of ${l.totalTeams}. Points: ${l.points}. PPG: ${l.ppg}. Goal differential: ${l.goalDiff}. Goals: ${TEAM_CONFIG.goals.for} for, ${TEAM_CONFIG.goals.against} against. Current streak: ${streak.count}-match ${streak.type === 'W' ? 'win' : streak.type === 'L' ? 'losing' : 'unbeaten'} streak. Remaining games: ${TEAM_CONFIG.remainingSchedule.length} (${avail} pts available). Next opponent: #${nm.oppRank} ${nm.oppName} (${nm.oppRecord}).\n\nWrite a dramatic broadcast-style season story.`
         ).then(result => {
             storyAiText[currentTeamId] = result;
-            resultBox.textContent = result;
-            resultBox.style.display = 'block';
+            // Replace the narrative body text directly
+            const narrativeEl = document.getElementById('storyNarrativeText');
+            if (narrativeEl) {
+                const formatted = result.replace(/\n\n/g, '</p><p class="story-narrative" style="margin-top:12px;">');
+                narrativeEl.innerHTML = formatted;
+            }
+            resultBox.style.display = 'none';
             btn.disabled = false;
             btn.innerHTML = '✦ Regenerate';
         }).catch(err => {
@@ -2086,45 +1821,6 @@
 
     // ── Main animation entry point ────────────────────────────────────────────
 
-    function getTacticRosterHTML() {
-        const roster = TEAM_CONFIG.roster || [];
-        if (!roster.length) return '';
-
-        // Map roster positions to tactic groups
-        const groups = [
-            { label: 'Goalkeeper', cls: 'gk',  chip: 'gk',  match: p => p.pos === 'GK' },
-            { label: 'Defense',    cls: '',     chip: '',    match: p => p.pos === 'DEF' },
-            { label: 'Midfield',   cls: 'mid',  chip: 'mid', match: p => p.pos === 'MID' },
-            { label: 'Attack',     cls: 'att',  chip: 'att', match: p => p.pos === 'FWD' },
-        ];
-
-        const sp = TEAM_CONFIG.spotlight || {};
-        const offNum = sp.offense ? sp.offense.name.match(/#(\d+)/)?.[1] : null;
-        const defNum = sp.defense ? sp.defense.name.match(/#(\d+)/)?.[1] : null;
-
-        const groupsHTML = groups.map(g => {
-            const players = roster.filter(g.match);
-            if (!players.length) return '';
-            const chips = players.map(p => {
-                const isSpot = p.num === offNum || p.num === defNum;
-                const roleTitle = p.role ? ` title="${p.role}"` : '';
-                return `<span class="tactic-player-chip ${g.chip}${isSpot ? ' spotlight' : ''}"${roleTitle}>
-                    <span class="chip-num">#${p.num}</span>${p.name.split(' ')[0]}
-                </span>`;
-            }).join('');
-            return `<div class="tactic-roster-group">
-                <div class="tactic-roster-pos-label ${g.cls}">${g.label} (${players.length})</div>
-                <div class="tactic-roster-players">${chips}</div>
-            </div>`;
-        }).join('');
-
-        return `<div class="tactic-roster-panel">
-            <div class="tactic-roster-title">👥 Squad · ${roster.length} Players</div>
-            ${groupsHTML}
-            <div style="font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.3);margin-top:8px;">Hover a name to see their role · ⭐ = Spotlight player</div>
-        </div>`;
-    }
-
 
     /* ============================================================
        TACTICAL SCENARIOS
@@ -2201,16 +1897,19 @@
             const bg = p.moved ? sec : tc.bg;
             const fg = p.moved ? '#00234b' : tc.fg;
             const brd = p.moved ? '#b45309' : tc.border;
-            const r = 5.5;
+            const r = 5.8;
             const opacity = p.faded ? '0.3' : '1';
-            const ring = p.moved ? `<circle cx="${p.x}" cy="${p.y}" r="${r+2.5}" fill="none" stroke="${sec}" stroke-width="0.8" opacity="0.5"/>` : '';
-            const nameY = p.y > 145 ? p.y - 7.5 : p.y + 8.5;
-            const nameParts = p.label.split(' ');
-            const firstName = nameParts[0];
+            const ring = p.moved ? `<circle cx="${p.x}" cy="${p.y}" r="${r+2.8}" fill="none" stroke="${sec}" stroke-width="0.9" opacity="0.55"/>` : '';
+            // label format: "POS|NUM" e.g. "GK|31" or "LW|7"
+            const parts = p.label.split('|');
+            const posLabel = parts[0] || '';
+            const numLabel = parts[1] || '';
+            const labelY = p.y > 148 ? p.y - 8.5 : p.y + 9.5;
+            const numFontSize = numLabel.length > 2 ? '3.2' : '3.8';
             return `${ring}
-                <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${bg}" stroke="${brd}" stroke-width="1.2" opacity="${opacity}"/>
-                <text x="${p.x}" y="${p.y + 1.8}" font-family="Nunito" font-size="4" font-weight="900" fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="${opacity}">${firstName.slice(0,3).toUpperCase()}</text>
-                <text x="${p.x}" y="${nameY}" font-family="Nunito" font-size="3.5" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle" opacity="${opacity}">${firstName}</text>`;
+                <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${bg}" stroke="${brd}" stroke-width="1.3" opacity="${opacity}"/>
+                <text x="${p.x}" y="${p.y + 0.6}" font-family="Nunito" font-size="${numFontSize}" font-weight="900" fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="${opacity}">${numLabel}</text>
+                <text x="${p.x}" y="${labelY}" font-family="Nunito" font-size="3" font-weight="800" fill="rgba(255,255,255,${p.moved ? '1' : '0.8'})" text-anchor="middle" opacity="${opacity}" letter-spacing="0.3">${posLabel}</text>`;
         }).join('');
 
         return `<svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">${fieldLines}${arrows}${dots}</svg>`;
@@ -2224,127 +1923,127 @@
         // ── Scenario 1: Tailynn drops to midfield coverage ────────────────────
         '1': {
             beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:25, y:128, label:'Kennedi',   type:'def', moved:false },
-                { x:44, y:122, label:'Hadley',    type:'def', moved:false },
-                { x:65, y:122, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:130, label:'Madelyn',   type:'def', moved:false },
-                { x:35, y:95,  label:'Aaditri',   type:'mid', moved:false },
-                { x:50, y:88,  label:'Ella S',    type:'mid', moved:false },
-                { x:65, y:95,  label:'Avery',     type:'mid', moved:false },
-                { x:20, y:45,  label:'Sarai',     type:'fwd', moved:false },
-                { x:50, y:38,  label:'Olivia',    type:'fwd', moved:false },
-                { x:80, y:45,  label:'Tailynn',   type:'fwd', moved:false },
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:25, y:128, label:'LB|5',   type:'def', moved:false },
+                { x:44, y:122, label:'LCB|25',    type:'def', moved:false },
+                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
+                { x:35, y:95,  label:'CDM|47',   type:'mid', moved:false },
+                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
+                { x:65, y:95,  label:'CM|27',     type:'mid', moved:false },
+                { x:20, y:45,  label:'LW|7',     type:'fwd', moved:false },
+                { x:50, y:38,  label:'ST|29',    type:'fwd', moved:false },
+                { x:80, y:45,  label:'RW|14',   type:'fwd', moved:false },
             ]),
             afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:25, y:128, label:'Kennedi',   type:'def', moved:false },
-                { x:44, y:122, label:'Hadley',    type:'def', moved:false },
-                { x:65, y:122, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:130, label:'Madelyn',   type:'def', moved:false },
-                { x:28, y:88,  label:'Aaditri',   type:'mid', moved:false },
-                { x:50, y:88,  label:'Ella S',    type:'mid', moved:false },
-                { x:68, y:88,  label:'Avery',     type:'mid', moved:false },
-                { x:82, y:72,  label:'Tailynn',   type:'mid', moved:true,
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:25, y:128, label:'LB|5',   type:'def', moved:false },
+                { x:44, y:122, label:'LCB|25',    type:'def', moved:false },
+                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
+                { x:28, y:88,  label:'CDM|47',   type:'mid', moved:false },
+                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
+                { x:68, y:88,  label:'CM|27',     type:'mid', moved:false },
+                { x:82, y:72,  label:'RW|14',   type:'mid', moved:true,
                   arrow:{ x2:82, y2:72, cx:84, cy:58 } },
-                { x:20, y:42,  label:'Sarai',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'Olivia',    type:'fwd', moved:false },
-                { x:65, y:55,  label:'Quinn',     type:'fwd', moved:false, faded:false },
+                { x:20, y:42,  label:'LW|7',     type:'fwd', moved:false },
+                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
+                { x:65, y:55,  label:'RW|97',     type:'fwd', moved:false, faded:false },
             ]),
         },
 
         // ── Scenario 2: Sarai shifts to pure defense ──────────────────────────
         '2': {
             beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:22, y:128, label:'Kennedi',   type:'def', moved:false },
-                { x:44, y:122, label:'Hadley',    type:'def', moved:false },
-                { x:65, y:122, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:130, label:'Madelyn',   type:'def', moved:false },
-                { x:35, y:92,  label:'Aaditri',   type:'mid', moved:false },
-                { x:50, y:88,  label:'Ella S',    type:'mid', moved:false },
-                { x:65, y:92,  label:'Avery',     type:'mid', moved:false },
-                { x:18, y:42,  label:'Sarai',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'Olivia',    type:'fwd', moved:false },
-                { x:82, y:42,  label:'Tailynn',   type:'fwd', moved:false },
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
+                { x:44, y:122, label:'LCB|25',    type:'def', moved:false },
+                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
+                { x:35, y:92,  label:'CDM|47',   type:'mid', moved:false },
+                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
+                { x:65, y:92,  label:'CM|27',     type:'mid', moved:false },
+                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
+                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
+                { x:82, y:42,  label:'RW|14',   type:'fwd', moved:false },
             ]),
             afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:22, y:128, label:'Kennedi',   type:'def', moved:false },
-                { x:38, y:118, label:'Hadley',    type:'def', moved:false },
-                { x:62, y:118, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:128, label:'Madelyn',   type:'def', moved:false },
-                { x:22, y:108, label:'Sarai',     type:'def', moved:true,
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
+                { x:38, y:118, label:'LCB|25',    type:'def', moved:false },
+                { x:62, y:118, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:128, label:'RB|24',   type:'def', moved:false },
+                { x:22, y:108, label:'LW|7',     type:'def', moved:true,
                   arrow:{ x2:22, y2:108, cx:18, cy:75 } },
-                { x:40, y:90,  label:'Aaditri',   type:'mid', moved:false },
-                { x:60, y:90,  label:'Ella S',    type:'mid', moved:false },
-                { x:65, y:72,  label:'Avery',     type:'mid', moved:false },
-                { x:50, y:38,  label:'Olivia',    type:'fwd', moved:false },
-                { x:80, y:42,  label:'Tailynn',   type:'fwd', moved:false },
+                { x:40, y:90,  label:'CDM|47',   type:'mid', moved:false },
+                { x:60, y:90,  label:'CM|23',    type:'mid', moved:false },
+                { x:65, y:72,  label:'CM|27',     type:'mid', moved:false },
+                { x:50, y:38,  label:'ST|29',    type:'fwd', moved:false },
+                { x:80, y:42,  label:'RW|14',   type:'fwd', moved:false },
             ]),
         },
 
         // ── Scenario 3: Quinn + Aaditri respond to right-flank overload ───────
         '3': {
             beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:22, y:128, label:'Kennedi',   type:'def', moved:false },
-                { x:42, y:122, label:'Hadley',    type:'def', moved:false },
-                { x:65, y:122, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:130, label:'Madelyn',   type:'def', moved:false },
-                { x:30, y:92,  label:'Aaditri',   type:'mid', moved:false },
-                { x:50, y:88,  label:'Ella S',    type:'mid', moved:false },
-                { x:65, y:92,  label:'Avery',     type:'mid', moved:false },
-                { x:18, y:42,  label:'Sarai',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'Olivia',    type:'fwd', moved:false },
-                { x:82, y:42,  label:'Quinn',     type:'fwd', moved:false },
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
+                { x:42, y:122, label:'LCB|25',    type:'def', moved:false },
+                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
+                { x:30, y:92,  label:'CDM|47',   type:'mid', moved:false },
+                { x:50, y:88,  label:'CM|23',    type:'mid', moved:false },
+                { x:65, y:92,  label:'CM|27',     type:'mid', moved:false },
+                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
+                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
+                { x:82, y:42,  label:'RW|97',     type:'fwd', moved:false },
             ]),
             afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:22, y:128, label:'Kennedi',   type:'def', moved:false },
-                { x:42, y:122, label:'Hadley',    type:'def', moved:false },
-                { x:65, y:122, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:130, label:'Madelyn',   type:'def', moved:false },
-                { x:30, y:92,  label:'Ella S',    type:'mid', moved:false },
-                { x:52, y:88,  label:'Sarah E',   type:'mid', moved:false },
-                { x:68, y:105, label:'Aaditri',   type:'def', moved:true,
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
+                { x:42, y:122, label:'LCB|25',    type:'def', moved:false },
+                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
+                { x:30, y:92,  label:'CM|23',    type:'mid', moved:false },
+                { x:52, y:88,  label:'CM|33',   type:'mid', moved:false },
+                { x:68, y:105, label:'CDM|47',   type:'def', moved:true,
                   arrow:{ x2:68, y2:105, cx:72, cy:98 } },
-                { x:78, y:108, label:'Quinn',     type:'def', moved:true,
+                { x:78, y:108, label:'RW|97',     type:'def', moved:true,
                   arrow:{ x2:78, y2:108, cx:85, cy:75 } },
-                { x:18, y:42,  label:'Sarai',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'Olivia',    type:'fwd', moved:false },
-                { x:75, y:55,  label:'Avery',     type:'mid', moved:false },
+                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
+                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
+                { x:75, y:55,  label:'CM|27',     type:'mid', moved:false },
             ]),
         },
 
         // ── Scenario 4: Sarah pushes to striker — chasing a goal ─────────────
         '4': {
             beforeSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:22, y:128, label:'Kennedi',   type:'def', moved:false },
-                { x:42, y:122, label:'Hadley',    type:'def', moved:false },
-                { x:65, y:122, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:130, label:'Madelyn',   type:'def', moved:false },
-                { x:30, y:90,  label:'Aaditri',   type:'mid', moved:false },
-                { x:50, y:86,  label:'Ella S',    type:'mid', moved:false },
-                { x:65, y:90,  label:'Sarah E',   type:'mid', moved:false },
-                { x:18, y:42,  label:'Sarai',     type:'fwd', moved:false },
-                { x:50, y:35,  label:'Olivia',    type:'fwd', moved:false },
-                { x:82, y:42,  label:'Quinn',     type:'fwd', moved:false },
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:22, y:128, label:'LB|5',   type:'def', moved:false },
+                { x:42, y:122, label:'LCB|25',    type:'def', moved:false },
+                { x:65, y:122, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
+                { x:30, y:90,  label:'CDM|47',   type:'mid', moved:false },
+                { x:50, y:86,  label:'CM|23',    type:'mid', moved:false },
+                { x:65, y:90,  label:'CM|33',   type:'mid', moved:false },
+                { x:18, y:42,  label:'LW|7',     type:'fwd', moved:false },
+                { x:50, y:35,  label:'ST|29',    type:'fwd', moved:false },
+                { x:82, y:42,  label:'RW|97',     type:'fwd', moved:false },
             ]),
             afterSVG: buildFieldSVG([
-                { x:50, y:148, label:'Ella A',    type:'gk',  moved:false },
-                { x:22, y:130, label:'Kennedi',   type:'def', moved:false },
-                { x:42, y:124, label:'Hadley',    type:'def', moved:false },
-                { x:65, y:124, label:'Charlotte', type:'def', moved:false },
-                { x:80, y:130, label:'Madelyn',   type:'def', moved:false },
-                { x:35, y:95,  label:'Aaditri',   type:'mid', moved:false },
-                { x:60, y:95,  label:'Ella S',    type:'mid', moved:false },
-                { x:18, y:35,  label:'Sarai',     type:'fwd', moved:false },
-                { x:40, y:28,  label:'Sarah E',   type:'fwd', moved:true,
+                { x:50, y:148, label:'GK|31',    type:'gk',  moved:false },
+                { x:22, y:130, label:'LB|5',   type:'def', moved:false },
+                { x:42, y:124, label:'LCB|25',    type:'def', moved:false },
+                { x:65, y:124, label:'RCB|86', type:'def', moved:false },
+                { x:80, y:130, label:'RB|24',   type:'def', moved:false },
+                { x:35, y:95,  label:'CDM|47',   type:'mid', moved:false },
+                { x:60, y:95,  label:'CM|23',    type:'mid', moved:false },
+                { x:18, y:35,  label:'LW|7',     type:'fwd', moved:false },
+                { x:40, y:28,  label:'CM|33',   type:'fwd', moved:true,
                   arrow:{ x2:40, y2:28, cx:52, cy:58 } },
-                { x:60, y:28,  label:'Olivia',    type:'fwd', moved:false },
-                { x:82, y:35,  label:'Quinn',     type:'fwd', moved:false },
+                { x:60, y:28,  label:'ST|29',    type:'fwd', moved:false },
+                { x:82, y:35,  label:'RW|97',     type:'fwd', moved:false },
             ]),
         },
     };
@@ -2357,11 +2056,11 @@
                 title: "Winger Drops to Midfield",
                 trigger: "🔴 Trigger: Opponent pressing high — midfield triangle losing shape in central zone",
                 moves: [
-                    { icon: '14', type: 'moved',  text: '<strong>Tailynn (#14)</strong> drops from right wing into the right midfield channel. With the opponent\'s press cutting off the central CM triangle, Tailynn provides a deeper outlet and restores numerical balance in the midfield line.' },
-                    { icon: '33', type: 'stable', text: '<strong>Avery (#27)</strong> slides into the space Tailynn vacated, becoming the wide right outlet. This keeps width without committing a dedicated winger.' },
-                    { icon: '→',  type: 'stable', text: '<strong>Sarai and Olivia</strong> hold their forward positions. The press is absorbed in midfield — the front two don\'t retreat.' },
+                    { icon: '#7',  type: 'moved',  text: '<strong>RW (#7)</strong> drops from right wing into the right midfield channel. With the high press cutting off the central CM triangle, #7 provides a deeper outlet and restores numerical balance in the midfield line.' },
+                    { icon: '#10', type: 'stable', text: '<strong>CM (#10)</strong> slides wide to cover the vacated right channel, maintaining width without committing a dedicated winger.' },
+                    { icon: '#11', type: 'stable', text: '<strong>LW (#11) and ST (#9)</strong> hold their forward positions. The press is absorbed in midfield — the front two don\'t retreat.' },
                 ],
-                principle: 'The midfield line shifts from a triangle to a flat four — temporarily. Zone separation holds: defenders don\'t push into midfield, forwards don\'t drop to help. Tailynn fills the gap while staying within her zone boundary.',
+                principle: 'The midfield line shifts from a triangle to a flat four — temporarily. Zone separation holds: defenders don\'t push into midfield, forwards don\'t drop to help. #7 fills the gap while staying within the midfield zone boundary.',
             },
             {
                 id: '2',
@@ -2369,11 +2068,11 @@
                 title: "Winger Becomes 5th Defender",
                 trigger: "🕐 Trigger: 75th minute, holding a 1-0 lead — opponent forcing play down our left flank",
                 moves: [
-                    { icon: '7',  type: 'moved',  text: '<strong>Sarai (#7)</strong> drops from left wing all the way to left back, creating a back 5. This overloads our defensive shape on the side the opponent is exploiting.' },
-                    { icon: '6',  type: 'stable', text: '<strong>Aaditri (#47)</strong> shifts left in midfield to cover the space Sarai left, maintaining a 3-person midfield line without gaps.' },
-                    { icon: '9',  type: 'stable', text: '<strong>Olivia and Tailynn</strong> remain the attacking outlet — now a front two instead of three. The team compacts vertically to protect the result.' },
+                    { icon: '#11', type: 'moved',  text: '<strong>LW (#11)</strong> drops from left wing all the way to left back, creating a back 5. This overloads our defensive shape on the side the opponent is exploiting.' },
+                    { icon: '#6',  type: 'stable', text: '<strong>CDM (#6)</strong> shifts left in midfield to cover the space #11 vacated, maintaining a 3-person midfield line without gaps.' },
+                    { icon: '#9',  type: 'stable', text: '<strong>ST (#9) and RW (#7)</strong> remain as the attacking outlet — now a front two instead of three. The team compacts vertically to protect the result.' },
                 ],
-                principle: 'The foundational principle of zone separation stays intact — Sarai simply drops an entire zone. The midfield line, though narrower, holds its horizontal integrity. This is "parking the bus" done intelligently: structure over chaos.',
+                principle: 'The foundational principle of zone separation stays intact — #11 simply drops an entire zone. The midfield line, though narrower, holds its horizontal integrity. This is "parking the bus" done intelligently: structure over chaos.',
             },
             {
                 id: '3',
@@ -2381,11 +2080,11 @@
                 title: "Right Flank Overload Response",
                 trigger: "⚠️ Trigger: Opponent attacking with 3v2 overload down our right side — need immediate cover",
                 moves: [
-                    { icon: '97', type: 'moved',  text: '<strong>Quinn (#97)</strong> drops from right wing to a wide defensive midfield position on the right, forming a temporary 3-4-3 → 4-4-2 shift and providing the third body in the threatened zone.' },
-                    { icon: '47', type: 'moved',  text: '<strong>Aaditri (#47)</strong> slides right in midfield to compress the lane, plugging the channel between Quinn\'s new position and Charlotte\'s CB role.' },
-                    { icon: '33', type: 'stable', text: '<strong>Sarah (#33)</strong> rotates into Aaditri\'s vacated central position, maintaining 3 in midfield. Formation becomes a 4-4-2 shape instead of 4-3-3.' },
+                    { icon: '#7',  type: 'moved',  text: '<strong>RW (#7)</strong> drops from right wing to a wide defensive midfield position, forming a temporary 4-4-2 shift and providing the third body in the threatened zone.' },
+                    { icon: '#6',  type: 'moved',  text: '<strong>CDM (#6)</strong> slides right in midfield to compress the lane, plugging the channel between #7\'s new position and RCB (#4).' },
+                    { icon: '#10', type: 'stable', text: '<strong>CM (#10)</strong> rotates into the vacated central position, maintaining 3 in midfield. Formation becomes a 4-4-2 shape instead of 4-3-3.' },
                 ],
-                principle: 'The midfield line doesn\'t collapse — it shifts laterally and gains a player via Quinn\'s drop. The zone boundary at y=107 is respected: no CB steps into midfield. Pressure is absorbed in the zone it arrives in.',
+                principle: 'The midfield line doesn\'t collapse — it shifts laterally and gains a player via #7\'s drop. The zone boundary is respected: no CB steps into midfield. Pressure is absorbed in the zone it arrives in.',
             },
             {
                 id: '4',
@@ -2393,14 +2092,13 @@
                 title: "Midfield Pushed to Striker",
                 trigger: "⚡ Trigger: 80th minute, trailing by 1 — need a goal; coach switches to 4-2-4 for 10 minutes",
                 moves: [
-                    { icon: '33', type: 'moved',  text: '<strong>Sarah (#33)</strong> pushes from CM/winger to second striker, joining Sarai, Olivia, and Quinn in a four-attacker shape. Her ability to play winger-mid means she understands spacing in the final third.' },
-                    { icon: '47', type: 'stable', text: '<strong>Aaditri (#47) and Ella S (#23)</strong> hold a double pivot — 2 DMs covering for the attacking surge. They must stay disciplined and compact, not follow the press forward.' },
-                    { icon: '→',  type: 'stable', text: '<strong>Back four holds their line.</strong> The risk is absorbed in midfield, not by exposing the defensive shape. If possession is lost, Aaditri and Ella S form an immediate defensive screen.' },
+                    { icon: '#10', type: 'moved',  text: '<strong>CM (#10)</strong> pushes from central midfield to second striker, joining LW, ST, and RW in a four-attacker shape. #10\'s range across the front means she understands final-third spacing.' },
+                    { icon: '#6',  type: 'stable', text: '<strong>CDM (#6) and CM (#8)</strong> hold a double pivot — two defensive mids covering the attacking surge. They must stay disciplined and compact, not follow the press forward.' },
+                    { icon: '→',   type: 'stable', text: '<strong>Back four holds their line.</strong> Risk is absorbed in midfield, not by exposing the defensive shape. If possession is lost, #6 and #8 form an immediate defensive screen.' },
                 ],
-                principle: 'The most aggressive scenario — temporarily trading midfield depth for attacking width. The key teaching point: even in chaos mode, the defensive block is non-negotiable. Four up top only works if two players hold the pivot without breaking.',
+                principle: 'The most aggressive scenario — temporarily trading midfield depth for attacking width. The key teaching point: even in chaos mode, the defensive block is non-negotiable. Four up top only works if the double pivot holds.',
             },
         ];
-
         const cardsHTML = cards.map(c => {
             const movesHTML = c.moves.map(m =>
                 `<div class="scenario-move-row">
@@ -2445,12 +2143,14 @@
             <button id="tbtn-attack"   onclick="switchTacticView('attack')"   class="tactic-btn">Attack Flow</button>
             <button id="tbtn-scenarios" onclick="showScenarios()" class="tactic-btn active">Scenarios</button>
         </div>
-        <div class="scenarios-wrap">
-            <div class="scenarios-intro">
-                <div class="scenarios-intro-title">Positional Flexibility · 4-3-3 Adaptive Scenarios</div>
-                <div class="scenarios-intro-sub">Each scenario shows how the formation adapts to a real game situation while preserving the core tactical structure. Use the Before / After toggle on each card to compare base formation vs. the adaptation. Gold highlights show which players moved and where.</div>
+        <div style="background:var(--card);">
+            <div class="scenarios-wrap">
+                <div class="scenarios-intro">
+                    <div class="scenarios-intro-title">Positional Flexibility · 4-3-3 Adaptive Scenarios</div>
+                    <div class="scenarios-intro-sub">Each card shows how the 4-3-3 adapts to a live game situation. Toggle Before / After to compare the base formation vs. the adjustment. Gold highlights show which positions moved and where.</div>
+                </div>
+                ${cardsHTML}
             </div>
-            ${cardsHTML}
         </div>
         ${footerHTML('Tactical Scenarios')}`;
 
@@ -2610,284 +2310,10 @@
             </div>
             <div style="flex:1;background:var(--card);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
                 <div id="tactic-desc">${getTacticDesc(currentTacticView)}</div>
-                ${getTacticRosterHTML()}
             </div>
         </div>${footerHTML('Tactical Guide')}`;
     }
 
-
-    function openMsgDraft() {
-        showAiModal({
-            title: '✦ AI Message Draft', promptLabel: "What do you want to communicate?",
-            placeholder: "e.g. Remind the team about Saturday's game — location, arrival time, what to bring...",
-            system: `You are a youth soccer team communicator for ${TEAM_CONFIG.branding.name}. Write clear, friendly, concise team messages. Plain text, no markdown. Under 120 words.`,
-            buildPrompt: (i) => { const nm = TEAM_CONFIG.nextMatch; return `Team: ${TEAM_CONFIG.branding.name}. Next match: #${nm.oppRank} ${nm.oppName} on ${nm.date} at ${nm.time}.\n\nWrite: ${i}`; },
-            onUse: (text) => { const inp = document.getElementById('msgInput'); if (inp) { inp.value = text; inp.focus(); } }
-        });
-    }
-    function postAnnouncement() {
-        showAiModal({
-            title: '📢 Draft Announcement', promptLabel: "What do you want to announce?",
-            placeholder: 'e.g. Practice moved to Field 3 Thursday. Same time, different field.',
-            system: `You are drafting a team announcement for ${TEAM_CONFIG.branding.name} youth soccer team. Be clear, friendly, brief. Plain text. Under 80 words.`,
-            buildPrompt: (i) => `Write a clear team announcement: ${i}`,
-            onUse: (text) => {
-                const ch = MSG_STATE.channels['announcements'];
-                if (ch) ch.messages.push({ id: Date.now(), from: 'You (AI Draft)', mine: true, text, ts: new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) });
-                MSG_STATE.active = 'channel:announcements';
-                renderMessenger(document.getElementById('main-content'));
-            }
-        });
-    }
-    function sendRsvpReminder() {
-        const nm = TEAM_CONFIG.nextMatch, sch = TEAM_CONFIG.remainingSchedule[0];
-        callAI(
-            `Write a brief, friendly RSVP reminder for ${TEAM_CONFIG.branding.name}. One paragraph, plain text, under 60 words. Be warm and direct.`,
-            `Game: #${nm.oppRank} ${nm.oppName} on ${nm.date} at ${nm.time}. Location: ${sch ? sch.loc : 'TBD'}. Ask parents to confirm attendance.`
-        ).then(result => {
-            const ch = MSG_STATE.channels['announcements'];
-            if (ch) ch.messages.push({ id: Date.now(), from: 'You (AI Draft)', mine: true, text: result, ts: new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) });
-            MSG_STATE.active = 'channel:announcements';
-            renderMessenger(document.getElementById('main-content'));
-        }).catch(e => alert('AI error: ' + e.message));
-    }
-    function shareLocation() {
-        const sch = TEAM_CONFIG.remainingSchedule[0];
-        const loc = sch ? sch.loc : 'TBD';
-        const text = '📍 Next match location: ' + loc + (sch ? '\n' + sch.date + ' · ' + sch.time : '') + '\nhttps://maps.google.com?q=' + encodeURIComponent(loc);
-        getMessages(MSG_STATE.active).push({ id: Date.now(), from: 'You', mine: true, text, ts: new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) });
-        renderMessenger(document.getElementById('main-content'));
-    }
-
-    /* ============================================================
-       MESSENGER STATE + RENDER
-    ============================================================ */
-    const MSG_STATE = {
-        active: 'channel:general',
-        channels: {
-            'general':       { label: '#general',       desc: 'Whole team',     messages: [
-                { id: 1, from: 'Coach Keri',  mine: false, text: 'Welcome to the team hub! Use this for all team comms.', ts: 'Mon 9:02 AM' },
-                { id: 2, from: 'Coach Keri', mine: false, text: 'Great tool. Parents can use this for schedule questions too.', ts: 'Mon 9:15 AM' },
-                { id: 3, from: 'You',         mine: true,  text: "First post from the hub. Let's go McNeal!", ts: 'Mon 9:20 AM' },
-            ]},
-            'match-day':     { label: '#match-day',     desc: 'Game day alerts',  messages: [
-                { id: 1, from: 'System', mine: false, system: true, text: 'Match Day Channel — post warm-up times, field locations, and lineups here.', ts: '' }
-            ]},
-            'announcements': { label: '#announcements', desc: 'Official notices', messages: [
-                { id: 1, from: 'Coach Keri', mine: false, text: 'Spring 2026 schedule is now live. Check the Schedule tab for all upcoming matches.', ts: 'Feb 28 · 8:00 AM' }
-            ]},
-        },
-        dms: {
-            'coach-mike':  { label: 'Coach Keri',    role: 'Head Coach',  messages: [] },
-            'coach-sarah': { label: 'Coach Keri',   role: 'Asst. Coach', messages: [] },
-            'manager':     { label: 'Team Manager',  role: 'Operations',  messages: [] },
-        }
-    };
-
-    function getThreadInfo(threadKey) {
-        const [type, id] = threadKey.split(':');
-        if (type === 'channel') return { type, id, ...MSG_STATE.channels[id] };
-        return { type, id, ...MSG_STATE.dms[id] };
-    }
-    function getMessages(threadKey) {
-        const [type, id] = threadKey.split(':');
-        if (type === 'channel') return MSG_STATE.channels[id].messages;
-        return MSG_STATE.dms[id].messages;
-    }
-
-    function renderMessenger(container) {
-        const tinfo = getThreadInfo(MSG_STATE.active);
-        const messages = getMessages(MSG_STATE.active);
-        const sidebarChannels = Object.entries(MSG_STATE.channels).map(([id, ch]) =>
-            `<button class="msg-thread-btn ${MSG_STATE.active === 'channel:' + id ? 'active' : ''}" onclick="switchThread('channel:${id}')">
-                <span class="thread-name">${ch.label}</span><span class="thread-sub">${ch.desc}</span>
-            </button>`
-        ).join('');
-        const sidebarDms = Object.entries(MSG_STATE.dms).map(([id, dm]) =>
-            `<button class="msg-thread-btn ${MSG_STATE.active === 'dm:' + id ? 'active' : ''}" onclick="switchThread('dm:${id}')">
-                <span class="thread-name">${dm.label}</span><span class="thread-sub">${dm.role}</span>
-            </button>`
-        ).join('');
-        const bubblesHtml = messages.map(m => {
-            if (m.system) return `<div class="msg-bubble system"><div class="msg-text">${m.text}</div></div>`;
-            return `<div class="msg-bubble ${m.mine ? 'mine' : 'theirs'}">
-                ${!m.mine ? `<div class="msg-meta">${m.from} ${m.ts ? '· ' + m.ts : ''}</div>` : `<div class="msg-meta">${m.ts}</div>`}
-                <div class="msg-text">${m.text}</div>
-            </div>`;
-        }).join('');
-        const topbarRight = tinfo.type === 'channel'
-            ? `<button class="reminder-btn" onclick="sendMatchReminder()">⚡ Match Day Reminder</button>` : '';
-
-        container.innerHTML = `${headerHTML('Team Messenger', 'MSG')}
-        <div class="msg-quick-actions">
-            <button class="quick-action-btn" onclick="withApiKey(postAnnouncement)">📢 Post Announcement</button>
-            <button class="quick-action-btn" onclick="withApiKey(sendRsvpReminder)">✅ RSVP Reminder</button>
-            <button class="quick-action-btn" onclick="shareLocation()">📍 Share Location</button>
-            <button class="quick-action-btn" onclick="withApiKey(openMsgDraft)">✦ AI Draft</button>
-        </div>
-        <div class="msg-layout">
-            <div class="msg-sidebar">
-                <div class="msg-sidebar-section">Channels</div>
-                ${sidebarChannels}
-                <div class="msg-sidebar-section" style="margin-top:8px;">Direct Messages</div>
-                ${sidebarDms}
-                <div style="flex:1;"></div>
-                <div style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.07);">
-                    <button onclick="clearApiKey()" style="font-family:'Nunito', sans-serif;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.2);background:none;border:none;cursor:pointer;width:100%;text-align:left;">⚙ AI Settings</button>
-                </div>
-            </div>
-            <div class="msg-main">
-                <div class="msg-topbar">
-                    <div>
-                        <div class="msg-topbar-name">${tinfo.label || tinfo.name}</div>
-                        <div class="msg-topbar-sub">${tinfo.desc || tinfo.role || ''}</div>
-                    </div>
-                    ${topbarRight}
-                </div>
-                <div class="msg-feed" id="msgFeed">${bubblesHtml}</div>
-                <div class="msg-input-area">
-                    <textarea class="msg-input" id="msgInput" placeholder="Write a message..." rows="1"
-                        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
-                    <button class="msg-ai-btn" onclick="withApiKey(openMsgDraft)">✦ AI Draft</button>
-                    <button class="msg-send-btn" onclick="sendMessage()">Send</button>
-                </div>
-            </div>
-        </div>${footerHTML('Team Communications')}`;
-        scrollFeedToBottom();
-    }
-
-    function scrollFeedToBottom() { setTimeout(() => { const f = document.getElementById('msgFeed'); if (f) f.scrollTop = f.scrollHeight; }, 50); }
-    function switchThread(threadKey) { MSG_STATE.active = threadKey; renderMessenger(document.getElementById('main-content')); }
-    function sendMessage() {
-        const input = document.getElementById('msgInput');
-        const text = (input.value || '').trim(); if (!text) return;
-        const messages = getMessages(MSG_STATE.active);
-        const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        messages.push({ id: Date.now(), from: 'You', mine: true, text, ts });
-        input.value = '';
-        const feed = document.getElementById('msgFeed');
-        const bubble = document.createElement('div');
-        bubble.className = 'msg-bubble mine';
-        bubble.innerHTML = `<div class="msg-meta">${ts}</div><div class="msg-text" style="background:var(--primary);color:white;border-radius:12px 3px 12px 12px;">${text}</div>`;
-        feed.appendChild(bubble); scrollFeedToBottom();
-    }
-    function sendMatchReminder() {
-        withApiKey(async () => {
-            const nm = TEAM_CONFIG.nextMatch;
-            const sch = TEAM_CONFIG.remainingSchedule[0];
-            const loc = sch ? sch.loc : 'TBD';
-            try {
-                const result = await callAI(
-                    `You are writing a match day reminder for ${TEAM_CONFIG.branding.name} youth soccer team. Be energetic, clear, and brief. Plain text only. Max 100 words.`,
-                    `Opponent: #${nm.oppRank} ${nm.oppName}. Date: ${nm.date}. Time: ${nm.time}. Location: ${loc}. Record: ${TEAM_CONFIG.record.wins}W-${TEAM_CONFIG.record.losses}L-${TEAM_CONFIG.record.draws}D.`
-                );
-                const messages = MSG_STATE.channels['match-day'].messages;
-                messages.push({ id: Date.now(), from: 'You (AI Draft)', mine: true, text: result, ts: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
-                MSG_STATE.active = 'channel:match-day';
-                renderMessenger(document.getElementById('main-content'));
-            } catch(e) { alert('AI error: ' + e.message); }
-        });
-    }
-    function clearApiKey() { localStorage.removeItem('sting_hub_api_key'); showApiKeyModal(null); }
-
-    /* ============================================================
-       SPONSORS STATE + RENDER
-    ============================================================ */
-    let SP_STATE = {
-        selected: null,
-        sponsors: [
-            { id: 1, name: 'McKinney Auto Group',          contact: 'James Hartwell', email: 'j.hartwell@mckinneyauto.com', phone: '(972) 555-0181', status: 'Active',      deal: '$750', notes: 'Jersey back sponsor. Renews in June.' },
-            { id: 2, name: 'Collin County Sports Medicine', contact: 'Dr. Priya Nair',  email: 'pnair@ccsports.com',         phone: '(972) 555-0244', status: 'Contacted',   deal: '',     notes: 'Sent intro email Mar 1. Follow up needed.' },
-            { id: 3, name: 'Plano Elite Soccer Gear',       contact: 'Tom Bautista',    email: 'tbautista@planosoccer.com',   phone: '(214) 555-0093', status: 'Prospect',    deal: '',     notes: 'Local shop, good brand alignment.' },
-            { id: 4, name: 'North Texas Family Dentistry',  contact: 'Dr. Linda Chu',   email: 'lchu@ntfd.com',               phone: '(972) 555-0312', status: 'Negotiating', deal: '$500', notes: 'Interested in banner + program ad.' },
-        ],
-        nextId: 5
-    };
-    function spGetSelected() { return SP_STATE.sponsors.find(s => s.id === SP_STATE.selected) || null; }
-
-    function renderSponsors(container) {
-        const listItems = SP_STATE.sponsors.map(s =>
-            `<div class="sp-card ${s.id === SP_STATE.selected ? 'active' : ''}" onclick="selectSponsor(${s.id})">
-                <div class="sp-card-name">${s.name}</div>
-                <div class="sp-card-contact">${s.contact} · ${s.email}</div>
-                <div><span class="sp-status-pill ${s.status}">${s.status}</span>${s.deal ? ` <span style="font-family:'Nunito', sans-serif;font-size:11px;font-weight:700;color:rgba(0,35,75,0.45);margin-left:6px;">${s.deal}</span>` : ''}</div>
-            </div>`
-        ).join('');
-        const sel = spGetSelected();
-        const detailHtml = sel ? `
-            <div class="sp-detail-topbar">
-                <div class="sp-detail-name">${sel.name}</div>
-                <div class="sp-detail-meta">${sel.contact} · <span class="sp-status-pill ${sel.status}" style="vertical-align:middle;">${sel.status}</span></div>
-            </div>
-            <div class="sp-detail-body">
-                <div class="sp-field-row">
-                    <div class="sp-field"><div class="sp-field-label">Contact Name</div><input class="sp-field-input" value="${sel.contact}" onchange="updateSponsor(${sel.id},'contact',this.value)"/></div>
-                    <div class="sp-field"><div class="sp-field-label">Email</div><input class="sp-field-input" value="${sel.email}" onchange="updateSponsor(${sel.id},'email',this.value)"/></div>
-                </div>
-                <div class="sp-field-row">
-                    <div class="sp-field"><div class="sp-field-label">Phone</div><input class="sp-field-input" value="${sel.phone||''}" onchange="updateSponsor(${sel.id},'phone',this.value)"/></div>
-                    <div class="sp-field"><div class="sp-field-label">Deal Value</div><input class="sp-field-input" value="${sel.deal||''}" placeholder="e.g. $500" onchange="updateSponsor(${sel.id},'deal',this.value)"/></div>
-                </div>
-                <div class="sp-field-row">
-                    <div class="sp-field"><div class="sp-field-label">Status</div>
-                        <select class="sp-field-select" onchange="updateSponsor(${sel.id},'status',this.value)">
-                            ${['Prospect','Contacted','Negotiating','Active','Declined'].map(s => `<option ${s === sel.status ? 'selected' : ''}>${s}</option>`).join('')}
-                        </select>
-                    </div>
-                    <div class="sp-field"></div>
-                </div>
-                <div class="sp-field"><div class="sp-field-label">Notes</div><textarea class="sp-field-input" style="min-height:60px;resize:vertical;" onchange="updateSponsor(${sel.id},'notes',this.value)">${sel.notes||''}</textarea></div>
-                <div class="sp-ai-actions">
-                    <button class="sp-ai-action-btn primary" onclick="withApiKey(()=>openSponsorEmail(${sel.id}))">✦ Draft Outreach Email</button>
-                    <button class="sp-ai-action-btn secondary" onclick="withApiKey(()=>openSponsorPitch(${sel.id}))">✦ Generate Pitch One-Pager</button>
-                    <button onclick="deleteSponsor(${sel.id})" style="font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:none;border:1px solid rgba(220,38,38,0.2);color:#b91c1c;padding:8px 14px;border-radius:3px;cursor:pointer;margin-left:auto;">Remove</button>
-                </div>
-            </div>` : `
-            <div class="sp-empty">
-                <div class="sp-empty-title">Select a Sponsor</div>
-                <div class="sp-empty-sub">Choose a sponsor from the list to view details, edit contact info, and draft AI-powered outreach.</div>
-            </div>`;
-
-        container.innerHTML = `${headerHTML('Sponsor Outreach', 'SPONSORS')}
-        <div class="sp-layout">
-            <div class="sp-list-panel">
-                <div class="sp-list-header"><div class="sp-list-title">Sponsors (${SP_STATE.sponsors.length})</div><button class="sp-add-btn" onclick="addSponsor()">+ Add</button></div>
-                <div class="sp-list-scroll">${listItems}</div>
-            </div>
-            <div class="sp-detail-panel">${detailHtml}</div>
-        </div>${footerHTML('Sponsor Management')}`;
-    }
-    function selectSponsor(id) { SP_STATE.selected = id; renderSponsors(document.getElementById('main-content')); }
-    function updateSponsor(id, field, value) { const s = SP_STATE.sponsors.find(s => s.id === id); if (s) s[field] = value; }
-    function deleteSponsor(id) { if (!confirm('Remove this sponsor?')) return; SP_STATE.sponsors = SP_STATE.sponsors.filter(s => s.id !== id); SP_STATE.selected = null; renderSponsors(document.getElementById('main-content')); }
-    function addSponsor() {
-        const name = prompt('Sponsor / Business name:'); if (!name || !name.trim()) return;
-        const newSp = { id: SP_STATE.nextId++, name: name.trim(), contact: '', email: '', phone: '', status: 'Prospect', deal: '', notes: '' };
-        SP_STATE.sponsors.unshift(newSp); SP_STATE.selected = newSp.id;
-        renderSponsors(document.getElementById('main-content'));
-    }
-    function openSponsorEmail(id) {
-        const s = SP_STATE.sponsors.find(sp => sp.id === id); if (!s) return;
-        showAiModal({
-            title: '✦ Draft Outreach Email',
-            promptLabel: 'Any specific angle or ask?',
-            placeholder: 'e.g. First contact — introduce the team and ask about jersey sponsorship for $500...',
-            system: `You are drafting a professional sponsorship outreach email on behalf of ${TEAM_CONFIG.branding.name}, a competitive youth soccer team in Dallas/Fort Worth. Write a warm, professional, concise email. Include a subject line. Keep it under 180 words. Use plain text with "Subject:" prefix, then a blank line, then the email body. Sign off as "The ${TEAM_CONFIG.branding.name} Coaching Staff".`,
-            buildPrompt: (input) => `Sponsor: ${s.name}. Contact: ${s.contact}. Status: ${s.status}. ${s.notes ? 'Notes: ' + s.notes + '.' : ''}\n\nUser direction: ${input}\n\nWrite the outreach email.`,
-            onUse: (text) => { alert('Email copied to clipboard!\n\n' + text); navigator.clipboard?.writeText(text); }
-        });
-    }
-    function openSponsorPitch(id) {
-        const s = SP_STATE.sponsors.find(sp => sp.id === id); if (!s) return;
-        showAiModal({
-            title: '✦ Sponsor Pitch One-Pager',
-            promptLabel: 'Key selling points to highlight?',
-            placeholder: 'e.g. We have 30+ families, play at UT Dallas, active social media presence...',
-            system: `You are creating a concise sponsorship pitch for ${TEAM_CONFIG.branding.name}. Write in plain text with section headers. Include: Team Overview, Why Sponsor Us, Sponsorship Tiers, What You Get, and Contact Info. Under 250 words. Be specific and data-driven.`,
-            buildPrompt: (input) => { const r = TEAM_CONFIG.record; return `Team: ${TEAM_CONFIG.branding.name}. League: ${TEAM_CONFIG.branding.league}. Record: ${r.wins}W-${r.losses}L-${r.draws}D. Prospect: ${s.name}.\n\nHighlights: ${input}\n\nGenerate the pitch one-pager.`; },
-            onUse: (text) => { alert('Pitch copied to clipboard!'); navigator.clipboard?.writeText(text); }
-        });
-    }
 
     /* ============================================================
        API KEY MANAGEMENT
@@ -2977,154 +2403,13 @@
         };
     }
 
-    /* ============================================================
-       MAIN RENDER
-    ============================================================ */
-
-    /* ============================================================
-       ROSTER TAB
-    ============================================================ */
-    let rosterFilter = 'ALL';
-
-    function rosterInitials(name) {
-        const parts = name.trim().split(' ');
-        if (parts.length >= 2) return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
-        return name.slice(0,2).toUpperCase();
-    }
-    function isSpotlightOff(num) {
-        const sp = TEAM_CONFIG.spotlight;
-        return sp && sp.offense && sp.offense.name.startsWith('#'+num+' ');
-    }
-    function isSpotlightDef(num) {
-        const sp = TEAM_CONFIG.spotlight;
-        return sp && sp.defense && sp.defense.name.startsWith('#'+num+' ');
-    }
-    function getPhotoKey(teamId, num) { return 'roster_photo_' + teamId + '_' + num; }
-    function getSavedPhoto(num) { return localStorage.getItem(getPhotoKey(currentTeamId, num)) || ''; }
-    function savePhoto(num, dataUrl) {
-        try { localStorage.setItem(getPhotoKey(currentTeamId, num), dataUrl); return true; }
-        catch(e) { alert('Storage full. Try a smaller or lower-resolution photo.'); return false; }
-    }
-    function clearPhoto(num) { localStorage.removeItem(getPhotoKey(currentTeamId, num)); }
-
-    function renderRoster(container) {
-        const roster = TEAM_CONFIG.roster || [];
-        const positions = ['ALL','GK','DEF','MID','FWD'];
-        const filtered = rosterFilter === 'ALL' ? roster : roster.filter(p => p.pos === rosterFilter);
-        const filterBtns = positions.map(pos => {
-            const count = pos === 'ALL' ? roster.length : roster.filter(p=>p.pos===pos).length;
-            return `<button class="roster-filter-btn ${rosterFilter===pos?'active':''}" onclick="setRosterFilter('${pos}')">${pos} <span style="opacity:0.6;font-weight:600;">${count}</span></button>`;
-        }).join('');
-        const cards = filtered.map(p => {
-            const photo = getSavedPhoto(p.num) || p.photo || '';
-            const initials = rosterInitials(p.name);
-            const isOff = isSpotlightOff(p.num);
-            const isDef = isSpotlightDef(p.num);
-            const isPlayUp = p.dob && p.dob.endsWith('/14');
-            const spotlightTag = isOff ? `<div class="roster-spotlight-tag off">&#9889; Offense Spotlight</div>`
-                : isDef ? `<div class="roster-spotlight-tag def">&#128737; Defense Spotlight</div>` : '';
-            const cardClass = isOff ? 'roster-card spotlight-off' : isDef ? 'roster-card spotlight-def' : 'roster-card';
-            const photoEl = photo
-                ? `<img class="roster-photo" src="${photo}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="roster-initials" style="display:none;">${initials}</div>`
-                : `<div class="roster-initials">${initials}</div>`;
-            const safeName = p.name.replace(/'/g, "&#39;");
-            return `<div class="${cardClass}" onclick="openPhotoModal('${p.num}','${safeName}')">
-                <div class="roster-photo-wrap">${photoEl}<div class="roster-num-badge">#${p.num}</div><div class="roster-pos-badge ${p.pos}">${p.pos}</div>${isPlayUp ? '<div class="roster-playup-badge">2014 ↑</div>' : ''}</div>
-                <div class="roster-info"><div class="roster-name">${p.name}</div>${p.role ? `<div style="font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.4);font-weight:700;margin-top:2px;">${p.role}</div>` : ''}${p.dob ? `<div style="font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.28);font-weight:500;margin-top:1px;">b. ${p.dob}</div>` : ''}${spotlightTag}</div>
-            </div>`;
-        }).join('');
-        container.innerHTML = `${headerHTML('Team Roster','ROSTER')}
-        <div style="padding:20px 32px 0;">
-            <div class="roster-filter-bar">${filterBtns}<span class="roster-count">${filtered.length} player${filtered.length!==1?'s':''}</span></div>
-            <div class="roster-upload-hint" onclick="openBulkPhotoGuide()">
-                <span class="roster-upload-icon">&#128248;</span>
-                <div><div class="roster-upload-title">Add Player Photos</div><div class="roster-upload-sub">Tap any player card to upload their photo — or tap here for bulk upload tips</div></div>
-            </div>
-        </div>
-        <div class="roster-grid">${cards}</div>
-        ${footerHTML('Team Roster')}`;
-    }
-
-    function setRosterFilter(pos) { rosterFilter = pos; renderRoster(document.getElementById('main-content')); }
-
-    function openPhotoModal(num, name) {
-        const existing = getSavedPhoto(num);
-        const overlay = document.createElement('div');
-        overlay.className = 'photo-modal-overlay'; overlay.id = 'photoModalOverlay';
-        overlay.innerHTML = `<div class="photo-modal">
-            <div class="photo-modal-header">
-                <div class="photo-modal-title">#${num} ${name}</div>
-                <button class="photo-modal-close" onclick="closePhotoModal()">&#10005;</button>
-            </div>
-            <div class="photo-modal-body">
-                <div class="photo-drop-zone" id="photoDropZone" onclick="document.getElementById('photoFileInput').click()"
-                    ondragover="event.preventDefault();this.classList.add('drag-over')"
-                    ondragleave="this.classList.remove('drag-over')"
-                    ondrop="handlePhotoDrop(event)">
-                    <input type="file" id="photoFileInput" accept="image/*" onchange="handlePhotoFile(event)">
-                    <span class="photo-drop-icon">&#128247;</span>
-                    <div class="photo-drop-title">Tap to choose a photo</div>
-                    <div class="photo-drop-sub">JPG, PNG, HEIC &middot; Saves to this device</div>
-                </div>
-                <div class="photo-preview-wrap" id="photoPreviewWrap">
-                    <img id="photoPreviewImg" class="photo-preview-img" src="" alt="Preview">
-                    <button class="photo-save-btn" onclick="commitPhoto('${num}')">Save Photo &#10003;</button>
-                </div>
-                <div class="photo-url-row">
-                    <input class="photo-url-input" id="photoUrlInput" placeholder="Or paste a photo URL&hellip;" />
-                    <button class="photo-url-btn" onclick="applyPhotoUrl('${num}')">Use URL</button>
-                </div>
-                ${existing ? `<button onclick="clearPhoto('${num}');closePhotoModal();renderRoster(document.getElementById('main-content'));" style="font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;background:none;border:1px solid rgba(220,38,38,0.2);color:#b91c1c;padding:8px;border-radius:3px;cursor:pointer;width:100%;margin-top:10px;">Remove Current Photo</button>` : ''}
-            </div>
-        </div>`;
-        document.body.appendChild(overlay);
-        overlay.addEventListener('click', e => { if (e.target === overlay) closePhotoModal(); });
-        window._photoModalNum = num;
-        window._photoDataUrl = null;
-    }
-    function closePhotoModal() { const o=document.getElementById('photoModalOverlay'); if(o) o.remove(); window._photoDataUrl=null; }
-    function handlePhotoFile(e) { const f=e.target.files[0]; if(f) readAndPreview(f); }
-    function handlePhotoDrop(e) { e.preventDefault(); document.getElementById('photoDropZone').classList.remove('drag-over'); const f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) readAndPreview(f); }
-    function readAndPreview(file) {
-        const reader=new FileReader();
-        reader.onload=function(ev) {
-            window._photoDataUrl=ev.target.result;
-            const prev=document.getElementById('photoPreviewWrap');
-            const img=document.getElementById('photoPreviewImg');
-            if(prev&&img){img.src=ev.target.result;prev.style.display='block';}
-        };
-        reader.readAsDataURL(file);
-    }
-    function commitPhoto(num) {
-        if(!window._photoDataUrl) return;
-        if(savePhoto(num,window._photoDataUrl)){
-            const p=(TEAM_CONFIG.roster||[]).find(x=>x.num===num);
-            if(p) p.photo=window._photoDataUrl;
-            closePhotoModal(); renderRoster(document.getElementById('main-content'));
-        }
-    }
-    function applyPhotoUrl(num) {
-        const url=document.getElementById('photoUrlInput').value.trim(); if(!url) return;
-        if(savePhoto(num,url)){
-            const p=(TEAM_CONFIG.roster||[]).find(x=>x.num===num);
-            if(p) p.photo=url;
-            closePhotoModal(); renderRoster(document.getElementById('main-content'));
-        }
-    }
-    function openBulkPhotoGuide() {
-        alert('How to add player photos:\n\n1. Tap any player card to open the photo uploader.\n2. Choose a photo from your device, or drag and drop one.\n3. Photos are saved to this browser — they persist across sessions.\n4. You can also paste a direct image URL (e.g. from a team website).\n5. Best results: square crop, face centered, good lighting.\n\nTo remove a photo, tap the card and choose Remove.');
-    }
-
     function render() {
         renderNavBars();
         const c = document.getElementById('main-content');
-        if (currentTab === 'home')      renderHome(c);
-        else if (currentTab === 'story')     renderStory(c);
-        else if (currentTab === 'schedule')  renderSchedule(c);
-        else if (currentTab === 'tactics')   renderTactics(c);
-        else if (currentTab === 'messenger') renderMessenger(c);
-        else if (currentTab === 'sponsors')  renderSponsors(c);
-        else if (currentTab === 'roster')    renderRoster(c);
+        if (currentTab === 'home')          renderHome(c);
+        else if (currentTab === 'story')    renderStory(c);
+        else if (currentTab === 'schedule') renderSchedule(c);
+        else if (currentTab === 'tactics')  renderTactics(c);
         else renderHome(c);
     }
 
