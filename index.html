@@ -307,6 +307,109 @@
         .mcs-sub{font-family:'Nunito',sans-serif;font-size:14px;color:rgba(0,35,75,0.5);max-width:420px;margin:0 auto 28px;line-height:1.7;}
         .mcs-badge{display:inline-block;font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:var(--primary);color:var(--secondary);padding:8px 20px;border-radius:20px;}
 
+
+        /* ===== SCHEDULE CARDS ===== */
+        .sched-cards{display:flex;flex-direction:column;gap:14px;}
+        .sched-card{background:white;border-radius:8px;overflow:hidden;border:1px solid rgba(0,35,75,0.09);box-shadow:0 2px 12px rgba(0,35,75,0.07);}
+        .sched-card-next{border:2px solid var(--secondary);box-shadow:0 4px 20px rgba(255,204,0,0.2);}
+        .sched-card-top{background:var(--primary);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+        .sched-card-next .sched-card-top{background:linear-gradient(135deg,#00234b 0%,#003580 100%);}
+        .sched-card-date-block{display:flex;align-items:baseline;gap:8px;}
+        .sched-card-day{font-family:'Bebas Neue','Nunito',sans-serif;font-size:15px;letter-spacing:2px;color:var(--secondary);}
+        .sched-card-dt{font-family:'Bebas Neue','Nunito',sans-serif;font-size:22px;letter-spacing:1px;color:white;}
+        .sched-next-pill{font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;letter-spacing:1px;text-transform:uppercase;background:var(--secondary);color:var(--primary);padding:4px 12px;border-radius:20px;}
+        .sched-card-opp{padding:16px 20px 10px;display:flex;align-items:center;gap:10px;}
+        .sched-card-rank{font-family:'Bebas Neue','Nunito',sans-serif;font-size:20px;letter-spacing:1px;color:rgba(0,35,75,0.3);}
+        .sched-card-opp-name{font-family:'Nunito',sans-serif;font-weight:900;font-size:17px;color:var(--primary);line-height:1.2;}
+        .sched-card-meta{padding:0 20px 14px;display:flex;gap:20px;flex-wrap:wrap;}
+        .sched-meta-item{font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:rgba(0,35,75,0.5);display:flex;align-items:center;gap:5px;}
+        .sched-meta-icon{font-size:13px;}
+        .sched-card-rsvp{padding:12px 20px 16px;border-top:1px solid rgba(0,35,75,0.06);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+        .sched-rsvp-label{font-family:'Nunito',sans-serif;font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:rgba(0,35,75,0.35);}
+        .sched-rsvp-btns{display:flex;gap:6px;}
+        @media(max-width:640px){
+            .sched-card-opp-name{font-size:15px;}
+            .sched-card-meta{gap:12px;}
+            .sched-card-rsvp{flex-direction:column;align-items:flex-start;gap:8px;}
+        }
+
+
+        /* ===== TOURNAMENT CARDS ===== */
+        .tc-group{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+        .tc-card{background:white;border-radius:8px;border:1px solid rgba(0,35,75,0.09);overflow:hidden;box-shadow:0 2px 10px rgba(0,35,75,0.06);}
+        .tc-card-ours{border:2px solid var(--secondary);box-shadow:0 4px 16px rgba(255,204,0,0.18);}
+        .tc-card-top{background:var(--primary);padding:10px 16px;display:flex;align-items:center;gap:12px;}
+        .tc-card-ours .tc-card-top{background:linear-gradient(135deg,#00234b 0%,#003580 100%);}
+        .tc-date-block{display:flex;align-items:baseline;gap:6px;flex:0 0 auto;}
+        .tc-day{font-family:'Bebas Neue','Nunito',sans-serif;font-size:13px;letter-spacing:2px;color:var(--secondary);}
+        .tc-dt{font-family:'Bebas Neue','Nunito',sans-serif;font-size:18px;letter-spacing:1px;color:white;}
+        .tc-time-field{flex:1;min-width:0;}
+        .tc-time,.tc-field{font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .tc-time{color:rgba(255,255,255,0.8);margin-bottom:2px;}
+        .tc-score{font-family:'Bebas Neue','Nunito',sans-serif;font-size:20px;letter-spacing:1px;color:var(--secondary);flex-shrink:0;}
+        .tc-tbd{font-family:'Nunito',sans-serif;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.3);flex-shrink:0;}
+        .tc-matchup{padding:10px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+        .tc-team{font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:rgba(0,35,75,0.6);}
+        .tc-us{font-weight:900;color:var(--primary);}
+        .tc-vs{font-family:'Nunito',sans-serif;font-size:10px;font-weight:900;letter-spacing:0.5px;text-transform:uppercase;color:rgba(0,35,75,0.25);}
+
+        /* Knockout */
+        .tc-knockout{display:grid;grid-template-columns:1fr 44px 1fr;align-items:center;gap:0;}
+        .tc-ko-col{display:flex;flex-direction:column;gap:10px;}
+        .tc-ko-label{font-family:'Bebas Neue','Nunito',sans-serif;font-size:13px;letter-spacing:2px;color:rgba(0,35,75,0.3);margin-bottom:2px;}
+        .tc-ko-connector{height:140px;}
+        .tc-ko-connector svg{width:100%;height:100%;}
+        .tc-ko-card{background:white;border-radius:8px;border:1px solid rgba(0,35,75,0.1);overflow:hidden;box-shadow:0 2px 8px rgba(0,35,75,0.06);}
+        .tc-ko-card.tc-consolation{opacity:0.7;}
+        .tc-ko-card.tc-final{border:2px solid var(--secondary);box-shadow:0 4px 16px rgba(255,204,0,0.2);}
+        .tc-ko-top{background:var(--primary);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;}
+        .tc-ko-card.tc-final .tc-ko-top{background:linear-gradient(135deg,#00234b 0%,#003580 100%);}
+        .tc-ko-slot{font-family:'Bebas Neue','Nunito',sans-serif;font-size:14px;letter-spacing:1.5px;color:var(--secondary);}
+        .tc-ko-time{font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,0.5);}
+        .tc-ko-field{padding:4px 14px;font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;color:rgba(0,35,75,0.4);background:rgba(0,35,75,0.03);border-bottom:1px solid rgba(0,35,75,0.06);}
+        .tc-ko-matchup{padding:10px 14px;}
+        .tc-ko-team{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--primary);padding:3px 6px;background:rgba(0,35,75,0.04);border-radius:2px;}
+        .tc-ko-result{font-family:'Bebas Neue','Nunito',sans-serif;font-size:20px;letter-spacing:1px;color:var(--primary);text-align:center;padding:6px 14px 10px;border-top:1px solid rgba(0,35,75,0.07);}
+
+        @media(max-width:640px){
+            .tc-knockout{grid-template-columns:1fr 30px 1fr;}
+            .tc-ko-time{display:none;}
+            .tc-team{font-size:12px;}
+        }
+
+
+        /* ===== STORY TAB REDESIGN ===== */
+        .story-grid{display:grid;grid-template-columns:3fr 2fr;gap:28px;}
+        .story-left-col{}
+        .story-right-col{}
+        .story-section-title{font-family:'Bebas Neue','Nunito',sans-serif;font-size:18px;letter-spacing:2px;color:var(--primary);border-bottom:2px solid var(--secondary);padding-bottom:6px;margin-bottom:14px;}
+        .tl-legend{display:flex;gap:14px;margin-bottom:20px;font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:rgba(0,35,75,0.45);}
+        .tl-legend span{display:flex;align-items:center;gap:5px;}
+        .tl-dot-pip{width:11px;height:11px;border-radius:50%;display:inline-block;flex-shrink:0;}
+
+        .story-stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
+        .story-stat-card{background:var(--primary);border-radius:6px;padding:12px 14px;text-align:center;}
+        .story-stat-card.gold{background:var(--secondary);}
+        .story-stat-card-val{font-family:'Bebas Neue','Nunito',sans-serif;font-size:26px;letter-spacing:1px;color:white;line-height:1;}
+        .story-stat-card.gold .story-stat-card-val{color:var(--primary);}
+        .story-stat-card-lbl{font-family:'Nunito',sans-serif;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:3px;}
+        .story-stat-card.gold .story-stat-card-lbl{color:rgba(0,35,75,0.5);}
+
+        .story-path-card{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.09);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;box-shadow:0 1px 6px rgba(0,35,75,0.05);}
+        .story-path-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:rgba(0,35,75,0.6);}
+        .story-path-sub{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.4);margin-top:2px;}
+        .story-path-val{font-family:'Bebas Neue','Nunito',sans-serif;font-size:28px;letter-spacing:1px;color:var(--primary);}
+        .pts-card{border-left:4px solid var(--primary);}
+        .avail-card{border-left:4px solid #ca8a04;}
+        .max-card{border-left:4px solid #16a34a;}
+
+        @media(max-width:860px){.story-grid{grid-template-columns:1fr;}}
+        @media(max-width:640px){
+            .story-stat-cards{grid-template-columns:1fr 1fr;}
+            .story-stat-card-val{font-size:22px;}
+            .story-path-val{font-size:24px;}
+        }
+
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -1661,86 +1764,51 @@
        SCHEDULE + RSVP TAB
     ============================================================ */
     function renderSchedule(container) {
-        const rows = TEAM_CONFIG.remainingSchedule.map((m, i) => {
-            const rsvp = getRSVP(i);
-            return `<tr class="${i === 0 ? 'next-up' : ''}">
-                <td class="schedule-date">${m.date}</td>
-                <td><span class="opp-rank">#${m.rank}</span> ${m.opp}</td>
-                <td class="schedule-time">${m.time}</td>
-                <td class="schedule-loc">${m.loc}</td>
-                <td class="sched-rsvp-cell">
-                    <button class="${rsvpBtnClass(i, 'yes')}" onclick="setRSVP(${i},'yes')">✓ Going</button>
-                    <button class="${rsvpBtnClass(i, 'maybe')}" onclick="setRSVP(${i},'maybe')">? Maybe</button>
-                    <button class="${rsvpBtnClass(i, 'no')}" onclick="setRSVP(${i},'no')">✗ Can't</button>
-                </td>
-            </tr>`;
-        }).join('');
+        var schedule = TEAM_CONFIG.remainingSchedule;
 
-        container.innerHTML = `${headerHTML('Remaining Schedule', 'SCHED')}
-        <div class="content-area">
-            <div class="section-title" style="margin-bottom:8px;">Upcoming Matches <span>${TEAM_CONFIG.remainingSchedule.length} Remaining</span></div>
-            <div style="font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(0,35,75,0.4);margin-bottom:14px;">Tap Going / Maybe / Can't to RSVP — saved to your device</div>
-            <div style="background:white;border-radius:3px;overflow:hidden;overflow-x:auto;">
-                <table class="schedule-table">
-                    <thead><tr>
-                        <th>Date</th><th>Opponent</th>
-                        <th style="text-align:center;">Time</th>
-                        <th style="text-align:right;">Location</th>
-                        <th style="text-align:right;">Your RSVP</th>
-                    </tr></thead>
-                    <tbody>${rows}</tbody>
-                </table>
-            </div>
-        </div>${footerHTML('Official Schedule Details')}`;
+        var cardsHTML = schedule.length === 0
+            ? '<div style="text-align:center;padding:48px 24px;font-family:Nunito,sans-serif;color:rgba(0,35,75,0.35);font-size:14px;">No remaining games \u2014 season complete.</div>'
+            : schedule.map(function(m, i) {
+                var isNext = i === 0;
+                var dateParts = m.date.split(' ');
+                var yesClass   = rsvpBtnClass(i, 'yes');
+                var maybeClass = rsvpBtnClass(i, 'maybe');
+                var noClass    = rsvpBtnClass(i, 'no');
+                return '<div class="sched-card' + (isNext ? ' sched-card-next' : '') + '">' +
+                    '<div class="sched-card-top">' +
+                        '<div class="sched-card-date-block">' +
+                            '<div class="sched-card-day">' + dateParts[0] + '</div>' +
+                            '<div class="sched-card-dt">' + dateParts.slice(1).join(' ') + '</div>' +
+                        '</div>' +
+                        (isNext ? '<span class="sched-next-pill">Next Up</span>' : '') +
+                    '</div>' +
+                    '<div class="sched-card-opp">' +
+                        '<span class="sched-card-rank">#' + m.rank + '</span>' +
+                        '<span class="sched-card-opp-name">' + m.opp + '</span>' +
+                    '</div>' +
+                    '<div class="sched-card-meta">' +
+                        '<div class="sched-meta-item"><span>&#128336;</span> ' + m.time + '</div>' +
+                        '<div class="sched-meta-item"><span>&#128205;</span> ' + m.loc + '</div>' +
+                    '</div>' +
+                    '<div class="sched-card-rsvp">' +
+                        '<div class="sched-rsvp-label">Your RSVP</div>' +
+                        '<div class="sched-rsvp-btns">' +
+                            '<button class="' + yesClass   + '" onclick="setRSVP(' + i + ',&quot;yes&quot;)">&#10003; Going</button>' +
+                            '<button class="' + maybeClass + '" onclick="setRSVP(' + i + ',&quot;maybe&quot;)">? Maybe</button>' +
+                            '<button class="' + noClass    + '" onclick="setRSVP(' + i + ',&quot;no&quot;)">&#10007; Can\'t</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+        container.innerHTML = headerHTML('Schedule', 'SCHED') +
+            '<div class="content-area">' +
+            '<div class="section-title" style="margin-bottom:16px;">Remaining Games <span>' + schedule.length + '</span></div>' +
+            '<div class="sched-cards">' + cardsHTML + '</div>' +
+            '</div>' + footerHTML('Official Schedule');
     }
 
-    /* ============================================================
-       SEASON STORY TAB (replaces Season Outlook)
-    ============================================================ */
-    function generateAutoNarrative(team) {
-        const r = team.record;
-        const l = team.league;
-        const nm = team.nextMatch;
-        const streak = getStreak(team.matches);
-        const form = getFormGuide(team.matches, 5);
-        const recentWins = form.filter(x => x === 'W').length;
-        const total = r.wins + r.losses + r.draws;
-        const gpg = total > 0 ? (team.goals.for / total).toFixed(1) : 0;
-        const gapg = total > 0 ? (team.goals.against / total).toFixed(1) : 0;
-        const avail = team.remainingSchedule.length * 3;
-        const maxPts = l.points + avail;
 
-        let opener = '';
-        if (streak.type === 'W' && streak.count >= 3) {
-            opener = `On the back of a ${streak.count}-match win streak, ${team.branding.name} is building serious momentum as the season enters its final stretch.`;
-        } else if (streak.type === 'W' && streak.count === 2) {
-            opener = `Back-to-back wins have ${team.branding.name} finding their rhythm at exactly the right moment in the season.`;
-        } else if (streak.type === 'L' && streak.count >= 2) {
-            opener = `Knocked down but not out — ${team.branding.name} absorbs a ${streak.count}-game skid and now faces a defining moment. The response to adversity separates teams. How they answer here will define this season.`;
-        } else if (recentWins >= 3) {
-            opener = `${team.branding.name} is finding their groove at the right time — ${recentWins} wins in the last 5 matches with the finish line in sight.`;
-        } else {
-            opener = `${r.wins} wins, ${r.losses} losses, ${r.draws} draw — ${team.branding.name} knows exactly what's at stake as the final games approach.`;
-        }
-
-        const rankContext = l.rank <= Math.ceil(l.totalTeams / 2)
-            ? `Holding down the #${l.rank} spot — comfortably in the top half of a ${l.totalTeams}-team division —`
-            : `Sitting at #${l.rank} of ${l.totalTeams} with games left to play and plenty of room to climb,`;
-
-        const diffContext = parseInt(l.goalDiff) > 0
-            ? `A positive ${l.goalDiff} goal differential (${team.goals.for} scored, ${team.goals.against} conceded) shows this team competes hard on both ends of the pitch.`
-            : parseInt(l.goalDiff) < 0
-            ? `The ${l.goalDiff} goal differential signals an area to tighten up — limiting chances against will be key in the final run.`
-            : `An even goal differential (${team.goals.for} for, ${team.goals.against} against) reflects a closely fought season where every goal matters.`;
-
-        const nextContext = l.rank < nm.oppRank
-            ? `Next up: a favorable matchup against #${nm.oppRank} ${nm.oppName} — a chance to pile on points and push up the table.`
-            : l.rank > nm.oppRank
-            ? `Next up is #${nm.oppRank} ${nm.oppName} — a true measuring stick. A result here would silence the doubters and signal that this group is ready to fight back.`
-            : `A leveled matchup against #${nm.oppRank} ${nm.oppName} awaits — three points from this one could be the catalyst for a strong finish.`;
-
-        return `${opener}\n\n${rankContext} the team has accumulated ${l.points} points across ${total} matches. ${diffContext}\n\n${nextContext} With ${team.remainingSchedule.length} games remaining and ${avail} points still available, a maximum tally of ${maxPts} is mathematically on the table. The final push starts now.`;
-    }
 
     function renderStory(container) {
         if (storyView === 'stats')      { renderStatsReport(container); return; }
@@ -1754,8 +1822,9 @@
         const avail = TEAM_CONFIG.remainingSchedule.length * 3;
         const maxPts = l.points + avail;
         const momentum = computeMomentum(TEAM_CONFIG.matches);
+        const gpg  = TEAM_CONFIG.matches.length ? (TEAM_CONFIG.goals.for  / TEAM_CONFIG.matches.length).toFixed(2) : '0.00';
+        const gapg = TEAM_CONFIG.matches.length ? (TEAM_CONFIG.goals.against / TEAM_CONFIG.matches.length).toFixed(2) : '0.00';
 
-        // Build timeline dots: completed matches + remaining as future dots
         const completedDots = TEAM_CONFIG.matches.map(m =>
             `<div class="tl-dot ${m.res}" title="${m.date} vs ${m.opp}: ${m.score}">${m.res}</div>`
         ).join('');
@@ -1766,23 +1835,28 @@
         const narrative = storyAiText[currentTeamId] || generateAutoNarrative(TEAM_CONFIG);
 
         container.innerHTML = `${headerHTML('Season Story', 'STORY')}
-        <div class="stats-subnav"><button class="stats-subnav-btn ${storyView==='narrative'||storyView==='story'?'active':''}" onclick="switchStoryView('narrative')">📖 Story</button><button class="stats-subnav-btn ${storyView==='stats'?'active':''}" onclick="switchStoryView('stats')">📊 Team Stats</button><button class="stats-subnav-btn ${storyView==='standings'?'active':''}" onclick="switchStoryView('standings')">🏆 Standings</button></div>
+        <div class="stats-subnav">
+            <button class="stats-subnav-btn ${storyView==='narrative'||storyView==='story'?'active':''}" onclick="switchStoryView('narrative')">📖 Story</button>
+            <button class="stats-subnav-btn ${storyView==='stats'?'active':''}" onclick="switchStoryView('stats')">📊 Team Stats</button>
+            <button class="stats-subnav-btn ${storyView==='standings'?'active':''}" onclick="switchStoryView('standings')">🏆 Standings</button>
+        </div>
         <div class="content-area">
-            <div class="story-grid" style="display:grid;grid-template-columns:3fr 2fr;gap:32px;">
-                <div>
+            <div class="story-grid">
+
+                <!-- LEFT: Timeline + Momentum + Narrative -->
+                <div class="story-left-col">
                     <div class="story-section-title">Season Timeline</div>
                     <div class="story-timeline">${completedDots}${futureDots}</div>
-                    <div style="display:flex;gap:12px;margin-bottom:24px;font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(0,35,75,0.5);">
-                        <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block;"></span> Win</span>
-                        <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;border-radius:50%;background:#dc2626;display:inline-block;"></span> Loss</span>
-                        <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;border-radius:50%;background:#ca8a04;display:inline-block;"></span> Draw</span>
-                        <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;border-radius:50%;border:2px dashed rgba(0,35,75,0.2);display:inline-block;"></span> Upcoming</span>
+                    <div class="tl-legend">
+                        <span><span class="tl-dot-pip" style="background:#16a34a;"></span>Win</span>
+                        <span><span class="tl-dot-pip" style="background:#dc2626;"></span>Loss</span>
+                        <span><span class="tl-dot-pip" style="background:#ca8a04;"></span>Draw</span>
+                        <span><span class="tl-dot-pip" style="border:2px dashed rgba(0,35,75,0.2);"></span>Upcoming</span>
                     </div>
 
-                    <!-- Momentum Meter -->
                     <div class="momentum-wrap">
                         <div class="momentum-header">
-                            <span class="momentum-title">Team Momentum · Last 5</span>
+                            <span class="momentum-title">Momentum · Last 5</span>
                             <span class="momentum-label-val" style="color:${momentum.color};">${momentum.label}</span>
                         </div>
                         <div class="momentum-track">
@@ -1797,36 +1871,54 @@
                         <button class="ai-story-btn" id="aiStoryBtn" onclick="enhanceStoryWithAI()">&#10022; Enhance with AI</button>
                         <div class="story-ai-result" id="storyAiResult"></div>
                     </div>
+                </div>
 
-                <div>
+                <!-- RIGHT: Stats + Path Forward -->
+                <div class="story-right-col">
                     <div class="story-section-title">By The Numbers</div>
-                    <div class="stat-item" style="margin-bottom:6px;"><span class="stat-label">Games Played</span><span class="stat-val">${TEAM_CONFIG.matches.length}</span></div>
-                    <div class="stat-item" style="margin-bottom:6px;"><span class="stat-label">Goals Per Game</span><span class="stat-val gold">${(TEAM_CONFIG.goals.for / TEAM_CONFIG.matches.length).toFixed(2)}</span></div>
-                    <div class="stat-item" style="margin-bottom:6px;"><span class="stat-label">GA Per Game</span><span class="stat-val gold">${(TEAM_CONFIG.goals.against / TEAM_CONFIG.matches.length).toFixed(2)}</span></div>
-                    <div class="stat-item" style="margin-bottom:20px;"><span class="stat-label">PPG</span><span class="stat-val">${l.ppg}</span></div>
+                    <div class="story-stat-cards">
+                        <div class="story-stat-card">
+                            <div class="story-stat-card-val">${TEAM_CONFIG.matches.length}</div>
+                            <div class="story-stat-card-lbl">Played</div>
+                        </div>
+                        <div class="story-stat-card gold">
+                            <div class="story-stat-card-val">${gpg}</div>
+                            <div class="story-stat-card-lbl">GF / Game</div>
+                        </div>
+                        <div class="story-stat-card">
+                            <div class="story-stat-card-val">${gapg}</div>
+                            <div class="story-stat-card-lbl">GA / Game</div>
+                        </div>
+                        <div class="story-stat-card gold">
+                            <div class="story-stat-card-val">${l.ppg}</div>
+                            <div class="story-stat-card-lbl">PPG</div>
+                        </div>
+                    </div>
 
-                    <div class="story-section-title">Path Forward</div>
-                    <div class="story-stat-row pts">
-                        <div><div class="story-stat-label" style="color:rgba(0,35,75,0.5);">Current Points</div></div>
-                        <div class="story-stat-val" style="color:var(--primary);">${l.points}</div>
+                    <div class="story-section-title" style="margin-top:20px;">Path Forward</div>
+                    <div class="story-path-card pts-card">
+                        <div class="story-path-label">Current Points</div>
+                        <div class="story-path-val">${l.points}</div>
                     </div>
-                    <div class="story-stat-row avail">
+                    <div class="story-path-card avail-card">
                         <div>
-                            <div class="story-stat-label" style="color:#7c5900;">Available</div>
-                            <div style="font-size:11px;color:#a16207;">${TEAM_CONFIG.remainingSchedule.length} games left</div>
+                            <div class="story-path-label" style="color:#7c5900;">Points Available</div>
+                            <div class="story-path-sub">${TEAM_CONFIG.remainingSchedule.length} game${TEAM_CONFIG.remainingSchedule.length!==1?'s':''} remaining</div>
                         </div>
-                        <div class="story-stat-val" style="color:#92400e;">+${avail}</div>
+                        <div class="story-path-val" style="color:#92400e;">+${avail}</div>
                     </div>
-                    <div class="story-stat-row max">
+                    <div class="story-path-card max-card">
                         <div>
-                            <div class="story-stat-label" style="color:#166534;">Max Potential</div>
-                            <div style="font-size:11px;color:#15803d;">Win all remaining</div>
+                            <div class="story-path-label" style="color:#166534;">Max Potential</div>
+                            <div class="story-path-sub" style="color:#15803d;">Win all remaining</div>
                         </div>
-                        <div class="story-stat-val" style="color:#15803d;">${maxPts}</div>
+                        <div class="story-path-val" style="color:#15803d;">${maxPts}</div>
                     </div>
                 </div>
+
             </div>
         </div>${footerHTML('Season Analysis & Projections')}`;
+
         setTimeout(() => { const f = document.getElementById('momentumFill'); if (f) f.style.width = momentum.pct + '%'; }, 200);
     }
 
@@ -2230,43 +2322,132 @@
 
     function renderTournBracket(container, td) {
         const hist = td.history || [];
-        let tW=0,tL=0,tD=0;
+        let tW=0, tL=0, tD=0;
         hist.forEach(t => { const p=(t.record||'').split('-'); tW+=parseInt(p[0])||0; tL+=parseInt(p[1])||0; tD+=parseInt(p[2])||0; });
+
         const histHTML = hist.length === 0
             ? '<div style="font-family:Nunito,sans-serif;font-size:13px;color:rgba(0,35,75,0.35);padding:16px;text-align:center;">No tournament history recorded yet.</div>'
             : hist.map(t => {
-                const bc = t.result.includes('Champion')||t.result.includes('\uD83C\uDFC6') ? 'champ' : t.result.includes('Runner')||t.result.includes('\uD83E\uDD48') ? 'runner' : 'other';
-                return `<div class="tourn-hist-row"><div class="tourn-hist-left"><div class="tourn-hist-name">${t.name}</div><div class="tourn-hist-meta">${t.date}${t.notes?' · '+t.notes:''}</div></div><div class="tourn-hist-right"><span class="tourn-badge ${bc}">${t.result}</span><span class="tourn-hist-rec">${t.record}</span></div></div>`;
+                const bc = (t.result.includes('Champion')||t.result.includes('\uD83C\uDFC6')) ? 'champ' : (t.result.includes('Runner')||t.result.includes('\uD83E\uDD48')) ? 'runner' : 'other';
+                return `<div class="tourn-hist-row">
+                    <div class="tourn-hist-left">
+                        <div class="tourn-hist-name">${t.name}</div>
+                        <div class="tourn-hist-meta">${t.date}${t.notes?' · '+t.notes:''}</div>
+                    </div>
+                    <div class="tourn-hist-right">
+                        <span class="tourn-badge ${bc}">${t.result}</span>
+                        <span class="tourn-hist-rec">${t.record}</span>
+                    </div>
+                </div>`;
             }).join('');
 
         let currentHTML = '';
         const ct = td.current;
         if (ct) {
             const grp = ct.group;
-            const matchRows = (grp.matches||[]).map(m => {
-                const isOurs = m.home===grp.ourTeam||m.away===grp.ourTeam;
-                const sc = m.score ? `<span class="tourn-score">${m.score}</span>` : `<span class="tourn-tbd">TBD</span>`;
-                return `<tr class="${isOurs?'tourn-our-match':''}"><td class="tourn-match-time">${m.date}<br><span>${m.time}</span></td><td class="tourn-match-teams"><span class="${m.home===grp.ourTeam?'tourn-us':''}">${m.home}</span><span class="tourn-vs">vs</span><span class="${m.away===grp.ourTeam?'tourn-us':''}">${m.away}</span></td><td class="tourn-match-score">${sc}</td><td class="tourn-match-field">${m.field}</td></tr>`;
+
+            // ── Group stage as match cards ────────────────────────
+            const groupCards = (grp.matches||[]).map(m => {
+                const isOurs = m.home === grp.ourTeam || m.away === grp.ourTeam;
+                const scoreHTML = m.score
+                    ? `<span class="tc-score">${m.score}</span>`
+                    : `<span class="tc-tbd">TBD</span>`;
+                return `<div class="tc-card${isOurs ? ' tc-card-ours' : ''}">
+                    <div class="tc-card-top">
+                        <div class="tc-date-block">
+                            <div class="tc-day">${m.date.split(' ')[0]}</div>
+                            <div class="tc-dt">${m.date.split(' ').slice(1).join(' ')}</div>
+                        </div>
+                        <div class="tc-time-field">
+                            <div class="tc-time">&#128336; ${m.time}</div>
+                            <div class="tc-field">&#128205; ${m.field}</div>
+                        </div>
+                        ${scoreHTML}
+                    </div>
+                    <div class="tc-matchup">
+                        <span class="tc-team${m.home===grp.ourTeam?' tc-us':''}">${m.home}</span>
+                        <span class="tc-vs">vs</span>
+                        <span class="tc-team${m.away===grp.ourTeam?' tc-us':''}">${m.away}</span>
+                    </div>
+                </div>`;
             }).join('');
 
+            // ── Knockout bracket ──────────────────────────────────
             const br = ct.bracket;
-            const bracketHTML = br ? `<div class="tourn-bracket">
-                <div class="tourn-bracket-col">
-                    <div class="tourn-bracket-label">Semifinals / Consolation</div>
-                    ${br.semis.map(s=>`<div class="tourn-match-card${s.slot==='Consolation'?' consolation':''}"><div class="tourn-match-card-slot">${s.slot}</div><div class="tourn-match-card-time">${s.time}</div>${s.field?`<div class="tourn-match-card-field">${s.field}</div>`:''}<div class="tourn-matchup"><div class="tourn-team-slot">${s.teamA}</div><div class="tourn-team-divider">vs</div><div class="tourn-team-slot">${s.teamB}</div></div>${s.score?`<div class="tourn-match-card-result">${s.score}</div>`:''}</div>`).join('')}
-                </div>
-                <div class="tourn-bracket-connector"><svg viewBox="0 0 60 120" preserveAspectRatio="none"><path d="M0,30 H30 V90 H0" fill="none" stroke="rgba(255,204,0,0.4)" stroke-width="2"/><path d="M30,60 H60" fill="none" stroke="rgba(255,204,0,0.4)" stroke-width="2"/></svg></div>
-                <div class="tourn-bracket-col">
-                    <div class="tourn-bracket-label">Final</div>
-                    <div class="tourn-match-card final"><div class="tourn-match-card-slot">${br.final.slot}</div><div class="tourn-match-card-time">${br.final.time}</div>${br.final.field?`<div class="tourn-match-card-field">${br.final.field}</div>`:''}<div class="tourn-matchup"><div class="tourn-team-slot">${br.final.teamA}</div><div class="tourn-team-divider">vs</div><div class="tourn-team-slot">${br.final.teamB}</div></div>${br.final.score?`<div class="tourn-match-card-result">${br.final.score}</div>`:''}</div>
-                </div>
-            </div>` : '';
+            const bracketHTML = br ? `
+                <div class="tc-knockout">
+                    <div class="tc-ko-col">
+                        <div class="tc-ko-label">Semifinals &amp; Consolation</div>
+                        ${br.semis.map(s => `
+                        <div class="tc-ko-card${s.slot==='Consolation'?' tc-consolation':''}">
+                            <div class="tc-ko-top">
+                                <span class="tc-ko-slot">${s.slot}</span>
+                                <span class="tc-ko-time">${s.time}</span>
+                            </div>
+                            ${s.field ? `<div class="tc-ko-field">&#128205; ${s.field}</div>` : ''}
+                            <div class="tc-ko-matchup">
+                                <div class="tc-ko-team">${s.teamA}</div>
+                                <div class="tc-vs" style="margin:4px 0;font-size:9px;">vs</div>
+                                <div class="tc-ko-team">${s.teamB}</div>
+                            </div>
+                            ${s.score ? `<div class="tc-ko-result">${s.score}</div>` : ''}
+                        </div>`).join('')}
+                    </div>
+                    <div class="tc-ko-connector">
+                        <svg viewBox="0 0 50 140" preserveAspectRatio="none">
+                            <path d="M0,35 H25 V105 H0" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/>
+                            <path d="M25,70 H50" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="tc-ko-col">
+                        <div class="tc-ko-label">Final</div>
+                        <div class="tc-ko-card tc-final">
+                            <div class="tc-ko-top">
+                                <span class="tc-ko-slot">&#127942; Final</span>
+                                <span class="tc-ko-time">${br.final.time}</span>
+                            </div>
+                            ${br.final.field ? `<div class="tc-ko-field">&#128205; ${br.final.field}</div>` : ''}
+                            <div class="tc-ko-matchup">
+                                <div class="tc-ko-team">${br.final.teamA}</div>
+                                <div class="tc-vs" style="margin:4px 0;font-size:9px;">vs</div>
+                                <div class="tc-ko-team">${br.final.teamB}</div>
+                            </div>
+                            ${br.final.score ? `<div class="tc-ko-result">${br.final.score}</div>` : ''}
+                        </div>
+                    </div>
+                </div>` : '';
 
-            currentHTML = `<div class="tourn-section"><div class="tourn-section-header"><div><div class="tourn-section-title">${ct.name}</div><div class="tourn-section-meta">${ct.dates} &nbsp;·&nbsp; ${ct.location}</div></div><span class="tourn-format-badge">${ct.format}</span></div><div class="tourn-sub-label">&#128205; ${grp.name} — Group Stage</div><div class="tourn-table-wrap"><table class="tourn-match-table"><thead><tr><th>Date / Time</th><th>Match</th><th style="text-align:center;">Score</th><th style="text-align:right;">Field</th></tr></thead><tbody>${matchRows}</tbody></table></div><div class="tourn-sub-label" style="margin-top:24px;">&#127942; Knockout Bracket</div>${bracketHTML}</div>`;
+            currentHTML = `
+                <div class="tourn-section">
+                    <div class="tourn-section-header">
+                        <div>
+                            <div class="tourn-section-title">${ct.name}</div>
+                            <div class="tourn-section-meta">${ct.dates} &nbsp;·&nbsp; ${ct.location}</div>
+                        </div>
+                        <span class="tourn-format-badge">${ct.format}</span>
+                    </div>
+                    <div class="tourn-sub-label">&#128205; ${grp.name} — Group Stage</div>
+                    <div class="tc-group">${groupCards}</div>
+                    <div class="tourn-sub-label" style="margin-top:24px;">&#127942; Knockout Bracket</div>
+                    ${bracketHTML}
+                </div>`;
         }
 
-        container.innerHTML = `${headerHTML('Tournament','TOURN')}${tournSubnav()}<div class="content-area"><div class="tourn-overall-strip" style="${hist.length===0?'display:none;':''}"><div class="tourn-overall-item"><div class="tourn-overall-num">${hist.length}</div><div class="tourn-overall-lbl">Tournaments</div></div><div class="tourn-overall-item"><div class="tourn-overall-num gold">${tW}</div><div class="tourn-overall-lbl">Tournament W</div></div><div class="tourn-overall-item"><div class="tourn-overall-num">${tL}</div><div class="tourn-overall-lbl">Tournament L</div></div><div class="tourn-overall-item"><div class="tourn-overall-num">${tD}</div><div class="tourn-overall-lbl">Draws</div></div><div class="tourn-overall-item"><div class="tourn-overall-num gold">${hist.filter(t=>t.result.includes('\uD83C\uDFC6')||t.result.includes('Champion')).length}</div><div class="tourn-overall-lbl">Titles</div></div></div>${currentHTML}<div class="tourn-sub-label" style="margin-top:24px;">&#128203; Tournament History</div><div class="tourn-hist-list">${histHTML}</div></div>${footerHTML('Tournament Record')}`;
+        container.innerHTML = `${headerHTML('Tournament','TOURN')}${tournSubnav()}
+        <div class="content-area">
+            <div class="tourn-overall-strip" style="${hist.length===0?'display:none;':''}">
+                <div class="tourn-overall-item"><div class="tourn-overall-num">${hist.length}</div><div class="tourn-overall-lbl">Tournaments</div></div>
+                <div class="tourn-overall-item"><div class="tourn-overall-num gold">${tW}</div><div class="tourn-overall-lbl">W</div></div>
+                <div class="tourn-overall-item"><div class="tourn-overall-num">${tL}</div><div class="tourn-overall-lbl">L</div></div>
+                <div class="tourn-overall-item"><div class="tourn-overall-num">${tD}</div><div class="tourn-overall-lbl">Draws</div></div>
+                <div class="tourn-overall-item"><div class="tourn-overall-num gold">${hist.filter(t=>t.result.includes('\uD83C\uDFC6')||t.result.includes('Champion')).length}</div><div class="tourn-overall-lbl">Titles</div></div>
+            </div>
+            ${currentHTML}
+            <div class="tourn-sub-label" style="margin-top:24px;">&#128203; Tournament History</div>
+            <div class="tourn-hist-list">${histHTML}</div>
+        </div>${footerHTML('Tournament Record')}`;
     }
+
 
     function renderTournMap(container, td) {
         const ct = td ? td.current : null;
