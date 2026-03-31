@@ -1690,6 +1690,12 @@
         renderStory(document.getElementById('main-content'));
     }
 
+    function renderStory(container) {
+        if (storyView === 'stats')      { renderStatsReport(container); return; }
+        if (storyView === 'standings')  { renderStandings(container);   return; }
+        renderStoryNarrative(container);
+    }
+
     function renderStatsReport(container) {
         const gfP = ((TEAM_CONFIG.goals.for / (TEAM_CONFIG.goals.for + TEAM_CONFIG.goals.against)) * 100).toFixed(1);
         const gaP = ((TEAM_CONFIG.goals.against / (TEAM_CONFIG.goals.for + TEAM_CONFIG.goals.against)) * 100).toFixed(1);
