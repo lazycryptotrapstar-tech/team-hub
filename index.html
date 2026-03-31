@@ -490,6 +490,10 @@
         .utd-parking-note{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.65);background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.3);border-radius:4px;padding:8px 14px;margin-top:12px;}
         @media(max-width:860px){.utd-map-wrap{grid-template-columns:1fr;}}
 
+
+        .tourn-hist-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+        .tourn-hist-summary{font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.5px;background:var(--primary);color:var(--secondary);padding:4px 12px;border-radius:20px;}
+
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -1216,6 +1220,7 @@
             ],
 
             tournaments: {
+                venueType: 'utd',
                 history: [
                     { name: "Fall Kickoff Classic", date: "Aug 2025", result: "Quarterfinalist", record: "2-1-0", notes: "Strong run, tough draw in quarters" },
                     { name: "Winter Warm-Up", date: "Jan 2026", result: "Champion 🏆", record: "4-0-0", notes: "Won every game, shut out in the final" },
@@ -2615,7 +2620,7 @@
         svgFields += field(9,  ux+fw+gap,   ly+fh+gap,    fw, fh);
 
         var fieldStY = uy + 2*(fh+gap) + 4;
-        var lotUX = ux + 2*(fw+gap) + fw + 16;
+        var lotUX = ux + 2*(fw+gap) + fw + 6;
         var lotUY = ly;
         var lotUW = 80;
         var lotUH = 2*fh + gap;
@@ -2657,11 +2662,11 @@
             // Arrow from Lot U to lower fields
             '<path d="M '+lotUX+' '+(lotUY+lotUH/2)+' L '+(ux+2*(fw+gap)+fw+6)+' '+(lotUY+lotUH/2)+'" fill="none" stroke="rgba(255,204,0,0.5)" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrowU)"/>' +
             // Lot J (crossed out, top right)
-            '<rect x="250" y="20" width="60" height="34" rx="3" fill="#3a2020" opacity="0.8"/>' +
-            '<text x="280" y="34" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="700" fill="rgba(220,38,38,0.7)">LOT J</text>' +
-            '<text x="280" y="46" text-anchor="middle" font-family="Nunito" font-size="7" fill="rgba(220,38,38,0.7)">Do Not Park</text>' +
-            '<line x1="250" y1="20" x2="310" y2="54" stroke="#dc2626" stroke-width="2" opacity="0.8"/>' +
-            '<line x1="310" y1="20" x2="250" y2="54" stroke="#dc2626" stroke-width="2" opacity="0.8"/>' +
+            '<rect x="256" y="20" width="48" height="22" rx="3" fill="#3a2020" opacity="0.5"/>' +
+            '<text x="280" y="28" text-anchor="middle" font-family="Nunito" font-size="7" font-weight="700" fill="rgba(220,38,38,0.5)">LOT J</text>' +
+            '<text x="280" y="38" text-anchor="middle" font-family="Nunito" font-size="6" fill="rgba(220,38,38,0.45)">No Parking</text>' +
+            '<line x1="258" y1="22" x2="302" y2="40" stroke="#dc2626" stroke-width="1.2" opacity="0.45"/>' +
+            '<line x1="302" y1="22" x2="258" y2="40" stroke="#dc2626" stroke-width="1.2" opacity="0.45"/>' +
             // Legend
             '<rect x="0" y="356" width="320" height="14" fill="rgba(0,0,0,0.4)"/>' +
             '<rect x="8" y="360" width="8" height="8" rx="1" fill="#ffcc00" stroke="#00234b" stroke-width="1.2"/>' +
@@ -2765,33 +2770,153 @@
     function switchTournView(v) { tournView = v; renderTournament(document.getElementById('main-content')); }
 
     function renderTournBracket(container, td) {
-        const hist = td.history||[];
-        let tW=0,tL=0,tD=0;
-        hist.forEach(t=>{const p=(t.record||'').split('-');tW+=parseInt(p[0])||0;tL+=parseInt(p[1])||0;tD+=parseInt(p[2])||0;});
-        const histHTML = hist.length===0
-            ? '<div style="font-family:Nunito,sans-serif;font-size:13px;color:rgba(0,35,75,0.60);padding:16px;text-align:center;">No tournament history recorded yet.</div>'
-            : hist.map(t=>{
-                const bc=(t.result.includes('Champion')||t.result.includes('\uD83C\uDFC6'))?'champ':(t.result.includes('Runner')||t.result.includes('\uD83E\uDD48'))?'runner':'other';
-                return `<div class="tourn-hist-row"><div class="tourn-hist-left"><div class="tourn-hist-name">${t.name}</div><div class="tourn-hist-meta">${t.date}${t.notes?' · '+t.notes:''}</div></div><div class="tourn-hist-right"><span class="tourn-badge ${bc}">${t.result}</span><span class="tourn-hist-rec">${t.record}</span></div></div>`;
+        const hist = td.history || [];
+        let tW=0, tL=0, tD=0;
+        hist.forEach(t => { const p=(t.record||'').split('-'); tW+=parseInt(p[0])||0; tL+=parseInt(p[1])||0; tD+=parseInt(p[2])||0; });
+
+        const histSummary = hist.length > 0
+            ? `<span class="tourn-hist-summary">${hist.length} played &nbsp;&middot;&nbsp; ${tW}W ${tL}L ${tD}D</span>`
+            : '';
+
+        const histHTML = hist.length === 0
+            ? '<div style="font-family:Nunito,sans-serif;font-size:13px;color:rgba(0,35,75,0.55);padding:16px;text-align:center;">No tournament history recorded yet.</div>'
+            : hist.map(t => {
+                const bc = (t.result.includes('Champion')||t.result.includes('\uD83C\uDFC6')) ? 'champ' : (t.result.includes('Runner')||t.result.includes('\uD83E\uDD48')) ? 'runner' : 'other';
+                return `<div class="tourn-hist-row">
+                    <div class="tourn-hist-left">
+                        <div class="tourn-hist-name">${t.name}</div>
+                        <div class="tourn-hist-meta">${t.date}${t.notes?' · '+t.notes:''}</div>
+                    </div>
+                    <div class="tourn-hist-right">
+                        <span class="tourn-badge ${bc}">${t.result}</span>
+                        <span class="tourn-hist-rec">${t.record}</span>
+                    </div>
+                </div>`;
             }).join('');
+
         let currentHTML = '';
         const ct = td.current;
         if (ct) {
             const grp = ct.group;
-            const groupCards = (grp.matches||[]).map(m=>{
-                const isOurs = m.home===grp.ourTeam||m.away===grp.ourTeam;
+            const groupCards = (grp.matches||[]).map(m => {
+                const isOurs = m.home === grp.ourTeam || m.away === grp.ourTeam;
                 const sc = m.score ? `<span class="tc-score">${m.score}</span>` : '';
-                return `<div class="tc-card${isOurs?' tc-card-ours':''}"><div class="tc-card-top"><div class="tc-date-block"><div class="tc-day">${m.date.split(' ')[0]}</div><div class="tc-dt">${m.date.split(' ').slice(1).join(' ')}</div></div><div class="tc-time-field"><div class="tc-time">&#128336; ${m.time}</div><div class="tc-field">&#128205; ${m.field}</div></div>${sc}</div><div class="tc-matchup"><span class="tc-team${m.home===grp.ourTeam?' tc-us':''}">${m.home}</span><span class="tc-vs">vs</span><span class="tc-team${m.away===grp.ourTeam?' tc-us':''}">${m.away}</span></div></div>`;
+                return `<div class="tc-card${isOurs ? ' tc-card-ours' : ''}">
+                    <div class="tc-card-top">
+                        <div class="tc-date-block">
+                            <div class="tc-day">${m.date.split(' ')[0]}</div>
+                            <div class="tc-dt">${m.date.split(' ').slice(1).join(' ')}</div>
+                        </div>
+                        <div class="tc-time-field">
+                            <div class="tc-time">&#128336; ${m.time}</div>
+                            <div class="tc-field">&#128205; ${m.field}</div>
+                        </div>
+                        ${sc}
+                    </div>
+                    <div class="tc-matchup">
+                        <span class="tc-team${m.home===grp.ourTeam?' tc-us':''}">${m.home}</span>
+                        <span class="tc-vs">vs</span>
+                        <span class="tc-team${m.away===grp.ourTeam?' tc-us':''}">${m.away}</span>
+                    </div>
+                </div>`;
             }).join('');
+
             const br = ct.bracket;
-            const bracketHTML = br?`<div class="tc-knockout"><div class="tc-ko-col"><div class="tc-ko-label">Semifinals &amp; Consolation</div>${br.semis.map(s=>`<div class="tc-ko-card${s.slot==='Consolation'?' tc-consolation':''}"><div class="tc-ko-top"><span class="tc-ko-slot">${s.slot}</span><span class="tc-ko-time">${s.time}</span></div>${s.field?`<div class="tc-ko-field">&#128205; ${s.field}</div>`:''}<div class="tc-ko-matchup"><div class="tc-ko-team">${s.teamA}</div><div class="tc-vs" style="margin:4px 0;font-size:9px;">vs</div><div class="tc-ko-team">${s.teamB}</div></div>${s.score?`<div class="tc-ko-result">${s.score}</div>`:''}</div>`).join('')}</div><div class="tc-ko-connector"><svg viewBox="0 0 50 140" preserveAspectRatio="none"><path d="M0,35 H25 V105 H0" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/><path d="M25,70 H50" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/></svg></div><div class="tc-ko-col"><div class="tc-ko-label">Final</div><div class="tc-ko-card tc-final"><div class="tc-ko-top"><span class="tc-ko-slot">&#127942; Final</span><span class="tc-ko-time">${br.final.time}</span></div>${br.final.field?`<div class="tc-ko-field">&#128205; ${br.final.field}</div>`:''}<div class="tc-ko-matchup"><div class="tc-ko-team">${br.final.teamA}</div><div class="tc-vs" style="margin:4px 0;font-size:9px;">vs</div><div class="tc-ko-team">${br.final.teamB}</div></div>${br.final.score?`<div class="tc-ko-result">${br.final.score}</div>`:''}</div></div></div>`:'';
-            currentHTML = `<div class="tourn-section"><div class="tourn-section-header"><div><div class="tourn-section-title">${ct.name}</div><div class="tourn-section-meta">${ct.dates} &nbsp;·&nbsp; ${ct.location}</div></div><span class="tourn-format-badge">${ct.format}</span></div><div class="tourn-sub-label">&#128205; ${grp.name} — Group Stage</div><div class="tc-group">${groupCards}</div><div class="tourn-sub-label" style="margin-top:24px;">&#127942; Knockout Bracket</div>${bracketHTML}</div>`;
+            const bracketHTML = br ? `
+                <div class="tc-knockout">
+                    <div class="tc-ko-col">
+                        <div class="tc-ko-label">Semifinals &amp; Consolation</div>
+                        ${br.semis.map(s => `
+                        <div class="tc-ko-card${s.slot==='Consolation'?' tc-consolation':''}">
+                            <div class="tc-ko-top">
+                                <span class="tc-ko-slot">${s.slot}</span>
+                                <span class="tc-ko-time">${s.time}</span>
+                            </div>
+                            ${s.field ? `<div class="tc-ko-field">&#128205; ${s.field}</div>` : ''}
+                            <div class="tc-ko-matchup">
+                                <div class="tc-ko-team">${s.teamA}</div>
+                                <div class="tc-vs" style="margin:4px 0;font-size:9px;">vs</div>
+                                <div class="tc-ko-team">${s.teamB}</div>
+                            </div>
+                            ${s.score ? `<div class="tc-ko-result">${s.score}</div>` : ''}
+                        </div>`).join('')}
+                    </div>
+                    <div class="tc-ko-connector">
+                        <svg viewBox="0 0 50 140" preserveAspectRatio="none">
+                            <path d="M0,35 H25 V105 H0" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/>
+                            <path d="M25,70 H50" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="tc-ko-col">
+                        <div class="tc-ko-label">Final</div>
+                        <div class="tc-ko-card tc-final">
+                            <div class="tc-ko-top">
+                                <span class="tc-ko-slot">&#127942; Final</span>
+                                <span class="tc-ko-time">${br.final.time}</span>
+                            </div>
+                            ${br.final.field ? `<div class="tc-ko-field">&#128205; ${br.final.field}</div>` : ''}
+                            <div class="tc-ko-matchup">
+                                <div class="tc-ko-team">${br.final.teamA}</div>
+                                <div class="tc-vs" style="margin:4px 0;font-size:9px;">vs</div>
+                                <div class="tc-ko-team">${br.final.teamB}</div>
+                            </div>
+                            ${br.final.score ? `<div class="tc-ko-result">${br.final.score}</div>` : ''}
+                        </div>
+                    </div>
+                </div>` : '';
+
+            currentHTML = `
+                <div class="tourn-section">
+                    <div class="tourn-section-header">
+                        <div>
+                            <div class="tourn-section-title">${ct.name}</div>
+                            <div class="tourn-section-meta">${ct.dates} &nbsp;·&nbsp; ${ct.location}</div>
+                        </div>
+                        <span class="tourn-format-badge">${ct.format}</span>
+                    </div>
+                    <div class="tourn-sub-label">&#128205; ${grp.name} — Group Stage</div>
+                    <div class="tc-group">${groupCards}</div>
+                    <div class="tourn-sub-label" style="margin-top:24px;">&#127942; Knockout Bracket</div>
+                    ${bracketHTML}
+                </div>`;
         }
-        container.innerHTML = `${headerHTML('Tournament','TOURN')}${tournSubnav()}<div class="content-area"><div class="tourn-overall-strip" style="${hist.length===0?'display:none;':''}"><div class="tourn-overall-item"><div class="tourn-overall-num">${hist.length}</div><div class="tourn-overall-lbl">Tournaments</div></div><div class="tourn-overall-item"><div class="tourn-overall-num gold">${tW}</div><div class="tourn-overall-lbl">W</div></div><div class="tourn-overall-item"><div class="tourn-overall-num">${tL}</div><div class="tourn-overall-lbl">L</div></div><div class="tourn-overall-item"><div class="tourn-overall-num">${tD}</div><div class="tourn-overall-lbl">Draws</div></div><div class="tourn-overall-item"><div class="tourn-overall-num gold">${hist.filter(t=>t.result.includes('\uD83C\uDFC6')||t.result.includes('Champion')).length}</div><div class="tourn-overall-lbl">Titles</div></div></div>${currentHTML}<div class="tourn-sub-label" style="margin-top:24px;">&#128203; Tournament History</div><div class="tourn-hist-list">${histHTML}</div></div>${footerHTML('Tournament Record')}`;
+
+        container.innerHTML = headerHTML('Tournament','TOURN') + tournSubnav() +
+            '<div class="content-area">' +
+            currentHTML +
+            '<div class="tourn-hist-title-row">' +
+                '<div class="tourn-sub-label" style="margin-top:24px;margin-bottom:0;">&#128203; Tournament History</div>' +
+                histSummary +
+            '</div>' +
+            '<div class="tourn-hist-list" style="margin-top:12px;">' + histHTML + '</div>' +
+            '</div>' +
+            footerHTML('Tournament Record');
     }
+
 
     function renderTournMap(container, td) {
         const ct = td?td.current:null;
+        const isUTD = td && td.venueType === 'utd';
+        if (isUTD) {
+            // Build UTD field highlights from tournament match fields
+            var utdFields = {};
+            (ct && ct.group && ct.group.matches || []).forEach(function(m) {
+                var match = (m.field||'').match(/UT\s*Dallas\s*#?(\d+)/i);
+                if (match) {
+                    var num = parseInt(match[1], 10);
+                    if (!utdFields[num]) utdFields[num] = [];
+                    utdFields[num].push({ date: m.date, time: m.time, opp: m.away === ct.group.ourTeam ? m.home : m.away, rank: '', loc: m.field });
+                }
+            });
+            container.innerHTML = headerHTML('Tournament','TOURN') + tournSubnav() +
+                '<div class="content-area">' +
+                (ct ? '<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">' + ct.name + '</div>' +
+                '<div style="font-family:Nunito,sans-serif;font-size:12px;color:rgba(0,35,75,0.65);margin-bottom:10px;">' + ct.location + '</div></div>' : '') +
+                '<div class="map-day-callout"><span class="map-day-callout-label">&#9733; Gold fields = your games</span><span class="map-day-callout-sub">All tournament fields shown</span></div>' +
+                buildUTDMap(utdFields) +
+                '</div>' + footerHTML('Venue Map');
+            return;
+        }
         const allGames = [];
         (ct&&ct.group&&ct.group.matches||[]).forEach(function(m){allGames.push({day:m.date,isOurs:m.home===ct.group.ourTeam||m.away===ct.group.ourTeam,field:m.field,date:m.date,time:m.time,home:m.home,away:m.away,score:m.score,label:(m.home===ct.group.ourTeam||m.away===ct.group.ourTeam)?'Our Match · Group Stage':'Group Stage'});});
         const brItems=[...((ct&&ct.bracket&&ct.bracket.semis)||[])];
