@@ -281,6 +281,9 @@
         }
 
 
+        .ai-story-btn:hover{opacity:0.85;}
+        .ai-story-btn:disabled{opacity:0.5;cursor:default;}
+
         .ai-story-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;background:var(--primary);color:var(--secondary);border:none;padding:9px 18px;border-radius:3px;cursor:pointer;transition:opacity 0.15s;}
         .ai-story-btn:hover{opacity:0.85;}
         .ai-story-btn:disabled{opacity:0.5;cursor:default;}
@@ -1758,9 +1761,10 @@
                     <div class="story-section-title">The Story So Far</div>
                     <p class="story-narrative" id="storyNarrativeText">${narrative.replace(/\n\n/g, '</p><p class="story-narrative" style="margin-top:12px;">')}</p>
                     <div style="margin-top:14px;">
-                        <button class="ai-story-btn" id="aiStoryBtn" onclick="enhanceStoryWithAI()">✦ Enhance with AI</button>
+                        <button class="ai-story-btn" id="aiStoryBtn" onclick="enhanceStoryWithAI()">&#10022; Enhance with AI</button>
                         <div class="story-ai-result" id="storyAiResult"></div>
                     </div>
+
                 <div>
                     <div class="story-section-title">By The Numbers</div>
                     <div class="stat-item" style="margin-bottom:6px;"><span class="stat-label">Games Played</span><span class="stat-val">${TEAM_CONFIG.matches.length}</span></div>
@@ -2342,15 +2346,12 @@
         var streakLabel = streak.count + '-match ' + (streak.type === 'W' ? 'win' : streak.type === 'L' ? 'losing' : 'unbeaten') + ' streak';
 
         callAI(
-            'You are a sports broadcast journalist writing dramatic weekly season recaps for youth soccer teams. Write in an energetic, narrative style like a Friday Night Lights broadcast recap. Use vivid language, build tension, and make it feel cinematic. Keep it under 200 words. Plain text only, no bullet points, no markdown.',
-            'Team: ' + TEAM_CONFIG.branding.name + '. Division: ' + TEAM_CONFIG.branding.league + '. Record: ' + r.wins + 'W-' + r.losses + 'L-' + r.draws + 'D. Rank: #' + l.rank + ' of ' + l.totalTeams + '. Points: ' + l.points + '. PPG: ' + l.ppg + '. Goal differential: ' + l.goalDiff + '. Goals: ' + TEAM_CONFIG.goals.for + ' scored, ' + TEAM_CONFIG.goals.against + ' conceded. Current streak: ' + streakLabel + '. Remaining games: ' + TEAM_CONFIG.remainingSchedule.length + ' (' + avail + ' pts available). Next opponent: #' + nm.oppRank + ' ' + nm.oppName + ' (' + nm.oppRecord + '). Write a dramatic broadcast-style season story.'
+            'You are a sports broadcast journalist writing dramatic weekly season recaps for youth soccer teams. Write in an energetic narrative style like a Friday Night Lights broadcast recap. Use vivid language, build tension, make it feel cinematic. Under 200 words. Plain text only, no bullet points, no markdown.',
+            'Team: ' + TEAM_CONFIG.branding.name + '. Division: ' + TEAM_CONFIG.branding.league + '. Record: ' + r.wins + 'W-' + r.losses + 'L-' + r.draws + 'D. Rank: #' + l.rank + ' of ' + l.totalTeams + '. Points: ' + l.points + '. PPG: ' + l.ppg + '. Goal diff: ' + l.goalDiff + '. Goals: ' + TEAM_CONFIG.goals.for + ' scored, ' + TEAM_CONFIG.goals.against + ' conceded. Streak: ' + streakLabel + '. Remaining: ' + TEAM_CONFIG.remainingSchedule.length + ' games (' + avail + ' pts available). Next: #' + nm.oppRank + ' ' + nm.oppName + ' (' + nm.oppRecord + '). Write a dramatic broadcast-style season story.'
         ).then(function(result) {
             storyAiText[currentTeamId] = result;
-            var narrativeEl = document.getElementById('storyNarrativeText');
-            if (narrativeEl) {
-                var parts = result.split('\n\n');
-                narrativeEl.innerHTML = parts.join('</p><p class="story-narrative" style="margin-top:12px;">');
-            }
+            var el = document.getElementById('storyNarrativeText');
+            if (el) el.innerHTML = result.split('\n\n').join('</p><p class="story-narrative" style="margin-top:12px;">');
             btn.disabled = false;
             btn.innerHTML = '&#10022; Regenerate';
         }).catch(function(err) {
