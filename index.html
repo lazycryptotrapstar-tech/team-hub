@@ -168,6 +168,118 @@
         .lm-date{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.35);letter-spacing:0.5px;text-transform:uppercase;}
         .lm-empty{color:rgba(0,35,75,0.3);font-size:12px;font-family:'Nunito',sans-serif;}
 
+
+
+
+        .tourn-map-header{margin-bottom:12px;}
+        .map-day-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+        .map-day-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:7px 14px;border-radius:20px;border:1.5px solid rgba(0,35,75,0.18);background:white;color:rgba(0,35,75,0.5);cursor:pointer;transition:all 0.15s;}
+        .map-day-btn:hover{border-color:var(--primary);color:var(--primary);}
+        .map-day-btn.active{background:var(--primary);color:var(--secondary);border-color:var(--primary);font-weight:900;}
+        /* ===== VENUE MAP ===== */
+        .venue-map-section{margin-bottom:24px;}
+        .venue-map-outer{display:grid;grid-template-columns:1fr 280px;gap:16px;align-items:start;}
+        .venue-svg{width:100%;display:block;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,0.25);}
+        .map-field-group:hover .mf-rect{filter:brightness(1.25);}
+        .vfi{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.1);padding:14px 16px;min-height:120px;box-shadow:0 2px 10px rgba(0,35,75,0.07);}
+        .vfi-empty{background:rgba(0,35,75,0.03);border:1px dashed rgba(0,35,75,0.15);display:flex;align-items:center;justify-content:center;min-height:100px;border-radius:6px;color:rgba(0,35,75,0.35);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;}
+        .vfi-field-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--secondary);}
+        .vfi-game{background:rgba(0,35,75,0.03);border-radius:4px;padding:10px 12px;margin-bottom:8px;border-left:3px solid rgba(0,35,75,0.1);}
+        .vfi-game:last-child{margin-bottom:0;}
+        .vfi-game.vfi-ours{background:rgba(255,204,0,0.1);border-left:3px solid var(--secondary);}
+        .vfi-label{font-family:'Nunito',sans-serif;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:rgba(0,35,75,0.4);margin-bottom:4px;}
+        .vfi-game.vfi-ours .vfi-label{color:rgba(124,89,0,0.8);}
+        .vfi-teams{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--primary);line-height:1.4;}
+        .vfi-vs{font-size:9px;font-weight:700;color:rgba(0,35,75,0.3);text-transform:uppercase;letter-spacing:0.5px;margin:0 5px;}
+        .vfi-meta{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.45);margin-top:4px;}
+
+        @media(max-width:860px){
+            .venue-map-outer{grid-template-columns:1fr;}
+        }
+        @media(max-width:640px){
+            .venue-map-outer{grid-template-columns:1fr;}
+            .vfi-teams{font-size:11px;}
+        }
+
+        /* ===== TOURNAMENT TAB ===== */
+        .tourn-overall-strip{display:grid;grid-template-columns:repeat(5,1fr);background:var(--primary);border-radius:4px;margin-bottom:24px;overflow:hidden;}
+        .tourn-overall-item{padding:16px 12px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);}
+        .tourn-overall-item:last-child{border-right:none;}
+        .tourn-overall-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:28px;color:white;line-height:1;}
+        .tourn-overall-num.gold{color:var(--secondary);}
+        .tourn-overall-lbl{font-family:'Nunito',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:4px;}
+
+        .tourn-section{margin-bottom:28px;}
+        .tourn-section-header{background:linear-gradient(135deg,var(--primary) 0%,#002a5c 100%);border-radius:4px;padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-left:4px solid var(--secondary);margin-bottom:16px;}
+        .tourn-section-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:white;}
+        .tourn-section-meta{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);margin-top:3px;}
+        .tourn-format-badge{font-family:'Nunito',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.5px;background:rgba(255,204,0,0.15);color:var(--secondary);padding:5px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+        .tourn-sub-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);border-bottom:2px solid var(--secondary);padding-bottom:5px;margin-bottom:12px;}
+
+        .tourn-table-wrap{background:white;border-radius:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+        .tourn-match-table{width:100%;border-collapse:collapse;font-size:13px;}
+        .tourn-match-table thead tr{background:var(--primary);}
+        .tourn-match-table thead th{font-family:'Nunito',sans-serif;font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.5);padding:10px 14px;text-align:left;}
+        .tourn-match-table tbody td{padding:12px 14px;border-bottom:1px solid rgba(0,35,75,0.06);vertical-align:middle;}
+        .tourn-match-table tbody tr:last-child td{border-bottom:none;}
+        .tourn-our-match{background:rgba(255,204,0,0.06) !important;}
+        .tourn-match-time{font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--primary);white-space:nowrap;}
+        .tourn-match-time span{font-size:11px;color:rgba(0,35,75,0.45);font-weight:600;}
+        .tourn-match-teams{font-family:'Nunito',sans-serif;font-size:13px;color:var(--primary);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+        .tourn-us{font-weight:900;color:var(--primary);}
+        .tourn-vs{font-size:10px;font-weight:700;color:rgba(0,35,75,0.3);text-transform:uppercase;letter-spacing:0.5px;}
+        .tourn-score{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:var(--primary);}
+        .tourn-tbd{font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(0,35,75,0.25);text-transform:uppercase;}
+        .tourn-match-field{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(0,35,75,0.4);text-align:right;white-space:nowrap;}
+        .tourn-match-score{text-align:center;}
+
+        .tourn-bracket{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:0;min-height:160px;}
+        .tourn-bracket-col{display:flex;flex-direction:column;gap:12px;}
+        .tourn-bracket-label{font-family:'Nunito',sans-serif;font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:rgba(0,35,75,0.3);margin-bottom:2px;}
+        .tourn-bracket-connector{height:120px;padding:0 4px;}
+        .tourn-bracket-connector svg{width:100%;height:100%;}
+        .tourn-match-card{background:white;border:1px solid rgba(0,35,75,0.1);border-radius:4px;padding:12px 14px;box-shadow:0 2px 8px rgba(0,35,75,0.06);}
+        .tourn-match-card.final{border:2px solid var(--secondary);box-shadow:0 0 0 1px var(--secondary),0 4px 16px rgba(255,204,0,0.15);}
+        .tourn-match-card.consolation{border:1px solid rgba(0,35,75,0.12);background:rgba(0,35,75,0.02);}
+        .tourn-match-card.consolation .tourn-match-card-slot{color:rgba(0,35,75,0.25);}
+        .tourn-match-card-field{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.35);margin-bottom:6px;letter-spacing:0.3px;}
+        .tourn-match-card.final .tourn-match-card-field{color:rgba(120,80,0,0.6);}
+        .tourn-match-card-slot{font-family:'Nunito',sans-serif;font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:rgba(0,35,75,0.3);margin-bottom:2px;}
+        .tourn-match-card.final .tourn-match-card-slot{color:rgba(180,120,0,0.7);}
+        .tourn-match-card-time{font-family:'Nunito',sans-serif;font-size:10px;color:rgba(0,35,75,0.4);margin-bottom:8px;}
+        .tourn-matchup{display:flex;flex-direction:column;gap:4px;}
+        .tourn-team-slot{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--primary);padding:5px 8px;background:rgba(0,35,75,0.04);border-radius:2px;}
+        .tourn-team-divider{font-family:'Nunito',sans-serif;font-size:9px;font-weight:700;color:rgba(0,35,75,0.25);text-transform:uppercase;letter-spacing:1px;text-align:center;padding:2px 0;}
+        .tourn-match-card-result{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:var(--primary);text-align:center;margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,35,75,0.08);}
+
+        .tourn-hist-list{display:flex;flex-direction:column;gap:0;background:white;border-radius:4px;overflow:hidden;border:1px solid rgba(0,35,75,0.08);}
+        .tourn-hist-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(0,35,75,0.06);}
+        .tourn-hist-row:last-child{border-bottom:none;}
+        .tourn-hist-left{flex:1;min-width:0;}
+        .tourn-hist-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--primary);}
+        .tourn-hist-meta{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(0,35,75,0.4);margin-top:2px;}
+        .tourn-hist-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+        .tourn-hist-rec{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:rgba(0,35,75,0.45);}
+        .tourn-badge{font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;padding:3px 9px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap;}
+        .tourn-badge.champ{background:rgba(255,204,0,0.2);color:#7c5900;border:1px solid rgba(255,204,0,0.5);}
+        .tourn-badge.runner{background:rgba(192,200,212,0.25);color:#374151;border:1px solid rgba(192,200,212,0.5);}
+        .tourn-badge.other{background:rgba(0,35,75,0.06);color:rgba(0,35,75,0.55);border:1px solid rgba(0,35,75,0.1);}
+
+        @media(max-width:860px){
+            .tourn-overall-strip{grid-template-columns:repeat(5,1fr);}
+            .tourn-overall-num{font-size:22px;}
+            .tourn-bracket{grid-template-columns:1fr 40px 1fr;}
+        }
+        @media(max-width:640px){
+            .tourn-overall-strip{grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;}
+            .tourn-overall-item:nth-child(3){border-right:none;}
+            .tourn-section-header{flex-direction:column;gap:8px;}
+            .tourn-bracket{grid-template-columns:1fr 30px 1fr;}
+            .tourn-team-slot{font-size:10px;padding:4px 6px;}
+            .tourn-hist-row{flex-direction:column;align-items:flex-start;gap:6px;}
+            .tourn-hist-right{width:100%;justify-content:flex-start;}
+        }
+
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -733,10 +845,10 @@
                 features: { standings: true, goalTracking: true, tactics: true },
                 terms: { match: "Match", goalsFor: "Goals", goalsAgainst: "GA" }
             },
-            lastUpdate: "Mar 23, 2026",
+            lastUpdate: "Apr 3, 2026",
 
             announcements: [
-                { id: 2, from: "Coach Keri", text: "Next up: Tue Apr 14 vs #17 Sting G13 Hubbard · 6:30 PM · UT Dallas #07. Let's finish the season strong — full kit, arrive 30 min early! 💪", ts: "Sun Mar 23", pinned: true }
+                { id: 3, from: "Coach Keri", text: "Last game of the season: Tue Apr 14 vs #17 Sting G13 Hubbard · 6:30 PM · UT Dallas #07. Let's finish strong — full kit, arrive 30 min early! 💪", ts: "Thu Apr 3", pinned: true }
             ],
             record: { wins: 6, losses: 7, draws: 1 },
             league: { rank: 11, totalTeams: 18, points: 19, ppg: "1.36", goalDiff: "-2" },
@@ -767,25 +879,55 @@
             ],
 
             standings: [
-                { rank: 1,  name: "Coppell FC 13G Oland Red",                mp: 13, w: 11, d: 0, l: 2,  gf: 47, ga: 12, gd: "+35", pts: 33 },
+                { rank: 1,  name: "Coppell FC 13G Oland Red",                mp: 14, w: 12, d: 0, l: 2,  gf: 53, ga: 12, gd: "+41", pts: 36 },
                 { rank: 2,  name: "FCD FC DIVAS XIII",                        mp: 13, w: 10, d: 1, l: 2,  gf: 34, ga: 14, gd: "+20", pts: 31 },
-                { rank: 3,  name: "Sting G13 E Rodriguez",                    mp: 14, w: 9,  d: 4, l: 1,  gf: 43, ga: 13, gd: "+30", pts: 31 },
-                { rank: 4,  name: "Sting Attack G13 H Pantoja",               mp: 13, w: 9,  d: 0, l: 4,  gf: 35, ga: 10, gd: "+25", pts: 27 },
-                { rank: 5,  name: "Panthers Black 13G",                       mp: 12, w: 7,  d: 0, l: 5,  gf: 17, ga: 20, gd: "-3",  pts: 21 },
-                { rank: 6,  name: "LC United 13G Evans",                      mp: 12, w: 6,  d: 2, l: 4,  gf: 27, ga: 17, gd: "+10", pts: 20 },
-                { rank: 7,  name: "NTX Lioness Select 13G",                   mp: 12, w: 6,  d: 2, l: 4,  gf: 26, ga: 18, gd: "+8",  pts: 20 },
-                { rank: 8,  name: "Atletico Dallas Youth 13G Blue Colon",     mp: 11, w: 6,  d: 1, l: 4,  gf: 24, ga: 17, gd: "+7",  pts: 19 },
-                { rank: 10, name: "Victory SC 2013 Girls Fort Worth",          mp: 12, w: 6,  d: 1, l: 5,  gf: 35, ga: 20, gd: "+15", pts: 19 },
+                { rank: 3,  name: "Sting G13 E Rodriguez",                    mp: 15, w: 9,  d: 4, l: 2,  gf: 45, ga: 16, gd: "+29", pts: 31 },
+                { rank: 4,  name: "Sting Attack G13 H Pantoja",               mp: 14, w: 10, d: 0, l: 4,  gf: 38, ga: 12, gd: "+26", pts: 30 },
+                { rank: 5,  name: "LC United 13G Evans",                      mp: 14, w: 8,  d: 2, l: 4,  gf: 31, ga: 17, gd: "+14", pts: 26 },
+                { rank: 6,  name: "Victory SC 2013 Girls Fort Worth",          mp: 14, w: 8,  d: 1, l: 5,  gf: 43, ga: 21, gd: "+22", pts: 25 },
+                { rank: 7,  name: "FCD-ETX '13G Premier",                     mp: 13, w: 7,  d: 2, l: 4,  gf: 23, ga: 11, gd: "+12", pts: 23 },
+                { rank: 8,  name: "Panthers Black 13G",                       mp: 13, w: 7,  d: 0, l: 6,  gf: 18, ga: 24, gd: "-6",  pts: 21 },
+                { rank: 9,  name: "NTX Lioness Select 13G",                   mp: 12, w: 6,  d: 2, l: 4,  gf: 26, ga: 18, gd: "+8",  pts: 20 },
+                { rank: 10, name: "Atletico Dallas Youth 13G Blue Colon",      mp: 13, w: 6,  d: 1, l: 6,  gf: 25, ga: 23, gd: "+2",  pts: 19 },
                 { rank: 11, name: "Sting McNeal 13G",                         mp: 14, w: 6,  d: 1, l: 7,  gf: 23, ga: 25, gd: "-2",  pts: 19 },
-                { rank: 8,  name: "FCD-ETX '13G Premier",                     mp: 12, w: 6,  d: 2, l: 4,  gf: 19, ga: 10, gd: "+9",  pts: 20 },
-                { rank: 12, name: "Frisco Fusion 13G NPL NTX Blue",           mp: 14, w: 4,  d: 1, l: 9,  gf: 16, ga: 34, gd: "-18", pts: 13 },
-                { rank: 13, name: "Dallas Cosmos 13G Red",                    mp: 10, w: 3,  d: 1, l: 6,  gf: 10, ga: 29, gd: "-19", pts: 10 },
-                { rank: 14, name: "Atletico Dallas Youth 13-GA Blanton",      mp: 3,  w: 3,  d: 0, l: 0,  gf: 17, ga: 3,  gd: "+14", pts: 9  },
-                { rank: 15, name: "ULETE FC 2013G Chris",                     mp: 11, w: 2,  d: 0, l: 9,  gf: 10, ga: 24, gd: "-14", pts: 6  },
+                { rank: 12, name: "Frisco Fusion 13G NPL NTX Blue",           mp: 15, w: 4,  d: 1, l: 10, gf: 16, ga: 38, gd: "-22", pts: 13 },
+                { rank: 13, name: "Dallas Cosmos 13G Red",                    mp: 12, w: 3,  d: 1, l: 8,  gf: 11, ga: 34, gd: "-23", pts: 10 },
+                { rank: 14, name: "Atletico Dallas Youth 13-GA Blanton",       mp: 3,  w: 3,  d: 0, l: 0,  gf: 17, ga: 3,  gd: "+14", pts: 9  },
+                { rank: 15, name: "ULETE FC 2013G Chris",                     mp: 12, w: 3,  d: 0, l: 9,  gf: 13, ga: 25, gd: "-12", pts: 9  },
                 { rank: 16, name: "Atletico Dallas Youth 14G Gomez",          mp: 9,  w: 1,  d: 0, l: 8,  gf: 6,  ga: 39, gd: "-33", pts: 3  },
-                { rank: 17, name: "Sting G13 Hubbard",                        mp: 12, w: 1,  d: 0, l: 11, gf: 10, ga: 49, gd: "-39", pts: 3  },
+                { rank: 17, name: "Sting G13 Hubbard",                        mp: 13, w: 1,  d: 0, l: 12, gf: 10, ga: 55, gd: "-45", pts: 3  },
                 { rank: 18, name: "FC Dallas Youth 13G White",                mp: 13, w: 1,  d: 0, l: 12, gf: 14, ga: 59, gd: "-45", pts: 3  }
-            ]
+            ],
+
+            tournaments: {
+                history: [],
+                current: {
+                    name: "Liberty Invitational",
+                    dates: "Apr 10–12, 2026",
+                    location: "Carpenter Park, Plano TX",
+                    format: "5-team Bracket A · 2 group games each · Semis + Final Apr 12",
+                    bracketSet: true,
+                    group: {
+                        name: "Bracket A",
+                        teams: ["Atletico Dallas 13G Blue Colon", "Coppell FC 13G Oland Red", "Sting G13 McNeal", "FWYSA Lady Strikers FC 13G", "Imperial SC 14G Black"],
+                        ourTeam: "Sting G13 McNeal",
+                        matches: [
+                            { date: "Fri Apr 10", time: "6:00 PM",  home: "Atletico Dallas 13G Blue Colon", away: "Coppell FC 13G Oland Red",      score: null, field: "Carpenter Park C · #208" },
+                            { date: "Fri Apr 10", time: "7:30 PM",  home: "Sting G13 McNeal",              away: "FWYSA Lady Strikers FC 13G",    score: null, field: "Carpenter Park D · #209" },
+                            { date: "Sat Apr 11", time: "9:30 AM",  home: "FWYSA Lady Strikers FC 13G",    away: "Imperial SC 14G Black",          score: null, field: "Carpenter Park M · #212" },
+                            { date: "Sat Apr 11", time: "9:30 AM",  home: "Coppell FC 13G Oland Red",      away: "Sting G13 McNeal",               score: null, field: "Carpenter Park A · #211" },
+                            { date: "Sat Apr 11", time: "2:00 PM",  home: "Imperial SC 14G Black",         away: "Atletico Dallas 13G Blue Colon", score: null, field: "Carpenter Park B · #210" },
+                        ]
+                    },
+                    bracket: {
+                        semis: [
+                            { slot: "Semi-Finals", time: "Sun Apr 12 · 8:00 AM", teamA: "Group Leader", teamB: "Group 2nd", score: null, field: "Carpenter Park D · #214" },
+                            { slot: "Consolation", time: "Sun Apr 12 · 8:00 AM", teamA: "Group 3rd",    teamB: "Group 4th", score: null, field: "Carpenter Park M · #213" },
+                        ],
+                        final: { slot: "Final", time: "Sun Apr 12 · 11:00 AM", teamA: "Semi Winner", teamB: "Semi Winner", score: null, field: "Carpenter Park B · #215" }
+                    }
+                }
+            },
         },
         "u12": {
             branding: {
@@ -797,14 +939,14 @@
                 features: { standings: true, goalTracking: true, tactics: true },
                 terms: { match: "Match", goalsFor: "Goals", goalsAgainst: "GA" }
             },
-            lastUpdate: "Mar 23, 2026",
+            lastUpdate: "Apr 3, 2026",
 
             announcements: [
-                { id: 3, from: "Coach Keri", text: "Big wins this weekend — 6-0 and 1-0! Next up: Sun Mar 29 vs #4 Sting G14 J Salazar at Railroad Park, 12:45 PM. It's a big one — full kit, arrive early! 💛", ts: "Sun Mar 23", pinned: true }
+                { id: 4, from: "Coach Keri", text: "4-0 win vs J Salazar — huge result! Rank jumped to #4! Next: Wed Apr 1 vs #14 Dallas Surf East Silver · 6:30 PM · UT Dallas #09. Keep the momentum going! 💛", ts: "Thu Apr 3", pinned: true }
             ],
-            record: { wins: 6, losses: 4, draws: 3 },
-            league: { rank: 7, totalTeams: 16, points: 21, ppg: "1.62", goalDiff: "+13" },
-            goals: { for: 29, against: 16 },
+            record: { wins: 7, losses: 4, draws: 3 },
+            league: { rank: 4, totalTeams: 16, points: 24, ppg: "1.71", goalDiff: "+17" },
+            goals: { for: 33, against: 16 },
             matches: [
                 { date: "Sep 07", rank: "15", opp: "Dallas Surf 14G East Silver",                  score: "3 - 0", res: "W" },
                 { date: "Sep 14", rank: "6",  opp: "Atletico Dallas Youth Pre ECNL G15 Blanton",   score: "2 - 0", res: "W" },
@@ -818,44 +960,69 @@
                 { date: "Feb 21", rank: "2",  opp: "NTX Celtic 14G Bravo South",                   score: "1 - 1", res: "D" },
                 { date: "Feb 28", rank: "7",  opp: "Waco Texans 2014 Girls Andrade",               score: "2 - 2", res: "D" },
                 { date: "Mar 21", rank: "16", opp: "FW All Stars FC 2014G",                           score: "6 - 0", res: "W" },
-                { date: "Mar 22", rank: "10", opp: "FC Dallas Youth 14G West",                        score: "1 - 0", res: "W", highlight: true }
+                { date: "Mar 22", rank: "10", opp: "FC Dallas Youth 14G West",                        score: "1 - 0", res: "W" },
+                { date: "Mar 29", rank: "5",  opp: "Sting G14 J Salazar",                           score: "4 - 0", res: "W", highlight: true }
             ],
             nextMatch: {
-                oppName: "Sting G14 J Salazar", date: "Sun Mar 29", time: "12:45 PM",
-                oppRank: 4, oppTotalTeams: 16, oppRecord: "6-2-5",
-                lastMatch: { date: "Mar 21", rank: 4, opp: "Atletico Dallas Pre ECNL G15", score: "0 - 2", res: "L" }
+                oppName: "Dallas Surf 14G East Silver", date: "Wed Apr 01", time: "6:30 PM",
+                oppRank: 14, oppTotalTeams: 16, oppRecord: "3-8-2",
+                lastMatch: { date: "Mar 21", rank: 14, opp: "Dallas Surf 14G North", score: "2 - 1", res: "W" }
             },
             remainingSchedule: [
-                { date: "Sun Mar 29", rank: "4",  opp: "Sting G14 J Salazar",           time: "12:45 PM", loc: "Railroad Park RR #1" },
-                { date: "Wed Apr 01", rank: "11", opp: "Dallas Surf 14G East Silver",   time: "6:30 PM",  loc: "UT Dallas #09" },
-                { date: "Sun Apr 12", rank: "12", opp: "FC Dallas Youth 14G Black",     time: "9:15 AM",  loc: "The Athletic Club #6" }
+                { date: "Wed Apr 01", rank: "14", opp: "Dallas Surf 14G East Silver",   time: "6:30 PM",  loc: "UT Dallas #09" },
+                { date: "Tue Apr 28", rank: "13", opp: "FC Dallas Youth 14G Black",     time: "7:45 PM",  loc: "UT Dallas #07" }
             ],
 
             standings: [
-                { rank: 1,  name: "Juventus Premier FC 2014G Cantu",              mp: 13, w: 10, d: 1, l: 2,  gf: 42, ga: 12, gd: "+30", pts: 31 },
-                { rank: 2,  name: "NTX Celtic 14G Bravo South",                   mp: 14, w: 9,  d: 2, l: 3,  gf: 44, ga: 17, gd: "+27", pts: 29 },
-                { rank: 3,  name: "Solar 14G Carrillo.E",                         mp: 11, w: 7,  d: 1, l: 3,  gf: 29, ga: 18, gd: "+11", pts: 22 },
-                { rank: 4,  name: "Sting G14 J Salazar",                          mp: 13, w: 6,  d: 2, l: 5,  gf: 26, ga: 15, gd: "+11", pts: 20 },
-                { rank: 5,  name: "Solar Byars 14G",                              mp: 11, w: 7,  d: 0, l: 4,  gf: 25, ga: 18, gd: "+7",  pts: 21 },
-                { rank: 6,  name: "Atletico Dallas Youth Pre ECNL G15 Blanton",   mp: 12, w: 6,  d: 1, l: 5,  gf: 16, ga: 18, gd: "-2",  pts: 19 },
-                { rank: 7,  name: "Waco Texans 2014 Girls Andrade",               mp: 12, w: 5,  d: 4, l: 3,  gf: 20, ga: 14, gd: "+6",  pts: 19 },
-                { rank: 8,  name: "Sting McNeal 14G",                             mp: 11, w: 4,  d: 3, l: 4,  gf: 22, ga: 16, gd: "+6",  pts: 15 },
-                { rank: 9,  name: "Pony Xpress 14/15G Castillo",                  mp: 13, w: 5,  d: 0, l: 8,  gf: 16, ga: 28, gd: "-12", pts: 15 },
-                { rank: 10, name: "Dallas Surf 14G North",                        mp: 12, w: 3,  d: 2, l: 7,  gf: 14, ga: 22, gd: "-8",  pts: 11 },
-                { rank: 12, name: "FC Dallas Youth 14G Black",                    mp: 13, w: 3,  d: 2, l: 8,  gf: 14, ga: 28, gd: "-14", pts: 11 },
-                { rank: 12, name: "FC Dallas Youth 14G West",                     mp: 9,  w: 3,  d: 1, l: 5,  gf: 7,  ga: 20, gd: "-13", pts: 10 },
-                { rank: 13, name: "NTX Celtic FC Pre-ECNL G14 McCallum",          mp: 4,  w: 3,  d: 0, l: 1,  gf: 8,  ga: 2,  gd: "+6",  pts: 9  },
-                { rank: 14, name: "Sting G14 Fuentes",                            mp: 15, w: 2,  d: 4, l: 9,  gf: 10, ga: 25, gd: "-15", pts: 10 },
-                { rank: 11, name: "Dallas Surf 14G East Silver",                  mp: 13, w: 3,  d: 2, l: 8,  gf: 12, ga: 32, gd: "-20", pts: 11 },
-                { rank: 5,  name: "Atletico Dallas Pre ECNL G15 Blanton",       mp: 13, w: 7,  d: 1, l: 5,  gf: 18, ga: 18, gd: "0",   pts: 22 },
-                { rank: 6,  name: "Solar Byars 14G",                              mp: 11, w: 7,  d: 0, l: 4,  gf: 25, ga: 18, gd: "+7",  pts: 21 },
-                { rank: 7,  name: "Sting Pre-ECNL G14 McNeal",                    mp: 13, w: 6,  d: 3, l: 4,  gf: 29, ga: 16, gd: "+13", pts: 21 },
-                { rank: 8,  name: "Waco Texans 2014 Girls Andrade",               mp: 12, w: 5,  d: 3, l: 4,  gf: 20, ga: 14, gd: "+6",  pts: 18 },
-                { rank: 10, name: "FC Dallas Youth 14G West",                     mp: 11, w: 4,  d: 1, l: 6,  gf: 8,  ga: 21, gd: "-13", pts: 13 },
-                { rank: 13, name: "Dallas Surf 14G North",                        mp: 13, w: 3,  d: 2, l: 8,  gf: 15, ga: 24, gd: "-9",  pts: 11 },
-                { rank: 15, name: "NTX Celtic Pre-ECNL G14 McCallum",             mp: 4,  w: 3,  d: 0, l: 1,  gf: 8,  ga: 2,  gd: "+6",  pts: 9  },
-                { rank: 16, name: "FW All Stars FC 2014G",                        mp: 14, w: 1,  d: 2, l: 11, gf: 10, ga: 38, gd: "-28", pts: 5  }
-            ]
+                { rank: 1,  name: "Juventus Premier FC 2014G Cantu",          mp: 14, w: 11, d: 2, l: 1,  gf: 45, ga: 14, gd: "+31", pts: 35 },
+                { rank: 2,  name: "NTX Celtic 14G Bravo South",                mp: 14, w: 9,  d: 3, l: 2,  gf: 44, ga: 17, gd: "+27", pts: 30 },
+                { rank: 3,  name: "Solar 14G Carrillo.E",                      mp: 11, w: 7,  d: 3, l: 1,  gf: 29, ga: 18, gd: "+11", pts: 24 },
+                { rank: 4,  name: "Sting Pre-ECNL G14 McNeal",                 mp: 14, w: 7,  d: 3, l: 4,  gf: 33, ga: 16, gd: "+17", pts: 24 },
+                { rank: 5,  name: "Sting G14 J Salazar",                       mp: 14, w: 6,  d: 5, l: 3,  gf: 26, ga: 19, gd: "+7",  pts: 23 },
+                { rank: 6,  name: "Atletico Dallas Pre ECNL G15 Blanton",      mp: 13, w: 7,  d: 1, l: 5,  gf: 18, ga: 18, gd: "0",   pts: 22 },
+                { rank: 7,  name: "Waco Texans 2014 Girls Andrade",            mp: 13, w: 6,  d: 4, l: 3,  gf: 22, ga: 15, gd: "+7",  pts: 22 },
+                { rank: 8,  name: "Solar Byars 14G",                           mp: 12, w: 7,  d: 0, l: 5,  gf: 26, ga: 20, gd: "+6",  pts: 21 },
+                { rank: 9,  name: "Pony Xpress 14/15G Castillo",               mp: 14, w: 5,  d: 0, l: 9,  gf: 18, ga: 31, gd: "-13", pts: 15 },
+                { rank: 10, name: "Dallas Surf 14G North",                     mp: 14, w: 4,  d: 2, l: 8,  gf: 17, ga: 24, gd: "-7",  pts: 14 },
+                { rank: 11, name: "FC Dallas Youth 14G West",                  mp: 11, w: 4,  d: 1, l: 6,  gf: 8,  ga: 21, gd: "-13", pts: 13 },
+                { rank: 12, name: "NTX Celtic Pre-ECNL G14 McCallum",          mp: 5,  w: 4,  d: 0, l: 1,  gf: 10, ga: 2,  gd: "+8",  pts: 12 },
+                { rank: 13, name: "FC Dallas Youth 14G Black",                 mp: 14, w: 3,  d: 2, l: 9,  gf: 14, ga: 30, gd: "-16", pts: 11 },
+                { rank: 14, name: "Dallas Surf 14G East Silver",               mp: 13, w: 3,  d: 2, l: 8,  gf: 12, ga: 32, gd: "-20", pts: 11 },
+                { rank: 15, name: "Sting G14 Fuentes",                         mp: 15, w: 2,  d: 4, l: 9,  gf: 10, ga: 25, gd: "-15", pts: 10 },
+                { rank: 16, name: "FW All Stars FC 2014G",                     mp: 15, w: 1,  d: 2, l: 12, gf: 10, ga: 40, gd: "-30", pts: 5  }
+            ],
+
+            tournaments: {
+                history: [
+                    { name: "Fall Kickoff Classic", date: "Aug 2025", result: "Quarterfinalist", record: "2-1-0", notes: "Strong run, tough draw in quarters" },
+                    { name: "Winter Warm-Up", date: "Jan 2026", result: "Champion 🏆", record: "4-0-0", notes: "Won every game, shut out in the final" },
+                    { name: "Presidents Cup", date: "Feb 2026", result: "Semifinalist", record: "2-1-0", notes: "Lost on PKs after a strong run" },
+                ],
+                current: {
+                    name: "Spring Classic 2026",
+                    dates: "Apr 19–20, 2026",
+                    location: "UT Dallas Complex",
+                    format: "4-team groups · Top 2 advance to semis",
+                    bracketSet: true,
+                    group: {
+                        name: "Group A",
+                        teams: ["Sting McNeal 14G", "Juventus 2014G", "NTX Celtic 14G", "Solar 14G Red"],
+                        ourTeam: "Sting McNeal 14G",
+                        matches: [
+                            { date: "Sat Apr 19", time: "10:00 AM", home: "Sting McNeal 14G",  away: "Juventus 2014G",   score: null, field: "Field #1" },
+                            { date: "Sat Apr 19", time: "2:00 PM",  home: "NTX Celtic 14G",    away: "Sting McNeal 14G", score: null, field: "Field #1" },
+                            { date: "Sun Apr 20", time: "9:00 AM",  home: "Sting McNeal 14G",  away: "Solar 14G Red",    score: null, field: "Field #2" },
+                        ]
+                    },
+                    bracket: {
+                        semis: [
+                            { slot: "SF1", time: "Sun Apr 20 · 1:00 PM", teamA: "Group A Winner", teamB: "Group B Runner-Up", score: null },
+                            { slot: "SF2", time: "Sun Apr 20 · 1:00 PM", teamA: "Group B Winner", teamB: "Group A Runner-Up", score: null },
+                        ],
+                        final: { slot: "Final", time: "Sun Apr 20 · 4:00 PM", teamA: "SF1 Winner", teamB: "SF2 Winner", score: null }
+                    }
+                }
+            },
         }
     };
 
@@ -864,6 +1031,9 @@
     ============================================================ */
     let currentTeamId = 'u13', TEAM_CONFIG = TEAMS['u13'], currentTab = 'home', currentTacticView = 'overview', storyView = 'story';
     let RSVP_STATE = JSON.parse(localStorage.getItem('hub_rsvp') || '{}');
+    let mapFieldGames = {};
+    let tournView = 'bracket';
+    let tournMapDay = 'All';
     let storyAiText = {
         'u13': `Saturday's 2-5 loss to #4 Sting Attack was a gut punch — no other way to say it. Against one of the division's best, McNeal gave up three in the second half when it mattered most. That stings.\n\nBut here's what doesn't change: 6 wins, 19 points, and one game left. This team has beaten teams ranked ahead of them all season. They've come back from multi-match losing skids before. The record shows a squad that competes — 23 goals scored, a win over #6 LC United, back-to-back wins in February when the season needed it most.\n\nThe final opponent is #17 Sting G13 Hubbard. On paper, this is a winnable game. But the only way it matters is if this team shows up with something to prove. A loss on Saturday can't define the season — the response to it can.\n\nSit at #11 of 18 with 19 points, and 3 more on the table Tuesday night. One game. One chance to finish with your head up.\n\nThe season isn't over. Write a better ending.`
     }; // keyed by teamId
@@ -1068,10 +1238,11 @@
 
     function getTabs() {
         const all = [
-            { id: 'home',      label: 'Home',      icon: '🏠' },
-            { id: 'story',     label: 'Story',     icon: '📖' },
-            { id: 'schedule',  label: 'Schedule',  icon: '📅' },
-            { id: 'tactics',   label: 'Tactics',   icon: '⚽' },
+            { id: 'home',       label: 'Home',       icon: '🏠' },
+            { id: 'story',      label: 'Story',      icon: '📖' },
+            { id: 'schedule',   label: 'Schedule',   icon: '📅' },
+            { id: 'tournament', label: 'Tournament', icon: '🏆' },
+            { id: 'tactics',    label: 'Tactics',    icon: '⚽' },
         ];
         return all.filter(t => t.id !== 'tactics' || TEAM_CONFIG.branding.tacticsEnabled);
     }
@@ -1112,6 +1283,7 @@
 
     function switchTeam(id) {
         if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+        tournView = 'bracket'; tournMapDay = 'All';
         currentTeamId = id; TEAM_CONFIG = TEAMS[id];
         if (currentTab === 'tactics' && !TEAM_CONFIG.branding.tacticsEnabled) currentTab = 'home';
         applyTheme(); renderTeamSwitcher(); renderSeasonPulse(); renderNavBars(); render();
@@ -1934,52 +2106,21 @@
 
 
     /* ============================================================
-       API KEY MANAGEMENT
+       AI UTILITY  — proxied through Cloudflare Worker
+       Worker URL: update WORKER_URL below after deploying worker.js
     ============================================================ */
-    function getApiKey() { return localStorage.getItem('sting_hub_api_key') || ''; }
-    function setApiKey(k) { localStorage.setItem('sting_hub_api_key', k); }
+    const WORKER_URL = 'https://sting-hub-ai.lazycryptotrapstar.workers.dev';
 
-    function showApiKeyModal(callback) {
-        const overlay = document.createElement('div');
-        overlay.className = 'ai-modal-overlay';
-        overlay.innerHTML = `<div class="apikey-modal">
-            <div class="apikey-modal-header">
-                <div class="apikey-modal-title">AI Features Setup</div>
-                <div class="apikey-modal-sub">One-time configuration</div>
-            </div>
-            <div class="apikey-modal-body">
-                <label class="ai-prompt-label" style="margin-bottom:8px;display:block;">Enter your Anthropic API Key</label>
-                <input class="apikey-input" id="apiKeyInput" type="password" placeholder="sk-ant-..."/>
-                <div class="apikey-hint">Your key is stored locally in your browser and never sent anywhere except Anthropic's servers. Get yours at console.anthropic.com</div>
-                <button class="apikey-submit" onclick="submitApiKey(this)">Save & Continue</button>
-            </div>
-        </div>`;
-        document.body.appendChild(overlay);
-        overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
-        window._apiKeyCb = callback;
-    }
-    function submitApiKey(btn) {
-        const val = document.getElementById('apiKeyInput').value.trim();
-        if (!val.startsWith('sk-ant-') && !val.startsWith('sk-')) { document.getElementById('apiKeyInput').style.borderColor = '#dc2626'; return; }
-        setApiKey(val); btn.closest('.ai-modal-overlay').remove();
-        if (window._apiKeyCb) window._apiKeyCb();
-    }
-
-    /* ============================================================
-       AI UTILITY
-    ============================================================ */
     async function callAI(systemPrompt, userPrompt) {
-        const key = getApiKey(); if (!key) throw new Error('API key not configured');
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
+        const res = await fetch(WORKER_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-            body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1024, system: systemPrompt, messages: [{ role: 'user', content: userPrompt }] })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ system: systemPrompt, prompt: userPrompt }),
         });
-        if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'API error'); }
-        const data = await res.json(); return data.content[0].text;
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'AI request failed');
+        return data.text;
     }
-
-    function withApiKey(fn) { if (!getApiKey()) { showApiKeyModal(fn); return; } fn(); }
 
     function showAiModal({ title, promptLabel, placeholder, system, buildPrompt, onUse }) {
         const overlay = document.createElement('div');
@@ -2021,13 +2162,171 @@
         };
     }
 
+    /* ============================================================
+       TOURNAMENT TAB
+    ============================================================ */
+    function renderTournament(container) {
+        const td = TEAM_CONFIG.tournaments;
+        if (!td) {
+            container.innerHTML = headerHTML('Tournament', 'TOURN') + '<div class="content-area"><p style="color:rgba(0,35,75,0.4);font-family:Nunito,sans-serif;">No tournament data available.</p></div>' + footerHTML('Tournament History');
+            return;
+        }
+        if (tournView === 'map')     { renderTournMap(container, td); return; }
+        renderTournBracket(container, td);
+    }
+
+    function tournSubnav() {
+        return `<div class="stats-subnav">
+            <button class="stats-subnav-btn ${tournView==='bracket'||tournView===''?'active':''}" onclick="switchTournView('bracket')">🏆 Bracket</button>
+            <button class="stats-subnav-btn ${tournView==='map'?'active':''}" onclick="switchTournView('map')">🗺\uFE0F Venue Map</button>
+        </div>`;
+    }
+
+    function switchTournView(v) { tournView = v; renderTournament(document.getElementById('main-content')); }
+
+    function renderTournBracket(container, td) {
+        const hist = td.history || [];
+        let tW=0,tL=0,tD=0;
+        hist.forEach(t => { const p=(t.record||'').split('-'); tW+=parseInt(p[0])||0; tL+=parseInt(p[1])||0; tD+=parseInt(p[2])||0; });
+        const histHTML = hist.length === 0
+            ? '<div style="font-family:Nunito,sans-serif;font-size:13px;color:rgba(0,35,75,0.35);padding:16px;text-align:center;">No tournament history recorded yet.</div>'
+            : hist.map(t => {
+                const bc = t.result.includes('Champion')||t.result.includes('\uD83C\uDFC6') ? 'champ' : t.result.includes('Runner')||t.result.includes('\uD83E\uDD48') ? 'runner' : 'other';
+                return `<div class="tourn-hist-row"><div class="tourn-hist-left"><div class="tourn-hist-name">${t.name}</div><div class="tourn-hist-meta">${t.date}${t.notes?' · '+t.notes:''}</div></div><div class="tourn-hist-right"><span class="tourn-badge ${bc}">${t.result}</span><span class="tourn-hist-rec">${t.record}</span></div></div>`;
+            }).join('');
+
+        let currentHTML = '';
+        const ct = td.current;
+        if (ct) {
+            const grp = ct.group;
+            const matchRows = (grp.matches||[]).map(m => {
+                const isOurs = m.home===grp.ourTeam||m.away===grp.ourTeam;
+                const sc = m.score ? `<span class="tourn-score">${m.score}</span>` : `<span class="tourn-tbd">TBD</span>`;
+                return `<tr class="${isOurs?'tourn-our-match':''}"><td class="tourn-match-time">${m.date}<br><span>${m.time}</span></td><td class="tourn-match-teams"><span class="${m.home===grp.ourTeam?'tourn-us':''}">${m.home}</span><span class="tourn-vs">vs</span><span class="${m.away===grp.ourTeam?'tourn-us':''}">${m.away}</span></td><td class="tourn-match-score">${sc}</td><td class="tourn-match-field">${m.field}</td></tr>`;
+            }).join('');
+
+            const br = ct.bracket;
+            const bracketHTML = br ? `<div class="tourn-bracket">
+                <div class="tourn-bracket-col">
+                    <div class="tourn-bracket-label">Semifinals / Consolation</div>
+                    ${br.semis.map(s=>`<div class="tourn-match-card${s.slot==='Consolation'?' consolation':''}"><div class="tourn-match-card-slot">${s.slot}</div><div class="tourn-match-card-time">${s.time}</div>${s.field?`<div class="tourn-match-card-field">${s.field}</div>`:''}<div class="tourn-matchup"><div class="tourn-team-slot">${s.teamA}</div><div class="tourn-team-divider">vs</div><div class="tourn-team-slot">${s.teamB}</div></div>${s.score?`<div class="tourn-match-card-result">${s.score}</div>`:''}</div>`).join('')}
+                </div>
+                <div class="tourn-bracket-connector"><svg viewBox="0 0 60 120" preserveAspectRatio="none"><path d="M0,30 H30 V90 H0" fill="none" stroke="rgba(255,204,0,0.4)" stroke-width="2"/><path d="M30,60 H60" fill="none" stroke="rgba(255,204,0,0.4)" stroke-width="2"/></svg></div>
+                <div class="tourn-bracket-col">
+                    <div class="tourn-bracket-label">Final</div>
+                    <div class="tourn-match-card final"><div class="tourn-match-card-slot">${br.final.slot}</div><div class="tourn-match-card-time">${br.final.time}</div>${br.final.field?`<div class="tourn-match-card-field">${br.final.field}</div>`:''}<div class="tourn-matchup"><div class="tourn-team-slot">${br.final.teamA}</div><div class="tourn-team-divider">vs</div><div class="tourn-team-slot">${br.final.teamB}</div></div>${br.final.score?`<div class="tourn-match-card-result">${br.final.score}</div>`:''}</div>
+                </div>
+            </div>` : '';
+
+            currentHTML = `<div class="tourn-section"><div class="tourn-section-header"><div><div class="tourn-section-title">${ct.name}</div><div class="tourn-section-meta">${ct.dates} &nbsp;·&nbsp; ${ct.location}</div></div><span class="tourn-format-badge">${ct.format}</span></div><div class="tourn-sub-label">&#128205; ${grp.name} — Group Stage</div><div class="tourn-table-wrap"><table class="tourn-match-table"><thead><tr><th>Date / Time</th><th>Match</th><th style="text-align:center;">Score</th><th style="text-align:right;">Field</th></tr></thead><tbody>${matchRows}</tbody></table></div><div class="tourn-sub-label" style="margin-top:24px;">&#127942; Knockout Bracket</div>${bracketHTML}</div>`;
+        }
+
+        container.innerHTML = `${headerHTML('Tournament','TOURN')}${tournSubnav()}<div class="content-area"><div class="tourn-overall-strip" style="${hist.length===0?'display:none;':''}"><div class="tourn-overall-item"><div class="tourn-overall-num">${hist.length}</div><div class="tourn-overall-lbl">Tournaments</div></div><div class="tourn-overall-item"><div class="tourn-overall-num gold">${tW}</div><div class="tourn-overall-lbl">Tournament W</div></div><div class="tourn-overall-item"><div class="tourn-overall-num">${tL}</div><div class="tourn-overall-lbl">Tournament L</div></div><div class="tourn-overall-item"><div class="tourn-overall-num">${tD}</div><div class="tourn-overall-lbl">Draws</div></div><div class="tourn-overall-item"><div class="tourn-overall-num gold">${hist.filter(t=>t.result.includes('\uD83C\uDFC6')||t.result.includes('Champion')).length}</div><div class="tourn-overall-lbl">Titles</div></div></div>${currentHTML}<div class="tourn-sub-label" style="margin-top:24px;">&#128203; Tournament History</div><div class="tourn-hist-list">${histHTML}</div></div>${footerHTML('Tournament Record')}`;
+    }
+
+    function renderTournMap(container, td) {
+        const ct = td ? td.current : null;
+        const allGames = [];
+        (ct && ct.group && ct.group.matches || []).forEach(function(m) {
+            allGames.push({ day:m.date, isOurs:m.home===ct.group.ourTeam||m.away===ct.group.ourTeam, field:m.field, date:m.date, time:m.time, home:m.home, away:m.away, score:m.score, label:(m.home===ct.group.ourTeam||m.away===ct.group.ourTeam)?'Our Match \u00b7 Group Stage':'Group Stage' });
+        });
+        const brItems = [...((ct && ct.bracket && ct.bracket.semis)||[])];
+        if (ct && ct.bracket && ct.bracket.final) brItems.push(ct.bracket.final);
+        brItems.forEach(function(s) {
+            const parts = (s.time||'').split(' \u00b7 ');
+            allGames.push({ day:parts[0], isOurs:false, field:s.field, date:parts[0], time:parts[1]||s.time, home:s.teamA, away:s.teamB, score:s.score, label:s.slot });
+        });
+
+        const seen = {}; const days = ['All'];
+        allGames.forEach(function(g){ if(g.day && !seen[g.day]){ seen[g.day]=1; days.push(g.day); } });
+
+        const activeDay = tournMapDay || 'All';
+        mapFieldGames = {};
+        const filtered = activeDay === 'All' ? allGames : allGames.filter(function(g){ return g.day === activeDay; });
+        filtered.forEach(function(g) {
+            const m = (g.field||'').match(/Carpenter Park\s*-?\s*([A-M])\b/i);
+            if (!m) return;
+            const letter = m[1].toUpperCase();
+            if (!mapFieldGames[letter]) mapFieldGames[letter] = [];
+            mapFieldGames[letter].push(g);
+        });
+
+        const dayBtns = days.map(function(d){ return '<button class="map-day-btn'+(d===activeDay?' active':'')+'" onclick="setMapDay(\''+d+'\')">'+d+'</button>'; }).join('');
+
+        container.innerHTML = `${headerHTML('Tournament','TOURN')}${tournSubnav()}<div class="content-area">${ct?`<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">${ct.name}</div><div style="font-family:Nunito,sans-serif;font-size:12px;color:rgba(0,35,75,0.45);margin-bottom:10px;">${ct.location}</div></div>`:''}<div class="map-day-bar">${dayBtns}</div><div class="venue-map-outer">${buildVenueMapSVG()}<div id="mapFieldInfo" class="vfi vfi-empty"><span>Tap any field to see${activeDay==='All'?' all':' '+activeDay} games</span></div></div></div>${footerHTML('Venue Map')}`;
+    }
+
+    function setMapDay(day) { tournMapDay = day; renderTournament(document.getElementById('main-content')); }
+
+    function buildVenueMapSVG() {
+        function state(id) {
+            const g = mapFieldGames[id]||[];
+            if (!g.length) return 'inactive';
+            if (g.some(function(x){return x.isOurs;})) return 'ours';
+            if (g.some(function(x){return x.label==='Final';})) return 'final';
+            if (g.some(function(x){return x.label&&x.label.indexOf('Semi')>=0;})) return 'semi';
+            return 'active';
+        }
+        const C = {
+            ours:    {fill:'#00234b',stroke:'#ffcc00',sw:2.5,text:'#ffcc00',ltext:'rgba(255,204,0,0.7)'},
+            final:   {fill:'#7c3f00',stroke:'#ffcc00',sw:2.5,text:'#ffcc00',ltext:'rgba(255,204,0,0.6)'},
+            semi:    {fill:'#1a3a6b',stroke:'#93c5fd',sw:1.8,text:'#bfdbfe',ltext:'rgba(191,219,254,0.7)'},
+            active:  {fill:'#1a5c30',stroke:'rgba(255,255,255,0.45)',sw:1.2,text:'rgba(255,255,255,0.85)',ltext:'rgba(255,255,255,0.45)'},
+            inactive:{fill:'#1a3d24',stroke:'rgba(255,255,255,0.15)',sw:0.8,text:'rgba(255,255,255,0.35)',ltext:'rgba(255,255,255,0.2)'},
+        };
+        const fields = [
+            {id:'E',x:25, y:58, w:58,h:44, label:'E',size:'9v9'},
+            {id:'F',x:148,y:18, w:58,h:44, label:'F',size:'9v9'},
+            {id:'G',x:216,y:18, w:58,h:44, label:'G',size:'9v9'},
+            {id:'H',x:298,y:22, w:64,h:48, label:'H',size:'9v9'},
+            {id:'A',x:140,y:83, w:88,h:112,label:'A',size:'11v11'},
+            {id:'B',x:238,y:83, w:88,h:112,label:'B',size:'11v11'},
+            {id:'D',x:140,y:205,w:88,h:112,label:'D',size:'11v11'},
+            {id:'C',x:238,y:205,w:88,h:112,label:'C',size:'11v11'},
+            {id:'L',x:330,y:258,w:72,h:100,label:'L',size:'11v11'},
+            {id:'M',x:410,y:258,w:72,h:100,label:'M',size:'11v11'},
+        ];
+        const svgFields = fields.map(function(f) {
+            const s=state(f.id),c=C[s],cx=f.x+f.w/2,cy=f.y+f.h/2,big=f.size==='11v11';
+            const mk=big?`<line x1="${f.x+3}" y1="${cy}" x2="${f.x+f.w-3}" y2="${cy}" stroke="rgba(255,255,255,0.15)" stroke-width="0.7"/><rect x="${cx-11}" y="${f.y+4}" width="22" height="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/><rect x="${cx-11}" y="${f.y+f.h-19}" width="22" height="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/><circle cx="${cx}" cy="${cy}" r="6" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>`:
+                `<line x1="${f.x+3}" y1="${cy}" x2="${f.x+f.w-3}" y2="${cy}" stroke="rgba(255,255,255,0.12)" stroke-width="0.6"/>`;
+            const badge=s==='ours'?'⭐':s==='final'?'🏆':'';
+            const badgeEl=badge?`<text x="${cx}" y="${f.y+(big?12:10)}" font-family="Nunito" font-size="${big?9:7}" text-anchor="middle" fill="${c.text}">${badge}</text>`:'';
+            return `<g onclick="showMapField('${f.id}')" style="cursor:pointer;" class="map-field-group"><rect id="mf-${f.id}" class="mf-rect" x="${f.x}" y="${f.y}" width="${f.w}" height="${f.h}" rx="3" fill="${c.fill}" stroke="${c.stroke}" stroke-width="${c.sw}" style="transition:filter 0.2s;"/>${mk}${badgeEl}<text x="${cx}" y="${cy+(badge?3:1)}" font-family="Nunito" font-size="${big?20:14}" font-weight="900" fill="${c.text}" text-anchor="middle" dominant-baseline="middle">${f.label}</text><text x="${cx}" y="${cy+(big?16:12)}" font-family="Nunito" font-size="6" font-weight="700" fill="${c.ltext}" text-anchor="middle">${f.size}</text></g>`;
+        }).join('');
+        return `<svg viewBox="0 0 490 375" xmlns="http://www.w3.org/2000/svg" class="venue-svg"><rect width="490" height="375" fill="#3a4a36"/><rect x="20" y="12" width="370" height="330" rx="5" fill="#2a3826" opacity="0.7"/><rect x="22" y="80" width="108" height="260" rx="2" fill="#4a4a42" opacity="0.75"/><text x="76" y="225" font-family="Nunito" font-size="9" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle" transform="rotate(-90 76 225)" letter-spacing="2">PARKING</text><rect x="138" y="193" width="190" height="14" fill="#5a5a48" opacity="0.6"/><rect x="326" y="80" width="14" height="240" fill="#5a5a48" opacity="0.5"/><rect x="318" y="248" width="172" height="120" rx="5" fill="#2a3826" opacity="0.7"/><rect x="484" y="0" width="6" height="375" fill="#5a5850" opacity="0.8"/><rect x="112" y="207" width="24" height="14" rx="2" fill="#1e3a8a"/><text x="124" y="217" font-family="Nunito" font-size="7" font-weight="900" fill="white" text-anchor="middle">HQ</text><circle cx="120" cy="160" r="9" fill="#dc2626" opacity="0.9"/><text x="120" y="164" font-family="Nunito" font-size="11" font-weight="900" fill="white" text-anchor="middle">+</text><text x="477" y="190" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.25)" text-anchor="middle" transform="rotate(90 477 190)" letter-spacing="1">COIT RD</text>${svgFields}<rect x="0" y="358" width="490" height="17" fill="rgba(0,0,0,0.35)"/><rect x="8" y="362" width="9" height="9" rx="1" fill="#00234b" stroke="#ffcc00" stroke-width="1.5"/><text x="21" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Our Games</text><rect x="88" y="362" width="9" height="9" rx="1" fill="#7c3f00" stroke="#ffcc00" stroke-width="1.5"/><text x="101" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Final</text><rect x="140" y="362" width="9" height="9" rx="1" fill="#1a3a6b" stroke="#93c5fd" stroke-width="1.5"/><text x="153" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Semis</text><rect x="196" y="362" width="9" height="9" rx="1" fill="#1a5c30" stroke="rgba(255,255,255,0.4)" stroke-width="1"/><text x="209" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Other Fields</text><text x="482" y="370" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.3)" text-anchor="end">6701 Coit Rd · Plano TX 75024</text></svg>`;
+    }
+
+    function showMapField(letter) {
+        document.querySelectorAll('.mf-rect').forEach(function(r){r.style.filter='';});
+        var sel=document.getElementById('mf-'+letter);
+        if(sel) sel.style.filter='brightness(1.5) drop-shadow(0 0 6px rgba(255,204,0,0.9))';
+        var games=mapFieldGames[letter]||[];
+        var el=document.getElementById('mapFieldInfo');
+        if(!el) return;
+        if(!games.length){
+            el.className='vfi vfi-empty';
+            el.innerHTML='<span>No games on Field <strong>'+letter+'</strong>'+(tournMapDay&&tournMapDay!=='All'?' on '+tournMapDay:'')+' this day</span>';
+            return;
+        }
+        el.className='vfi';
+        el.innerHTML='<div class="vfi-field-title">Field '+letter+'</div>'+
+            games.map(function(g){
+                return '<div class="vfi-game'+(g.isOurs?' vfi-ours':'')+'">'+'<div class="vfi-label">'+(g.isOurs?'⭐ ':'')+g.label+'</div>'+'<div class="vfi-teams">'+g.home+'<span class="vfi-vs">vs</span>'+g.away+'</div>'+'<div class="vfi-meta">'+g.date+' · '+g.time+(g.score?' &nbsp;·&nbsp; <strong>'+g.score+'</strong>':'')+' </div></div>';
+            }).join('');
+    }
+
+
+
+
     function render() {
         renderNavBars();
         const c = document.getElementById('main-content');
-        if (currentTab === 'home')          renderHome(c);
-        else if (currentTab === 'story')    renderStory(c);
-        else if (currentTab === 'schedule') renderSchedule(c);
-        else if (currentTab === 'tactics')  renderTactics(c);
+        if (currentTab === 'home')           renderHome(c);
+        else if (currentTab === 'story')     renderStory(c);
+        else if (currentTab === 'schedule')  renderSchedule(c);
+        else if (currentTab === 'tournament') renderTournament(c);
+        else if (currentTab === 'tactics')   renderTactics(c);
         else renderHome(c);
     }
 
