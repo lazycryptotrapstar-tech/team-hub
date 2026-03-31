@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Team Hub" data-id="th-modified">
     <meta name="description" content="Team Hub — Season Dashboard" data-id="th-modified">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         /* ===== VARIABLES ===== */
         :root{--primary:#00234b;--secondary:#ffcc00;--silver:#c0c8d4;--silver-dim:#8a94a2;--bg:#0d1f38;--card:#f5f0e8;--radius:6px;}
@@ -54,13 +54,14 @@
         .card-header{background:var(--primary);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:4px solid var(--secondary);position:relative;overflow:hidden;}
         .card-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 18px,rgba(255,255,255,0.015) 18px,rgba(255,255,255,0.015) 36px);}
         .card-header::after{content:attr(data-watermark);font-family:'Nunito', sans-serif;font-weight:900;font-size:130px;line-height:1;color:rgba(255,255,255,0.03);position:absolute;right:-10px;bottom:-20px;letter-spacing:-4px;pointer-events:none;}
-        .header-team-name{font-family:'Nunito', sans-serif;font-weight:900;font-style:italic;font-size:clamp(24px,4vw,36px);letter-spacing:1px;text-transform:uppercase;color:white;line-height:1;z-index:1;position:relative;}
+        .header-stars{font-size:10px;letter-spacing:4px;color:var(--secondary);margin-bottom:4px;opacity:0.85;}
+        .header-team-name{font-family:'Bebas Neue','Nunito',sans-serif;font-weight:400;font-size:clamp(28px,4.5vw,42px);letter-spacing:2px;text-transform:uppercase;color:white;line-height:1;z-index:1;position:relative;}
         .header-subtitle{font-family:'Nunito', sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--secondary);margin-top:5px;}
         .header-badge{display:inline-block;font-family:'Nunito', sans-serif;font-weight:700;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;background:var(--secondary);color:var(--primary);padding:3px 10px;border-radius:2px;margin-top:8px;}
         .header-right{text-align:right;z-index:1;flex-shrink:0;}
         .header-division-label{font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);}
         .header-division{font-family:'Nunito', sans-serif;font-weight:900;font-size:21px;letter-spacing:1px;text-transform:uppercase;color:white;line-height:1.2;}
-        .header-record{font-family:'Nunito', sans-serif;font-weight:900;font-size:25px;color:var(--secondary);margin-top:4px;}
+        .header-record{font-family:'Bebas Neue','Nunito',sans-serif;font-weight:400;font-size:30px;letter-spacing:2px;color:var(--secondary);margin-top:4px;}
         .card-footer{background:var(--primary);padding:14px 32px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:16px;border-top:2px solid rgba(255,204,0,0.18);}
         .footer-verify{font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);}
         .footer-date{font-family:'Nunito', sans-serif;font-size:13px;color:rgba(255,255,255,0.45);margin-top:2px;}
@@ -158,6 +159,15 @@
         .momentum-fill{height:100%;border-radius:6px;transition:width 1s cubic-bezier(0.34,1.56,0.64,1);}
         .momentum-sublabel{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:8px;}
 
+
+
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes countUp{from{opacity:0;}to{opacity:1;}}
+        .content-area{animation:fadeInUp 0.3s ease both;}
+        .card-header{animation:fadeInUp 0.2s ease both;}
+        .home-cell{animation:fadeInUp 0.25s ease both;}
+        .tourn-section{animation:fadeInUp 0.3s ease both;}
+        .tactic-board-wrap,.tactic-board{animation:fadeInUp 0.3s ease both;}
 
         /* ===== LAST MATCH CELL ===== */
         .lm-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;}
@@ -289,6 +299,14 @@
         .ai-story-btn:disabled{opacity:0.5;cursor:default;}
         .story-ai-result{margin-top:10px;font-family:'Nunito',sans-serif;font-size:13px;color:#dc2626;display:none;line-height:1.5;}
 
+
+        /* ===== MEDIA TAB ===== */
+        .media-coming-soon{text-align:center;padding:60px 24px 40px;}
+        .mcs-stars{font-size:14px;letter-spacing:6px;color:var(--secondary);margin-bottom:20px;}
+        .mcs-title{font-family:'Bebas Neue','Nunito',sans-serif;font-size:48px;letter-spacing:3px;color:var(--primary);line-height:1;margin-bottom:14px;}
+        .mcs-sub{font-family:'Nunito',sans-serif;font-size:14px;color:rgba(0,35,75,0.5);max-width:420px;margin:0 auto 28px;line-height:1.7;}
+        .mcs-badge{display:inline-block;font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:var(--primary);color:var(--secondary);padding:8px 20px;border-radius:20px;}
+
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -346,7 +364,7 @@
         .record-card.draws{background:#fefce8;border-color:#ca8a04;}
         .record-label{font-family:'Nunito', sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;}
         .record-label.wins{color:#15803d;}.record-label.losses{color:#b91c1c;}.record-label.draws{color:#78350f;}
-        .record-num{font-family:'Nunito', sans-serif;font-weight:900;font-size:42px;line-height:1;margin-top:2px;}
+        .record-num{font-family:'Bebas Neue','Nunito',sans-serif;font-weight:400;letter-spacing:2px;font-size:42px;line-height:1;margin-top:2px;}
         .record-num.wins{color:#166534;}.record-num.losses{color:#991b1b;}.record-num.draws{color:#78350f;}
         .rank-strip{background:var(--primary);border-radius:3px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
         .rank-label{font-family:'Nunito', sans-serif;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);}
@@ -935,7 +953,16 @@
                         ],
                         final: { slot: "Final", time: "Sun Apr 12 · 11:00 AM", teamA: "Semi Winner", teamB: "Semi Winner", score: null, field: "Carpenter Park B · #215" }
                     }
-                }
+                },
+
+            media: [
+                /* Add highlights here. Get the file ID from your Google Drive share link:
+                   https://drive.google.com/file/d/FILE_ID_HERE/view
+                   Set sharing to "Anyone with the link can view"  */
+                /* Example:
+                { id: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs", title: "Game Highlights vs Coppell", date: "Apr 11, 2026", tag: "Game Highlights" },
+                */
+            ],
             },
         },
         "u12": {
@@ -1032,6 +1059,10 @@
                     }
                 }
             },
+            media: [
+                /* Add highlights here. Get the file ID from your Google Drive share link.
+                   Set sharing to \"Anyone with the link can view\" */
+            ],
         }
     };
 
@@ -1251,6 +1282,7 @@
             { id: 'story',      label: 'Story',      icon: '📖' },
             { id: 'schedule',   label: 'Schedule',   icon: '📅' },
             { id: 'tournament', label: 'Tournament', icon: '🏆' },
+            { id: 'media',      label: 'Media',      icon: '🎬' },
             { id: 'tactics',    label: 'Tactics',    icon: '⚽' },
         ];
         return all.filter(t => t.id !== 'tactics' || TEAM_CONFIG.branding.tacticsEnabled);
@@ -1312,6 +1344,7 @@
         const r = TEAM_CONFIG.record;
         return `<div class="card-header" data-watermark="${wm || (r.wins + '-' + r.losses + '-' + r.draws)}">
             <div style="z-index:1;position:relative;">
+                <div class="header-stars">★ ★ ★ ★ ★</div>
                 <div class="header-team-name">${TEAM_CONFIG.branding.name}</div>
                 <div class="header-subtitle">${subtitle}</div>
                 <span class="header-badge">${TEAM_CONFIG.branding.season}</span>
@@ -2120,7 +2153,7 @@
        AI UTILITY  — proxied through Cloudflare Worker
        Worker URL: update WORKER_URL below after deploying worker.js
     ============================================================ */
-    const WORKER_URL = 'https://sting-hub-ai.lazycryptotrapstar.workers.dev/ai';
+    const WORKER_URL = 'https://sting-hub-ai.YOURSUBDOMAIN.workers.dev/ai';
 
     async function callAI(systemPrompt, userPrompt) {
         const res = await fetch(WORKER_URL, {
@@ -2363,6 +2396,22 @@
     }
 
 
+    /* ============================================================
+       MEDIA / HIGHLIGHTS TAB
+    ============================================================ */
+    function renderMedia(container) {
+        container.innerHTML = headerHTML('Highlights', 'MEDIA') +
+            '<div class="content-area">' +
+            '<div class="media-coming-soon">' +
+            '<div class="mcs-stars">★ ★ ★ ★ ★</div>' +
+            '<div class="mcs-title">Highlights Coming Soon</div>' +
+            '<div class="mcs-sub">Game clips, training sessions, and tournament moments — all in one place. Check back after the Liberty Invitational.</div>' +
+            '<div class="mcs-badge">&#127916; Video Hub · Season 2026</div>' +
+            '</div>' +
+            '</div>' + footerHTML('Media');
+    }
+
+
     function render() {
         renderNavBars();
         const c = document.getElementById('main-content');
@@ -2370,6 +2419,7 @@
         else if (currentTab === 'story')     renderStory(c);
         else if (currentTab === 'schedule')  renderSchedule(c);
         else if (currentTab === 'tournament') renderTournament(c);
+        else if (currentTab === 'media')      renderMedia(c);
         else if (currentTab === 'tactics')   renderTactics(c);
         else renderHome(c);
     }
