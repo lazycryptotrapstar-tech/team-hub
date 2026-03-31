@@ -181,6 +181,9 @@
 
 
 
+        .map-day-callout{background:rgba(255,204,0,0.12);border:1px solid rgba(255,204,0,0.35);border-radius:4px;padding:8px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+        .map-day-callout-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:#7c5900;letter-spacing:0.3px;}
+        .map-day-callout-sub{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(0,35,75,0.4);}
         .tourn-map-header{margin-bottom:12px;}
         .map-day-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
         .map-day-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:7px 14px;border-radius:20px;border:1.5px solid rgba(0,35,75,0.18);background:white;color:rgba(0,35,75,0.5);cursor:pointer;transition:all 0.15s;}
@@ -1176,7 +1179,7 @@
     let RSVP_STATE = JSON.parse(localStorage.getItem('hub_rsvp') || '{}');
     let mapFieldGames = {};
     let tournView = 'bracket';
-    let tournMapDay = 'All';
+    let tournMapDay = 'Fri Apr 10';
     let storyAiText = {
         'u13': `Saturday's 2-5 loss to #4 Sting Attack was a gut punch — no other way to say it. Against one of the division's best, McNeal gave up three in the second half when it mattered most. That stings.\n\nBut here's what doesn't change: 6 wins, 19 points, and one game left. This team has beaten teams ranked ahead of them all season. They've come back from multi-match losing skids before. The record shows a squad that competes — 23 goals scored, a win over #6 LC United, back-to-back wins in February when the season needed it most.\n\nThe final opponent is #17 Sting G13 Hubbard. On paper, this is a winnable game. But the only way it matters is if this team shows up with something to prove. A loss on Saturday can't define the season — the response to it can.\n\nSit at #11 of 18 with 19 points, and 3 more on the table Tuesday night. One game. One chance to finish with your head up.\n\nThe season isn't over. Write a better ending.`
     }; // keyed by teamId
@@ -1427,7 +1430,7 @@
 
     function switchTeam(id) {
         if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
-        tournView = 'bracket'; tournMapDay = 'All';
+        tournView = 'bracket'; tournMapDay = 'Fri Apr 10';
         currentTeamId = id; TEAM_CONFIG = TEAMS[id];
         if (currentTab === 'tactics' && !TEAM_CONFIG.branding.tacticsEnabled) currentTab = 'home';
         applyTheme(); renderTeamSwitcher(); renderSeasonPulse(); renderNavBars(); render();
@@ -2478,7 +2481,7 @@
 
         const dayBtns = days.map(function(d){ return '<button class="map-day-btn'+(d===activeDay?' active':'')+'" onclick="setMapDay(\''+d+'\')">'+d+'</button>'; }).join('');
 
-        container.innerHTML = `${headerHTML('Tournament','TOURN')}${tournSubnav()}<div class="content-area">${ct?`<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">${ct.name}</div><div style="font-family:Nunito,sans-serif;font-size:12px;color:rgba(0,35,75,0.45);margin-bottom:10px;">${ct.location}</div></div>`:''}<div class="map-day-bar">${dayBtns}</div><div class="venue-map-outer">${buildVenueMapSVG()}<div id="mapFieldInfo" class="vfi vfi-empty"><span>Tap any field to see${activeDay==='All'?' all':' '+activeDay} games</span></div></div></div>${footerHTML('Venue Map')}`;
+        container.innerHTML = `${headerHTML('Tournament','TOURN')}${tournSubnav()}<div class="content-area">${ct?`<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">${ct.name}</div><div style="font-family:Nunito,sans-serif;font-size:12px;color:rgba(0,35,75,0.45);margin-bottom:10px;">${ct.location}</div></div>`:''}<div class="map-day-callout"><span class="map-day-callout-label">&#9733; Gold fields = your games</span><span class="map-day-callout-sub">Select a day to see only that day's fields</span></div><div class="map-day-bar">${dayBtns}</div><div class="venue-map-outer">${buildVenueMapSVG()}<div id="mapFieldInfo" class="vfi vfi-empty"><span>Tap any field to see${activeDay==='All'?' all':' '+activeDay} games</span></div></div></div>${footerHTML('Venue Map')}`;
     }
 
     function setMapDay(day) { tournMapDay = day; renderTournament(document.getElementById('main-content')); }
@@ -2493,11 +2496,11 @@
             return 'active';
         }
         const C = {
-            ours:    {fill:'#00234b',stroke:'#ffcc00',sw:2.5,text:'#ffcc00',ltext:'rgba(255,204,0,0.7)'},
-            final:   {fill:'#7c3f00',stroke:'#ffcc00',sw:2.5,text:'#ffcc00',ltext:'rgba(255,204,0,0.6)'},
+            ours:    {fill:'#ffcc00',stroke:'#00234b',sw:3,  text:'#00234b',ltext:'rgba(0,35,75,0.6)'},
+            final:   {fill:'#1a3a6b',stroke:'#93c5fd',sw:2,  text:'#bfdbfe',ltext:'rgba(191,219,254,0.6)'},
             semi:    {fill:'#1a3a6b',stroke:'#93c5fd',sw:1.8,text:'#bfdbfe',ltext:'rgba(191,219,254,0.7)'},
             active:  {fill:'#1a5c30',stroke:'rgba(255,255,255,0.45)',sw:1.2,text:'rgba(255,255,255,0.85)',ltext:'rgba(255,255,255,0.45)'},
-            inactive:{fill:'#1a3d24',stroke:'rgba(255,255,255,0.15)',sw:0.8,text:'rgba(255,255,255,0.35)',ltext:'rgba(255,255,255,0.2)'},
+            inactive:{fill:'#1a3d24',stroke:'rgba(255,255,255,0.1)', sw:0.8,text:'rgba(255,255,255,0.2)',ltext:'rgba(255,255,255,0.1)'},
         };
         const fields = [
             {id:'E',x:25, y:58, w:58,h:44, label:'E',size:'9v9'},
@@ -2515,11 +2518,11 @@
             const s=state(f.id),c=C[s],cx=f.x+f.w/2,cy=f.y+f.h/2,big=f.size==='11v11';
             const mk=big?`<line x1="${f.x+3}" y1="${cy}" x2="${f.x+f.w-3}" y2="${cy}" stroke="rgba(255,255,255,0.15)" stroke-width="0.7"/><rect x="${cx-11}" y="${f.y+4}" width="22" height="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/><rect x="${cx-11}" y="${f.y+f.h-19}" width="22" height="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/><circle cx="${cx}" cy="${cy}" r="6" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>`:
                 `<line x1="${f.x+3}" y1="${cy}" x2="${f.x+f.w-3}" y2="${cy}" stroke="rgba(255,255,255,0.12)" stroke-width="0.6"/>`;
-            const badge=s==='ours'?'⭐':s==='final'?'🏆':'';
+            const badge=s==='ours'?'★':s==='final'?'F':'';
             const badgeEl=badge?`<text x="${cx}" y="${f.y+(big?12:10)}" font-family="Nunito" font-size="${big?9:7}" text-anchor="middle" fill="${c.text}">${badge}</text>`:'';
             return `<g onclick="showMapField('${f.id}')" style="cursor:pointer;" class="map-field-group"><rect id="mf-${f.id}" class="mf-rect" x="${f.x}" y="${f.y}" width="${f.w}" height="${f.h}" rx="3" fill="${c.fill}" stroke="${c.stroke}" stroke-width="${c.sw}" style="transition:filter 0.2s;"/>${mk}${badgeEl}<text x="${cx}" y="${cy+(badge?3:1)}" font-family="Nunito" font-size="${big?20:14}" font-weight="900" fill="${c.text}" text-anchor="middle" dominant-baseline="middle">${f.label}</text><text x="${cx}" y="${cy+(big?16:12)}" font-family="Nunito" font-size="6" font-weight="700" fill="${c.ltext}" text-anchor="middle">${f.size}</text></g>`;
         }).join('');
-        return `<svg viewBox="0 0 490 375" xmlns="http://www.w3.org/2000/svg" class="venue-svg"><rect width="490" height="375" fill="#3a4a36"/><rect x="20" y="12" width="370" height="330" rx="5" fill="#2a3826" opacity="0.7"/><rect x="22" y="80" width="108" height="260" rx="2" fill="#4a4a42" opacity="0.75"/><text x="76" y="225" font-family="Nunito" font-size="9" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle" transform="rotate(-90 76 225)" letter-spacing="2">PARKING</text><rect x="138" y="193" width="190" height="14" fill="#5a5a48" opacity="0.6"/><rect x="326" y="80" width="14" height="240" fill="#5a5a48" opacity="0.5"/><rect x="318" y="248" width="172" height="120" rx="5" fill="#2a3826" opacity="0.7"/><rect x="484" y="0" width="6" height="375" fill="#5a5850" opacity="0.8"/><rect x="112" y="207" width="24" height="14" rx="2" fill="#1e3a8a"/><text x="124" y="217" font-family="Nunito" font-size="7" font-weight="900" fill="white" text-anchor="middle">HQ</text><circle cx="120" cy="160" r="9" fill="#dc2626" opacity="0.9"/><text x="120" y="164" font-family="Nunito" font-size="11" font-weight="900" fill="white" text-anchor="middle">+</text><text x="477" y="190" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.25)" text-anchor="middle" transform="rotate(90 477 190)" letter-spacing="1">COIT RD</text>${svgFields}<rect x="0" y="358" width="490" height="17" fill="rgba(0,0,0,0.35)"/><rect x="8" y="362" width="9" height="9" rx="1" fill="#00234b" stroke="#ffcc00" stroke-width="1.5"/><text x="21" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Our Games</text><rect x="88" y="362" width="9" height="9" rx="1" fill="#7c3f00" stroke="#ffcc00" stroke-width="1.5"/><text x="101" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Final</text><rect x="140" y="362" width="9" height="9" rx="1" fill="#1a3a6b" stroke="#93c5fd" stroke-width="1.5"/><text x="153" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Semis</text><rect x="196" y="362" width="9" height="9" rx="1" fill="#1a5c30" stroke="rgba(255,255,255,0.4)" stroke-width="1"/><text x="209" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Other Fields</text><text x="482" y="370" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.3)" text-anchor="end">6701 Coit Rd · Plano TX 75024</text></svg>`;
+        return `<svg viewBox="0 0 490 375" xmlns="http://www.w3.org/2000/svg" class="venue-svg"><rect width="490" height="375" fill="#3a4a36"/><rect x="20" y="12" width="370" height="330" rx="5" fill="#2a3826" opacity="0.7"/><rect x="22" y="80" width="108" height="260" rx="2" fill="#4a4a42" opacity="0.75"/><text x="76" y="225" font-family="Nunito" font-size="9" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle" transform="rotate(-90 76 225)" letter-spacing="2">PARKING</text><rect x="138" y="193" width="190" height="14" fill="#5a5a48" opacity="0.6"/><rect x="326" y="80" width="14" height="240" fill="#5a5a48" opacity="0.5"/><rect x="318" y="248" width="172" height="120" rx="5" fill="#2a3826" opacity="0.7"/><rect x="484" y="0" width="6" height="375" fill="#5a5850" opacity="0.8"/><rect x="112" y="207" width="24" height="14" rx="2" fill="#1e3a8a"/><text x="124" y="217" font-family="Nunito" font-size="7" font-weight="900" fill="white" text-anchor="middle">HQ</text><circle cx="120" cy="160" r="9" fill="#dc2626" opacity="0.9"/><text x="120" y="164" font-family="Nunito" font-size="11" font-weight="900" fill="white" text-anchor="middle">+</text><text x="477" y="190" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.25)" text-anchor="middle" transform="rotate(90 477 190)" letter-spacing="1">COIT RD</text>${svgFields}<rect x="0" y="358" width="490" height="17" fill="rgba(0,0,0,0.35)"/><rect x="8" y="362" width="9" height="9" rx="1" fill="#ffcc00" stroke="#00234b" stroke-width="1.5"/><text x="21" y="370" font-family="Nunito" font-size="7.5" font-weight="900" fill="#ffcc00">Our Games</text><rect x="96" y="362" width="9" height="9" rx="1" fill="#1a3a6b" stroke="#93c5fd" stroke-width="1.5"/><text x="109" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Knockouts</text><rect x="174" y="362" width="9" height="9" rx="1" fill="#1a5c30" stroke="rgba(255,255,255,0.4)" stroke-width="1"/><text x="187" y="370" font-family="Nunito" font-size="7.5" fill="rgba(255,255,255,0.6)">Other Games</text><text x="482" y="370" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.3)" text-anchor="end">6701 Coit Rd · Plano TX 75024</text></svg>`;
     }
 
     function showMapField(letter) {
