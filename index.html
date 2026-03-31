@@ -443,6 +443,53 @@
         .gd-pos{color:#15803d;font-weight:700;}
         .gd-neg{color:#b91c1c;font-weight:700;}
 
+
+        .tactic-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px;}
+        .tactic-item-body{flex:1;}
+        .tactic-tip{font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:var(--secondary);background:rgba(0,35,75,0.06);border-left:3px solid var(--secondary);padding:5px 9px;border-radius:0 3px 3px 0;margin-top:6px;line-height:1.4;}
+        .pd-pos{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);font-family:'Nunito',sans-serif;font-size:7px;font-weight:900;letter-spacing:0.5px;white-space:nowrap;color:rgba(255,255,255,0.7);text-shadow:0 1px 2px rgba(0,0,0,0.5);pointer-events:none;}
+        .player-dot{position:relative;}
+
+
+        /* ===== SET PIECE VIEWS ===== */
+        .sp-wrap{display:grid;grid-template-columns:180px 1fr;min-height:460px;}
+        .sp-sidebar{background:var(--primary);padding:16px 12px;display:flex;flex-direction:column;gap:8px;}
+        .sp-tab{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;padding:10px 12px;border-radius:4px;cursor:pointer;color:rgba(255,255,255,0.55);transition:all 0.15s;line-height:1.3;}
+        .sp-tab:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.8);}
+        .sp-tab.active{background:var(--secondary);color:var(--primary);font-weight:900;}
+        .sp-content{background:var(--card);display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;}
+        .sp-diagram{padding:20px;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(0,35,75,0.08);}
+        .sp-info{padding:20px 24px;overflow-y:auto;}
+        .sp-desc{font-family:'Nunito',sans-serif;font-size:13px;color:rgba(0,35,75,0.70);line-height:1.6;margin-bottom:16px;padding-bottom:14px;border-bottom:2px solid var(--secondary);}
+        .sp-tips{display:flex;flex-direction:column;gap:10px;}
+        .sp-tip-row{display:flex;gap:10px;align-items:flex-start;}
+        .sp-tip-role{font-family:'Bebas Neue','Nunito',sans-serif;font-size:13px;letter-spacing:1px;padding:3px 8px;border-radius:3px;flex-shrink:0;min-width:36px;text-align:center;}
+        .sp-tip-text{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.70);line-height:1.5;}
+        @media(max-width:860px){
+            .sp-wrap{grid-template-columns:1fr;}
+            .sp-sidebar{flex-direction:row;flex-wrap:wrap;padding:10px;}
+            .sp-tab{font-size:10px;padding:7px 10px;}
+            .sp-content{grid-template-columns:1fr;}
+            .sp-diagram{border-right:none;border-bottom:1px solid rgba(0,35,75,0.08);}
+        }
+        @media(max-width:640px){
+            .sp-content{grid-template-columns:1fr;}
+        }
+
+
+        /* ===== UTD VENUE MAP ===== */
+        .utd-map-section{margin-top:8px;}
+        .utd-map-wrap{display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start;}
+        .utd-svg{width:100%;display:block;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+        .utd-info-panel{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.1);padding:14px;box-shadow:0 2px 8px rgba(0,35,75,0.06);}
+        .utd-info-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(0,35,75,0.07);}
+        .utd-info-row:last-child{border-bottom:none;padding-bottom:0;}
+        .utd-field-badge{font-family:'Bebas Neue','Nunito',sans-serif;font-size:15px;letter-spacing:1px;background:var(--primary);color:var(--secondary);padding:4px 10px;border-radius:3px;flex-shrink:0;}
+        .utd-info-detail{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.70);line-height:1.5;}
+        .utd-info-detail strong{color:var(--primary);}
+        .utd-parking-note{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.65);background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.3);border-radius:4px;padding:8px 14px;margin-top:12px;}
+        @media(max-width:860px){.utd-map-wrap{grid-template-columns:1fr;}}
+
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -1064,7 +1111,10 @@
             ],
 
             tournaments: {
-                history: [],
+                history: [
+                    { name: "Fall Premier Showcase",  date: "Nov 2025",  result: "Group Stage",  record: "1-1-1", notes: "W 6-0 vs Atletico · D vs FWYSA · L vs Evolution" },
+                    { name: "2026 Winter Frost Cup",  date: "Feb 2026",  result: "Consolation",  record: "0-2-1", notes: "L vs Atletico NPL · D vs Dallas Surf · Consolation loss" },
+                ],
                 current: {
                     name: "Liberty Invitational",
                     dates: "Apr 10–12, 2026",
@@ -1989,36 +2039,319 @@
     }
     function getTacticDesc(v) {
         const D = {
-            overview: { badge: 'overview', label: '4-3-3 Overview', items: [
-                { role: 'DEF', rc: '', t: 'The Shield', b: 'Maintain a high line, win 1v1 battles, and use the fullbacks to provide width in the attack.' },
-                { role: 'MID', rc: 'mid', t: 'Engine Room', b: 'Control the center with passing triangles. The #6 anchors while the 8 and 10 create overloads.' },
-                { role: 'FWD', rc: 'att', t: 'Strike Force', b: 'Lead the high press. Stretch the pitch wide, isolate defenders, and finish chances in the box.' }
+            overview: { badge: 'overview', label: '4-3-3 · Your Formation', items: [
+                { role: 'GK·DEF', rc: '', t: '🛡️ Defend as a Unit',
+                  b: `Stay organized and connected. When we lose the ball, every player moves back together — defenders don't chase, they hold shape.`,
+                  tip: `Key: Never leave a gap. Talk to each other constantly.` },
+                { role: 'MID', rc: 'mid', t: '⚙️ You Control the Game',
+                  b: `The midfield is the engine. Your job is to connect the defense to the attack — receive the ball, keep it moving, and never let the other team settle.`,
+                  tip: `Key: Always be available. Show for the ball, then move again.` },
+                { role: 'FWD', rc: 'att', t: '⚡ Press and Finish',
+                  b: `Forwards lead the pressure when we don't have the ball, and run in behind when we do. Make defenders uncomfortable — don't just stand and wait.`,
+                  tip: `Key: When you press, commit fully. Half-pressing is worse than no press.` }
             ]},
-            defense: { badge: 'defense', label: 'Defense Flow', items: [
-                { role: '1/4/5', rc: '', t: 'Playing Out The Back', b: "The CBs split wide to the edges. The GK acts as a pivot to create passing lanes and bypass the first line of pressure." },
-                { role: '2/3', rc: '', t: 'Fullback Expansion', b: 'Upon winning possession, fullbacks push high and hug the touchline to stretch the opponent and create space inside.' },
-                { role: '6', rc: 'mid', t: 'Rest Defense', b: 'When fullbacks push up, the #6 drops centrally to form a temporary back-three, shielding against counter-attacks.' }
+            defense: { badge: 'defense', label: 'Building Out from the Back', items: [
+                { role: '#1·4·5', rc: '', t: '🧤 GK + CBs: Spread Wide',
+                  b: `When we have the ball at the back, the goalkeeper becomes a passing option and the two center backs split apart. This stretches the opposing forwards and creates space to pass through.`,
+                  tip: `Key: #1 — position yourself to receive. #4/#5 — spread to the edges, make it easy for the keeper.` },
+                { role: '#2·3', rc: '', t: '🏃 Fullbacks: Push Forward',
+                  b: `Once the center backs have the ball, the fullbacks sprint up the sideline. This gives us width and makes the field feel wider for the opponent to defend.`,
+                  tip: `Key: Time your run — push up when your CB has control, not before.` },
+                { role: '#6', rc: 'mid', t: '🔒 #6: Be the Safety Net',
+                  b: `When both fullbacks push up, the #6 drops back between the center backs. This protects against a quick counter-attack and keeps us from being caught short-handed.`,
+                  tip: `Key: Read the play. If both #2 and #3 are high, you drop. Simple.` }
             ]},
-            midfield: { badge: 'midfield', label: 'Midfield Flow', items: [
-                { role: '6/8/10', rc: 'mid', t: 'The Triangle', b: 'Never stand in a flat line. Always form dynamic triangles so the ball carrier has two passing options at all times.' },
-                { role: '8/10', rc: 'mid', t: 'Half-Space Dominance', b: "Push into the half-spaces between the opponent's wide and central defenders to turn and create overloads." },
-                { role: '6', rc: 'mid', t: 'The Pivot', b: 'The anchor dictates tempo. If center is blocked, the #6 receives and quickly switches play to the weak side.' }
+            midfield: { badge: 'midfield', label: 'Midfield Movement', items: [
+                { role: '#6·8·10', rc: 'mid', t: '🔺 Always Form a Triangle',
+                  b: `The three midfielders should never stand in a straight line. One sits deep, one goes left, one goes right — this gives the ball carrier two passing options at all times and makes it almost impossible to defend.`,
+                  tip: `Key: If two of you are side by side, one of you is in the wrong spot.` },
+                { role: '#8·10', rc: 'mid', t: '↗️ Get Between Their Lines',
+                  b: `The attacking midfielders (#8 and #10) should look for the gap between the opponent's defenders and midfielders. Receive the ball facing forward in that space — that's where you can turn and attack.`,
+                  tip: `Key: Face the opponent's goal when you receive. Don't take it with your back to play.` },
+                { role: '#6', rc: 'mid', t: '🎯 #6: Switch the Field',
+                  b: `If the center of the field is blocked, the #6 receives and immediately switches the ball to the other side. This shifts the whole opponent team and creates space on the weak side.`,
+                  tip: `Key: One or two touches max. Receive, look up, switch.` }
             ]},
-            attack: { badge: 'attack', label: 'Attack Flow', items: [
-                { role: '7/9/11', rc: 'att', t: 'High Press Triggers', b: "The front three trigger an aggressive press when the opponent plays backward or a defender takes a bad touch." },
-                { role: '2/3', rc: '', t: 'Auxiliary Attackers', b: 'When possession is secured, fullbacks push wide and high to create 2v1 overloads alongside the wingers.' },
-                { role: '4/5/6', rc: '', t: 'High Rest Defense', b: 'With fullbacks committed, the CBs and CDM establish a high line near midfield to cover half-spaces.' }
+            attack: { badge: 'attack', label: 'Attacking Together', items: [
+                { role: '#7·9·11', rc: 'att', t: '🦁 Press the Moment They Struggle',
+                  b: `Watch for the trigger: a bad touch, a back pass to the keeper, a slow defender. The second you see it, all three forwards press at once — together. One person pressing alone never works.`,
+                  tip: `Key: Make eye contact with each other. Press as a pack, not solo.` },
+                { role: '#2·3', rc: '', t: '🚀 Fullbacks Join the Attack',
+                  b: `When we have control in their half, the fullbacks push high along the sidelines. Now we have five players threatening their goal — that's too many for them to mark.`,
+                  tip: `Key: Hug the touchline. Don't cut inside — stay wide to create space for the wingers.` },
+                { role: '#4·5·6', rc: '', t: '🧱 Hold the Line',
+                  b: `With fullbacks forward, the center backs and #6 stay in a disciplined line near midfield. If we lose the ball, we need to be organized — not scrambling back from their end.`,
+                  tip: `Key: Do NOT follow the attack forward. Your job is to protect the space behind.` }
             ]}
         };
         const d = D[v];
         return `<span class="tactic-section-badge ${d.badge}">${d.label}</span>` +
             d.items.map(i =>
-                `<div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;">
+                `<div class="tactic-item">
                     <div class="tactic-role ${i.rc}">${i.role}</div>
-                    <div><div class="tactic-heading">${i.t}</div><div class="tactic-body">${i.b}</div></div>
+                    <div class="tactic-item-body">
+                        <div class="tactic-heading">${i.t}</div>
+                        <div class="tactic-body">${i.b}</div>
+                        <div class="tactic-tip">${i.tip}</div>
+                    </div>
                 </div>`
             ).join('');
     }
+    function renderSetPiece(container, view) {
+        const isCorner = view === 'corner';
+        const plays = isCorner ? [
+            {
+                id: 'atk-corner',
+                label: "⚽ Attacking Corner",
+                color: '#00234b',
+                desc: "Three options run at once. The kicker reads which defender loses their mark first and picks that runner.",
+                tips: [
+                    { role: '#9', color: '#dc2626',  text: "Near Post Run — Sprint to the near post. Flick it on or let it go through to the back post runners." },
+                    { role: '#7', color: '#ffcc00',  text: "Back Post Run — Arrive late to the back post. Time your run so you reach the ball at full speed." },
+                    { role: '#10', color: '#3b82f6', text: 'Short Corner — Stay close to the kicker. If neither run is on, #10 offers a short pass to reset.' },
+                    { role: '#6', color: '#16a34a',  text: "Edge of Box — Hold back at the edge for a clearance or a second ball. Also tracks counter." },
+                ],
+                svg: `<svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:0 auto;">
+                    <!-- Field -->
+                    <rect width="200" height="260" fill="#1a5c30"/>
+                    <!-- Penalty area -->
+                    <rect x="35" y="10" width="130" height="90" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <!-- Goal area -->
+                    <rect x="70" y="10" width="60" height="30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <!-- Goal -->
+                    <rect x="80" y="4" width="40" height="10" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                    <!-- Goal line -->
+                    <line x1="0" y1="10" x2="200" y2="10" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                    <!-- Corner arc -->
+                    <path d="M 200 10 A 20 20 0 0 0 180 30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                    <!-- Penalty spot -->
+                    <circle cx="100" cy="68" r="2" fill="rgba(255,255,255,0.4)"/>
+
+                    <!-- Corner flag + kicker -->
+                    <circle cx="192" cy="18" r="7" fill="white" stroke="#00234b" stroke-width="2"/>
+                    <text x="192" y="22" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">11</text>
+
+                    <!-- Runner 1: #9 near post (red) -->
+                    <circle cx="90" cy="28" r="7" fill="#dc2626" stroke="white" stroke-width="1.5"/>
+                    <text x="90" y="32" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="white">9</text>
+                    <path d="M 185 22 Q 140 15 97 28" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4 2" marker-end="url(#arr-r)"/>
+
+                    <!-- Runner 2: #7 back post (gold) -->
+                    <circle cx="115" cy="55" r="7" fill="#ffcc00" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="115" y="59" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">7</text>
+                    <path d="M 185 22 Q 160 40 122 52" fill="none" stroke="#ffcc00" stroke-width="1.8" stroke-dasharray="4 2" marker-end="url(#arr-g)"/>
+
+                    <!-- #10 short corner -->
+                    <circle cx="165" cy="45" r="7" fill="#3b82f6" stroke="white" stroke-width="1.5"/>
+                    <text x="165" y="49" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="white">10</text>
+                    <path d="M 185 22 Q 178 32 172 43" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="3 2" marker-end="url(#arr-b)"/>
+
+                    <!-- #6 edge -->
+                    <circle cx="100" cy="100" r="7" fill="#16a34a" stroke="white" stroke-width="1.5"/>
+                    <text x="100" y="104" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="white">6</text>
+
+                    <defs>
+                        <marker id="arr-r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/></marker>
+                        <marker id="arr-g" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#ffcc00"/></marker>
+                        <marker id="arr-b" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#3b82f6"/></marker>
+                    </defs>
+                </svg>`
+            },
+            {
+                id: 'def-corner',
+                label: "🛡️ Defending a Corner",
+                color: '#1a3a6b',
+                desc: "Zonal marking — each defender owns a zone, not a person. Stay goal-side, watch the ball, and attack it.",
+                tips: [
+                    { role: '#1', color: '#ffcc00', text: 'GK owns the 6-yard box. Call "KEEPER!" loudly and come for anything in your zone. Command the box.' },
+                    { role: '#4·5', color: 'white',  text: "Near Post & Back Post — one CB on each post. Don't leave your post until the ball is cleared." },
+                    { role: '#2·3·6', color: '#93c5fd', text: 'Zone Markers — spread across the penalty area. Attack the ball if it enters your zone. Stay between attacker and goal.' },
+                    { role: '#7·11', color: '#fbbf24', text: 'Counter-Attack Runners — stay near the halfway line. The second we clear, you run — turn defense into attack immediately.' },
+                ],
+                svg: `<svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:0 auto;">
+                    <rect width="200" height="260" fill="#1a5c30"/>
+                    <rect x="35" y="10" width="130" height="90" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <rect x="70" y="10" width="60" height="30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <rect x="80" y="4" width="40" height="10" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                    <line x1="0" y1="10" x2="200" y2="10" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                    <path d="M 200 10 A 20 20 0 0 0 180 30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                    <circle cx="100" cy="68" r="2" fill="rgba(255,255,255,0.4)"/>
+
+                    <!-- Opponent kicker -->
+                    <circle cx="192" cy="18" r="7" fill="rgba(220,38,38,0.8)" stroke="white" stroke-width="1.5"/>
+                    <text x="192" y="22" text-anchor="middle" font-family="Nunito" font-size="7" font-weight="900" fill="white">OPP</text>
+
+                    <!-- #1 GK -->
+                    <circle cx="100" cy="22" r="8" fill="#ffcc00" stroke="#00234b" stroke-width="2"/>
+                    <text x="100" y="26" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">1</text>
+
+                    <!-- #4 near post -->
+                    <circle cx="82" cy="14" r="7" fill="white" stroke="#00234b" stroke-width="2"/>
+                    <text x="82" y="18" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">4</text>
+
+                    <!-- #5 back post -->
+                    <circle cx="118" cy="14" r="7" fill="white" stroke="#00234b" stroke-width="2"/>
+                    <text x="118" y="18" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">5</text>
+
+                    <!-- Zone markers -->
+                    <circle cx="65" cy="45" r="7" fill="#93c5fd" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="65" y="49" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">2</text>
+                    <circle cx="100" cy="52" r="7" fill="#93c5fd" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="100" y="56" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">6</text>
+                    <circle cx="135" cy="45" r="7" fill="#93c5fd" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="135" y="49" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">3</text>
+
+                    <!-- Counter runners -->
+                    <circle cx="30" cy="140" r="7" fill="#fbbf24" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="30" y="144" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">11</text>
+                    <circle cx="170" cy="140" r="7" fill="#fbbf24" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="170" y="144" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">7</text>
+                    <text x="100" y="160" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="700" fill="rgba(255,255,255,0.5)">← on counter duty →</text>
+                </svg>`
+            }
+        ] : [
+            {
+                id: 'throwin-def',
+                label: "🛡️ Throw-In: Defensive Third",
+                color: '#00234b',
+                desc: "Keep it simple and safe. Never throw across the field in your own third — one mistake becomes a goal.",
+                tips: [
+                    { role: '#4·5', color: 'white',  text: "Drop deep to give the thrower an easy option. Receive with your back to the field, then play it back to the GK to reset." },
+                    { role: '#6', color: '#ffcc00',  text: "Move to create a second angle — if the nearest defender is covered, #6 is always the backup option." },
+                    { role: '⚠️', color: '#dc2626',  text: "NEVER throw across the middle of your own half. If it gets intercepted near your goal, that's a scoring chance for them." },
+                ],
+                svg: `<svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:0 auto;">
+                    <rect width="200" height="260" fill="#1a5c30"/>
+                    <rect x="35" y="170" width="130" height="90" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <rect x="70" y="170" width="60" height="30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <rect x="80" y="246" width="40" height="10" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                    <line x1="0" y1="260" x2="200" y2="260" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                    <line x1="0" y1="130" x2="200" y2="130" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="4 4"/>
+                    <text x="100" y="125" text-anchor="middle" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.3)">HALFWAY LINE</text>
+
+                    <!-- Thrower -->
+                    <circle cx="0" cy="200" r="7" fill="white" stroke="#00234b" stroke-width="2"/>
+                    <text x="0" y="204" text-anchor="middle" font-family="Nunito" font-size="7" font-weight="900" fill="#00234b">3</text>
+
+                    <!-- #5 dropping deep -->
+                    <circle cx="55" cy="215" r="7" fill="white" stroke="#00234b" stroke-width="2"/>
+                    <text x="55" y="219" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">5</text>
+                    <path d="M 7 200 Q 30 207 48 214" fill="none" stroke="white" stroke-width="1.8" stroke-dasharray="4 2" marker-end="url(#arr-w2)"/>
+
+                    <!-- #6 angle -->
+                    <circle cx="60" cy="185" r="7" fill="#ffcc00" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="60" y="189" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">6</text>
+
+                    <!-- Red X zone -->
+                    <line x1="80" y1="180" x2="160" y2="230" stroke="#dc2626" stroke-width="2" opacity="0.6"/>
+                    <line x1="160" y1="180" x2="80" y2="230" stroke="#dc2626" stroke-width="2" opacity="0.6"/>
+                    <text x="120" y="210" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#dc2626">DANGER</text>
+                    <text x="120" y="222" text-anchor="middle" font-family="Nunito" font-size="7" fill="#dc2626">Never throw here</text>
+
+                    <defs><marker id="arr-w2" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="white"/></marker></defs>
+                </svg>`
+            },
+            {
+                id: 'throwin-att',
+                label: "⚡ Throw-In: Attacking Third",
+                color: '#1a3a6b',
+                desc: "This is a mini set piece. Use movement to create space and keep the pressure going.",
+                tips: [
+                    { role: '#7·11', color: '#ffcc00', text: 'The winger near the thrower pulls AWAY first — dragging their defender with them — then spins back into the space they just created.' },
+                    { role: '#9', color: '#dc2626',    text: "Make a run toward the goal. Even if you don't get the ball, you pull a defender away and create space for the winger." },
+                    { role: '#8·10', color: '#93c5fd',  text: "Stay back slightly as second-ball option. If the first touch is cleared, you need to be ready to keep possession." },
+                    { role: '💡', color: '#ffcc00',    text: "Quick throws catch defenders off guard. If someone is open immediately, go fast — don't wait for a &quot;set play.&quot;" },
+                ],
+                svg: `<svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:0 auto;">
+                    <rect width="200" height="260" fill="#1a5c30"/>
+                    <rect x="35" y="10" width="130" height="90" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <rect x="70" y="10" width="60" height="30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <rect x="80" y="4" width="40" height="10" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                    <line x1="0" y1="10" x2="200" y2="10" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                    <line x1="0" y1="130" x2="200" y2="130" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="4 4"/>
+                    <circle cx="100" cy="68" r="2" fill="rgba(255,255,255,0.4)"/>
+
+                    <!-- Thrower #2 -->
+                    <circle cx="200" cy="60" r="7" fill="white" stroke="#00234b" stroke-width="2"/>
+                    <text x="200" y="64" text-anchor="middle" font-family="Nunito" font-size="7" font-weight="900" fill="#00234b">2</text>
+
+                    <!-- #7 run away then back -->
+                    <circle cx="155" cy="55" r="7" fill="#ffcc00" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="155" y="59" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">7</text>
+                    <path d="M 162 57 Q 175 80 165 95 Q 152 110 140 80 Q 135 65 148 56" fill="none" stroke="#ffcc00" stroke-width="1.8" stroke-dasharray="3 2" marker-end="url(#arr-g2)"/>
+
+                    <!-- #9 goal run -->
+                    <circle cx="100" cy="90" r="7" fill="#dc2626" stroke="white" stroke-width="1.5"/>
+                    <text x="100" y="94" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="white">9</text>
+                    <path d="M 100 83 Q 100 60 100 45" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="3 2" marker-end="url(#arr-r2)"/>
+
+                    <!-- #10 second ball -->
+                    <circle cx="140" cy="110" r="7" fill="#93c5fd" stroke="#00234b" stroke-width="1.5"/>
+                    <text x="140" y="114" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="#00234b">10</text>
+
+                    <defs>
+                        <marker id="arr-g2" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#ffcc00"/></marker>
+                        <marker id="arr-r2" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/></marker>
+                    </defs>
+                </svg>`
+            }
+        ];
+
+        const playsHTML = plays.map((play, pi) => `
+            <div class="sp-play${pi===0?' sp-play-active':''}" id="sp-play-${play.id}" onclick="selectSPPlay('${play.id}')">
+                <div class="sp-play-header" style="background:${play.color};">
+                    <span class="sp-play-label">${play.label}</span>
+                </div>
+            </div>`).join('');
+
+        const activePlay = plays[0];
+
+        container.innerHTML = `${headerHTML(isCorner ? 'Corner Kicks' : 'Throw-Ins', 'SET')}
+        <div class="tactic-subnav">
+            <button onclick="switchTacticView('overview')"  class="tactic-btn">Full Team</button>
+            <button onclick="switchTacticView('defense')"   class="tactic-btn">Defense Flow</button>
+            <button onclick="switchTacticView('midfield')"  class="tactic-btn">Midfield Flow</button>
+            <button onclick="switchTacticView('attack')"    class="tactic-btn">Attack Flow</button>
+            <button onclick="switchTacticView('corner')"    class="tactic-btn ${isCorner?'active':''}">⚽ Corners</button>
+            <button onclick="switchTacticView('throwin')"   class="tactic-btn ${!isCorner?'active':''}">🤾 Throw-Ins</button>
+        </div>
+        <div class="sp-wrap">
+            <div class="sp-sidebar">
+                ${plays.map((p, pi) => `<div class="sp-tab${pi===0?' active':''}" id="sptab-${p.id}" onclick="selectSPPlay('${p.id}', ${JSON.stringify(plays).replace(/</g,'&lt;')})">${p.label}</div>`).join('')}
+            </div>
+            <div class="sp-content" id="spContent">
+                ${renderSPContent(activePlay)}
+            </div>
+        </div>
+        ${footerHTML('Set Pieces')}`;
+
+        window._spPlays = plays;
+    }
+
+    function renderSPContent(play) {
+        return `<div class="sp-diagram">${play.svg}</div>
+        <div class="sp-info">
+            <div class="sp-desc">${play.desc}</div>
+            <div class="sp-tips">
+                ${play.tips.map(t => `<div class="sp-tip-row">
+                    <span class="sp-tip-role" style="background:${t.color};color:${t.color==='white'||t.color==='#ffcc00'?'#00234b':'white'}">${t.role}</span>
+                    <span class="sp-tip-text">${t.text}</span>
+                </div>`).join('')}
+            </div>
+        </div>`;
+    }
+
+    function selectSPPlay(id) {
+        const plays = window._spPlays || [];
+        const play = plays.find(p => p.id === id);
+        if (!play) return;
+        document.querySelectorAll('.sp-tab').forEach(t => t.classList.remove('active'));
+        const tab = document.getElementById('sptab-' + id);
+        if (tab) tab.classList.add('active');
+        const content = document.getElementById('spContent');
+        if (content) content.innerHTML = renderSPContent(play);
+    }
+
 
     let tacticAnimFrame = null;
     function easeInOutTactic(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
@@ -2066,6 +2399,11 @@
     }
 
     function switchTacticView(toView) {
+        if (toView === 'corner' || toView === 'throwin') {
+            currentTacticView = toView;
+            renderTactics(document.getElementById('main-content'));
+            return;
+        }
         if (!document.getElementById('tactic-board')) {
             currentTacticView = toView;
             renderTactics(document.getElementById('main-content'));
@@ -2134,11 +2472,16 @@
     function updateTacticBoard() { switchTacticView(currentTacticView); }
 
     function renderTactics(container) {
+        if (currentTacticView === 'corner' || currentTacticView === 'throwin') {
+            renderSetPiece(container, currentTacticView);
+            return;
+        }
         const sec = TEAM_CONFIG.branding.secondaryColor;
+        const PNAMES = {1:'GK',2:'RB',3:'LB',4:'RCB',5:'LCB',6:'CDM',7:'RW',8:'CM',9:'ST',10:'CM',11:'LW'};
         const dots = PLAYER_CONFIG.map(p => {
             const pos = p[currentTacticView] || p.base;
             const hl = getPHL(p, currentTacticView);
-            return `<div id="pd-${p.id}" class="player-dot ${hl}" style="left:${pos[0]}%;top:${pos[1]}%;${getPStyle(p)}">${p.id}</div>`;
+            return `<div id="pd-${p.id}" class="player-dot ${hl}" title="${PNAMES[p.id]||''}" style="left:${pos[0]}%;top:${pos[1]}%;${getPStyle(p)}">${p.id}<span class="pd-pos">${PNAMES[p.id]||''}</span></div>`;
         }).join('');
         container.innerHTML = `${headerHTML(TEAM_CONFIG.branding.tacticalSystem, 'TACTICS')}
         <div class="tactic-subnav">
@@ -2146,6 +2489,8 @@
             <button id="tbtn-defense"   onclick="switchTacticView('defense')"   class="tactic-btn ${currentTacticView==='defense'?'active':''}">Defense Flow</button>
             <button id="tbtn-midfield"  onclick="switchTacticView('midfield')"  class="tactic-btn ${currentTacticView==='midfield'?'active':''}">Midfield Flow</button>
             <button id="tbtn-attack"    onclick="switchTacticView('attack')"    class="tactic-btn ${currentTacticView==='attack'?'active':''}">Attack Flow</button>
+            <button id="tbtn-corner"    onclick="switchTacticView('corner')"    class="tactic-btn ${currentTacticView==='corner'?'active':''}">⚽ Corners</button>
+            <button id="tbtn-throwin"   onclick="switchTacticView('throwin')"   class="tactic-btn ${currentTacticView==='throwin'?'active':''}">🤾 Throw-Ins</button>
         </div>
         <div id="tactic-board" style="display:flex;flex-direction:row;min-height:460px;">
             <div style="background:var(--primary);width:44%;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
@@ -2219,6 +2564,133 @@
         });
     }
 
+    function buildUTDMap(utdFields) {
+        // utdFields: { 7: [{date,time,opp,...}], 9: [...] }
+
+        function fieldColor(num) {
+            if (utdFields[num]) return { fill:'#ffcc00', stroke:'#00234b', sw:2.5, text:'#00234b', sub:'rgba(0,35,75,0.6)' };
+            return { fill:'#1a5c30', stroke:'rgba(255,255,255,0.3)', sw:0.8, text:'rgba(255,255,255,0.8)', sub:'rgba(255,255,255,0.35)' };
+        }
+
+        function field(num, x, y, w, h) {
+            var c = fieldColor(num);
+            var cx = x + w/2, cy = y + h/2;
+            var badge = utdFields[num] ? '<text x="'+cx+'" y="'+(y+10)+'" text-anchor="middle" font-family="Nunito" font-size="7" font-weight="900" fill="'+c.text+'">★</text>' : '';
+            var midY = (y + h/2) - 5;
+            return '<g onclick="utdFieldClick('+num+')" style="cursor:pointer;">' +
+                '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="3" fill="'+c.fill+'" stroke="'+c.stroke+'" stroke-width="'+c.sw+'" style="transition:filter 0.15s;" id="utdf-'+num+'"/>' +
+                // pitch markings
+                '<line x1="'+(x+3)+'" y1="'+cy+'" x2="'+(x+w-3)+'" y2="'+cy+'" stroke="rgba(255,255,255,0.18)" stroke-width="0.6"/>' +
+                '<rect x="'+(cx-10)+'" y="'+(y+4)+'" width="20" height="12" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>' +
+                '<rect x="'+(cx-10)+'" y="'+(y+h-16)+'" width="20" height="12" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>' +
+                badge +
+                '<text x="'+cx+'" y="'+(cy + (utdFields[num]?4:2))+'" text-anchor="middle" dominant-baseline="middle" font-family="Bebas Neue,Nunito" font-size="'+(utdFields[num]?13:11)+'" font-weight="900" fill="'+c.text+'">UTD-'+num+'</text>' +
+                '</g>';
+        }
+
+        // Layout: viewBox 0 0 320 370
+        // Upper block: UTD-3,2,1 (row1) UTD-6,5,4 (row2)
+        // Field St divider
+        // Lower block: UTD-8,7 (row3) UTD-10,9 (row4)
+        // Lot U right of lower block
+        var fw = 72, fh = 86, gap = 8;
+        var ux = 12, uy = 22;
+
+        var svgFields = '';
+        // Row 1: UTD-3, UTD-2, UTD-1
+        svgFields += field(3, ux,           uy,           fw, fh);
+        svgFields += field(2, ux+fw+gap,    uy,           fw, fh);
+        svgFields += field(1, ux+2*(fw+gap),uy,           fw, fh);
+        // Row 2: UTD-6, UTD-5, UTD-4
+        svgFields += field(6, ux,           uy+fh+gap,    fw, fh);
+        svgFields += field(5, ux+fw+gap,    uy+fh+gap,    fw, fh);
+        svgFields += field(4, ux+2*(fw+gap),uy+fh+gap,    fw, fh);
+        // Lower block y-start
+        var ly = uy + 2*(fh+gap) + 28;
+        // Row 3: UTD-8, UTD-7
+        svgFields += field(8, ux,           ly,           fw, fh);
+        svgFields += field(7, ux+fw+gap,    ly,           fw, fh);
+        // Row 4: UTD-10, UTD-9
+        svgFields += field(10, ux,          ly+fh+gap,    fw, fh);
+        svgFields += field(9,  ux+fw+gap,   ly+fh+gap,    fw, fh);
+
+        var fieldStY = uy + 2*(fh+gap) + 4;
+        var lotUX = ux + 2*(fw+gap) + fw + 16;
+        var lotUY = ly;
+        var lotUW = 80;
+        var lotUH = 2*fh + gap;
+
+        // Build info panel (shown on click)
+        var infoRows = '';
+        Object.keys(utdFields).sort().forEach(function(num) {
+            utdFields[num].forEach(function(m) {
+                infoRows += '<div class="utd-info-row">' +
+                    '<span class="utd-field-badge">UTD-'+num+'</span>' +
+                    '<div class="utd-info-detail"><strong>'+m.date+' · '+m.time+'</strong><br>vs #'+m.rank+' '+m.opp+'</div>' +
+                    '</div>';
+            });
+        });
+
+        var svg = '<svg viewBox="0 0 320 370" xmlns="http://www.w3.org/2000/svg" class="utd-svg">' +
+            // Background
+            '<rect width="320" height="370" fill="#2d3a2d"/>' +
+            // Upper complex background
+            '<rect x="6" y="16" width="'+(3*fw+2*gap+12)+'" height="'+(2*fh+gap+12)+'" rx="5" fill="#243324" opacity="0.8"/>' +
+            // Lower complex background
+            '<rect x="6" y="'+(fieldStY+20)+'" width="'+(2*fw+gap+12)+'" height="'+(2*fh+gap+12)+'" rx="5" fill="#243324" opacity="0.8"/>' +
+            // Field St road
+            '<rect x="0" y="'+fieldStY+'" width="320" height="22" fill="#5a5848" opacity="0.9"/>' +
+            '<text x="160" y="'+(fieldStY+15)+'" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="2">FIELD ST</text>' +
+            // Loop Road label at top
+            '<rect x="0" y="0" width="320" height="16" fill="#5a5848" opacity="0.8"/>' +
+            '<text x="120" y="11" text-anchor="middle" font-family="Nunito" font-size="7" font-weight="700" fill="rgba(255,255,255,0.65)" letter-spacing="1">LOOP ROAD SW</text>' +
+            // Pavilion marker
+            '<rect x="'+(ux+2*(fw+gap)+fw+4)+'" y="'+(uy+fh+gap)+'" width="14" height="20" rx="2" fill="#3a4a6a"/>' +
+            '<text x="'+(ux+2*(fw+gap)+fw+11)+'" y="'+(uy+fh+gap+23)+'" text-anchor="middle" font-family="Nunito" font-size="6" fill="rgba(255,255,255,0.5)">PAV</text>' +
+            // Lot U parking
+            '<rect x="'+lotUX+'" y="'+lotUY+'" width="'+lotUW+'" height="'+lotUH+'" rx="4" fill="#1e3a8a" opacity="0.85"/>' +
+            '<text x="'+(lotUX+lotUW/2)+'" y="'+(lotUY+22)+'" text-anchor="middle" font-family="Bebas Neue,Nunito" font-size="14" fill="#ffcc00" letter-spacing="1">P</text>' +
+            '<text x="'+(lotUX+lotUW/2)+'" y="'+(lotUY+35)+'" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="white">LOT U</text>' +
+            '<text x="'+(lotUX+lotUW/2)+'" y="'+(lotUY+48)+'" text-anchor="middle" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.6)">Park Here</text>' +
+            '<text x="'+(lotUX+lotUW/2)+'" y="'+(lotUY+60)+'" text-anchor="middle" font-family="Nunito" font-size="6" fill="rgba(255,255,255,0.45)">Enter from</text>' +
+            '<text x="'+(lotUX+lotUW/2)+'" y="'+(lotUY+70)+'" text-anchor="middle" font-family="Nunito" font-size="6" fill="rgba(255,255,255,0.45)">Field St</text>' +
+            // Arrow from Lot U to lower fields
+            '<path d="M '+lotUX+' '+(lotUY+lotUH/2)+' L '+(ux+2*(fw+gap)+fw+6)+' '+(lotUY+lotUH/2)+'" fill="none" stroke="rgba(255,204,0,0.5)" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrowU)"/>' +
+            // Lot J (crossed out, top right)
+            '<rect x="250" y="20" width="60" height="34" rx="3" fill="#3a2020" opacity="0.8"/>' +
+            '<text x="280" y="34" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="700" fill="rgba(220,38,38,0.7)">LOT J</text>' +
+            '<text x="280" y="46" text-anchor="middle" font-family="Nunito" font-size="7" fill="rgba(220,38,38,0.7)">Do Not Park</text>' +
+            '<line x1="250" y1="20" x2="310" y2="54" stroke="#dc2626" stroke-width="2" opacity="0.8"/>' +
+            '<line x1="310" y1="20" x2="250" y2="54" stroke="#dc2626" stroke-width="2" opacity="0.8"/>' +
+            // Legend
+            '<rect x="0" y="356" width="320" height="14" fill="rgba(0,0,0,0.4)"/>' +
+            '<rect x="8" y="360" width="8" height="8" rx="1" fill="#ffcc00" stroke="#00234b" stroke-width="1.2"/>' +
+            '<text x="20" y="367" font-family="Nunito" font-size="7" font-weight="900" fill="#ffcc00">Your Field</text>' +
+            '<rect x="80" y="360" width="8" height="8" rx="1" fill="#1a5c30" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>' +
+            '<text x="92" y="367" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.6)">Other Fields</text>' +
+            '<text x="312" y="367" font-family="Nunito" font-size="6.5" fill="rgba(255,255,255,0.3)" text-anchor="end">6701 Floyd Rd · Richardson TX</text>' +
+            '<defs><marker id="arrowU" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,204,0,0.5)"/></marker></defs>' +
+            svgFields +
+            '</svg>';
+
+        var infoPanel = Object.keys(utdFields).length > 0
+            ? '<div class="utd-info-panel">' + infoRows + '</div>'
+            : '';
+
+        return '<div class="utd-map-section">' +
+            '<div class="tourn-sub-label" style="margin-top:28px;">📍 Venue Map · UT Dallas</div>' +
+            '<div class="utd-map-wrap">' + svg + infoPanel + '</div>' +
+            '<div class="utd-parking-note">&#128663; <strong>Park in Lot U</strong> — enter from Field St (east side of complex). <strong>Do not use Lot J.</strong></div>' +
+            '</div>';
+    }
+
+    function utdFieldClick(num) {
+        document.querySelectorAll('[id^="utdf-"]').forEach(function(r){ r.style.filter=''; });
+        var sel = document.getElementById('utdf-'+num);
+        if (sel) sel.style.filter = 'brightness(1.3) drop-shadow(0 0 5px rgba(255,204,0,0.7))';
+    }
+
+
     function renderSchedule(container) {
         var schedule = TEAM_CONFIG.remainingSchedule;
         var cardsHTML = schedule.length === 0
@@ -2255,10 +2727,22 @@
                     '</div>' +
                 '</div>';
             }).join('');
+        // Build UTD field highlights from schedule locs
+        var utdFields = {};
+        schedule.forEach(function(m) {
+            var match = (m.loc||'').match(/UT\s*Dallas\s*#?(\d+)/i);
+            if (match) {
+                var num = parseInt(match[1], 10);
+                if (!utdFields[num]) utdFields[num] = [];
+                utdFields[num].push(m);
+            }
+        });
+
         container.innerHTML = headerHTML('Schedule', 'SCHED') +
             '<div class="content-area">' +
             '<div class="section-title" style="margin-bottom:16px;">Remaining Games <span>' + schedule.length + '</span></div>' +
             '<div class="sched-cards">' + cardsHTML + '</div>' +
+            buildUTDMap(utdFields) +
             '</div>' + footerHTML('Official Schedule');
     }
 
@@ -2296,7 +2780,7 @@
             const grp = ct.group;
             const groupCards = (grp.matches||[]).map(m=>{
                 const isOurs = m.home===grp.ourTeam||m.away===grp.ourTeam;
-                const sc = m.score?`<span class="tc-score">${m.score}</span>`:`<span class="tc-tbd">TBD</span>`;
+                const sc = m.score ? `<span class="tc-score">${m.score}</span>` : '';
                 return `<div class="tc-card${isOurs?' tc-card-ours':''}"><div class="tc-card-top"><div class="tc-date-block"><div class="tc-day">${m.date.split(' ')[0]}</div><div class="tc-dt">${m.date.split(' ').slice(1).join(' ')}</div></div><div class="tc-time-field"><div class="tc-time">&#128336; ${m.time}</div><div class="tc-field">&#128205; ${m.field}</div></div>${sc}</div><div class="tc-matchup"><span class="tc-team${m.home===grp.ourTeam?' tc-us':''}">${m.home}</span><span class="tc-vs">vs</span><span class="tc-team${m.away===grp.ourTeam?' tc-us':''}">${m.away}</span></div></div>`;
             }).join('');
             const br = ct.bracket;
