@@ -2485,14 +2485,28 @@
                             <marker id="arrowSec" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="${sec}"/></marker>
                             <marker id="arrowWhite" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/></marker>
                         </defs>
+                        <!-- Field markings — all in SVG for reliable rendering -->
+                        <g stroke="rgba(255,255,255,0.35)" fill="none" stroke-width="0.5">
+                            <!-- Halfway line -->
+                            <line x1="0" y1="50" x2="100" y2="50" stroke-width="0.6"/>
+                            <!-- Center circle -->
+                            <circle cx="50" cy="50" r="10"/>
+                            <!-- Center spot -->
+                            <circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.35)" stroke="none"/>
+                            <!-- Top penalty area (opponent end) -->
+                            <rect x="17" y="0" width="66" height="20"/>
+                            <!-- Top 6-yard box -->
+                            <rect x="35" y="0" width="30" height="8"/>
+                            <!-- Bottom penalty area (our end) -->
+                            <rect x="17" y="80" width="66" height="20"/>
+                            <!-- Bottom 6-yard box -->
+                            <rect x="35" y="92" width="30" height="8"/>
+                            <!-- Penalty spots -->
+                            <circle cx="50" cy="14" r="0.8" fill="rgba(255,255,255,0.35)" stroke="none"/>
+                            <circle cx="50" cy="86" r="0.8" fill="rgba(255,255,255,0.35)" stroke="none"/>
+                        </g>
                         <g id="tactic-svg-overlays">${getTacticalOverlays(currentTacticView)}</g>
                     </svg>
-                    <div style="position:absolute;inset-x:0;top:0;height:50%;border-bottom:2px solid rgba(255,255,255,0.3);"></div>
-                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;"></div>
-                    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:130px;height:56px;border:2px solid rgba(255,255,255,0.3);border-top:none;"></div>
-                    <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:130px;height:56px;border:2px solid rgba(255,255,255,0.3);border-bottom:none;"></div>
-                    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:64px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top:none;"></div>
-                    <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:64px;height:20px;border:2px solid rgba(255,255,255,0.3);border-bottom:none;"></div>
                     ${dots}
                 </div>
                 <div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.25);text-align:center;">${TEAM_CONFIG.branding.motto}</div>
