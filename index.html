@@ -501,6 +501,18 @@
         .sp-sub-btn.active{background:var(--primary);color:var(--secondary);}
         .sp-role{border-radius:3px;flex-shrink:0;min-width:44px;text-align:center;font-family:'Bebas Neue','Nunito',sans-serif;letter-spacing:0.5px;}
 
+
+        /* ===== SET PIECE MOBILE ===== */
+        .sp-role-badge{font-family:'Bebas Neue','Nunito',sans-serif;font-size:13px;letter-spacing:1px;padding:3px 10px;background:var(--primary);border-radius:3px;flex-shrink:0;min-width:48px;text-align:center;}
+        @media(max-width:700px){
+            #sp-board{flex-direction:column !important;}
+            #sp-board > div:first-child{width:100% !important;padding:12px 12px 8px !important;min-height:0;}
+            #sp-board > div:first-child > div:first-child{display:none;}
+            #sp-desc-panel{padding:16px !important;}
+            .sp-sub-nav{gap:6px;}
+            .sp-sub-btn{font-size:10px;padding:6px 10px;}
+        }
+
         /* ===== HOME TAB ===== */
         .home-content{padding:0;}
         .home-hero{background:var(--primary);padding:24px 32px;border-bottom:1px solid rgba(255,204,0,0.15);position:relative;overflow:hidden;}
@@ -2291,20 +2303,20 @@
 
     function buildSPDesc(play) {
         var tipRows = play.tips.map(function(t) {
-            var textColor = (t.color === 'white' || t.color === '#ffcc00' || t.color === '#fbbf24') ? '#00234b' : 'white';
+            // Always navy badge background, role color as text — readable on cream
+            var accentColor = (t.color === 'white') ? 'rgba(255,255,255,0.9)' : t.color;
             return '<div class="tactic-item">' +
-                '<div class="tactic-role sp-role" style="background:' + t.color + ';color:' + textColor + ';font-size:11px;padding:4px 6px;min-width:44px;">' + t.role + '</div>' +
+                '<div class="sp-role-badge" style="color:' + accentColor + ';border-left:3px solid ' + accentColor + ';">' + t.role + '</div>' +
                 '<div class="tactic-item-body">' +
                     '<div class="tactic-body">' + t.text + '</div>' +
                 '</div>' +
             '</div>';
         }).join('');
-        var badgeColor = play.badge === 'attack' ? '#dc2626' : play.badge === 'defense' ? '#1e40af' : '#00234b';
         return '<div style="margin-bottom:12px;">' +
                 '<span class="tactic-section-badge ' + play.badge + '">' + play.label + '</span>' +
             '</div>' +
             '<p style="font-family:\'Nunito\',sans-serif;font-size:13px;color:rgba(0,35,75,0.70);line-height:1.6;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--secondary);">' + play.desc + '</p>' +
-            '<div style="display:flex;flex-direction:column;gap:14px;">' + tipRows + '</div>';
+            '<div style="display:flex;flex-direction:column;gap:12px;">' + tipRows + '</div>';
     }
 
     function selectSPPlay(id) {
