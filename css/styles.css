@@ -109,7 +109,45 @@ body{
 .team-switcher-btn.active{
     color:var(--bg);background:var(--accent);border-color:var(--accent);font-weight:800;
     box-shadow:0 2px 14px var(--accent-soft);
+    --crest-ink:var(--bg);
 }
+
+
+/* ===== IDENTITY ===== */
+.site-brand{display:flex;align-items:center;gap:11px;}
+.site-brand .mark{display:block;flex-shrink:0;}
+.site-wordmark{
+    font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.02em;color:var(--text);
+}
+.site-wordmark span{color:var(--accent);}
+
+.header-identity{display:flex;align-items:flex-start;gap:16px;min-width:0;}
+.crest{display:block;flex-shrink:0;margin-top:2px;}
+.header-id-text{min-width:0;}
+.header-meta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;}
+
+/* Last-five pips — the row of stars, replaced by something true */
+.form-pips{display:flex;align-items:center;gap:4px;}
+.form-pip{width:16px;height:5px;border-radius:3px;background:var(--border2);}
+.form-pip.pip-W{background:var(--green);}
+.form-pip.pip-L{background:var(--red);}
+.form-pip.pip-D{background:var(--amber);}
+.form-pips-label{
+    font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text3);margin-left:4px;
+}
+.header-record-label{
+    font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text3);margin-top:5px;
+}
+.header-record span{color:var(--text3);margin:0 5px;font-weight:400;}
+
+/* Team switcher carries each team's crest */
+#team-switcher{
+    width:100%;max-width:1100px;display:flex;flex-wrap:wrap;gap:9px;margin-top:2px;
+}
+.team-switcher-btn{display:inline-flex;align-items:center;gap:9px;}
+.team-switcher-btn .crest{margin-top:0;}
 
 /* ===== SEASON PULSE ===== */
 .season-pulse{
@@ -160,6 +198,13 @@ body{
     opacity:1;transition:opacity .12s var(--ease);
 }
 .main-card.switching{opacity:0;}
+.main-card > *{animation:viewIn .22s var(--ease) both;}
+@keyframes viewIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+@media(prefers-reduced-motion:reduce){
+    .main-card > *{animation:none;}
+    .progress-fill,.momentum-fill{transition:none;}
+    html{scroll-behavior:auto;}
+}
 
 /* ===== CARD HEADER / FOOTER ===== */
 .card-header{
@@ -173,9 +218,7 @@ body{
     content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;
     background:linear-gradient(90deg,var(--accent),transparent 55%);
 }
-.header-stars{
-    font-size:9px;letter-spacing:3px;color:var(--accent);opacity:.5;margin-bottom:10px;
-}
+
 .header-team-name{
     font-family:var(--display);font-size:29px;font-weight:700;letter-spacing:-.03em;
     line-height:1.1;color:var(--text);
@@ -185,7 +228,7 @@ body{
     color:var(--accent);margin-top:9px;
 }
 .header-badge{
-    display:inline-block;margin-top:12px;
+    display:inline-block;
     font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
     color:var(--text2);background:var(--elevated);border:1px solid var(--border2);
     border-radius:999px;padding:4px 11px;

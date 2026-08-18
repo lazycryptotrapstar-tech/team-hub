@@ -34,6 +34,81 @@ function hexToRgb(hex) {
     return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(',');
 }
 
+/* ============================================================
+   IDENTITY
+   No logo files: the product mark and each team's crest are drawn
+   from the team's own name and colour, so any team that joins gets
+   an identity without anyone designing one.
+============================================================ */
+
+/* What goes on the crest. An age/gender code ("13G", "U12") is what
+   actually tells two sibling teams apart, so it wins over initials —
+   otherwise "Sting McNeal 13G" and "Sting McNeal 14G" both read "SM". */
+function teamInitials(name) {
+    const raw = String(name || '');
+    const code = raw.match(/\b(?:U-?)?(\d{1,2})\s?([GB])\b/i) || raw.match(/\bU-?(\d{1,2})\b/i);
+    if (code) return (code[1] + (code[2] || '')).toUpperCase();
+    const words = raw.split(/[\s·\-—]+/)
+        .filter(w => w && !/^\d/.test(w) && !/^(fc|sc|cf|the|of)$/i.test(w));
+    const letters = words.map(w => w[0]).filter(c => /[a-z]/i.test(c));
+    return (letters.slice(0, 2).join('') || 'TH').toUpperCase();
+}
+
+/* The product mark: three ascending bars — standings, form, a season
+   climbing. Geometric, sport-agnostic, and it takes the team's colour. */
+function productMark(size) {
+    const s = size || 30;
+    return `<svg class="mark" width="${s}" height="${s}" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="var(--accent)" opacity=".14"/>
+        <rect x="7"  y="17" width="4.5" height="8"  rx="2" fill="var(--accent)" opacity=".55"/>
+        <rect x="13.75" y="12" width="4.5" height="13" rx="2" fill="var(--accent)" opacity=".8"/>
+        <rect x="20.5" y="6"  width="4.5" height="19" rx="2" fill="var(--accent)"/>
+    </svg>`;
+}
+
+/* A team's crest: its initials set in the display face on an accent tile */
+function teamCrest(team, size) {
+    const s = size || 46;
+    const initials = teamInitials(team.branding.name);
+    const fs = initials.length > 2 ? 12 : 15;
+    return `<svg class="crest" width="${s}" height="${s}" viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="11" fill="var(--crest-ink,var(--accent))" opacity=".16"/>
+        <rect x=".75" y=".75" width="38.5" height="38.5" rx="10.5" fill="none" stroke="var(--crest-ink,var(--accent))" stroke-opacity=".45"/>
+        <text x="20" y="20" text-anchor="middle" dominant-baseline="central"
+              font-family="'Space Grotesk',sans-serif" font-size="${fs}" font-weight="700"
+              letter-spacing="-.5" fill="var(--crest-ink,var(--accent))">${initials}</text>
+    </svg>`;
+}
+
+/* Last five results as pips — replaces the row of stars with something
+   that actually says how the season is going. */
+function formPips(matches) {
+    const last5 = matches.slice(-5);
+    if (!last5.length) return '';
+    return '<div class="form-pips">' + last5.map(m =>
+        `<span class="form-pip pip-${m.res}" title="${m.date} vs ${m.opp}: ${m.score}"></span>`
+    ).join('') + '<span class="form-pips-label">Last 5</span></div>';
+}
+
+function renderSiteBrand() {
+    const el = document.getElementById('siteBrand');
+    if (!el) return;
+    el.innerHTML = productMark(30) +
+        '<span class="site-wordmark">Team <span>Hub</span></span>';
+}
+
+/* Favicon follows the team, so a bookmarked hub is recognisable in a tab */
+function applyFavicon() {
+    const accent = TEAM_CONFIG.branding.secondaryColor || '#F5C842';
+    const initials = teamInitials(TEAM_CONFIG.branding.name);
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">` +
+        `<rect width="32" height="32" rx="8" fill="#0A0F14"/>` +
+        `<text x="16" y="17" text-anchor="middle" dominant-baseline="central" ` +
+        `font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="${accent}">${initials}</text></svg>`;
+    const href = 'data:image/svg+xml,' + encodeURIComponent(svg);
+    document.querySelectorAll('link[rel~="icon"]').forEach(l => l.setAttribute('href', href));
+}
+
 function getTabs() {
     return [
         { id: 'schedule',   label: 'Schedule',   icon: '📅' },
@@ -63,8 +138,11 @@ function renderSeasonPulse() {
 
 function renderTeamSwitcher() {
     const c = document.getElementById('team-switcher');
+    // Only worth showing when there is actually a choice to make
+    if (Object.keys(TEAMS).length < 2) { c.innerHTML = ''; return; }
     c.innerHTML = Object.keys(TEAMS).map(id =>
-        `<button onclick="switchTeam('${id}')" class="team-switcher-btn ${id === currentTeamId ? 'active' : ''}">${TEAMS[id].branding.name}</button>`
+        `<button onclick="switchTeam('${id}')" class="team-switcher-btn ${id === currentTeamId ? 'active' : ''}">` +
+        teamCrest(TEAMS[id], 22) + TEAMS[id].branding.name + '</button>'
     ).join('');
 }
 
@@ -81,7 +159,8 @@ function renderNavBars() {
 function switchTeam(id) {
     tournView = 'bracket'; tournMapDay = 'All';
     currentTeamId = id; TEAM_CONFIG = TEAMS[id];
-    applyTheme(); renderTeamSwitcher(); renderSeasonPulse(); renderNavBars(); render();
+    applyTheme(); applyFavicon(); renderSiteBrand();
+    renderTeamSwitcher(); renderSeasonPulse(); renderNavBars(); render();
 }
 
 function switchTab(tab) {
@@ -94,16 +173,22 @@ function switchTab(tab) {
 function headerHTML(subtitle, wm) {
     const r = TEAM_CONFIG.record;
     return `<div class="card-header" data-watermark="${wm || (r.wins + '-' + r.losses + '-' + r.draws)}">
-        <div style="z-index:1;position:relative;">
-            <div class="header-stars">★ ★ ★ ★ ★</div>
-            <div class="header-team-name">${TEAM_CONFIG.branding.name}</div>
-            <div class="header-subtitle">${subtitle}</div>
-            <span class="header-badge">${TEAM_CONFIG.branding.season}</span>
+        <div class="header-identity">
+            ${teamCrest(TEAM_CONFIG, 46)}
+            <div class="header-id-text">
+                <div class="header-subtitle">${subtitle}</div>
+                <div class="header-team-name">${TEAM_CONFIG.branding.name}</div>
+                <div class="header-meta-row">
+                    <span class="header-badge">${TEAM_CONFIG.branding.season}</span>
+                    ${formPips(TEAM_CONFIG.matches)}
+                </div>
+            </div>
         </div>
         <div class="header-right">
             <div class="header-division-label">League / Division</div>
             <div class="header-division">${TEAM_CONFIG.branding.league}</div>
-            <div class="header-record">${r.wins} – ${r.losses} – ${r.draws}</div>
+            <div class="header-record">${r.wins}<span>–</span>${r.losses}<span>–</span>${r.draws}</div>
+            <div class="header-record-label">W · L · D</div>
         </div>
     </div>`;
 }
@@ -648,6 +733,8 @@ function boot() {
         currentTeamId = ids[0];
         TEAM_CONFIG = TEAMS[currentTeamId];
         applyTheme();
+        applyFavicon();
+        renderSiteBrand();
         renderTeamSwitcher();
         renderSeasonPulse();
         render();
