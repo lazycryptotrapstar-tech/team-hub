@@ -10,7 +10,7 @@
       "canvas": {
         "w": 340,
         "h": 452,
-        "bg": "#101820"
+        "bg": "var(--bg)"
       },
       "locationPatterns": [
         "UT\\s*Dallas\\s*#?0*(\\d+)",
@@ -186,7 +186,7 @@
       "canvas": {
         "w": 490,
         "h": 375,
-        "bg": "#111B16"
+        "bg": "var(--bg)"
       },
       "locationPatterns": [
         "Carpenter Park\\s*-?\\s*([A-M])\\b"
@@ -358,6 +358,219 @@
         }
       ],
       "emptyState": "empty"
+    },
+    {
+      "id": "railroad",
+      "name": "Railroad Park",
+      "shortName": "Railroad Park",
+      "address": "1301 S Railroad St · Lewisville TX 75057",
+      "parkingNote": "Main lots are off <strong>Locomotive Drive</strong>. The north lot is closest to fields 8, 9 and 10; the south lot serves fields 1, 2 and 3.",
+      "layoutNote": "Schematic — field order follows the official park map.",
+      "canvas": {
+        "w": 360,
+        "h": 648,
+        "bg": "var(--bg)"
+      },
+      "locationPatterns": [
+        "Railroad\\s*Park\\s*-?\\s*#?(\\d{1,2})",
+        "Railroad\\s*-?\\s*#?(\\d{1,2})",
+        "RRP\\s*-?\\s*#?(\\d{1,2})"
+      ],
+      "fieldLabelPrefix": "",
+      "emptyState": "inactive",
+      "legend": [
+        {
+          "state": "ours",
+          "label": "Your Field"
+        },
+        {
+          "state": "inactive",
+          "label": "Other Fields"
+        }
+      ],
+      "zones": [
+        {
+          "type": "road",
+          "label": "VALLEY RIDGE BLVD",
+          "x": 0,
+          "y": 0,
+          "w": 360,
+          "h": 15,
+          "labelX": 190
+        },
+        {
+          "type": "road",
+          "label": "LOCOMOTIVE DR",
+          "x": 0,
+          "y": 15,
+          "w": 22,
+          "h": 633,
+          "rotate": 90,
+          "labelX": 11,
+          "labelY": 330
+        },
+        {
+          "type": "area",
+          "x": 26,
+          "y": 18,
+          "w": 272,
+          "h": 616
+        },
+        {
+          "type": "parking",
+          "label": "NORTH LOT",
+          "sublabel": "Fields 8–10",
+          "x": 44,
+          "y": 22,
+          "w": 104,
+          "h": 74
+        },
+        {
+          "type": "parking",
+          "label": "SOUTH LOT",
+          "sublabel": "Fields 1–3",
+          "x": 244,
+          "y": 520,
+          "w": 100,
+          "h": 96
+        },
+        {
+          "type": "landmark",
+          "label": "WC",
+          "x": 232,
+          "y": 128,
+          "w": 24,
+          "h": 15
+        },
+        {
+          "type": "landmark",
+          "label": "WC",
+          "x": 176,
+          "y": 372,
+          "w": 24,
+          "h": 15
+        },
+        {
+          "type": "medical",
+          "x": 300,
+          "y": 300,
+          "r": 9
+        }
+      ],
+      "markers": [],
+      "fields": [
+        {
+          "id": "9",
+          "x": 160,
+          "y": 24,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "10",
+          "x": 232,
+          "y": 24,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "8",
+          "x": 48,
+          "y": 120,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "7",
+          "x": 160,
+          "y": 132,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "6",
+          "x": 104,
+          "y": 224,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "4",
+          "x": 232,
+          "y": 236,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "5",
+          "x": 32,
+          "y": 316,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "3",
+          "x": 96,
+          "y": 408,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "2",
+          "x": 168,
+          "y": 468,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        },
+        {
+          "id": "1",
+          "x": 104,
+          "y": 548,
+          "w": 62,
+          "h": 80,
+          "size": "11v11"
+        }
+      ]
+    },
+    {
+      "id": "craigranch",
+      "name": "McKinney Soccer Complex at Craig Ranch",
+      "shortName": "Craig Ranch",
+      "address": "6375 Collin McKinney Pkwy · McKinney TX 75070",
+      "locationPatterns": [
+        "Craig\\s*Ranch\\s*-?\\s*#?([A-Z0-9]{1,3})\\b"
+      ],
+      "fields": []
+    },
+    {
+      "id": "russellcreek",
+      "name": "Russell Creek Park",
+      "shortName": "Russell Creek",
+      "address": "3500 McDermott Rd · Plano TX 75025",
+      "locationPatterns": [
+        "Russell\\s*Creek\\s*-?\\s*#?([A-Z0-9]{1,3})\\b"
+      ],
+      "fields": []
+    },
+    {
+      "id": "toyota",
+      "name": "Toyota Soccer Center",
+      "shortName": "Toyota Soccer Center",
+      "address": "9200 World Cup Way · Frisco TX 75034",
+      "parkingNote": "Off the Dallas North Tollway at Main St (FM 720).",
+      "locationPatterns": [
+        "Toyota\\s*(?:Soccer)?\\s*(?:Center|Complex)?\\s*-?\\s*#?([A-Z0-9]{1,3})\\b"
+      ],
+      "fields": []
     }
   ]
 }

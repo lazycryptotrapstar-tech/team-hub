@@ -87,6 +87,45 @@ check('detect carpenter from tournament', ctx.detectVenue([{ field: 'Carpenter P
 check('detect none for unknown', ctx.detectVenue([{ locText: 'Nowhere Field 1' }]), null);
 check('venueType hint honored', ctx.detectVenue([], 'utd').id, 'utd');
 
+/* ---- the North DFW venues these teams travel to ---- */
+console.log('\n[north dfw]');
+const rr = inCtxVenue('railroad');
+check('railroad park exists', !!rr, true);
+check('railroad address', rr.address, '1301 S Railroad St · Lewisville TX 75057');
+check('railroad has ten soccer fields', rr.fields.length, 10);
+check('railroad numbers 1-10', rr.fields.map(f => f.id).sort((a,b)=>a-b), ['1','2','3','4','5','6','7','8','9','10'].sort((a,b)=>a-b));
+// no two pitches may overlap, or the map lies about where you are standing
+const boxes = rr.fields;
+let clashes = 0;
+for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+  const a = boxes[i], b = boxes[j];
+  if (a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h) clashes++;
+}
+check('no overlapping pitches', clashes, 0);
+check('all inside the canvas',
+  boxes.every(f => f.x >= 0 && f.y >= 0 && f.x + f.w <= rr.canvas.w && f.y + f.h <= rr.canvas.h), true);
+
+// venues we know but have not drawn: address must be real, fields empty
+for (const [id, addr] of [
+  ['craigranch',   '6375 Collin McKinney Pkwy · McKinney TX 75070'],
+  ['russellcreek', '3500 McDermott Rd · Plano TX 75025'],
+  ['toyota',       '9200 World Cup Way · Frisco TX 75034'],
+]) {
+  const v = inCtxVenue(id);
+  check(`${id} present`, !!v, true);
+  check(`${id} address`, v.address, addr);
+  check(`${id} draws no invented fields`, (v.fields || []).length, 0);
+}
+
+// location strings from real schedules must land on the right venue
+check('"Railroad Park #7"',    ctx.detectVenue([{ locText: 'Railroad Park #7' }]).id, 'railroad');
+check('"Railroad #10"',        ctx.detectVenue([{ locText: 'Railroad #10' }]).id, 'railroad');
+check('"Craig Ranch 4"',       ctx.detectVenue([{ locText: 'Craig Ranch 4' }]).id, 'craigranch');
+check('"Russell Creek 12"',    ctx.detectVenue([{ locText: 'Russell Creek 12' }]).id, 'russellcreek');
+check('"Toyota Soccer Center 3"', ctx.detectVenue([{ locText: 'Toyota Soccer Center 3' }]).id, 'toyota');
+check('railroad resolves field 7', ctx.resolveField(rr, { locText: 'Railroad Park #7' }), '7');
+check('railroad resolves field 10', ctx.resolveField(rr, { locText: 'Railroad #10' }), '10');
+
 /* ---- state coloring ---- */
 console.log('\n[states]');
 check('ours wins over others', ctx.fieldState([{ isOurs: false, label: 'Final' }, { isOurs: true }]), 'ours');

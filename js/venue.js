@@ -15,9 +15,9 @@ const FIELD_STATES = {
     ours:     { fill:'var(--accent)', stroke:'var(--bg)',       sw:2.5, text:'#0A0F14',                sub:'rgba(10,15,20,.55)',     badge:'★' },
     final:    { fill:'#1D3B57', stroke:'#5EA8F2',               sw:2,   text:'#BFDBFE',                sub:'rgba(191,219,254,.6)',   badge:'F' },
     semi:     { fill:'#1D3B57', stroke:'#5EA8F2',               sw:1.8, text:'#BFDBFE',                sub:'rgba(191,219,254,.7)',   badge:'' },
-    active:   { fill:'#1E5B39', stroke:'rgba(255,255,255,.42)', sw:1.2, text:'rgba(255,255,255,.88)',  sub:'rgba(255,255,255,.45)',  badge:'' },
-    inactive: { fill:'#1B4E31', stroke:'rgba(255,255,255,.22)', sw:0.8, text:'rgba(255,255,255,.72)',  sub:'rgba(255,255,255,.32)',  badge:'' },
-    empty:    { fill:'#16301F', stroke:'rgba(255,255,255,.08)', sw:0.8, text:'rgba(255,255,255,.2)',   sub:'rgba(255,255,255,.1)',   badge:'' },
+    active:   { fill:'#24704A', stroke:'rgba(255,255,255,.42)', sw:1.2, text:'rgba(255,255,255,.88)',  sub:'rgba(255,255,255,.45)',  badge:'' },
+    inactive: { fill:'#215F3E', stroke:'rgba(255,255,255,.22)', sw:0.8, text:'rgba(255,255,255,.72)',  sub:'rgba(255,255,255,.32)',  badge:'' },
+    empty:    { fill:'#1A3F2B', stroke:'rgba(255,255,255,.08)', sw:0.8, text:'rgba(255,255,255,.2)',   sub:'rgba(255,255,255,.1)',   badge:'' },
 };
 
 /* SVG type matches the page: mono for labels, display for field names */
@@ -97,11 +97,11 @@ function renderZone(z) {
     switch (z.type) {
         case 'road': {
             const t = label ? `<text x="${z.labelX != null ? z.labelX : z.x + z.w/2}" y="${z.labelY != null ? z.labelY : z.y + z.h*0.7}" text-anchor="middle" font-family="${SVG_MONO}" font-size="${z.h >= 20 ? 8 : 7}" font-weight="700" fill="rgba(255,255,255,0.68)" letter-spacing="${z.letterSpacing || 1}"${z.rotate ? ` transform="rotate(${z.rotate} ${z.labelX} ${z.labelY})"` : ''}>${label}</text>` : '';
-            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="#2E353D" opacity="0.95"/>${t}`;
+            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="var(--elevated)" opacity="1"/>${t}`;
         }
         case 'parking': {
             if (z.plain) {
-                return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="3" fill="#242A31" opacity="0.9"/>` +
+                return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="3" fill="var(--elevated)" opacity="0.9"/>` +
                     (label ? `<text x="${z.labelX}" y="${z.labelY}" font-family="${SVG_MONO}" font-size="9" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle" transform="rotate(${z.rotate || 0} ${z.labelX} ${z.labelY})" letter-spacing="2">${label}</text>` : '');
             }
             const cx = z.x + z.w/2;
@@ -112,7 +112,7 @@ function renderZone(z) {
                 (z.note ? `<text x="${cx}" y="${z.y+63}" text-anchor="middle" font-family="${SVG_MONO}" font-size="6" fill="rgba(255,255,255,0.45)">${esc(z.note)}</text>` : '');
         }
         case 'landmark':
-            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="3" fill="#2B3A52"/>` +
+            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="3" fill="var(--border2)"/>` +
                 (label ? (z.w >= 20
                     ? `<text x="${z.x+z.w/2}" y="${z.y+z.h*0.72}" font-family="${SVG_MONO}" font-size="7" font-weight="900" fill="white" text-anchor="middle">${label}</text>`
                     : `<text x="${z.x+z.w/2}" y="${z.y+z.h+7}" text-anchor="middle" font-family="${SVG_MONO}" font-size="6" fill="rgba(255,255,255,0.5)">${label}</text>`) : '');
@@ -121,7 +121,7 @@ function renderZone(z) {
                 `<text x="${z.x}" y="${z.y+4}" font-family="${SVG_MONO}" font-size="11" font-weight="900" fill="white" text-anchor="middle">+</text>`;
         case 'area':
         default:
-            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="6" fill="#16211B" opacity="0.9"/>`;
+            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="6" fill="var(--surface)" opacity="0.9"/>`;
     }
 }
 
@@ -222,9 +222,26 @@ function showFieldInfo(fieldId) {
     }).join('');
 }
 
+/* A venue we know but haven't drawn a field map for yet. Better an honest
+   address and directions than a made-up field grid someone drives to. */
+function buildVenueCard(venue, games) {
+    const fieldRefs = [...new Set((games || []).map(g => g.locText || g.loc || g.field).filter(Boolean))];
+    const q = encodeURIComponent(venue.name + ' ' + venue.address);
+    return '<div class="venue-map-section">' +
+        `<div class="tourn-sub-label" style="margin-top:26px;">Venue · ${esc(venue.shortName || venue.name)}</div>` +
+        '<div class="venue-card">' +
+            `<div class="venue-card-name">${esc(venue.name)}</div>` +
+            `<div class="venue-card-address">${esc(venue.address)}</div>` +
+            (fieldRefs.length ? `<div class="venue-card-fields">${fieldRefs.map(esc).join(' · ')}</div>` : '') +
+            (venue.parkingNote ? `<div class="venue-card-note">🚗 ${venue.parkingNote}</div>` : '') +
+            `<a class="venue-dir-link" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">Directions</a>` +
+        '</div></div>';
+}
+
 /* Full venue map section: heading + svg + info panel + parking note.
    opts: { title, dayBar, showPanel } */
 function buildVenueSection(venue, games, opts) {
+    if (!venue.fields || !venue.fields.length) return buildVenueCard(venue, games);
     opts = opts || {};
     activeVenueId = venue.id;
     venueFieldGames = groupGamesByField(venue, games);

@@ -25,6 +25,7 @@ function applyTheme() {
     root.setProperty('--team-accent-soft', `rgba(${rgb},.08)`);
     root.setProperty('--team-accent-line', `rgba(${rgb},.38)`);
     root.setProperty('--primary', b.primaryColor || '#00234b');
+    applySurfaces(b.primaryColor);
     document.title = b.name + ' – Team Hub';
 }
 
@@ -34,6 +35,44 @@ function hexToRgb(hex) {
     const n = parseInt(full, 16);
     if (isNaN(n) || full.length !== 6) return '245,200,66';
     return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(',');
+}
+
+function hexToHsl(hex) {
+    const [r, g, b] = hexToRgb(hex).split(',').map(v => +v / 255);
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    const l = (max + min) / 2;
+    let h = 0, s = 0;
+    if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0));
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+        h *= 60;
+    }
+    return { h, s: s * 100, l: l * 100 };
+}
+
+function hsl(h, s, l) { return `hsl(${h.toFixed(0)} ${s.toFixed(0)}% ${l.toFixed(0)}%)`; }
+
+/* The page ground is built from the club's own primary colour — a school
+   site in the school's colours rather than a generic black. Saturation is
+   clamped and lightness is fixed, so a club with a loud colour still gets
+   a calm, readable surface ladder instead of a wash of it. */
+function applySurfaces(primary) {
+    const { h, s } = hexToHsl(primary || '#00234b');
+    const sat = Math.min(Math.max(s, 14), 32);   // never garish, never flat grey
+    const root = document.documentElement.style;
+    root.setProperty('--bg',       hsl(h, sat, 17));
+    root.setProperty('--surface',  hsl(h, sat * 0.94, 22));
+    root.setProperty('--card',     hsl(h, sat * 0.88, 25));
+    root.setProperty('--elevated', hsl(h, sat * 0.80, 31));
+    root.setProperty('--border',   hsl(h, sat * 0.62, 38));
+    root.setProperty('--border2',  hsl(h, sat * 0.50, 50));
+    // text softens a touch against a lighter ground so it doesn't glare
+    root.setProperty('--text',  hsl(h, 22, 97));
+    root.setProperty('--text2', hsl(h, 16, 78));
+    root.setProperty('--text3', hsl(h, 12, 62));
 }
 
 /* ============================================================
