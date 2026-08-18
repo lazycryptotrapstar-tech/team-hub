@@ -344,6 +344,7 @@
         .map-day-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:7px 14px;border-radius:20px;border:1.5px solid rgba(0,35,75,0.18);background:white;color:rgba(0,35,75,0.5);cursor:pointer;transition:all 0.15s;}
         .map-day-btn:hover{border-color:var(--primary);color:var(--primary);}
         .map-day-btn.active{background:var(--primary);color:var(--secondary);border-color:var(--primary);font-weight:900;}
+        .story-byline{font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.5px;color:rgba(0,35,75,0.45);margin-top:14px;}
         .cross-tab-nudge{display:flex;gap:10px;padding:16px 24px;background:rgba(0,35,75,0.04);border-top:1px solid rgba(0,35,75,0.08);}
         .cross-nudge-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--primary);background:white;border:2px solid rgba(0,35,75,0.12);border-radius:4px;padding:8px 16px;cursor:pointer;text-decoration:none;transition:border-color 0.15s;}
         .cross-nudge-btn:hover{border-color:var(--secondary);}

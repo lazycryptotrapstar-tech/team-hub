@@ -259,7 +259,9 @@ function renderStory(container) {
         `<div class="tl-dot future" title="${m.date} vs ${m.opp}"></div>`
     ).join('');
     const narrative = getStoryText(TEAM_CONFIG);
-    const isPublished = !storyAiText[currentTeamId] && TEAM_CONFIG.story && TEAM_CONFIG.story.text;
+    const byline = storyIsPublished(TEAM_CONFIG) && TEAM_CONFIG.story.source === 'ai'
+        ? '<div class="story-byline">✦ Written by AI from this season\'s results</div>'
+        : '';
 
     container.innerHTML = `${headerHTML('Season Story', 'STORY')}
     <div class="content-area">
@@ -285,10 +287,7 @@ function renderStory(container) {
                 </div>
                 <div class="story-section-title">The Story So Far</div>
                 <p class="story-narrative" id="storyNarrativeText">${narrative.replace(/\n\n/g, '</p><p class="story-narrative" style="margin-top:12px;">')}</p>
-                <div style="margin-top:14px;">
-                    <button class="ai-story-btn" id="aiStoryBtn" onclick="enhanceStoryWithAI()">&#10022; ${isPublished ? 'Rewrite with AI' : 'Enhance with AI'}</button>
-                    <div class="story-ai-result" id="storyAiResult"></div>
-                </div>
+                ${byline}
             </div>
             <div class="story-right-col">
                 <div class="story-section-title">By The Numbers</div>

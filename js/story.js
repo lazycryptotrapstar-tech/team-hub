@@ -1,17 +1,19 @@
 /* ============================================================
-   AI STORYLINES
-   Two tiers: offline template narrative (works for any team with
-   games data, no network) + LLM enhancement via the worker.
-   Session-generated text lives in storyAiText; a published
-   storyline arrives via team.story.text in data/teams.json.
+   STORYLINES
+   Two tiers: an offline template narrative that works for any team
+   with games data, and an AI rewrite via the worker. The family app
+   only ever reads — storylines are written and published from the
+   admin editor, and arrive as team.story in data/teams.json.
 ============================================================ */
 
 const WORKER_URL = 'https://sting-hub-ai.lazycryptotrapstar.workers.dev/ai';
 
-let storyAiText = {}; // teamId -> generated text (session only until Phase 3 publishes it)
-
 function getStoryText(team) {
-    return storyAiText[team.id] || (team.story && team.story.text) || generateAutoNarrative(team);
+    return (team.story && team.story.text) || generateAutoNarrative(team);
+}
+
+function storyIsPublished(team) {
+    return !!(team.story && team.story.text);
 }
 
 function generateAutoNarrative(team) {
@@ -70,30 +72,28 @@ async function callAI(systemPrompt, userPrompt) {
     return data.text;
 }
 
-function enhanceStoryWithAI() {
-    var btn = document.getElementById('aiStoryBtn');
-    var resultBox = document.getElementById('storyAiResult');
-    if (!btn || !resultBox) return;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="ai-spinner"></span> Writing...';
-    resultBox.style.display = 'none';
-    var team = TEAM_CONFIG;
-    var r = team.record, l = team.league, nm = team.nextMatch;
-    var streak = getStreak(team.matches);
-    var avail = team.remainingSchedule.length * team.pointsConfig.win;
-    var streakLabel = streak.count + '-match ' + (streak.type==='W'?'win':streak.type==='L'?'losing':'unbeaten') + ' streak';
-    var sport = (team.branding.sport || 'soccer').toLowerCase();
-    callAI(
-        'You are a sports broadcast journalist writing dramatic weekly season recaps for youth ' + sport + ' teams. Write in an energetic narrative style like a Friday Night Lights broadcast recap. Under 200 words. Plain text only.',
-        'Team: '+team.branding.name+'. Division: '+team.branding.league+'. Record: '+r.wins+'W-'+r.losses+'L-'+r.draws+'D. Rank: #'+l.rank+' of '+l.totalTeams+'. Points: '+l.points+'. PPG: '+l.ppg+'. Goal diff: '+l.goalDiff+'. Goals: '+team.goals.for+' scored, '+team.goals.against+' conceded. Streak: '+streakLabel+'. Remaining: '+team.remainingSchedule.length+' games ('+avail+' pts available). '+(nm ? 'Next: #'+nm.oppRank+' '+nm.oppName+(nm.oppRecord?' ('+nm.oppRecord+')':'')+'. ' : 'Regular season complete. ')+'Write a dramatic broadcast-style season story.'
-    ).then(function(result) {
-        storyAiText[currentTeamId] = result;
-        var el = document.getElementById('storyNarrativeText');
-        if (el) el.innerHTML = result.split('\n\n').join('</p><p class="story-narrative" style="margin-top:12px;">');
-        btn.disabled = false; btn.innerHTML = '&#10022; Regenerate';
-    }).catch(function(err) {
-        resultBox.textContent = 'Error: ' + err.message;
-        resultBox.style.display = 'block';
-        btn.disabled = false; btn.innerHTML = '&#10022; Enhance with AI';
-    });
+/* The stat brief the AI writes from. Shared so the admin editor and any
+   future caller describe a team the same way. */
+function buildStoryPrompt(team) {
+    const r = team.record, l = team.league, nm = team.nextMatch;
+    const streak = getStreak(team.matches);
+    const avail = team.remainingSchedule.length * team.pointsConfig.win;
+    const streakLabel = streak.count
+        ? streak.count + '-match ' + (streak.type === 'W' ? 'win' : streak.type === 'L' ? 'losing' : 'unbeaten') + ' streak'
+        : 'no current streak';
+    const sport = (team.branding.sport || 'soccer').toLowerCase();
+    const system = 'You are a sports broadcast journalist writing dramatic weekly season recaps for youth ' +
+        sport + ' teams. Write in an energetic narrative style like a Friday Night Lights broadcast recap. ' +
+        'Under 200 words. Plain text only.';
+    const prompt = 'Team: ' + team.branding.name + '. Division: ' + team.branding.league +
+        '. Record: ' + r.wins + 'W-' + r.losses + 'L-' + r.draws + 'D' +
+        '. Rank: #' + (l.rank || '?') + ' of ' + l.totalTeams +
+        '. Points: ' + l.points + '. PPG: ' + l.ppg + '. Goal diff: ' + l.goalDiff +
+        '. Goals: ' + team.goals.for + ' scored, ' + team.goals.against + ' conceded' +
+        '. Streak: ' + streakLabel +
+        '. Remaining: ' + team.remainingSchedule.length + ' games (' + avail + ' pts available). ' +
+        (nm ? 'Next: #' + nm.oppRank + ' ' + nm.oppName + (nm.oppRecord ? ' (' + nm.oppRecord + ')' : '') + '. '
+            : 'Regular season complete. ') +
+        'Write a dramatic broadcast-style season story.';
+    return { system, prompt };
 }

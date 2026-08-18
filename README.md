@@ -66,3 +66,45 @@ Then check the geometry and resolution rules:
 node test/verify-venues.mjs
 node test/verify-css.mjs
 ```
+
+## Updating the site (admin editor)
+
+`admin.html` edits `data/teams.json` in the browser and can publish it
+straight to this repo — Cloudflare then rebuilds the site.
+
+- **Games** — the source of truth. Record, goals, form, the timeline and
+  the season story all come from here.
+- **Standings** — the league's own table. GD and points are computed;
+  mark which row is your team with the **Us** button.
+- **Tournament** — current bracket and the history underneath it.
+- **Team Info** — names, colours, and how the sport scores (win/draw/loss
+  points; turn off draws for win-or-lose sports).
+- **Storyline** — write it yourself, build one from the results, or have
+  AI write it. Whatever is saved here is what families read.
+
+Edits are held in the browser until you publish, so a closed tab loses
+nothing. **Publish** validates first and refuses on real errors.
+
+### Publishing setup
+
+Publishing needs a GitHub [fine-grained token](https://github.com/settings/personal-access-tokens/new)
+scoped to **only this repository** with **Contents: Read and write** —
+nothing else. Paste it into Setup. It is stored in that browser and is
+only ever sent to `api.github.com`.
+
+Prefer running the admin page **locally** (`npx serve`, then
+<http://localhost:3000/admin.html>) rather than on the live domain, so the
+token never lives in a browser profile for a public site. No token? Use
+**Download** and commit `data/teams.json` yourself — same result.
+
+If someone else publishes while you have the editor open, publishing
+stops and asks rather than overwriting their work.
+
+## Tests
+
+```
+node test/verify-derivation.mjs   # every stat matches the pre-rewrite values
+node test/verify-venues.mjs       # venue geometry + field resolution
+node test/verify-css.mjs          # nothing on screen lost its styling
+node test/verify-publish.mjs      # encoding, conflicts, retries (no network)
+```
