@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <a class="skip-link no-print" href="#main-content">Skip to content</a>
     <div class="site-header no-print">
         <div class="site-brand" id="siteBrand"></div>
         <button onclick="window.print()" class="pdf-btn">Save PDF</button>
@@ -23,7 +24,15 @@
     <div id="coach-toolbox" class="toolbar no-print">
         <div class="tab-nav" id="desktopTabNav"></div>
     </div>
-    <div id="main-content" class="print-container main-card" style="width:100%;max-width:1000px;"></div>
+    <main id="main-content" class="print-container main-card" tabindex="-1">
+        <div class="loading-wrap" aria-busy="true" aria-label="Loading team data">
+            <div class="skeleton sk-title"></div>
+            <div class="skeleton sk-row" style="width:92%"></div>
+            <div class="skeleton sk-row" style="width:74%"></div>
+            <div class="skeleton sk-row" style="width:83%"></div>
+            <div class="skeleton sk-row" style="width:61%"></div>
+        </div>
+    </main>
 
     <!-- Mobile bottom nav -->
     <nav class="bottom-nav no-print" id="bottomNav">

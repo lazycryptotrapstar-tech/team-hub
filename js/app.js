@@ -18,10 +18,12 @@ function applyTheme() {
     const b = TEAM_CONFIG.branding;
     const accent = b.secondaryColor || '#F5C842';
     const rgb = hexToRgb(accent);
+    // Set the team's colour, not --accent itself: the stylesheet maps
+    // --accent onto this, which lets print swap in an ink-safe accent.
     const root = document.documentElement.style;
-    root.setProperty('--accent', accent);
-    root.setProperty('--accent-soft', `rgba(${rgb},.12)`);
-    root.setProperty('--accent-line', `rgba(${rgb},.35)`);
+    root.setProperty('--team-accent', accent);
+    root.setProperty('--team-accent-soft', `rgba(${rgb},.08)`);
+    root.setProperty('--team-accent-line', `rgba(${rgb},.38)`);
     root.setProperty('--primary', b.primaryColor || '#00234b');
     document.title = b.name + ' – Team Hub';
 }
@@ -136,14 +138,43 @@ function renderSeasonPulse() {
         <div class="pulse-item" style="flex:3;border-right:none;"><span class="pulse-icon">📅</span><span class="pulse-label">Next&nbsp;</span><span class="pulse-val silver">${nextLabel}</span></div>`;
 }
 
+/* Past a handful of teams a row of pills stops being a switcher and starts
+   being a wall, so a club running twenty teams gets a picker instead. */
+const PILL_LIMIT = 6;
+
 function renderTeamSwitcher() {
     const c = document.getElementById('team-switcher');
-    // Only worth showing when there is actually a choice to make
-    if (Object.keys(TEAMS).length < 2) { c.innerHTML = ''; return; }
-    c.innerHTML = Object.keys(TEAMS).map(id =>
-        `<button onclick="switchTeam('${id}')" class="team-switcher-btn ${id === currentTeamId ? 'active' : ''}">` +
-        teamCrest(TEAMS[id], 22) + TEAMS[id].branding.name + '</button>'
-    ).join('');
+    const ids = Object.keys(TEAMS);
+    if (ids.length < 2) { c.innerHTML = ''; return; }
+
+    if (ids.length <= PILL_LIMIT) {
+        c.className = 'no-print switcher-pills';
+        c.innerHTML = ids.map(id =>
+            `<button onclick="switchTeam('${id}')" class="team-switcher-btn ${id === currentTeamId ? 'active' : ''}"` +
+            ` aria-pressed="${id === currentTeamId}">` +
+            teamCrest(TEAMS[id], 22) + TEAMS[id].branding.name + '</button>'
+        ).join('');
+        return;
+    }
+
+    // Grouped by league so a big club's list stays navigable
+    const groups = {};
+    ids.forEach(id => {
+        const key = TEAMS[id].branding.league || 'Other';
+        (groups[key] = groups[key] || []).push(id);
+    });
+    c.className = 'no-print switcher-select';
+    c.innerHTML =
+        teamCrest(TEAMS[currentTeamId], 26) +
+        `<select onchange="switchTeam(this.value)" aria-label="Choose a team">` +
+        Object.keys(groups).sort().map(league =>
+            `<optgroup label="${league}">` +
+            groups[league].map(id =>
+                `<option value="${id}"${id === currentTeamId ? ' selected' : ''}>${TEAMS[id].branding.name}</option>`
+            ).join('') + '</optgroup>'
+        ).join('') +
+        '</select>' +
+        `<span class="switcher-count">${ids.length} teams</span>`;
 }
 
 function renderNavBars() {
