@@ -106,7 +106,7 @@ for (const v of [utd, cp]) {
   const svg = ctx.buildVenueSVG(v, games);
   check(`${v.id}: viewBox`, /viewBox="0 0 \d+ \d+"/.test(svg), true);
   check(`${v.id}: one rect per field`, (svg.match(/class="vf-rect"/g) || []).length, v.fields.length);
-  check(`${v.id}: gold highlight present`, (svg.match(/fill="#ffcc00"/g) || []).length >= 1, true);
+  check(`${v.id}: highlighted field uses the team accent`, svg.includes('fill="var(--accent)"'), true);
   check(`${v.id}: tags balanced`, (svg.match(/<g /g)||[]).length, (svg.match(/<\/g>/g)||[]).length);
   check(`${v.id}: no undefined/NaN`, /undefined|NaN/.test(svg), false);
 }

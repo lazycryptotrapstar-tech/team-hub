@@ -12,10 +12,26 @@ let tournMapDay = 'All';
 /* ============================================================
    THEME + NAV
 ============================================================ */
+/* The team's own colour becomes the accent the whole page is lit by:
+   fills, glows, tint washes and the ambient background all derive from it. */
 function applyTheme() {
-    document.documentElement.style.setProperty('--primary', TEAM_CONFIG.branding.primaryColor);
-    document.documentElement.style.setProperty('--secondary', TEAM_CONFIG.branding.secondaryColor);
-    document.title = TEAM_CONFIG.branding.name + ' – Team Hub';
+    const b = TEAM_CONFIG.branding;
+    const accent = b.secondaryColor || '#F5C842';
+    const rgb = hexToRgb(accent);
+    const root = document.documentElement.style;
+    root.setProperty('--accent', accent);
+    root.setProperty('--accent-soft', `rgba(${rgb},.12)`);
+    root.setProperty('--accent-line', `rgba(${rgb},.35)`);
+    root.setProperty('--primary', b.primaryColor || '#00234b');
+    document.title = b.name + ' – Team Hub';
+}
+
+function hexToRgb(hex) {
+    const h = String(hex).replace('#', '').trim();
+    const full = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+    const n = parseInt(full, 16);
+    if (isNaN(n) || full.length !== 6) return '245,200,66';
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(',');
 }
 
 function getTabs() {
@@ -138,7 +154,7 @@ function renderLeagueTable(container) {
         </tr>`;
     }).join('');
 
-    const emptyMsg = '<div style="text-align:center;padding:48px 24px;font-family:Nunito,sans-serif;color:rgba(0,35,75,0.60);font-size:14px;">No standings imported yet.</div>';
+    const emptyMsg = '<div style="text-align:center;padding:48px 24px;color:var(--text3);font-size:14px;">No standings imported yet.</div>';
 
     container.innerHTML = `${headerHTML('Standings & Records', 'TABLE')}
     ${standingsSubnav()}
@@ -219,14 +235,14 @@ function renderStatsReport(container) {
                 <div class="stat-item"><span class="stat-label">PPG</span><span class="stat-val gold">${l.ppg}</span></div>
                 <div class="stat-item"><span class="stat-label">Goal Diff</span><span class="stat-val gold">${l.goalDiff}</span></div>
             </div>
-            <div style="background:white;border-radius:3px;padding:16px;">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;">
                 <div class="section-title" style="margin-bottom:16px;">Scoring</div>
                 <div class="progress-wrap">
-                    <div class="progress-header"><span>${terms.goalsFor || 'Goals'} For</span><strong style="color:#15803d;font-size:14px;">${g.for}</strong></div>
+                    <div class="progress-header"><span>${terms.goalsFor || 'Goals'} For</span><strong style="color:var(--green);font-size:14px;">${g.for}</strong></div>
                     <div class="progress-track"><div class="progress-fill" style="width:${gfP}%;background:#16a34a;"></div></div>
                 </div>
                 <div class="progress-wrap" style="margin-top:12px;">
-                    <div class="progress-header"><span>${terms.goalsFor || 'Goals'} Against</span><strong style="color:#b91c1c;font-size:14px;">${g.against}</strong></div>
+                    <div class="progress-header"><span>${terms.goalsFor || 'Goals'} Against</span><strong style="color:var(--blue);font-size:14px;">${g.against}</strong></div>
                     <div class="progress-track"><div class="progress-fill" style="width:${gaP}%;background:#3b82f6;"></div></div>
                 </div>
             </div>
@@ -273,7 +289,7 @@ function renderStory(container) {
                     <span><span class="tl-dot-pip" style="background:#16a34a;"></span>Win</span>
                     <span><span class="tl-dot-pip" style="background:#dc2626;"></span>Loss</span>
                     <span><span class="tl-dot-pip" style="background:#ca8a04;"></span>Draw</span>
-                    <span><span class="tl-dot-pip" style="border:2px dashed rgba(0,35,75,0.2);"></span>Upcoming</span>
+                    <span><span class="tl-dot-pip" style="border:1.5px dashed var(--border2);"></span>Upcoming</span>
                 </div>
                 <div class="momentum-wrap">
                     <div class="momentum-header">
@@ -316,17 +332,17 @@ function renderStory(container) {
                 </div>
                 <div class="story-path-card avail-card">
                     <div>
-                        <div class="story-path-label" style="color:#7c5900;">Points Available</div>
+                        <div class="story-path-label" style="color:var(--amber);">Points Available</div>
                         <div class="story-path-sub">${TEAM_CONFIG.remainingSchedule.length} game${TEAM_CONFIG.remainingSchedule.length!==1?'s':''} remaining</div>
                     </div>
-                    <div class="story-path-val" style="color:#92400e;">+${avail}</div>
+                    <div class="story-path-val" style="color:var(--amber);">+${avail}</div>
                 </div>
                 <div class="story-path-card max-card">
                     <div>
-                        <div class="story-path-label" style="color:#166534;">Max Potential</div>
-                        <div class="story-path-sub" style="color:#15803d;">Win all remaining</div>
+                        <div class="story-path-label" style="color:var(--green);">Max Potential</div>
+                        <div class="story-path-sub" style="color:var(--green);">Win all remaining</div>
                     </div>
-                    <div class="story-path-val" style="color:#15803d;">${maxPts}</div>
+                    <div class="story-path-val" style="color:var(--green);">${maxPts}</div>
                 </div>
             </div>
         </div>
@@ -344,26 +360,26 @@ function renderStory(container) {
 function renderSchedule(container) {
     var schedule = TEAM_CONFIG.remainingSchedule;
     var cardsHTML = schedule.length === 0
-        ? '<div style="text-align:center;padding:48px 24px;font-family:Nunito,sans-serif;color:rgba(0,35,75,0.60);font-size:14px;">No remaining games — season complete.</div>'
+        ? '<div style="text-align:center;padding:48px 24px;color:var(--text3);font-size:14px;">No remaining games — season complete.</div>'
         : schedule.map(function(m, i) {
             var isNext = i === 0;
             var dateParts = m.date.split(' ');
             return '<div class="sched-card' + (isNext ? ' sched-card-next' : '') + '">' +
-                '<div class="sched-card-top">' +
-                    '<div class="sched-card-date-block">' +
-                        '<div class="sched-card-day">' + dateParts[0] + '</div>' +
-                        '<div class="sched-card-dt">' + dateParts.slice(1).join(' ') + '</div>' +
+                '<div class="sched-card-date-block">' +
+                    '<div class="sched-card-day">' + dateParts[0] + '</div>' +
+                    '<div class="sched-card-dt">' + dateParts.slice(1).join(' ') + '</div>' +
+                '</div>' +
+                '<div class="sched-card-main">' +
+                    '<div class="sched-card-opp">' +
+                        (m.rank ? '<span class="sched-card-rank">#' + m.rank + '</span>' : '') +
+                        '<span class="sched-card-opp-name">' + m.opp + '</span>' +
                     '</div>' +
-                    (isNext ? '<span class="sched-next-pill">Next Up</span>' : '') +
+                    '<div class="sched-card-meta">' +
+                        '<div class="sched-meta-item"><span>&#128336;</span> ' + m.time + '</div>' +
+                        (m.loc ? '<div class="sched-meta-item"><span>&#128205;</span> ' + m.loc + '</div>' : '') +
+                    '</div>' +
                 '</div>' +
-                '<div class="sched-card-opp">' +
-                    (m.rank ? '<span class="sched-card-rank">#' + m.rank + '</span>' : '') +
-                    '<span class="sched-card-opp-name">' + m.opp + '</span>' +
-                '</div>' +
-                '<div class="sched-card-meta">' +
-                    '<div class="sched-meta-item"><span>&#128336;</span> ' + m.time + '</div>' +
-                    (m.loc ? '<div class="sched-meta-item"><span>&#128205;</span> ' + m.loc + '</div>' : '') +
-                '</div>' +
+                (isNext ? '<span class="sched-next-pill">Next Up</span>' : '') +
             '</div>';
         }).join('');
 
@@ -402,7 +418,7 @@ function renderSchedule(container) {
 ============================================================ */
 function renderTournament(container) {
     const td = TEAM_CONFIG.tournaments;
-    if (!td) { container.innerHTML = headerHTML('Tournament','TOURN')+'<div class="content-area"><p style="color:rgba(0,35,75,0.65);font-family:Nunito,sans-serif;">No tournament data.</p></div>'+footerHTML('Tournament'); return; }
+    if (!td) { container.innerHTML = headerHTML('Tournament','TOURN')+'<div class="content-area"><p style="color:var(--text3);">No tournament data.</p></div>'+footerHTML('Tournament'); return; }
     if (tournView==='map') { renderTournMap(container, td); return; }
     renderTournBracket(container, td);
 }
@@ -426,7 +442,7 @@ function renderTournBracket(container, td) {
         : '';
 
     const histHTML = hist.length === 0
-        ? '<div style="font-family:Nunito,sans-serif;font-size:13px;color:rgba(0,35,75,0.55);padding:16px;text-align:center;">No tournament history recorded yet.</div>'
+        ? '<div style="font-size:13px;color:var(--text3);padding:16px;text-align:center;">No tournament history recorded yet.</div>'
         : hist.map(t => {
             const bc = (t.result.includes('Champion')||t.result.includes('🏆')) ? 'champ' : (t.result.includes('Runner')||t.result.includes('🥈')) ? 'runner' : 'other';
             return `<div class="tourn-hist-row">
@@ -595,8 +611,8 @@ function renderTournMap(container, td) {
 
     container.innerHTML = headerHTML('Tournament','TOURN') + tournSubnav() +
         '<div class="content-area">' +
-        (ct ? '<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">' + ct.name + '</div>' +
-            '<div style="font-family:Nunito,sans-serif;font-size:12px;color:rgba(0,35,75,0.65);margin-bottom:10px;">' + ct.location + '</div></div>' : '') +
+        (ct ? '<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--text);font-size:15px;">' + ct.name + '</div>' +
+            '<div style="font-size:12px;color:var(--text3);margin-bottom:10px;">' + ct.location + '</div></div>' : '') +
         '<div class="map-day-callout"><span class="map-day-callout-label">&#9733; Gold fields = your games</span><span class="map-day-callout-sub">' +
             (days.length > 1 ? "Select a day to see only that day's fields" : 'All tournament fields shown') + '</span></div>' +
         mapHTML +
@@ -637,9 +653,9 @@ function boot() {
         render();
     }).catch(err => {
         document.getElementById('main-content').innerHTML =
-            '<div style="padding:40px;text-align:center;font-family:Nunito,sans-serif;color:#b91c1c;">' +
-            '<strong>Could not load team data.</strong><br><span style="font-size:13px;color:rgba(0,35,75,0.6);">' +
-            err.message + '</span><br><span style="font-size:12px;color:rgba(0,35,75,0.45);margin-top:8px;display:inline-block;">' +
+            '<div style="padding:40px;text-align:center;color:var(--red);">' +
+            '<strong>Could not load team data.</strong><br><span style="font-size:13px;color:var(--text3);">' +
+            err.message + '</span><br><span style="font-size:12px;color:var(--text3);margin-top:8px;display:inline-block;">' +
             'If you opened this file directly, run a local server instead (npx serve).</span></div>';
         console.error(err);
     });

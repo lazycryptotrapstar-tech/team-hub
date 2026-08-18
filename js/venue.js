@@ -9,15 +9,20 @@ let VENUES = {};          // id -> venue definition
 let venueFieldGames = {}; // fieldId -> [games] for the venue currently on screen
 let activeVenueId = null;
 
-/* Field state colors — shared vocabulary across all venues */
+/* Field state colours. "Ours" is the team's own accent, so the map is lit
+   by the same colour as the rest of the hub. */
 const FIELD_STATES = {
-    ours:     { fill:'#ffcc00', stroke:'#00234b',              sw:2.5, text:'#00234b',            sub:'rgba(0,35,75,0.6)',        badge:'★' },
-    final:    { fill:'#1a3a6b', stroke:'#93c5fd',              sw:2,   text:'#bfdbfe',            sub:'rgba(191,219,254,0.6)',    badge:'F' },
-    semi:     { fill:'#1a3a6b', stroke:'#93c5fd',              sw:1.8, text:'#bfdbfe',            sub:'rgba(191,219,254,0.7)',    badge:'' },
-    active:   { fill:'#1a5c30', stroke:'rgba(255,255,255,0.45)', sw:1.2, text:'rgba(255,255,255,0.85)', sub:'rgba(255,255,255,0.45)', badge:'' },
-    inactive: { fill:'#1a5c30', stroke:'rgba(255,255,255,0.3)', sw:0.8, text:'rgba(255,255,255,0.8)',  sub:'rgba(255,255,255,0.35)', badge:'' },
-    empty:    { fill:'#1a3d24', stroke:'rgba(255,255,255,0.1)', sw:0.8, text:'rgba(255,255,255,0.2)',  sub:'rgba(255,255,255,0.1)',  badge:'' },
+    ours:     { fill:'var(--accent)', stroke:'var(--bg)',       sw:2.5, text:'#0A0F14',                sub:'rgba(10,15,20,.55)',     badge:'★' },
+    final:    { fill:'#1D3B57', stroke:'#5EA8F2',               sw:2,   text:'#BFDBFE',                sub:'rgba(191,219,254,.6)',   badge:'F' },
+    semi:     { fill:'#1D3B57', stroke:'#5EA8F2',               sw:1.8, text:'#BFDBFE',                sub:'rgba(191,219,254,.7)',   badge:'' },
+    active:   { fill:'#1E5B39', stroke:'rgba(255,255,255,.42)', sw:1.2, text:'rgba(255,255,255,.88)',  sub:'rgba(255,255,255,.45)',  badge:'' },
+    inactive: { fill:'#1B4E31', stroke:'rgba(255,255,255,.22)', sw:0.8, text:'rgba(255,255,255,.72)',  sub:'rgba(255,255,255,.32)',  badge:'' },
+    empty:    { fill:'#16301F', stroke:'rgba(255,255,255,.08)', sw:0.8, text:'rgba(255,255,255,.2)',   sub:'rgba(255,255,255,.1)',   badge:'' },
 };
+
+/* SVG type matches the page: mono for labels, display for field names */
+const SVG_MONO = "'JetBrains Mono',monospace";
+const SVG_DISPLAY = "'Space Grotesk',sans-serif";
 
 function loadVenues() {
     return fetch('data/venues.json', { cache: 'no-store' })
@@ -91,32 +96,32 @@ function renderZone(z) {
     const label = z.label ? esc(z.label) : '';
     switch (z.type) {
         case 'road': {
-            const t = label ? `<text x="${z.labelX != null ? z.labelX : z.x + z.w/2}" y="${z.labelY != null ? z.labelY : z.y + z.h*0.7}" text-anchor="middle" font-family="Nunito" font-size="${z.h >= 20 ? 8 : 7}" font-weight="700" fill="rgba(255,255,255,0.68)" letter-spacing="${z.letterSpacing || 1}"${z.rotate ? ` transform="rotate(${z.rotate} ${z.labelX} ${z.labelY})"` : ''}>${label}</text>` : '';
-            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="#5a5848" opacity="0.85"/>${t}`;
+            const t = label ? `<text x="${z.labelX != null ? z.labelX : z.x + z.w/2}" y="${z.labelY != null ? z.labelY : z.y + z.h*0.7}" text-anchor="middle" font-family="${SVG_MONO}" font-size="${z.h >= 20 ? 8 : 7}" font-weight="700" fill="rgba(255,255,255,0.68)" letter-spacing="${z.letterSpacing || 1}"${z.rotate ? ` transform="rotate(${z.rotate} ${z.labelX} ${z.labelY})"` : ''}>${label}</text>` : '';
+            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="#2E353D" opacity="0.95"/>${t}`;
         }
         case 'parking': {
             if (z.plain) {
-                return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="2" fill="#4a4a42" opacity="0.75"/>` +
-                    (label ? `<text x="${z.labelX}" y="${z.labelY}" font-family="Nunito" font-size="9" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle" transform="rotate(${z.rotate || 0} ${z.labelX} ${z.labelY})" letter-spacing="2">${label}</text>` : '');
+                return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="3" fill="#242A31" opacity="0.9"/>` +
+                    (label ? `<text x="${z.labelX}" y="${z.labelY}" font-family="${SVG_MONO}" font-size="9" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle" transform="rotate(${z.rotate || 0} ${z.labelX} ${z.labelY})" letter-spacing="2">${label}</text>` : '');
             }
             const cx = z.x + z.w/2;
-            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="4" fill="#1e3a8a" opacity="0.85"/>` +
-                `<text x="${cx}" y="${z.y+22}" text-anchor="middle" font-family="Bebas Neue,Nunito" font-size="14" fill="#ffcc00" letter-spacing="1">P</text>` +
-                `<text x="${cx}" y="${z.y+36}" text-anchor="middle" font-family="Nunito" font-size="8" font-weight="900" fill="white">${label}</text>` +
-                (z.sublabel ? `<text x="${cx}" y="${z.y+50}" text-anchor="middle" font-family="Nunito" font-size="7" fill="rgba(255,255,255,0.65)">${esc(z.sublabel)}</text>` : '') +
-                (z.note ? `<text x="${cx}" y="${z.y+63}" text-anchor="middle" font-family="Nunito" font-size="6" fill="rgba(255,255,255,0.45)">${esc(z.note)}</text>` : '');
+            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="5" fill="#1B3358" opacity="0.95"/>` +
+                `<text x="${cx}" y="${z.y+22}" text-anchor="middle" font-family="${SVG_DISPLAY}" font-size="14" fill="var(--accent)" letter-spacing="1">P</text>` +
+                `<text x="${cx}" y="${z.y+36}" text-anchor="middle" font-family="${SVG_MONO}" font-size="8" font-weight="900" fill="white">${label}</text>` +
+                (z.sublabel ? `<text x="${cx}" y="${z.y+50}" text-anchor="middle" font-family="${SVG_MONO}" font-size="7" fill="rgba(255,255,255,0.65)">${esc(z.sublabel)}</text>` : '') +
+                (z.note ? `<text x="${cx}" y="${z.y+63}" text-anchor="middle" font-family="${SVG_MONO}" font-size="6" fill="rgba(255,255,255,0.45)">${esc(z.note)}</text>` : '');
         }
         case 'landmark':
-            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="2" fill="#3a4a6a"/>` +
+            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="3" fill="#2B3A52"/>` +
                 (label ? (z.w >= 20
-                    ? `<text x="${z.x+z.w/2}" y="${z.y+z.h*0.72}" font-family="Nunito" font-size="7" font-weight="900" fill="white" text-anchor="middle">${label}</text>`
-                    : `<text x="${z.x+z.w/2}" y="${z.y+z.h+7}" text-anchor="middle" font-family="Nunito" font-size="6" fill="rgba(255,255,255,0.5)">${label}</text>`) : '');
+                    ? `<text x="${z.x+z.w/2}" y="${z.y+z.h*0.72}" font-family="${SVG_MONO}" font-size="7" font-weight="900" fill="white" text-anchor="middle">${label}</text>`
+                    : `<text x="${z.x+z.w/2}" y="${z.y+z.h+7}" text-anchor="middle" font-family="${SVG_MONO}" font-size="6" fill="rgba(255,255,255,0.5)">${label}</text>`) : '');
         case 'medical':
-            return `<circle cx="${z.x}" cy="${z.y}" r="${z.r || 9}" fill="#dc2626" opacity="0.9"/>` +
-                `<text x="${z.x}" y="${z.y+4}" font-family="Nunito" font-size="11" font-weight="900" fill="white" text-anchor="middle">+</text>`;
+            return `<circle cx="${z.x}" cy="${z.y}" r="${z.r || 9}" fill="#F26D5E" opacity="0.9"/>` +
+                `<text x="${z.x}" y="${z.y+4}" font-family="${SVG_MONO}" font-size="11" font-weight="900" fill="white" text-anchor="middle">+</text>`;
         case 'area':
         default:
-            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="5" fill="#243324" opacity="0.75"/>`;
+            return `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="6" fill="#16211B" opacity="0.9"/>`;
     }
 }
 
@@ -137,17 +142,17 @@ function renderField(venue, f, games) {
                  `<circle cx="${cx}" cy="${cy}" r="6" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>`;
     }
     const badge = c.badge
-        ? `<text x="${cx}" y="${f.y + (big ? 12 : 10)}" text-anchor="middle" font-family="Nunito" font-size="${big ? 9 : 7}" font-weight="900" fill="${c.text}">${c.badge}</text>`
+        ? `<text x="${cx}" y="${f.y + (big ? 12 : 10)}" text-anchor="middle" font-family="${SVG_MONO}" font-size="${big ? 9 : 7}" font-weight="900" fill="${c.text}">${c.badge}</text>`
         : '';
     const nameSize = venue.showFieldSize ? (big ? 20 : 14) : (isHot ? 13 : 11);
     const sizeLabel = venue.showFieldSize && f.size
-        ? `<text x="${cx}" y="${cy + (big ? 16 : 12)}" font-family="Nunito" font-size="6" font-weight="700" fill="${c.sub}" text-anchor="middle">${esc(f.size)}</text>`
+        ? `<text x="${cx}" y="${cy + (big ? 16 : 12)}" font-family="${SVG_MONO}" font-size="6" font-weight="700" fill="${c.sub}" text-anchor="middle">${esc(f.size)}</text>`
         : '';
 
     return `<g onclick="venueFieldClick('${esc(f.id)}')" style="cursor:pointer;" class="map-field-group">` +
         `<rect id="vf-${esc(f.id)}" class="vf-rect" x="${f.x}" y="${f.y}" width="${f.w}" height="${f.h}" rx="3" fill="${c.fill}" stroke="${c.stroke}" stroke-width="${c.sw}" style="transition:filter 0.2s;"/>` +
         marks + badge +
-        `<text x="${cx}" y="${cy + (c.badge ? 3 : 1)}" text-anchor="middle" dominant-baseline="middle" font-family="${venue.showFieldSize ? 'Nunito' : 'Bebas Neue,Nunito'}" font-size="${nameSize}" font-weight="900" fill="${c.text}">${esc(label)}</text>` +
+        `<text x="${cx}" y="${cy + (c.badge ? 3 : 1)}" text-anchor="middle" dominant-baseline="middle" font-family="${SVG_DISPLAY}" font-size="${nameSize}" font-weight="900" fill="${c.text}">${esc(label)}</text>` +
         sizeLabel +
         `</g>`;
 }
@@ -155,15 +160,15 @@ function renderField(venue, f, games) {
 function renderLegend(venue) {
     const W = venue.canvas.w, H = venue.canvas.h;
     const barY = H - 17;
-    let out = `<rect x="0" y="${barY}" width="${W}" height="17" fill="rgba(0,0,0,0.4)"/>`;
+    let out = `<rect x="0" y="${barY}" width="${W}" height="17" fill="rgba(0,0,0,0.55)"/>`;
     let x = 8;
     (venue.legend || []).forEach(item => {
         const c = FIELD_STATES[item.state] || FIELD_STATES.inactive;
         out += `<rect x="${x}" y="${barY+4}" width="9" height="9" rx="1" fill="${c.fill}" stroke="${c.stroke}" stroke-width="1.2"/>`;
-        out += `<text x="${x+13}" y="${barY+11.5}" font-family="Nunito" font-size="7.5"${item.state==='ours'?' font-weight="900"':''} fill="${item.state==='ours'?'#ffcc00':'rgba(255,255,255,0.6)'}">${esc(item.label)}</text>`;
+        out += `<text x="${x+13}" y="${barY+11.5}" font-family="${SVG_MONO}" font-size="7.5"${item.state==='ours'?' font-weight="900"':''} fill="${item.state==='ours'?'#ffcc00':'rgba(255,255,255,0.6)'}">${esc(item.label)}</text>`;
         x += 13 + esc(item.label).length * 4.6 + 14;
     });
-    out += `<text x="${W-5}" y="${barY+11.5}" font-family="Nunito" font-size="6.5" fill="rgba(255,255,255,0.3)" text-anchor="end">${esc(venue.address)}</text>`;
+    out += `<text x="${W-5}" y="${barY+11.5}" font-family="${SVG_MONO}" font-size="6.5" fill="rgba(255,255,255,0.3)" text-anchor="end">${esc(venue.address)}</text>`;
     return out;
 }
 
@@ -229,7 +234,7 @@ function buildVenueSection(venue, games, opts) {
     return '<div class="venue-map-section">' +
         (opts.title === null ? '' : `<div class="tourn-sub-label" style="margin-top:28px;">📍 Venue Map · ${esc(opts.title || venue.shortName || venue.name)}</div>`) +
         (opts.dayBar || '') +
-        `<div class="venue-map-outer">${svg}${panel}</div>` +
+        `<div class="venue-map-outer"><div class="venue-map-frame">${svg}</div>${panel}</div>` +
         (venue.parkingNote ? `<div class="venue-parking-note">🚗 ${venue.parkingNote}</div>` : '') +
         '</div>';
 }
