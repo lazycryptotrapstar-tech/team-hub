@@ -334,18 +334,26 @@
         .player-dot{position:relative;}
 
 
-        /* ===== UTD VENUE MAP ===== */
-        .utd-map-section{margin-top:8px;}
-        .utd-map-wrap{display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start;}
-        .utd-svg{width:100%;display:block;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
-        .utd-info-panel{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.1);padding:14px;box-shadow:0 2px 8px rgba(0,35,75,0.06);}
-        .utd-info-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(0,35,75,0.07);}
-        .utd-info-row:last-child{border-bottom:none;padding-bottom:0;}
-        .utd-field-badge{font-family:'Bebas Neue','Nunito',sans-serif;font-size:15px;letter-spacing:1px;background:var(--primary);color:var(--secondary);padding:4px 10px;border-radius:3px;flex-shrink:0;}
-        .utd-info-detail{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.70);line-height:1.5;}
-        .utd-info-detail strong{color:var(--primary);}
-        .utd-parking-note{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.65);background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.3);border-radius:4px;padding:8px 14px;margin-top:12px;}
-        @media(max-width:860px){.utd-map-wrap{grid-template-columns:1fr;}}
+        /* ===== VENUE MAP SECTION ===== */
+        .venue-map-section{margin-top:8px;}
+        .tourn-map-header{margin-bottom:12px;}
+        .map-day-callout{background:rgba(255,204,0,0.12);border:1px solid rgba(255,204,0,0.35);border-radius:4px;padding:8px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+        .map-day-callout-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:#7c5900;letter-spacing:0.3px;}
+        .map-day-callout-sub{font-family:'Nunito',sans-serif;font-size:11px;color:rgba(0,35,75,0.65);}
+        .map-day-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+        .map-day-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:7px 14px;border-radius:20px;border:1.5px solid rgba(0,35,75,0.18);background:white;color:rgba(0,35,75,0.5);cursor:pointer;transition:all 0.15s;}
+        .map-day-btn:hover{border-color:var(--primary);color:var(--primary);}
+        .map-day-btn.active{background:var(--primary);color:var(--secondary);border-color:var(--primary);font-weight:900;}
+        .cross-tab-nudge{display:flex;gap:10px;padding:16px 24px;background:rgba(0,35,75,0.04);border-top:1px solid rgba(0,35,75,0.08);}
+        .cross-nudge-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--primary);background:white;border:2px solid rgba(0,35,75,0.12);border-radius:4px;padding:8px 16px;cursor:pointer;text-decoration:none;transition:border-color 0.15s;}
+        .cross-nudge-btn:hover{border-color:var(--secondary);}
+        .ai-spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px;}
+        @keyframes spin{to{transform:rotate(360deg);}}
+        .venue-parking-note{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(0,35,75,0.65);background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.3);border-radius:4px;padding:8px 14px;margin-top:12px;}
+        .venue-unknown{background:white;border-radius:6px;border:1px solid rgba(0,35,75,0.1);padding:14px 16px;}
+        .venue-unknown-row{font-family:'Nunito',sans-serif;font-size:13px;color:var(--primary);padding:8px 0;border-bottom:1px solid rgba(0,35,75,0.07);display:flex;align-items:center;gap:8px;}
+        .venue-unknown-row:last-child{border-bottom:none;}
+        .venue-dir-link{margin-left:auto;font-size:11px;font-weight:900;color:var(--primary);background:var(--secondary);padding:4px 10px;border-radius:3px;text-decoration:none;}
 
 
         .tourn-hist-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}

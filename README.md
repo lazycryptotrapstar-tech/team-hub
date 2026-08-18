@@ -42,3 +42,27 @@ npx serve .
 ```
 
 Deploys happen automatically on push to `main` (Cloudflare).
+
+## Adding a venue
+
+Venues are data, not code. Add an entry to `data/venues.json`:
+
+- `canvas` — the drawing area (`w`, `h`, `bg`)
+- `fields[]` — each field's `id`, `x`, `y`, `w`, `h` (and optional `size`, `aliases`)
+- `zones[]` — `road`, `parking`, `area`, `landmark`, `medical` boxes
+- `markers[]` — arrows (e.g. parking lot → fields)
+- `locationPatterns[]` — regexes that pull a field id out of a location
+  string, so "UT Dallas #07" lights up field 7
+- `emptyState` — how fields with no games look: `inactive` (normal) or
+  `empty` (dimmed, good for tournament maps)
+
+Games point at a venue with `venueId` + `fieldId`; free-text `locText`
+still works through `locationPatterns`. A game at a venue with no map
+falls back to an address card with a directions link.
+
+Then check the geometry and resolution rules:
+
+```
+node test/verify-venues.mjs
+node test/verify-css.mjs
+```

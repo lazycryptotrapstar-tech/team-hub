@@ -8,7 +8,6 @@ let currentTab = 'schedule';
 let standingsView = 'table';   // table | stats
 let tournView = 'bracket';     // bracket | map
 let tournMapDay = 'All';
-let mapFieldGames = {};
 
 /* ============================================================
    THEME + NAV
@@ -369,24 +368,34 @@ function renderSchedule(container) {
             '</div>';
         }).join('');
 
-    // Build UTD field highlights from schedule locations
-    var utdFields = {};
-    schedule.forEach(function(m) {
-        var num = null;
-        if (m.game && m.game.venueId === 'utd' && m.game.fieldId) num = parseInt(m.game.fieldId, 10);
-        else { var match = (m.loc||'').match(/UT\s*Dallas\s*#?(\d+)/i); if (match) num = parseInt(match[1], 10); }
-        if (num) {
-            if (!utdFields[num]) utdFields[num] = [];
-            utdFields[num].push(m);
-        }
+    // Venue map: mark our upcoming games on whichever venue they're at
+    var mapGames = schedule.map(function(m) {
+        var g = m.game || {};
+        return {
+            venueId: g.venueId, fieldId: g.fieldId, locText: m.loc,
+            date: m.date, time: m.time, opp: m.opp, rank: m.rank, isOurs: true
+        };
     });
+    var venue = detectVenue(mapGames);
+    var mapHTML = '';
+    if (venue) {
+        mapHTML = buildVenueSection(venue, mapGames, { panelHint: 'Tap any field to see its games' });
+    } else if (schedule.length) {
+        mapHTML = buildUnknownVenueCard(schedule.map(function(m) { return m.loc; }));
+    }
 
     container.innerHTML = headerHTML('Schedule', 'SCHED') +
         '<div class="content-area">' +
         '<div class="section-title" style="margin-bottom:16px;">Remaining Games <span>' + schedule.length + '</span></div>' +
         '<div class="sched-cards">' + cardsHTML + '</div>' +
-        (Object.keys(utdFields).length ? buildUTDMap(utdFields) : '') +
+        mapHTML +
         '</div>' + footerHTML('Official Schedule');
+
+    // Pre-fill the panel with the next game's field so it isn't empty on arrival
+    if (venue && mapGames.length) {
+        var firstField = resolveField(venue, mapGames[0]);
+        if (firstField) showFieldInfo(firstField);
+    }
 }
 
 /* ============================================================
@@ -532,41 +541,67 @@ function renderTournBracket(container, td) {
         footerHTML('Tournament Record');
 }
 
+/* Flatten a tournament into one game list the venue engine understands */
+function tournamentGames(ct) {
+    const games = [];
+    if (!ct) return games;
+    const ourTeam = ct.group && ct.group.ourTeam;
+    (ct.group && ct.group.matches || []).forEach(function(m) {
+        const isOurs = m.home === ourTeam || m.away === ourTeam;
+        games.push({
+            day: m.date, isOurs: isOurs, field: m.field, locText: m.field,
+            venueId: m.venueId, fieldId: m.fieldId,
+            date: m.date, time: m.time, home: m.home, away: m.away, score: m.score,
+            label: isOurs ? 'Our Match · Group Stage' : 'Group Stage'
+        });
+    });
+    const brItems = [...((ct.bracket && ct.bracket.semis) || [])];
+    if (ct.bracket && ct.bracket.final) brItems.push(ct.bracket.final);
+    brItems.forEach(function(s) {
+        const parts = (s.time || '').split(' · ');
+        games.push({
+            day: parts[0], isOurs: false, field: s.field, locText: s.field,
+            venueId: s.venueId, fieldId: s.fieldId,
+            date: parts[0], time: parts[1] || s.time,
+            home: s.teamA, away: s.teamB, score: s.score, label: s.slot
+        });
+    });
+    return games;
+}
+
 function renderTournMap(container, td) {
     const ct = td ? td.current : null;
-    const isUTD = td && td.venueType === 'utd';
-    if (isUTD) {
-        var utdFields = {};
-        (ct && ct.group && ct.group.matches || []).forEach(function(m) {
-            var match = (m.field||'').match(/UT\s*Dallas\s*#?(\d+)/i);
-            if (match) {
-                var num = parseInt(match[1], 10);
-                if (!utdFields[num]) utdFields[num] = [];
-                utdFields[num].push({ date: m.date, time: m.time, opp: m.away === ct.group.ourTeam ? m.home : m.away, rank: '', loc: m.field });
-            }
-        });
-        container.innerHTML = headerHTML('Tournament','TOURN') + tournSubnav() +
-            '<div class="content-area">' +
-            (ct ? '<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">' + ct.name + '</div>' +
+    const allGames = tournamentGames(ct);
+
+    // Day filter chips
+    const seen = {}, days = ['All'];
+    allGames.forEach(function(g) { if (g.day && !seen[g.day]) { seen[g.day] = 1; days.push(g.day); } });
+    if (days.indexOf(tournMapDay) === -1) tournMapDay = 'All';
+    const activeDay = tournMapDay;
+    const filtered = activeDay === 'All' ? allGames : allGames.filter(function(g) { return g.day === activeDay; });
+    const dayBar = days.length > 1
+        ? '<div class="map-day-bar">' + days.map(function(d) {
+            return '<button class="map-day-btn' + (d === activeDay ? ' active' : '') + '" onclick="setMapDay(\'' + d + '\')">' + d + '</button>';
+          }).join('') + '</div>'
+        : '';
+
+    // venueType is a legacy hint; detection falls back to matching game locations
+    const venue = detectVenue(allGames, td && td.venueType);
+    const mapHTML = venue
+        ? buildVenueSection(venue, filtered, {
+            title: null, dayBar: dayBar,
+            panelHint: 'Tap any field to see' + (activeDay === 'All' ? ' all' : ' ' + activeDay) + ' games'
+          })
+        : buildUnknownVenueCard(allGames.map(function(g) { return g.field; }));
+
+    container.innerHTML = headerHTML('Tournament','TOURN') + tournSubnav() +
+        '<div class="content-area">' +
+        (ct ? '<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">' + ct.name + '</div>' +
             '<div style="font-family:Nunito,sans-serif;font-size:12px;color:rgba(0,35,75,0.65);margin-bottom:10px;">' + ct.location + '</div></div>' : '') +
-            '<div class="map-day-callout"><span class="map-day-callout-label">&#9733; Gold fields = your games</span><span class="map-day-callout-sub">All tournament fields shown</span></div>' +
-            buildUTDMap(utdFields) +
-            '</div>' + footerHTML('Venue Map');
-        return;
-    }
-    const allGames = [];
-    (ct&&ct.group&&ct.group.matches||[]).forEach(function(m){allGames.push({day:m.date,isOurs:m.home===ct.group.ourTeam||m.away===ct.group.ourTeam,field:m.field,date:m.date,time:m.time,home:m.home,away:m.away,score:m.score,label:(m.home===ct.group.ourTeam||m.away===ct.group.ourTeam)?'Our Match · Group Stage':'Group Stage'});});
-    const brItems=[...((ct&&ct.bracket&&ct.bracket.semis)||[])];
-    if(ct&&ct.bracket&&ct.bracket.final) brItems.push(ct.bracket.final);
-    brItems.forEach(function(s){const parts=(s.time||'').split(' · ');allGames.push({day:parts[0],isOurs:false,field:s.field,date:parts[0],time:parts[1]||s.time,home:s.teamA,away:s.teamB,score:s.score,label:s.slot});});
-    const seen={};const days=['All'];
-    allGames.forEach(function(g){if(g.day&&!seen[g.day]){seen[g.day]=1;days.push(g.day);}});
-    const activeDay=tournMapDay||'All';
-    mapFieldGames={};
-    const filtered=activeDay==='All'?allGames:allGames.filter(function(g){return g.day===activeDay;});
-    filtered.forEach(function(g){const m=(g.field||'').match(/Carpenter Park\s*-?\s*([A-M])\b/i);if(!m)return;const letter=m[1].toUpperCase();if(!mapFieldGames[letter])mapFieldGames[letter]=[];mapFieldGames[letter].push(g);});
-    const dayBtns=days.map(function(d){return '<button class="map-day-btn'+(d===activeDay?' active':'')+'" onclick="setMapDay(\''+d+'\')">'+d+'</button>';}).join('');
-    container.innerHTML=`${headerHTML('Tournament','TOURN')}${tournSubnav()}<div class="content-area">${ct?`<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--primary);font-size:15px;">${ct.name}</div><div style="font-family:Nunito,sans-serif;font-size:12px;color:rgba(0,35,75,0.65);margin-bottom:10px;">${ct.location}</div></div>`:''}<div class="map-day-callout"><span class="map-day-callout-label">&#9733; Gold fields = your games</span><span class="map-day-callout-sub">Select a day to see only that day's fields</span></div><div class="map-day-bar">${dayBtns}</div><div class="venue-map-outer">${buildVenueMapSVG()}<div id="mapFieldInfo" class="vfi vfi-empty"><span>Tap any field to see${activeDay==='All'?' all':' '+activeDay} games</span></div></div></div>${footerHTML('Venue Map')}`;
+        '<div class="map-day-callout"><span class="map-day-callout-label">&#9733; Gold fields = your games</span><span class="map-day-callout-sub">' +
+            (days.length > 1 ? "Select a day to see only that day's fields" : 'All tournament fields shown') + '</span></div>' +
+        mapHTML +
+        '</div>' + footerHTML('Venue Map');
 }
 
 function setMapDay(day){tournMapDay=day;renderTournament(document.getElementById('main-content'));}
@@ -592,7 +627,7 @@ function purgeLegacyStorage() {
 
 function boot() {
     purgeLegacyStorage();
-    loadHubData().then(() => {
+    Promise.all([loadHubData(), loadVenues()]).then(() => {
         const ids = Object.keys(TEAMS);
         if (!ids.length) throw new Error('No teams in data/teams.json');
         currentTeamId = ids[0];

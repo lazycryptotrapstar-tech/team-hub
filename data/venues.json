@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "venues": [
+    {
+      "id": "utd",
+      "name": "UT Dallas Soccer Complex",
+      "shortName": "UT Dallas",
+      "address": "6701 Floyd Rd · Richardson TX",
+      "parkingNote": "<strong>Park in Lot U</strong> — enter from Field St (east side of complex). <strong>Do not use Lot J.</strong>",
+      "canvas": {
+        "w": 340,
+        "h": 452,
+        "bg": "#2d3a2d"
+      },
+      "locationPatterns": [
+        "UT\\s*Dallas\\s*#?0*(\\d+)",
+        "UTD[-\\s]#?0*(\\d+)"
+      ],
+      "fieldLabelPrefix": "UTD-",
+      "legend": [
+        {
+          "state": "ours",
+          "label": "Your Field"
+        },
+        {
+          "state": "inactive",
+          "label": "Other Fields"
+        }
+      ],
+      "zones": [
+        {
+          "type": "area",
+          "x": 6,
+          "y": 16,
+          "w": 248,
+          "h": 192
+        },
+        {
+          "type": "area",
+          "x": 6,
+          "y": 234,
+          "w": 168,
+          "h": 282
+        },
+        {
+          "type": "road",
+          "label": "LOOP ROAD SW",
+          "x": 0,
+          "y": 0,
+          "w": 340,
+          "h": 16,
+          "labelX": 130
+        },
+        {
+          "type": "road",
+          "label": "FIELD ST",
+          "x": 0,
+          "y": 214,
+          "w": 340,
+          "h": 22,
+          "labelX": 160,
+          "letterSpacing": 2
+        },
+        {
+          "type": "landmark",
+          "label": "PAV",
+          "x": 256,
+          "y": 116,
+          "w": 14,
+          "h": 20
+        },
+        {
+          "type": "parking",
+          "label": "LOT U",
+          "sublabel": "Park Here",
+          "note": "Enter from Field St",
+          "x": 250,
+          "y": 238,
+          "w": 84,
+          "h": 180
+        }
+      ],
+      "markers": [
+        {
+          "type": "arrow",
+          "from": [
+            250,
+            328
+          ],
+          "to": [
+            244,
+            328
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "id": "3",
+          "x": 12,
+          "y": 22,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "2",
+          "x": 92,
+          "y": 22,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "1",
+          "x": 172,
+          "y": 22,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "6",
+          "x": 12,
+          "y": 116,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "5",
+          "x": 92,
+          "y": 116,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "4",
+          "x": 172,
+          "y": 116,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "8",
+          "x": 12,
+          "y": 238,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "7",
+          "x": 92,
+          "y": 238,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "10",
+          "x": 12,
+          "y": 332,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "9",
+          "x": 92,
+          "y": 332,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        }
+      ],
+      "emptyState": "inactive"
+    },
+    {
+      "id": "carpenter",
+      "name": "Carpenter Park",
+      "shortName": "Carpenter Park",
+      "address": "6701 Coit Rd · Plano TX 75024",
+      "parkingNote": null,
+      "canvas": {
+        "w": 490,
+        "h": 375,
+        "bg": "#3a4a36"
+      },
+      "locationPatterns": [
+        "Carpenter Park\\s*-?\\s*([A-M])\\b"
+      ],
+      "fieldLabelPrefix": "",
+      "showFieldSize": true,
+      "legend": [
+        {
+          "state": "ours",
+          "label": "Our Games"
+        },
+        {
+          "state": "final",
+          "label": "Knockouts"
+        },
+        {
+          "state": "active",
+          "label": "Other Games"
+        }
+      ],
+      "zones": [
+        {
+          "type": "area",
+          "x": 20,
+          "y": 12,
+          "w": 370,
+          "h": 330
+        },
+        {
+          "type": "area",
+          "x": 318,
+          "y": 248,
+          "w": 172,
+          "h": 120
+        },
+        {
+          "type": "parking",
+          "label": "PARKING",
+          "x": 22,
+          "y": 80,
+          "w": 108,
+          "h": 260,
+          "rotate": -90,
+          "labelX": 76,
+          "labelY": 225,
+          "plain": true
+        },
+        {
+          "type": "road",
+          "x": 138,
+          "y": 193,
+          "w": 190,
+          "h": 14
+        },
+        {
+          "type": "road",
+          "x": 326,
+          "y": 80,
+          "w": 14,
+          "h": 240
+        },
+        {
+          "type": "road",
+          "label": "COIT RD",
+          "x": 484,
+          "y": 0,
+          "w": 6,
+          "h": 375,
+          "rotate": 90,
+          "labelX": 477,
+          "labelY": 190
+        },
+        {
+          "type": "landmark",
+          "label": "HQ",
+          "x": 112,
+          "y": 207,
+          "w": 24,
+          "h": 14
+        },
+        {
+          "type": "medical",
+          "x": 120,
+          "y": 160,
+          "r": 9
+        }
+      ],
+      "markers": [],
+      "fields": [
+        {
+          "id": "E",
+          "x": 25,
+          "y": 58,
+          "w": 58,
+          "h": 44,
+          "size": "9v9"
+        },
+        {
+          "id": "F",
+          "x": 148,
+          "y": 18,
+          "w": 58,
+          "h": 44,
+          "size": "9v9"
+        },
+        {
+          "id": "G",
+          "x": 216,
+          "y": 18,
+          "w": 58,
+          "h": 44,
+          "size": "9v9"
+        },
+        {
+          "id": "H",
+          "x": 298,
+          "y": 22,
+          "w": 64,
+          "h": 48,
+          "size": "9v9"
+        },
+        {
+          "id": "A",
+          "x": 140,
+          "y": 83,
+          "w": 88,
+          "h": 112,
+          "size": "11v11"
+        },
+        {
+          "id": "B",
+          "x": 238,
+          "y": 83,
+          "w": 88,
+          "h": 112,
+          "size": "11v11"
+        },
+        {
+          "id": "D",
+          "x": 140,
+          "y": 205,
+          "w": 88,
+          "h": 112,
+          "size": "11v11"
+        },
+        {
+          "id": "C",
+          "x": 238,
+          "y": 205,
+          "w": 88,
+          "h": 112,
+          "size": "11v11"
+        },
+        {
+          "id": "L",
+          "x": 330,
+          "y": 258,
+          "w": 72,
+          "h": 100,
+          "size": "11v11"
+        },
+        {
+          "id": "M",
+          "x": 410,
+          "y": 258,
+          "w": 72,
+          "h": 100,
+          "size": "11v11"
+        }
+      ],
+      "emptyState": "empty"
+    }
+  ]
+}
