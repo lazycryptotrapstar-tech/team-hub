@@ -222,6 +222,15 @@ function showFieldInfo(fieldId) {
     }).join('');
 }
 
+/* Some grounds run to house rules — where spectators stand, what you can
+   bring. Worth showing families before they turn up, not after. */
+function buildVenueRules(venue) {
+    if (!venue.rules || !venue.rules.length) return '';
+    return '<details class="venue-rules"><summary>Facility rules</summary><ul>' +
+        venue.rules.map(r => `<li>${esc(r)}</li>`).join('') +
+        '</ul></details>';
+}
+
 /* A venue we know but haven't drawn a field map for yet. Better an honest
    address and directions than a made-up field grid someone drives to. */
 function buildVenueCard(venue, games) {
@@ -253,6 +262,7 @@ function buildVenueSection(venue, games, opts) {
         (opts.dayBar || '') +
         `<div class="venue-map-outer"><div class="venue-map-frame">${svg}</div>${panel}</div>` +
         (venue.parkingNote ? `<div class="venue-parking-note">🚗 ${venue.parkingNote}</div>` : '') +
+        buildVenueRules(venue) +
         '</div>';
 }
 

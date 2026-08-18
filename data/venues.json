@@ -3,9 +3,9 @@
   "venues": [
     {
       "id": "utd",
-      "name": "UT Dallas Soccer Complex",
+      "name": "UTD Soccer Complex",
       "shortName": "UT Dallas",
-      "address": "6701 Floyd Rd · Richardson TX",
+      "address": "800 W Campbell Rd · Richardson TX 75080",
       "parkingNote": "<strong>Park in Lot U</strong> — enter from Field St (east side of complex). <strong>Do not use Lot J.</strong>",
       "canvas": {
         "w": 340,
@@ -78,6 +78,15 @@
           "y": 238,
           "w": 84,
           "h": 180
+        },
+        {
+          "type": "parking",
+          "label": "LOT J",
+          "sublabel": "Do not use",
+          "x": 258,
+          "y": 22,
+          "w": 76,
+          "h": 54
         }
       ],
       "markers": [
@@ -361,14 +370,14 @@
     },
     {
       "id": "railroad",
-      "name": "Railroad Park",
+      "name": "Lewisville Railroad Park",
       "shortName": "Railroad Park",
       "address": "1301 S Railroad St · Lewisville TX 75057",
-      "parkingNote": "Main lots are off <strong>Locomotive Drive</strong>. The north lot is closest to fields 8, 9 and 10; the south lot serves fields 1, 2 and 3.",
+      "parkingNote": "Lots are on the <strong>east side</strong> — the upper lot serves fields 4, 11 and 12, the lower lot serves 1, 2 and 3. HQ, first aid and restrooms sit in the middle by field 4.",
       "layoutNote": "Schematic — field order follows the official park map.",
       "canvas": {
-        "w": 360,
-        "h": 648,
+        "w": 430,
+        "h": 720,
         "bg": "var(--bg)"
       },
       "locationPatterns": [
@@ -391,152 +400,159 @@
       "zones": [
         {
           "type": "road",
-          "label": "VALLEY RIDGE BLVD",
-          "x": 0,
-          "y": 0,
-          "w": 360,
-          "h": 15,
-          "labelX": 190
-        },
-        {
-          "type": "road",
           "label": "LOCOMOTIVE DR",
-          "x": 0,
-          "y": 15,
-          "w": 22,
-          "h": 633,
+          "x": 26,
+          "y": 40,
+          "w": 20,
+          "h": 640,
           "rotate": 90,
-          "labelX": 11,
-          "labelY": 330
+          "labelX": 36,
+          "labelY": 360
         },
         {
           "type": "area",
-          "x": 26,
-          "y": 18,
-          "w": 272,
-          "h": 616
+          "x": 60,
+          "y": 30,
+          "w": 350,
+          "h": 660
         },
         {
           "type": "parking",
-          "label": "NORTH LOT",
-          "sublabel": "Fields 8–10",
-          "x": 44,
-          "y": 22,
-          "w": 104,
-          "h": 74
+          "label": "EAST LOT",
+          "sublabel": "Fields 4, 11, 12",
+          "x": 326,
+          "y": 430,
+          "w": 84,
+          "h": 104
         },
         {
           "type": "parking",
           "label": "SOUTH LOT",
           "sublabel": "Fields 1–3",
-          "x": 244,
-          "y": 520,
+          "x": 290,
+          "y": 630,
           "w": 100,
-          "h": 96
+          "h": 66
         },
         {
           "type": "landmark",
-          "label": "WC",
-          "x": 232,
-          "y": 128,
-          "w": 24,
-          "h": 15
-        },
-        {
-          "type": "landmark",
-          "label": "WC",
-          "x": 176,
-          "y": 372,
-          "w": 24,
+          "label": "HQ",
+          "x": 186,
+          "y": 452,
+          "w": 30,
           "h": 15
         },
         {
           "type": "medical",
-          "x": 300,
-          "y": 300,
+          "x": 201,
+          "y": 492,
           "r": 9
+        },
+        {
+          "type": "landmark",
+          "label": "WC",
+          "x": 186,
+          "y": 512,
+          "w": 30,
+          "h": 15
         }
       ],
       "markers": [],
       "fields": [
         {
           "id": "9",
-          "x": 160,
-          "y": 24,
-          "w": 62,
-          "h": 80,
+          "x": 210,
+          "y": 60,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "10",
-          "x": 232,
-          "y": 24,
-          "w": 62,
-          "h": 80,
+          "x": 290,
+          "y": 48,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "8",
-          "x": 48,
-          "y": 120,
-          "w": 62,
-          "h": 80,
+          "x": 110,
+          "y": 170,
+          "w": 64,
+          "h": 84,
+          "size": "11v11"
+        },
+        {
+          "id": "11",
+          "x": 300,
+          "y": 170,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "7",
-          "x": 160,
-          "y": 132,
-          "w": 62,
-          "h": 80,
+          "x": 180,
+          "y": 254,
+          "w": 64,
+          "h": 84,
+          "size": "11v11"
+        },
+        {
+          "id": "12",
+          "x": 346,
+          "y": 272,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "6",
-          "x": 104,
-          "y": 224,
-          "w": 62,
-          "h": 80,
+          "x": 140,
+          "y": 344,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "4",
-          "x": 232,
-          "y": 236,
-          "w": 62,
-          "h": 80,
+          "x": 250,
+          "y": 360,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "5",
-          "x": 32,
-          "y": 316,
-          "w": 62,
-          "h": 80,
+          "x": 96,
+          "y": 434,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "3",
-          "x": 96,
-          "y": 408,
-          "w": 62,
-          "h": 80,
+          "x": 130,
+          "y": 520,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "2",
-          "x": 168,
-          "y": 468,
-          "w": 62,
-          "h": 80,
+          "x": 200,
+          "y": 592,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         },
         {
           "id": "1",
-          "x": 104,
-          "y": 548,
-          "w": 62,
-          "h": 80,
+          "x": 120,
+          "y": 616,
+          "w": 64,
+          "h": 84,
           "size": "11v11"
         }
       ]
@@ -566,11 +582,641 @@
       "name": "Toyota Soccer Center",
       "shortName": "Toyota Soccer Center",
       "address": "9200 World Cup Way · Frisco TX 75034",
-      "parkingNote": "Off the Dallas North Tollway at Main St (FM 720).",
+      "parkingNote": "Public lots: <strong>Highlander Green</strong> either side of fields 9–17, <strong>Corolla Red</strong> along the west for fields 1–8. Enter from World Cup Way off the Tollway at Main St.",
+      "canvas": {
+        "w": 380,
+        "h": 620,
+        "bg": "var(--bg)"
+      },
       "locationPatterns": [
-        "Toyota\\s*(?:Soccer)?\\s*(?:Center|Complex)?\\s*-?\\s*#?([A-Z0-9]{1,3})\\b"
+        "Toyota\\s*(?:Soccer)?\\s*(?:Center|Complex|Park)?\\s*-?\\s*(?:Field\\s*)?#?(18[AB]|\\d{1,2})\\b",
+        "TSC\\s*-?\\s*#?(18[AB]|\\d{1,2})\\b"
       ],
-      "fields": []
+      "fieldLabelPrefix": "",
+      "emptyState": "inactive",
+      "legend": [
+        {
+          "state": "ours",
+          "label": "Your Field"
+        },
+        {
+          "state": "inactive",
+          "label": "Other Fields"
+        }
+      ],
+      "zones": [
+        {
+          "type": "road",
+          "label": "ELDORADO PKWY",
+          "x": 0,
+          "y": 0,
+          "w": 380,
+          "h": 12,
+          "labelX": 200
+        },
+        {
+          "type": "road",
+          "label": "WORLD CUP WAY",
+          "x": 0,
+          "y": 12,
+          "w": 14,
+          "h": 574,
+          "rotate": 90,
+          "labelX": 7,
+          "labelY": 300
+        },
+        {
+          "type": "road",
+          "label": "FRISCO ST",
+          "x": 366,
+          "y": 12,
+          "w": 14,
+          "h": 574,
+          "rotate": 90,
+          "labelX": 373,
+          "labelY": 300
+        },
+        {
+          "type": "road",
+          "label": "TECHNOLOGY DR",
+          "x": 14,
+          "y": 332,
+          "w": 352,
+          "h": 14,
+          "labelX": 190
+        },
+        {
+          "type": "road",
+          "label": "MAIN ST",
+          "x": 14,
+          "y": 586,
+          "w": 352,
+          "h": 12,
+          "labelX": 190
+        },
+        {
+          "type": "area",
+          "x": 88,
+          "y": 8,
+          "w": 224,
+          "h": 318
+        },
+        {
+          "type": "area",
+          "x": 52,
+          "y": 348,
+          "w": 282,
+          "h": 234
+        },
+        {
+          "type": "parking",
+          "label": "GREEN LOT",
+          "sublabel": "Fields 9–17",
+          "x": 318,
+          "y": 104,
+          "w": 44,
+          "h": 220
+        },
+        {
+          "type": "parking",
+          "label": "RED LOT",
+          "sublabel": "Fields 1–8",
+          "x": 18,
+          "y": 350,
+          "w": 30,
+          "h": 230
+        },
+        {
+          "type": "landmark",
+          "label": "VICTORY CTR",
+          "x": 168,
+          "y": 310,
+          "w": 68,
+          "h": 14
+        }
+      ],
+      "markers": [],
+      "fields": [
+        {
+          "id": "18A",
+          "x": 96,
+          "y": 16,
+          "w": 64,
+          "h": 34,
+          "size": "11v11"
+        },
+        {
+          "id": "18B",
+          "x": 96,
+          "y": 54,
+          "w": 64,
+          "h": 34,
+          "size": "11v11"
+        },
+        {
+          "id": "15",
+          "x": 96,
+          "y": 96,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "Hybrid"
+          ]
+        },
+        {
+          "id": "16",
+          "x": 168,
+          "y": 96,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "Mirai"
+          ]
+        },
+        {
+          "id": "17",
+          "x": 240,
+          "y": 96,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "C-HR"
+          ]
+        },
+        {
+          "id": "12",
+          "x": 96,
+          "y": 170,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "Supra"
+          ]
+        },
+        {
+          "id": "13",
+          "x": 168,
+          "y": 170,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "Yaris"
+          ]
+        },
+        {
+          "id": "14",
+          "x": 240,
+          "y": 170,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "4Runner"
+          ]
+        },
+        {
+          "id": "9",
+          "x": 96,
+          "y": 240,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "Sequoia"
+          ]
+        },
+        {
+          "id": "10",
+          "x": 168,
+          "y": 240,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "Tacoma"
+          ]
+        },
+        {
+          "id": "11",
+          "x": 240,
+          "y": 240,
+          "w": 64,
+          "h": 68,
+          "size": "11v11",
+          "aliases": [
+            "Land Cruiser"
+          ]
+        },
+        {
+          "id": "5",
+          "x": 60,
+          "y": 356,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "Highlander"
+          ]
+        },
+        {
+          "id": "6",
+          "x": 128,
+          "y": 356,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "Avalon"
+          ]
+        },
+        {
+          "id": "7",
+          "x": 196,
+          "y": 356,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "Sienna"
+          ]
+        },
+        {
+          "id": "8",
+          "x": 264,
+          "y": 356,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "Prius"
+          ]
+        },
+        {
+          "id": "3",
+          "x": 128,
+          "y": 430,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "Corolla"
+          ]
+        },
+        {
+          "id": "4",
+          "x": 196,
+          "y": 430,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "RAV4"
+          ]
+        },
+        {
+          "id": "2",
+          "x": 128,
+          "y": 504,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "Tundra"
+          ]
+        },
+        {
+          "id": "1",
+          "x": 196,
+          "y": 504,
+          "w": 62,
+          "h": 62,
+          "size": "11v11",
+          "aliases": [
+            "Camry"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fairview",
+      "name": "Fairview Soccer Park",
+      "shortName": "Fairview",
+      "address": "3671 County Road 317 · McKinney TX 75069",
+      "parkingNote": "Two lots on the west side, concessions and the pavilion between them and the pitches. <strong>9v9 games</strong> play the A (north) or B (south) half of the numbered field.",
+      "canvas": {
+        "w": 420,
+        "h": 400,
+        "bg": "var(--bg)"
+      },
+      "locationPatterns": [
+        "Fairview\\s*-?\\s*(?:Field\\s*)?#?(\\d)[AB]?\\b",
+        "FVW?\\s*-?\\s*#?(\\d)[AB]?\\b"
+      ],
+      "fieldLabelPrefix": "",
+      "emptyState": "inactive",
+      "legend": [
+        {
+          "state": "ours",
+          "label": "Your Field"
+        },
+        {
+          "state": "inactive",
+          "label": "Other Fields"
+        }
+      ],
+      "zones": [
+        {
+          "type": "road",
+          "label": "CR 317",
+          "x": 0,
+          "y": 0,
+          "w": 10,
+          "h": 383,
+          "rotate": 90,
+          "labelX": 5,
+          "labelY": 190
+        },
+        {
+          "type": "area",
+          "x": 88,
+          "y": 22,
+          "w": 326,
+          "h": 322
+        },
+        {
+          "type": "parking",
+          "label": "LOT A",
+          "x": 16,
+          "y": 40,
+          "w": 66,
+          "h": 118
+        },
+        {
+          "type": "parking",
+          "label": "LOT B",
+          "x": 16,
+          "y": 180,
+          "w": 66,
+          "h": 118
+        },
+        {
+          "type": "landmark",
+          "label": "CONCESSIONS",
+          "x": 16,
+          "y": 312,
+          "w": 66,
+          "h": 15
+        }
+      ],
+      "markers": [],
+      "fields": [
+        {
+          "id": "1",
+          "x": 96,
+          "y": 34,
+          "w": 96,
+          "h": 142,
+          "size": "11v11"
+        },
+        {
+          "id": "2",
+          "x": 204,
+          "y": 34,
+          "w": 96,
+          "h": 142,
+          "size": "11v11"
+        },
+        {
+          "id": "3",
+          "x": 312,
+          "y": 34,
+          "w": 96,
+          "h": 142,
+          "size": "11v11"
+        },
+        {
+          "id": "4",
+          "x": 96,
+          "y": 190,
+          "w": 96,
+          "h": 142,
+          "size": "11v11"
+        },
+        {
+          "id": "5",
+          "x": 204,
+          "y": 190,
+          "w": 96,
+          "h": 142,
+          "size": "11v11"
+        },
+        {
+          "id": "6",
+          "x": 312,
+          "y": 190,
+          "w": 96,
+          "h": 142,
+          "size": "11v11"
+        }
+      ]
+    },
+    {
+      "id": "spectrum",
+      "name": "Soccer Spectrum",
+      "shortName": "Soccer Spectrum",
+      "address": "1251 Digital Dr · Richardson TX 75081",
+      "parkingNote": "Lot is in front of the building, on the west side of the pitch.",
+      "canvas": {
+        "w": 300,
+        "h": 262,
+        "bg": "var(--bg)"
+      },
+      "locationPatterns": [
+        "Spectrum\\s*-?\\s*(?:Field\\s*)?#?(1[AB]|1)\\b"
+      ],
+      "fieldLabelPrefix": "",
+      "emptyState": "inactive",
+      "legend": [
+        {
+          "state": "ours",
+          "label": "Your Field"
+        },
+        {
+          "state": "inactive",
+          "label": "Other Fields"
+        }
+      ],
+      "zones": [
+        {
+          "type": "area",
+          "x": 140,
+          "y": 20,
+          "w": 150,
+          "h": 202
+        },
+        {
+          "type": "landmark",
+          "label": "CLUBHOUSE",
+          "x": 24,
+          "y": 28,
+          "w": 100,
+          "h": 16
+        },
+        {
+          "type": "parking",
+          "label": "LOT",
+          "x": 24,
+          "y": 120,
+          "w": 100,
+          "h": 100
+        }
+      ],
+      "markers": [],
+      "fields": [
+        {
+          "id": "1A",
+          "x": 150,
+          "y": 30,
+          "w": 130,
+          "h": 90,
+          "size": "9v9",
+          "aliases": [
+            "Field 1 North"
+          ]
+        },
+        {
+          "id": "1B",
+          "x": 150,
+          "y": 128,
+          "w": 130,
+          "h": 90,
+          "size": "9v9",
+          "aliases": [
+            "Field 1 South"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alc",
+      "name": "ALC — Sting Athletic Learning Center",
+      "shortName": "ALC",
+      "address": "17717 Coit Rd · Dallas TX 75252",
+      "parkingNote": "Parking is the lot on the <strong>east side</strong> only. Spectators watch from the marked <strong>Spectator Area</strong> at the north end.",
+      "rules": [
+        "No pets",
+        "Only coaches and onboarded staff on the fields or grass — including walking the perimeter",
+        "Spectators stay in the marked Spectator Area",
+        "No walking across the fields at any point",
+        "No sitting behind any goal",
+        "No smoking, drugs, alcohol or firearms in the complex",
+        "Park only in the designated lots",
+        "Take your trash, bottles and tape with you"
+      ],
+      "canvas": {
+        "w": 480,
+        "h": 300,
+        "bg": "var(--bg)"
+      },
+      "locationPatterns": [
+        "ALC\\s*-?\\s*(?:Field\\s*)?#?(\\d)\\b",
+        "Athletic\\s*Learning\\s*Center\\s*-?\\s*#?(\\d)\\b",
+        "Coit\\s*(?:Rd)?\\s*-?\\s*Field\\s*#?(\\d)\\b"
+      ],
+      "fieldLabelPrefix": "",
+      "emptyState": "inactive",
+      "legend": [
+        {
+          "state": "ours",
+          "label": "Your Field"
+        },
+        {
+          "state": "inactive",
+          "label": "Other Fields"
+        }
+      ],
+      "zones": [
+        {
+          "type": "area",
+          "x": 26,
+          "y": 20,
+          "w": 372,
+          "h": 258
+        },
+        {
+          "type": "landmark",
+          "label": "SPECTATOR AREA",
+          "x": 250,
+          "y": 46,
+          "w": 140,
+          "h": 18
+        },
+        {
+          "type": "parking",
+          "label": "LOT",
+          "sublabel": "East side",
+          "x": 406,
+          "y": 30,
+          "w": 62,
+          "h": 240
+        }
+      ],
+      "markers": [],
+      "fields": [
+        {
+          "id": "6",
+          "x": 40,
+          "y": 84,
+          "w": 92,
+          "h": 92,
+          "size": "9v9"
+        },
+        {
+          "id": "5",
+          "x": 142,
+          "y": 84,
+          "w": 92,
+          "h": 92,
+          "size": "9v9"
+        },
+        {
+          "id": "4",
+          "x": 40,
+          "y": 186,
+          "w": 96,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "3",
+          "x": 146,
+          "y": 186,
+          "w": 90,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "2",
+          "x": 246,
+          "y": 186,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        },
+        {
+          "id": "1",
+          "x": 328,
+          "y": 186,
+          "w": 72,
+          "h": 86,
+          "size": "11v11"
+        }
+      ]
     }
   ]
 }

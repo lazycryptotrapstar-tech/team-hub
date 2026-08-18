@@ -48,7 +48,7 @@ for (const f of utd.fields) {
 check('Field St road y', utd.zones.find(z => z.label === 'FIELD ST').y, uy + 2*(fh+gap) + 4);
 const lotU = utd.zones.find(z => z.type === 'parking');
 check('Lot U origin', [lotU.x, lotU.y], [ux + 2*(fw+gap) + fw + 6, ly]);
-check('address', utd.address, '6701 Floyd Rd · Richardson TX');
+check('address', utd.address, '800 W Campbell Rd · Richardson TX 75080');
 check('has parking note', /Lot U/.test(utd.parkingNote) && /Lot J/.test(utd.parkingNote), true);
 
 /* ---- Carpenter Park: legacy field array, verbatim ---- */
@@ -92,8 +92,9 @@ console.log('\n[north dfw]');
 const rr = inCtxVenue('railroad');
 check('railroad park exists', !!rr, true);
 check('railroad address', rr.address, '1301 S Railroad St · Lewisville TX 75057');
-check('railroad has ten soccer fields', rr.fields.length, 10);
-check('railroad numbers 1-10', rr.fields.map(f => f.id).sort((a,b)=>a-b), ['1','2','3','4','5','6','7','8','9','10'].sort((a,b)=>a-b));
+// the club's map shows twelve pitches; the city park map only carried ten
+check('railroad has twelve pitches', rr.fields.length, 12);
+check('railroad numbers 1-12', rr.fields.map(f => +f.id).sort((a,b)=>a-b), [1,2,3,4,5,6,7,8,9,10,11,12]);
 // no two pitches may overlap, or the map lies about where you are standing
 const boxes = rr.fields;
 let clashes = 0;
@@ -109,13 +110,24 @@ check('all inside the canvas',
 for (const [id, addr] of [
   ['craigranch',   '6375 Collin McKinney Pkwy · McKinney TX 75070'],
   ['russellcreek', '3500 McDermott Rd · Plano TX 75025'],
-  ['toyota',       '9200 World Cup Way · Frisco TX 75034'],
 ]) {
   const v = inCtxVenue(id);
   check(`${id} present`, !!v, true);
   check(`${id} address`, v.address, addr);
   check(`${id} draws no invented fields`, (v.fields || []).length, 0);
 }
+
+const toy = inCtxVenue('toyota');
+check('toyota address', toy.address, '9200 World Cup Way · Frisco TX 75034');
+check('toyota pitch count', toy.fields.length, 19);
+check('toyota carries the model names', (toy.fields.find(f => f.id === '13').aliases || [])[0], 'Yaris');
+
+const alc = inCtxVenue('alc');
+check('ALC present', !!alc, true);
+check('ALC address', alc.address, '17717 Coit Rd · Dallas TX 75252');
+check('ALC has six pitches', alc.fields.length, 6);
+check('ALC carries its facility rules', alc.rules.length >= 8, true);
+check('ALC spectator area marked', alc.zones.some(z => /SPECTATOR/.test(z.label || '')), true);
 
 // location strings from real schedules must land on the right venue
 check('"Railroad Park #7"',    ctx.detectVenue([{ locText: 'Railroad Park #7' }]).id, 'railroad');
@@ -125,6 +137,11 @@ check('"Russell Creek 12"',    ctx.detectVenue([{ locText: 'Russell Creek 12' }]
 check('"Toyota Soccer Center 3"', ctx.detectVenue([{ locText: 'Toyota Soccer Center 3' }]).id, 'toyota');
 check('railroad resolves field 7', ctx.resolveField(rr, { locText: 'Railroad Park #7' }), '7');
 check('railroad resolves field 10', ctx.resolveField(rr, { locText: 'Railroad #10' }), '10');
+check('railroad resolves field 12', ctx.resolveField(rr, { locText: 'Railroad Park #12' }), '12');
+check('"Toyota 13"', ctx.detectVenue([{ locText: 'Toyota Soccer Center 13' }]).id, 'toyota');
+check('toyota resolves 18A', ctx.resolveField(toy, { locText: 'Toyota Field 18A' }), '18A');
+check('"ALC 4"', ctx.detectVenue([{ locText: 'ALC Field 4' }]).id, 'alc');
+check('"Fairview 3B" -> pitch 3', ctx.resolveField(inCtxVenue('fairview'), { locText: 'Fairview 3B' }), '3');
 
 /* ---- state coloring ---- */
 console.log('\n[states]');
@@ -148,6 +165,22 @@ for (const v of [utd, cp]) {
   check(`${v.id}: highlighted field uses the team accent`, svg.includes('fill="var(--accent)"'), true);
   check(`${v.id}: tags balanced`, (svg.match(/<g /g)||[]).length, (svg.match(/<\/g>/g)||[]).length);
   check(`${v.id}: no undefined/NaN`, /undefined|NaN/.test(svg), false);
+}
+
+console.log('\n[every venue renders]');
+for (const v of venuesDoc.venues) {
+  if (!v.fields || !v.fields.length) { check(`${v.id}: location card has an address`, !!v.address, true); continue; }
+  const svg = ctx.buildVenueSVG(v, {});
+  check(`${v.id}: no broken attributes`, /undefined|NaN/.test(svg), false);
+  check(`${v.id}: a box per pitch`, (svg.match(/class="vf-rect"/g) || []).length, v.fields.length);
+  const clash = [];
+  for (let i = 0; i < v.fields.length; i++) for (let j = i + 1; j < v.fields.length; j++) {
+    const a = v.fields[i], b = v.fields[j];
+    if (a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h) clash.push(`${a.id}/${b.id}`);
+  }
+  check(`${v.id}: no overlapping pitches`, clash, []);
+  check(`${v.id}: all pitches on the canvas`,
+    v.fields.every(f => f.x >= 0 && f.y >= 0 && f.x + f.w <= v.canvas.w && f.y + f.h <= v.canvas.h), true);
 }
 
 console.log(`\n${'='.repeat(50)}\n${pass} passed, ${fail} failed`);
