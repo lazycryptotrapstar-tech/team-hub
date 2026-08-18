@@ -111,31 +111,78 @@ function applyFavicon() {
     document.querySelectorAll('link[rel~="icon"]').forEach(l => l.setAttribute('href', href));
 }
 
+const TAB_ICONS = {
+    schedule:   '<path d="M3 9h18M7 3v3m10-3v3M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>',
+    standings:  '<path d="M5 20v-8m7 8V4m7 16v-5"/>',
+    story:      '<path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2zm9-2h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5z"/>',
+    tournament: '<path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3m10-4h3v1a3 3 0 0 1-3 3M12 14v4m-3 3h6"/>',
+};
+
+/* Line icons drawn inline — no icon library, no build step */
+function tabIcon(id) {
+    return '<svg class="bnav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+        'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        (TAB_ICONS[id] || '') + '</svg>';
+}
+
 function getTabs() {
     return [
-        { id: 'schedule',   label: 'Schedule',   icon: '📅' },
-        { id: 'standings',  label: 'Standings',  icon: '🏆' },
-        { id: 'story',      label: 'Story',      icon: '📖' },
-        { id: 'tournament', label: 'Tournament', icon: '🎯' },
+        { id: 'schedule',   label: 'Schedule' },
+        { id: 'standings',  label: 'Standings' },
+        { id: 'story',      label: 'Story' },
+        { id: 'tournament', label: 'Tournament' },
     ];
 }
 
-function renderSeasonPulse() {
-    const l = TEAM_CONFIG.league, r = TEAM_CONFIG.record, nm = TEAM_CONFIG.nextMatch;
+/* One band that says who this is and how the season is going. It used to
+   be split across a status strip and a header on every tab, which meant
+   the name, record and next game were each on screen three times. */
+function renderTeamBar() {
+    const el = document.getElementById('teamBar');
+    if (!el) return;
+    const b = TEAM_CONFIG.branding, l = TEAM_CONFIG.league, r = TEAM_CONFIG.record;
     const streak = getStreak(TEAM_CONFIG.matches);
     const streakLabel = streak.count >= 2
-        ? (streak.type==='W' ? '🔥' : streak.type==='L' ? '❄️' : '🛡️') + ' ' + streak.count + '-Match ' + (streak.type==='W' ? 'Win' : streak.type==='L' ? 'Losing' : 'Unbeaten') + ' Streak'
-        : r.wins + '-' + r.losses + '-' + r.draws;
-    const el = document.getElementById('seasonPulse');
+        ? streak.count + '-game ' + (streak.type === 'W' ? 'win streak' : streak.type === 'L' ? 'losing run' : 'unbeaten')
+        : null;
+
+    el.innerHTML =
+        `<div class="tb-identity">
+            ${teamCrest(TEAM_CONFIG, 44)}
+            <div class="tb-id-text">
+                <h1 class="tb-name">${b.name}</h1>
+                <div class="tb-sub">${b.league} <span>·</span> ${b.season}</div>
+            </div>
+        </div>
+        <div class="tb-stats">
+            <div class="tb-stat">
+                <span class="tb-k">Record</span>
+                <span class="tb-v">${r.wins}<i>–</i>${r.losses}<i>–</i>${r.draws}</span>
+            </div>
+            ${l.rank ? `<div class="tb-stat">
+                <span class="tb-k">Position</span>
+                <span class="tb-v">#${l.rank}<em>of ${l.totalTeams}</em></span>
+            </div>` : ''}
+            <div class="tb-stat">
+                <span class="tb-k">Points</span>
+                <span class="tb-v">${l.points}</span>
+            </div>
+            <div class="tb-stat tb-form">
+                <span class="tb-k">Form${streakLabel ? ' · ' + streakLabel : ''}</span>
+                ${formPips(TEAM_CONFIG.matches)}
+            </div>
+        </div>`;
+}
+
+function renderPageFooter() {
+    const el = document.getElementById('pageFooter');
     if (!el) return;
-    const nextLabel = nm
-        ? `${nm.date} · ${nm.time} · vs #${nm.oppRank} ${nm.oppName}`
-        : 'Season complete';
-    el.innerHTML = `
-        <div class="pulse-item" style="flex:1;"><span class="pulse-icon">📍</span><span class="pulse-label">Rank&nbsp;</span><span class="pulse-val">#${l.rank || '—'}</span></div>
-        <div class="pulse-item" style="flex:1;"><span class="pulse-icon">⭐</span><span class="pulse-label">Pts&nbsp;</span><span class="pulse-val">${l.points}</span></div>
-        <div class="pulse-item" style="flex:2;"><span class="pulse-icon">🏃</span><span class="pulse-label">Form&nbsp;</span><span class="pulse-val white">${streakLabel}</span></div>
-        <div class="pulse-item" style="flex:3;border-right:none;"><span class="pulse-icon">📅</span><span class="pulse-label">Next&nbsp;</span><span class="pulse-val silver">${nextLabel}</span></div>`;
+    const b = TEAM_CONFIG.branding;
+    el.innerHTML =
+        `<span class="pf-motto">${b.motto}</span>` +
+        `<span class="pf-dot">·</span>` +
+        `<a class="pf-site" href="https://${b.website}" target="_blank" rel="noopener">${b.website}</a>` +
+        `<span class="pf-updated">Updated ${TEAM_CONFIG.lastUpdate}</span>`;
 }
 
 /* Past a handful of teams a row of pills stops being a switcher and starts
@@ -183,7 +230,7 @@ function renderNavBars() {
         `<button onclick="switchTab('${t.id}')" id="tab_${t.id}" class="tab-btn ${currentTab === t.id ? 'tab-active' : ''}">${t.label}</button>`
     ).join('');
     document.getElementById('bottomNavInner').innerHTML = tabs.map(t =>
-        `<button onclick="switchTab('${t.id}')" id="bnav_${t.id}" class="bnav-btn ${currentTab === t.id ? 'active' : ''}"><span class="bnav-icon">${t.icon}</span>${t.label}</button>`
+        `<button onclick="switchTab('${t.id}')" id="bnav_${t.id}" class="bnav-btn ${currentTab === t.id ? 'active' : ''}">${tabIcon(t.id)}${t.label}</button>`
     ).join('');
 }
 
@@ -191,7 +238,7 @@ function switchTeam(id) {
     tournView = 'bracket'; tournMapDay = 'All';
     currentTeamId = id; TEAM_CONFIG = TEAMS[id];
     applyTheme(); applyFavicon(); renderSiteBrand();
-    renderTeamSwitcher(); renderSeasonPulse(); renderNavBars(); render();
+    renderTeamSwitcher(); renderTeamBar(); renderPageFooter(); renderNavBars(); render();
 }
 
 function switchTab(tab) {
@@ -201,35 +248,7 @@ function switchTab(tab) {
     setTimeout(() => { render(); card.classList.remove('switching'); }, 120);
 }
 
-function headerHTML(subtitle, wm) {
-    const r = TEAM_CONFIG.record;
-    return `<div class="card-header" data-watermark="${wm || (r.wins + '-' + r.losses + '-' + r.draws)}">
-        <div class="header-identity">
-            ${teamCrest(TEAM_CONFIG, 46)}
-            <div class="header-id-text">
-                <div class="header-subtitle">${subtitle}</div>
-                <div class="header-team-name">${TEAM_CONFIG.branding.name}</div>
-                <div class="header-meta-row">
-                    <span class="header-badge">${TEAM_CONFIG.branding.season}</span>
-                    ${formPips(TEAM_CONFIG.matches)}
-                </div>
-            </div>
-        </div>
-        <div class="header-right">
-            <div class="header-division-label">League / Division</div>
-            <div class="header-division">${TEAM_CONFIG.branding.league}</div>
-            <div class="header-record">${r.wins}<span>–</span>${r.losses}<span>–</span>${r.draws}</div>
-            <div class="header-record-label">W · L · D</div>
-        </div>
-    </div>`;
-}
 
-function footerHTML(label) {
-    return `<div class="card-footer">
-        <div><div class="footer-verify">${label}</div><div class="footer-date">Last Update: ${TEAM_CONFIG.lastUpdate}</div></div>
-        <div><div class="footer-motto">${TEAM_CONFIG.branding.motto}</div><div class="footer-website">${TEAM_CONFIG.branding.website}</div></div>
-    </div>`;
-}
 
 /* ============================================================
    STANDINGS TAB  (League Table / Team Stats)
@@ -241,8 +260,8 @@ function switchStandingsView(v) {
 
 function standingsSubnav() {
     return `<div class="stats-subnav">
-        <button class="stats-subnav-btn ${standingsView==='table'?'active':''}" onclick="switchStandingsView('table')">🏆 League Table</button>
-        <button class="stats-subnav-btn ${standingsView==='stats'?'active':''}" onclick="switchStandingsView('stats')">📊 Team Stats</button>
+        <button class="stats-subnav-btn ${standingsView==='table'?'active':''}" onclick="switchStandingsView('table')">League Table</button>
+        <button class="stats-subnav-btn ${standingsView==='stats'?'active':''}" onclick="switchStandingsView('stats')">Team Stats</button>
     </div>`;
 }
 
@@ -272,14 +291,9 @@ function renderLeagueTable(container) {
 
     const emptyMsg = '<div style="text-align:center;padding:48px 24px;color:var(--text3);font-size:14px;">No standings imported yet.</div>';
 
-    container.innerHTML = `${headerHTML('Standings & Records', 'TABLE')}
-    ${standingsSubnav()}
+    container.innerHTML = `${standingsSubnav()}
     <div class="content-area">
         <div class="st-card">
-            <div class="st-card-header">
-                <span class="st-card-title">League Table</span>
-                <span class="st-card-sub">${TEAM_CONFIG.standings.length} Teams · ${TEAM_CONFIG.branding.league}</span>
-            </div>
             ${TEAM_CONFIG.standings.length === 0 ? emptyMsg : `<div class="st-scroll">
                 <table class="st-table">
                     <thead><tr>
@@ -298,7 +312,7 @@ function renderLeagueTable(container) {
                 </table>
             </div>`}
         </div>
-    </div>${footerHTML('Standings & Records')}`;
+    </div>`;
 }
 
 function renderStatsReport(container) {
@@ -317,21 +331,8 @@ function renderStatsReport(container) {
         </tr>`
     ).join('');
 
-    const nextCard = nm ? `<div class="next-match-card">
-        <div class="nm-top-row" style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
-            <div style="flex:1;"><div class="next-match-eyebrow">Next ${terms.match || 'Match'} Details</div><div class="next-match-opp">#${nm.oppRank} ${nm.oppName}</div><div class="next-match-meta">${nm.date} &nbsp;·&nbsp; ${nm.time}</div></div>
-            <div style="text-align:right;flex-shrink:0;"><div class="opp-stats-label">Opp Rank</div><div class="opp-stats-rank">${nm.oppRank} <span style="font-size:13px;color:rgba(255,255,255,0.3);font-family:'Nunito', sans-serif;font-weight:600;">of ${nm.oppTotalTeams}</span></div>${nm.oppRecord ? `<div class="opp-stats-label" style="margin-top:4px;">Record: ${nm.oppRecord}</div>` : ''}</div>
-        </div>
-        ${nm.lastMatch ? `<div class="nm-last-row" style="background:rgba(255,255,255,0.05);border-radius:2px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;">
-            <span style="font-family:'Nunito', sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:700;white-space:nowrap;">Opp Last ${terms.match || 'Match'}</span>
-            <span style="flex:1;color:rgba(255,255,255,0.65);font-size:12px;text-align:center;">${nm.lastMatch.date} &nbsp;<span style="color:rgba(255,255,255,0.35);">#${nm.lastMatch.rank}</span> ${nm.lastMatch.opp}</span>
-            <span style="font-family:'Nunito', sans-serif;font-weight:700;font-size:14px;color:white;white-space:nowrap;">${nm.lastMatch.score}</span>
-            <span class="res-badge res-${nm.lastMatch.res}" style="flex-shrink:0;">${nm.lastMatch.res}</span>
-        </div>` : ''}
-    </div>` : '';
 
-    container.innerHTML = `${headerHTML('Standings & Records')}
-    ${standingsSubnav()}
+    container.innerHTML = `${standingsSubnav()}
     <div class="content-area stats-grid" style="display:grid;grid-template-columns:1fr 2fr;gap:28px;">
         <div style="display:flex;flex-direction:column;gap:20px;">
             <div>
@@ -370,7 +371,7 @@ function renderStatsReport(container) {
             </div>
             ${nextCard}
         </div>
-    </div>${footerHTML('Standings & Records')}`;
+    </div>`;
 }
 
 /* ============================================================
@@ -395,8 +396,7 @@ function renderStory(container) {
         ? '<div class="story-byline">✦ Written by AI from this season\'s results</div>'
         : '';
 
-    container.innerHTML = `${headerHTML('Season Story', 'STORY')}
-    <div class="content-area">
+    container.innerHTML = `<div class="content-area">
         <div class="story-grid">
             <div class="story-left-col">
                 <div class="story-section-title">Season Timeline</div>
@@ -462,71 +462,84 @@ function renderStory(container) {
                 </div>
             </div>
         </div>
-    </div>${footerHTML('Season Analysis & Projections') +
-        '<div class="cross-tab-nudge">' +
-        '<a class="cross-nudge-btn" onclick="switchTab(\'schedule\')">📅 View Schedule</a>' +
-        '<a class="cross-nudge-btn" onclick="switchTab(\'standings\')">🏆 Standings</a>' +
-        '</div>'}`;
+    </div>`;
     setTimeout(() => { const f = document.getElementById('momentumFill'); if (f) f.style.width = momentum.pct + '%'; }, 200);
 }
 
 /* ============================================================
    SCHEDULE TAB  (games + venue map)
 ============================================================ */
+/* Schedule reads top to bottom the way the question gets asked:
+   where do I need to be next, then what else is coming, then how it
+   has gone. The next game and its map are one block, not two that
+   repeat each other. */
 function renderSchedule(container) {
-    var schedule = TEAM_CONFIG.remainingSchedule;
-    var cardsHTML = schedule.length === 0
-        ? '<div style="text-align:center;padding:48px 24px;color:var(--text3);font-size:14px;">No remaining games — season complete.</div>'
-        : schedule.map(function(m, i) {
-            var isNext = i === 0;
-            var dateParts = m.date.split(' ');
-            return '<div class="sched-card' + (isNext ? ' sched-card-next' : '') + '">' +
-                '<div class="sched-card-date-block">' +
-                    '<div class="sched-card-day">' + dateParts[0] + '</div>' +
-                    '<div class="sched-card-dt">' + dateParts.slice(1).join(' ') + '</div>' +
-                '</div>' +
-                '<div class="sched-card-main">' +
-                    '<div class="sched-card-opp">' +
-                        (m.rank ? '<span class="sched-card-rank">#' + m.rank + '</span>' : '') +
-                        '<span class="sched-card-opp-name">' + m.opp + '</span>' +
-                    '</div>' +
-                    '<div class="sched-card-meta">' +
-                        '<div class="sched-meta-item"><span>&#128336;</span> ' + m.time + '</div>' +
-                        (m.loc ? '<div class="sched-meta-item"><span>&#128205;</span> ' + m.loc + '</div>' : '') +
-                    '</div>' +
-                '</div>' +
-                (isNext ? '<span class="sched-next-pill">Next Up</span>' : '') +
-            '</div>';
-        }).join('');
+    const schedule = TEAM_CONFIG.remainingSchedule;
+    const next = schedule[0];
+    const later = schedule.slice(1);
+    const results = TEAM_CONFIG.matches.slice().reverse();
 
-    // Venue map: mark our upcoming games on whichever venue they're at
-    var mapGames = schedule.map(function(m) {
-        var g = m.game || {};
-        return {
-            venueId: g.venueId, fieldId: g.fieldId, locText: m.loc,
-            date: m.date, time: m.time, opp: m.opp, rank: m.rank, isOurs: true
-        };
+    const mapGames = schedule.map(m => {
+        const g = m.game || {};
+        return { venueId: g.venueId, fieldId: g.fieldId, locText: m.loc,
+                 date: m.date, time: m.time, opp: m.opp, rank: m.rank, isOurs: true };
     });
-    var venue = detectVenue(mapGames);
-    var mapHTML = '';
-    if (venue) {
-        mapHTML = buildVenueSection(venue, mapGames, { panelHint: 'Tap any field to see its games' });
-    } else if (schedule.length) {
-        mapHTML = buildUnknownVenueCard(schedule.map(function(m) { return m.loc; }));
+    const venue = detectVenue(mapGames);
+
+    /* --- next game: the one thing most people opened this for --- */
+    let nextBlock;
+    if (!next) {
+        nextBlock = '<div class="empty-state"><strong>Season complete.</strong>' +
+            '<span>No more games on the schedule.</span></div>';
+    } else {
+        const parts = next.date.split(' ');
+        const mapHTML = venue
+            ? buildVenueSection(venue, mapGames, { title: null, showPanel: false })
+            : buildUnknownVenueCard([next.loc]);
+        nextBlock =
+            '<div class="next-up">' +
+                '<div class="next-up-head">' +
+                    '<span class="next-up-flag">Next up</span>' +
+                    '<span class="next-up-when">' + parts[0] + ' ' + parts.slice(1).join(' ') +
+                        ' <i>·</i> ' + next.time + '</span>' +
+                '</div>' +
+                '<div class="next-up-opp">' +
+                    (next.rank ? '<span class="next-up-rank">#' + next.rank + '</span>' : '') +
+                    next.opp +
+                '</div>' +
+                (next.loc ? '<div class="next-up-where">' + next.loc + '</div>' : '') +
+                mapHTML +
+            '</div>';
     }
 
-    container.innerHTML = headerHTML('Schedule', 'SCHED') +
-        '<div class="content-area">' +
-        '<div class="section-title" style="margin-bottom:16px;">Remaining Games <span>' + schedule.length + '</span></div>' +
-        '<div class="sched-cards">' + cardsHTML + '</div>' +
-        mapHTML +
-        '</div>' + footerHTML('Official Schedule');
+    /* --- the rest of the fixtures, compact --- */
+    const laterBlock = later.length ? sectionTitle('Also coming up', later.length) +
+        '<div class="fixture-list">' + later.map(m => {
+            const parts = m.date.split(' ');
+            return '<div class="fixture">' +
+                '<span class="fx-date">' + parts[0] + ' ' + parts.slice(1).join(' ') + '</span>' +
+                '<span class="fx-opp">' + (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
+                '<span class="fx-meta">' + m.time + (m.loc ? ' · ' + m.loc : '') + '</span>' +
+            '</div>';
+        }).join('') + '</div>' : '';
 
-    // Pre-fill the panel with the next game's field so it isn't empty on arrival
-    if (venue && mapGames.length) {
-        var firstField = resolveField(venue, mapGames[0]);
-        if (firstField) showFieldInfo(firstField);
-    }
+    /* --- results, newest first: gives the tab substance late in a season --- */
+    const resultsBlock = results.length ? sectionTitle('Results', results.length) +
+        '<div class="fixture-list">' + results.map(m =>
+            '<div class="fixture' + (m.highlight ? ' fx-featured' : '') + '">' +
+                '<span class="fx-date">' + m.date + '</span>' +
+                '<span class="fx-opp">' + (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
+                '<span class="fx-score">' + m.score + '</span>' +
+                '<span class="res-badge res-' + m.res + '">' + m.res + '</span>' +
+            '</div>'
+        ).join('') + '</div>' : '';
+
+    container.innerHTML = '<div class="content-area">' + nextBlock + laterBlock + resultsBlock + '</div>';
+}
+
+function sectionTitle(label, count) {
+    return '<div class="section-title">' + label +
+        (count != null ? '<span>' + count + '</span>' : '') + '</div>';
 }
 
 /* ============================================================
@@ -534,15 +547,15 @@ function renderSchedule(container) {
 ============================================================ */
 function renderTournament(container) {
     const td = TEAM_CONFIG.tournaments;
-    if (!td) { container.innerHTML = headerHTML('Tournament','TOURN')+'<div class="content-area"><p style="color:var(--text3);">No tournament data.</p></div>'+footerHTML('Tournament'); return; }
+    if (!td) { container.innerHTML = '<div class="content-area"><div class="empty-state">No tournament running right now.</div></div>'; return; }
     if (tournView==='map') { renderTournMap(container, td); return; }
     renderTournBracket(container, td);
 }
 
 function tournSubnav() {
     return `<div class="stats-subnav">
-        <button class="stats-subnav-btn ${tournView==='bracket'||tournView===''?'active':''}" onclick="switchTournView('bracket')">🏆 Bracket</button>
-        <button class="stats-subnav-btn ${tournView==='map'?'active':''}" onclick="switchTournView('map')">🗺️ Venue Map</button>
+        <button class="stats-subnav-btn ${tournView==='bracket'||tournView===''?'active':''}" onclick="switchTournView('bracket')">Bracket</button>
+        <button class="stats-subnav-btn ${tournView==='map'?'active':''}" onclick="switchTournView('map')">Venue Map</button>
     </div>`;
 }
 
@@ -660,16 +673,15 @@ function renderTournBracket(container, td) {
             </div>`;
     }
 
-    container.innerHTML = headerHTML('Tournament','TOURN') + tournSubnav() +
+    container.innerHTML = tournSubnav() +
         '<div class="content-area">' +
         currentHTML +
         '<div class="tourn-hist-title-row">' +
-            '<div class="tourn-sub-label" style="margin-top:24px;margin-bottom:0;">&#128203; Tournament History</div>' +
+            '<div class="tourn-sub-label" style="margin-top:24px;margin-bottom:0;">Tournament history</div>' +
             histSummary +
         '</div>' +
         '<div class="tourn-hist-list" style="margin-top:12px;">' + histHTML + '</div>' +
-        '</div>' +
-        footerHTML('Tournament Record');
+        '</div>';
 }
 
 /* Flatten a tournament into one game list the venue engine understands */
@@ -725,14 +737,14 @@ function renderTournMap(container, td) {
           })
         : buildUnknownVenueCard(allGames.map(function(g) { return g.field; }));
 
-    container.innerHTML = headerHTML('Tournament','TOURN') + tournSubnav() +
+    container.innerHTML = tournSubnav() +
         '<div class="content-area">' +
         (ct ? '<div class="tourn-map-header"><div class="tourn-section-title" style="color:var(--text);font-size:15px;">' + ct.name + '</div>' +
             '<div style="font-size:12px;color:var(--text3);margin-bottom:10px;">' + ct.location + '</div></div>' : '') +
         '<div class="map-day-callout"><span class="map-day-callout-label">&#9733; Gold fields = your games</span><span class="map-day-callout-sub">' +
             (days.length > 1 ? "Select a day to see only that day's fields" : 'All tournament fields shown') + '</span></div>' +
         mapHTML +
-        '</div>' + footerHTML('Venue Map');
+        '</div>';
 }
 
 function setMapDay(day){tournMapDay=day;renderTournament(document.getElementById('main-content'));}
@@ -767,7 +779,8 @@ function boot() {
         applyFavicon();
         renderSiteBrand();
         renderTeamSwitcher();
-        renderSeasonPulse();
+        renderTeamBar();
+        renderPageFooter();
         render();
     }).catch(err => {
         document.getElementById('main-content').innerHTML =
