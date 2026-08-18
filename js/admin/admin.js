@@ -111,6 +111,7 @@ function renderPanelNav() {
         { id: 'tournament', label: 'Tournament' },
         { id: 'info', label: 'Team Info' },
         { id: 'story', label: 'Storyline' },
+        { id: 'import', label: 'Import' },
     ];
     $('panelNav').innerHTML = panels.map(p =>
         `<button class="panel-btn ${p.id === panel ? 'active' : ''}" onclick="setPanel('${p.id}')">${p.label}</button>`
@@ -147,6 +148,91 @@ function renderPanel() {
     else if (panel === 'tournament') el.innerHTML = tournamentPanel();
     else if (panel === 'info')       el.innerHTML = infoPanel();
     else if (panel === 'story')      el.innerHTML = storyPanel();
+    else if (panel === 'import')     el.innerHTML = importPanel();
+}
+
+/* ============================================================
+   IMPORT PANEL
+   Paste in, review, then add. The review step is the point: parsing
+   other people's tables is guesswork, so nothing lands unlooked-at.
+============================================================ */
+function importPanel() {
+    return `<div class="panel-head">
+        <div><h2>Import</h2><p class="panel-sub">Paste a league table or a run of fixtures straight off the league site, or drop in a spreadsheet. Everything lands in a list to check first — nothing reaches the site until you publish.</p></div>
+    </div>
+    <div class="import-controls">
+        <label class="field"><span>What is this?</span>
+            <select id="importKind">
+                <option value="auto">Work it out</option>
+                <option value="standings">League table</option>
+                <option value="games">Fixtures / results</option>
+            </select>
+        </label>
+        <label class="field"><span>Or choose a file</span>
+            <input type="file" accept=".csv,.txt,.tsv" onchange="readImportFile(this)">
+        </label>
+    </div>
+    <textarea id="importText" class="import-area" rows="8"
+        placeholder="Paste here — for example:&#10;1  Coppell FC 13G Oland Red  14  12  0  2  53  12  +41  36&#10;or&#10;Mar 21  #4 Sting Attack G13 H Pantoja  2 - 5  UT Dallas #07"></textarea>
+    <div class="import-actions">
+        <button class="btn primary" onclick="runImport()">Read it</button>
+        <button class="btn ghost" onclick="clearImport()">Clear</button>
+    </div>
+    ${importReview()}
+    <p class="hint">Dates can be <code>2026-03-21</code>, <code>3/21/26</code> or <code>Mar 21</code> — a bare date is placed in the right season automatically. Scores read as <code>2 - 5</code>, and a <code>W</code> or <code>L</code> in front is used to check which side is which. Grounds we know (UT Dallas, Railroad, Toyota, ALC and the rest) are matched to their map.</p>`;
+}
+
+function importReview() {
+    if (!IMPORT_ROWS.length) return '';
+    const accepted = IMPORT_ROWS.filter(r => r.accept).length;
+    const head = `<div class="import-review-head">
+        <h3 class="sub-h" style="margin:26px 0 12px;">Check these ${IMPORT_KIND === 'standings' ? 'clubs' : 'games'}</h3>
+        <div class="import-bulk">
+            <button class="btn ghost small" onclick="IMPORT_ROWS.forEach(r=>r.accept=true);renderPanel();">Tick all</button>
+            <button class="btn ghost small" onclick="IMPORT_ROWS.forEach(r=>r.accept=false);renderPanel();">Untick all</button>
+        </div>
+    </div>`;
+
+    const rows = IMPORT_KIND === 'standings'
+        ? IMPORT_ROWS.map((r, i) => `<tr class="${r.accept ? '' : 'row-off'}">
+            <td class="center"><input type="checkbox" ${r.accept ? 'checked' : ''} onchange="setImportRow(${i},'accept',this.checked)"></td>
+            <td><input class="num" type="number" value="${r.rank}" onchange="setImportRow(${i},'rank',this.value)"></td>
+            <td><input class="wide" type="text" value="${h(r.name)}" onchange="setImportRow(${i},'name',this.value)"></td>
+            <td><input class="num" type="number" value="${r.mp}" onchange="setImportRow(${i},'mp',this.value)"></td>
+            <td><input class="num" type="number" value="${r.w}" onchange="setImportRow(${i},'w',this.value)"></td>
+            <td><input class="num" type="number" value="${r.d}" onchange="setImportRow(${i},'d',this.value)"></td>
+            <td><input class="num" type="number" value="${r.l}" onchange="setImportRow(${i},'l',this.value)"></td>
+            <td><input class="num" type="number" value="${r.gf}" onchange="setImportRow(${i},'gf',this.value)"></td>
+            <td><input class="num" type="number" value="${r.ga}" onchange="setImportRow(${i},'ga',this.value)"></td>
+            <td class="import-note">${h(r.note || '')}</td>
+        </tr>`).join('')
+        : IMPORT_ROWS.map((r, i) => `<tr class="${r.accept ? '' : 'row-off'}">
+            <td class="center"><input type="checkbox" ${r.accept ? 'checked' : ''} onchange="setImportRow(${i},'accept',this.checked)"></td>
+            <td><input type="date" value="${h(r.date)}" onchange="setImportRow(${i},'date',this.value)"></td>
+            <td><input type="time" value="${h(r.time || '')}" onchange="setImportRow(${i},'time',this.value)"></td>
+            <td><input class="wide" type="text" value="${h(r.opponent)}" onchange="setImportRow(${i},'opponent',this.value)"></td>
+            <td><input class="num" type="number" value="${r.oppRank ?? ''}" onchange="setImportRow(${i},'oppRank',this.value)"></td>
+            <td><input class="num2" type="text" value="${r.score ? r.score.us + ' - ' + r.score.them : ''}" placeholder="—" onchange="setImportRow(${i},'score',this.value)"></td>
+            <td><input class="wide" type="text" value="${h(r.locText || '')}" onchange="setImportRow(${i},'locText',this.value)"></td>
+            <td class="import-note">${h(r.note || '')}</td>
+        </tr>`).join('');
+
+    const cols = IMPORT_KIND === 'standings'
+        ? '<th></th><th>#</th><th>Club</th><th>MP</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>Note</th>'
+        : '<th></th><th>Date</th><th>Time</th><th>Opponent</th><th>Rank</th><th>Score</th><th>Where</th><th>Note</th>';
+
+    return head +
+        `<div class="table-wrap"><table class="grid"><thead><tr>${cols}</tr></thead><tbody>${rows}</tbody></table></div>
+        <div class="import-actions">
+            <button class="btn primary" onclick="applyImport()">Add ${accepted} to the draft</button>
+            <span class="import-count" id="importCount">${accepted} of ${IMPORT_ROWS.length} ticked</span>
+        </div>`;
+}
+
+function renderImportSummary() {
+    const accepted = IMPORT_ROWS.filter(r => r.accept).length;
+    const el = $('importCount');
+    if (el) el.textContent = `${accepted} of ${IMPORT_ROWS.length} ticked`;
 }
 
 /* ============================================================

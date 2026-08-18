@@ -108,3 +108,27 @@ node test/verify-venues.mjs       # venue geometry + field resolution
 node test/verify-css.mjs          # nothing on screen lost its styling
 node test/verify-publish.mjs      # encoding, conflicts, retries (no network)
 ```
+
+## Importing
+
+The **Import** tab takes a league table or a run of fixtures pasted
+straight off the league site, or a CSV. It works out which of the two it
+is, parses it, and puts every row in a list to check — tick, edit or
+untick each one before it joins the draft. Nothing reaches the site
+until you publish.
+
+Formats it understands:
+
+- **Dates** — `2026-03-21`, `3/21/26`, `3/21`, `Mar 21`, `Sat Mar 21`.
+  A date with no year is placed in the right season automatically, so an
+  August fixture lands in the autumn rather than next spring.
+- **Times** — `6:30 PM` or `18:30`.
+- **Scores** — `2 - 5` or `2-5`. A leading `W` or `L` is used to check
+  which side is which, so an opponent-first table still records
+  correctly.
+- **Grounds** — any venue in `data/venues.json` is recognised with its
+  field (`UT Dallas #07`, `Railroad Park #12`, `ALC Field 3`) and the
+  game is linked to that venue's map automatically.
+
+Games already on the schedule are flagged as duplicates and unticked;
+league rows that already exist are marked as replacing the current row.
