@@ -22,7 +22,7 @@ const FIELD_STATES = {
 
 /* SVG type matches the page: mono for labels, display for field names */
 const SVG_MONO = "'JetBrains Mono',monospace";
-const SVG_DISPLAY = "'Space Grotesk',sans-serif";
+const SVG_DISPLAY = "'Barlow Condensed',sans-serif";
 
 function loadVenues() {
     return fetch('data/venues.json', { cache: 'no-store' })

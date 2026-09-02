@@ -2,24 +2,48 @@
 
 Youth-sports team hub — live at [teamhub.simplegenius.io](https://teamhub.simplegenius.io).
 
-Focused on three pillars:
+Built so a parent or player landing on it can answer three questions fast:
 
-1. **Field maps** — interactive venue maps for games and tournaments
-2. **Standings & records** — league tables and season records
-3. **AI storylines** — season narratives generated from a team's own stats
+1. **Where is the next game?** — schedule with venue field maps and directions
+2. **How are we doing?** — live standings and stats, synced from the league site
+3. **What's my job out there?** — the strategy page: formation, per-position guide, set pieces
+
+Plus AI storylines and tournament brackets.
 
 ## Layout
 
 ```
-index.html          family app shell
-css/styles.css      all styles
-js/data.js          loads data/teams.json, derives every stat
-js/venue.js         venue map rendering
-js/story.js         narrative engine + AI enhancement
-js/app.js           tab renderers (Schedule / Standings / Story / Tournament)
-data/teams.json     all team data — the single source of truth
-test/               regression checks
+index.html            family app shell
+css/styles.css        all styles
+js/data.js            loads data/teams.json, derives every stat
+js/venue.js           venue map rendering
+js/story.js           narrative engine + AI enhancement
+js/strategy.js        strategy tab: formation board, position guide, set pieces
+js/app.js             tab renderers (Schedule / Standings / Strategy / Story / Tournament)
+scripts/pull-league.mjs  league sync: pulls schedule + standings from GotSport
+data/teams.json       all team data — the single source of truth
+test/                 regression checks
 ```
+
+## League sync
+
+A team plays in one or more competitions (`competitions[]` in teams.json).
+A competition with a `source` block (`provider: "gotsport"`, `eventId`,
+`teamId`) is **connected**: `node scripts/pull-league.mjs` fetches its
+GotSport team page and rewrites that competition's games and standings —
+venues resolve to their maps via `data/venues.json` location patterns,
+opponent ranks come from the live table. `--push` commits and pushes
+(which deploys). A scheduled task on Dee's machine runs this daily.
+The admin editor's league-table screen is for teams *without* a
+connected competition; connected tables would just be overwritten by
+the next sync.
+
+## SVG rules for the strategy board (learned the hard way)
+
+Chrome's compositor hard-froze rendering the tactics board. Inside any
+SVG that gets re-rendered: no `<marker>` elements, no `var(--*)` paints,
+no `preserveAspectRatio="none"`, and no CSS transitions on `left`/`top`
+of the player dots (phase moves animate via the Web Animations API).
 
 ## Editing data
 

@@ -116,7 +116,7 @@ function teamCrest(team, size) {
         <rect width="40" height="40" rx="11" fill="var(--crest-ink,var(--accent))" opacity=".16"/>
         <rect x=".75" y=".75" width="38.5" height="38.5" rx="10.5" fill="none" stroke="var(--crest-ink,var(--accent))" stroke-opacity=".45"/>
         <text x="20" y="20" text-anchor="middle" dominant-baseline="central"
-              font-family="'Space Grotesk',sans-serif" font-size="${fs}" font-weight="700"
+              font-family="'Barlow Condensed',sans-serif" font-size="${fs + 2}" font-weight="700"
               letter-spacing="-.5" fill="var(--crest-ink,var(--accent))">${initials}</text>
     </svg>`;
 }
@@ -153,6 +153,7 @@ function applyFavicon() {
 const TAB_ICONS = {
     schedule:   '<path d="M3 9h18M7 3v3m10-3v3M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>',
     standings:  '<path d="M5 20v-8m7 8V4m7 16v-5"/>',
+    strategy:   '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
     story:      '<path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2zm9-2h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5z"/>',
     tournament: '<path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3m10-4h3v1a3 3 0 0 1-3 3M12 14v4m-3 3h6"/>',
 };
@@ -165,12 +166,17 @@ function tabIcon(id) {
 }
 
 function getTabs() {
-    return [
+    const tabs = [
         { id: 'schedule',   label: 'Schedule' },
         { id: 'standings',  label: 'Standings' },
+        { id: 'strategy',   label: 'Strategy' },
         { id: 'story',      label: 'Story' },
-        { id: 'tournament', label: 'Tournament' },
     ];
+    const td = TEAM_CONFIG.tournaments;
+    if (td && (td.current || (td.history || []).length)) {
+        tabs.push({ id: 'tournament', label: 'Tournament' });
+    }
+    return tabs;
 }
 
 /* One band that says who this is and how the season is going. It used to
@@ -198,10 +204,10 @@ function renderTeamBar() {
                 <span class="tb-k">Record</span>
                 <span class="tb-v">${r.wins}<i>–</i>${r.losses}<i>–</i>${r.draws}</span>
             </div>
-            ${l.rank ? `<div class="tb-stat">
-                <span class="tb-k">Position</span>
-                <span class="tb-v">#${l.rank}<em>of ${l.totalTeams}</em></span>
-            </div>` : ''}
+            ${(TEAM_CONFIG.comps || []).filter(c => c.league).map(c => `<div class="tb-stat">
+                <span class="tb-k">${(TEAM_CONFIG.comps.length > 1 ? c.shortLabel : 'Position')}</span>
+                <span class="tb-v">#${c.league.rank}<em>of ${c.league.totalTeams}</em></span>
+            </div>`).join('')}
             <div class="tb-stat">
                 <span class="tb-k">Points</span>
                 <span class="tb-v">${l.points}</span>
@@ -274,7 +280,7 @@ function renderNavBars() {
 }
 
 function switchTeam(id) {
-    tournView = 'bracket'; tournMapDay = 'All';
+    tournView = 'bracket'; tournMapDay = 'All'; standingsView = 'table';
     currentTeamId = id; TEAM_CONFIG = TEAMS[id];
     applyTheme(); applyFavicon(); renderSiteBrand();
     renderTeamSwitcher(); renderTeamBar(); renderPageFooter(); renderNavBars(); render();
@@ -297,11 +303,23 @@ function switchStandingsView(v) {
     renderStandingsTab(document.getElementById('main-content'));
 }
 
+/* One button per league the team plays in, plus the stats report.
+   A single-league team reads exactly like it used to. */
 function standingsSubnav() {
-    return `<div class="stats-subnav">
-        <button class="stats-subnav-btn ${standingsView==='table'?'active':''}" onclick="switchStandingsView('table')">League Table</button>
+    const comps = TEAM_CONFIG.comps || [];
+    const compBtns = comps.map(c =>
+        `<button class="stats-subnav-btn ${standingsView === c.id ? 'active' : ''}"` +
+        ` onclick="switchStandingsView('${c.id}')">${comps.length > 1 ? c.shortLabel : 'League Table'}</button>`
+    ).join('');
+    return `<div class="stats-subnav">${compBtns}
         <button class="stats-subnav-btn ${standingsView==='stats'?'active':''}" onclick="switchStandingsView('stats')">Team Stats</button>
     </div>`;
+}
+
+function activeComp() {
+    const comps = TEAM_CONFIG.comps || [];
+    return comps.find(c => c.id === standingsView) ||
+           comps.find(c => c.rows.length) || comps[0] || null;
 }
 
 function renderStandingsTab(container) {
@@ -310,8 +328,11 @@ function renderStandingsTab(container) {
 }
 
 function renderLeagueTable(container) {
+    const comp = activeComp();
+    if (comp) standingsView = comp.id;
     const drawsOn = TEAM_CONFIG.pointsConfig.drawsAllowed !== false;
-    const rows = TEAM_CONFIG.standings.map(t => {
+    const compRows = comp ? comp.rows : [];
+    const rows = compRows.map(t => {
         const gdNum = parseInt(t.gd, 10);
         const gdClass = gdNum > 0 ? 'gd-pos' : (gdNum < 0 ? 'gd-neg' : '');
         return `<tr class="${t.isOurs ? 'current-team' : ''}">
@@ -328,12 +349,19 @@ function renderLeagueTable(container) {
         </tr>`;
     }).join('');
 
-    const emptyMsg = '<div style="text-align:center;padding:48px 24px;color:var(--text3);font-size:14px;">No standings imported yet.</div>';
+    const emptyMsg = '<div class="st-empty"><strong>' + (comp ? comp.label : 'League') + '</strong>' +
+        '<span>Standings aren’t published yet. They fill in automatically once the league posts results.</span></div>';
+
+    const compHead = comp ? `<div class="comp-head">
+            <div class="comp-head-label">${comp.label}${comp.bracket ? ' · ' + comp.bracket : ''}</div>
+            ${comp.updatedAt ? `<div class="comp-head-updated">Synced ${comp.updatedAt}</div>` : ''}
+        </div>` : '';
 
     container.innerHTML = `${standingsSubnav()}
     <div class="content-area">
+        ${compHead}
         <div class="st-card">
-            ${TEAM_CONFIG.standings.length === 0 ? emptyMsg : `<div class="st-scroll">
+            ${compRows.length === 0 ? emptyMsg : `<div class="st-scroll">
                 <table class="st-table">
                     <thead><tr>
                         <th class="st-th-rank">#</th>
@@ -369,6 +397,18 @@ function renderStatsReport(container) {
             <td class="center"><span class="res-badge res-${m.res}">${m.res}</span></td>
         </tr>`
     ).join('');
+    const matchTable = TEAM_CONFIG.matches.length
+        ? `<div class="match-table-wrap"><table class="match-table"><thead><tr><th>Date</th><th>Opponent</th><th class="center">Score</th><th class="center">Res</th></tr></thead><tbody>${matchRows}</tbody></table></div>`
+        : '<div class="st-empty"><span>No results yet this season.</span></div>';
+
+    const nextCard = nm ? `
+            <div>
+                <div class="section-title">Next ${terms.match || 'Match'}</div>
+                <div class="next-mini">
+                    <div class="next-mini-opp">${nm.oppRank ? `<span class="opp-rank">#${nm.oppRank}</span>` : ''}${nm.oppName}</div>
+                    <div class="next-mini-meta">${nm.date}${nm.time ? ' · ' + nm.time : ''}${nm.oppRecord ? ' · They are ' + nm.oppRecord : ''}</div>
+                </div>
+            </div>` : '';
 
 
     container.innerHTML = `${standingsSubnav()}
@@ -406,7 +446,7 @@ function renderStatsReport(container) {
         <div style="display:flex;flex-direction:column;gap:20px;">
             <div>
                 <div class="section-title">${terms.match || 'Match'} History</div>
-                <div class="match-table-wrap"><table class="match-table"><thead><tr><th>Date</th><th>Opponent</th><th class="center">Score</th><th class="center">Res</th></tr></thead><tbody>${matchRows}</tbody></table></div>
+                ${matchTable}
             </div>
             ${nextCard}
         </div>
@@ -539,10 +579,12 @@ function renderSchedule(container) {
             '<div class="next-up">' +
                 '<div class="next-up-head">' +
                     '<span class="next-up-flag">Next up</span>' +
+                    (next.comp ? '<span class="comp-chip">' + next.comp + '</span>' : '') +
                     '<span class="next-up-when">' + parts[0] + ' ' + parts.slice(1).join(' ') +
                         ' <i>·</i> ' + next.time + '</span>' +
                 '</div>' +
                 '<div class="next-up-opp">' +
+                    '<span class="next-up-ha">' + (next.ha === 'away' ? '@' : 'vs') + '</span> ' +
                     (next.rank ? '<span class="next-up-rank">#' + next.rank + '</span>' : '') +
                     next.opp +
                 '</div>' +
@@ -557,7 +599,9 @@ function renderSchedule(container) {
             const parts = m.date.split(' ');
             return '<div class="fixture">' +
                 '<span class="fx-date">' + parts[0] + ' ' + parts.slice(1).join(' ') + '</span>' +
-                '<span class="fx-opp">' + (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
+                '<span class="fx-opp">' + (m.ha ? '<em class="fx-ha">' + (m.ha === 'away' ? '@' : 'vs') + '</em> ' : '') +
+                    (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
+                (m.comp ? '<span class="comp-chip">' + m.comp + '</span>' : '') +
                 '<span class="fx-meta">' + m.time + (m.loc ? ' · ' + m.loc : '') + '</span>' +
             '</div>';
         }).join('') + '</div>' : '';
@@ -567,7 +611,9 @@ function renderSchedule(container) {
         '<div class="fixture-list">' + results.map(m =>
             '<div class="fixture' + (m.highlight ? ' fx-featured' : '') + '">' +
                 '<span class="fx-date">' + m.date + '</span>' +
-                '<span class="fx-opp">' + (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
+                '<span class="fx-opp">' + (m.ha ? '<em class="fx-ha">' + (m.ha === 'away' ? '@' : 'vs') + '</em> ' : '') +
+                    (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
+                (m.comp ? '<span class="comp-chip">' + m.comp + '</span>' : '') +
                 '<span class="fx-score">' + m.score + '</span>' +
                 '<span class="res-badge res-' + m.res + '">' + m.res + '</span>' +
             '</div>'
@@ -673,7 +719,7 @@ function renderTournBracket(container, td) {
                     </div>`).join('')}
                 </div>
                 <div class="tc-ko-connector">
-                    <svg viewBox="0 0 50 140" preserveAspectRatio="none">
+                    <svg viewBox="0 0 50 140">
                         <path d="M0,35 H25 V105 H0" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/>
                         <path d="M25,70 H50" fill="none" stroke="rgba(255,204,0,0.35)" stroke-width="2"/>
                     </svg>
@@ -796,6 +842,7 @@ function render() {
     const c = document.getElementById('main-content');
     if      (currentTab === 'story')       renderStory(c);
     else if (currentTab === 'standings')   renderStandingsTab(c);
+    else if (currentTab === 'strategy')    renderStrategy(c);
     else if (currentTab === 'schedule')    renderSchedule(c);
     else if (currentTab === 'tournament')  renderTournament(c);
     else renderSchedule(c);
