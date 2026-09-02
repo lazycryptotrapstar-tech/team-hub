@@ -4,7 +4,7 @@
   "teams": {
     "u13": {
       "branding": {
-        "name": "Sting McNeal 13G",
+        "name": "Sting McNeal G2013/14",
         "league": "GCL U13 Div 2 · N1 South",
         "season": "2026-27",
         "motto": "Pride · Passion · Performance",
@@ -89,25 +89,7 @@
         "ourRowName": null,
         "rows": []
       },
-      "tournaments": {
-        "history": [
-          {
-            "name": "Fall Premier Showcase",
-            "date": "Nov 2025",
-            "result": "Group Stage",
-            "record": "1-1-1",
-            "notes": "W 6-0 vs Atletico · D vs FWYSA · L vs Evolution"
-          },
-          {
-            "name": "2026 Winter Frost Cup",
-            "date": "Feb 2026",
-            "result": "Consolation",
-            "record": "0-2-1",
-            "notes": "L vs Atletico NPL · D vs Dallas Surf · Consolation loss"
-          }
-        ],
-        "current": null
-      },
+      "tournaments": null,
       "story": null,
       "archive": {
         "spring-2026": {
@@ -736,7 +718,9 @@
           }
         }
       ]
-    },
+    }
+  },
+  "archivedTeams": {
     "u12": {
       "branding": {
         "name": "Sting McNeal 14G",
