@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Team Hub · Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%224%22%20fill%3D%22%23111827%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2223%22%20font-family%3D%22Arial%20Black%2Csans-serif%22%20font-size%3D%2222%22%20font-weight%3D%22900%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffcc00%22%3EA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="brand">Team Hub <span>Admin</span></div>
+        <div class="header-right">
+            <span class="repo-label" id="repoLabel"></span>
+            <button class="btn ghost" onclick="openSetup()">Setup</button>
+            <button class="btn ghost" onclick="exportJSON()">Download</button>
+            <button class="btn primary" id="publishBtn" onclick="publish()" disabled>Publish to site</button>
+        </div>
+    </header>
+
+    <div class="token-banner" id="tokenBanner" style="display:none;"></div>
+    <div class="status-bar" id="statusBar"></div>
+
+    <div class="sub-header">
+        <div class="team-picker" id="teamPicker"></div>
+        <div class="draft-controls">
+            <span class="draft-flag" id="draftFlag"></span>
+            <button class="btn ghost small" onclick="discardDraft()">Discard changes</button>
+        </div>
+    </div>
+
+    <div class="summary-strip" id="summaryStrip"></div>
+
+    <nav class="panel-nav" id="panelNav"></nav>
+
+    <main class="admin-main">
+        <div class="problems" id="problems"></div>
+        <div id="panelBody"></div>
+    </main>
+
+    <!-- Setup -->
+    <div class="modal" id="setupModal">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Publishing setup</h2>
+                <button class="modal-x" onclick="closeSetup()">✕</button>
+            </div>
+            <p class="modal-intro">
+                Publishing saves your changes straight into the site's repository, and the site rebuilds itself a minute later.
+                To do that it needs a GitHub access token.
+            </p>
+            <ol class="setup-steps">
+                <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub's fine-grained token page</a>.</li>
+                <li>Under <strong>Repository access</strong>, choose <strong>Only select repositories</strong> and pick <strong>team-hub</strong>.</li>
+                <li>Under <strong>Permissions → Repository permissions</strong>, set <strong>Contents</strong> to <strong>Read and write</strong>. Leave everything else alone.</li>
+                <li>Generate it, copy it, and paste it below.</li>
+            </ol>
+            <div class="field-grid">
+                <label class="field"><span>Owner</span><input type="text" id="cfgOwner"></label>
+                <label class="field"><span>Repository</span><input type="text" id="cfgRepo"></label>
+                <label class="field"><span>Branch</span><input type="text" id="cfgBranch"></label>
+                <label class="field"><span>Access token</span><input type="password" id="cfgToken" placeholder="github_pat_…"></label>
+            </div>
+            <div class="setup-result" id="setupResult"></div>
+            <p class="modal-warn">
+                The token is stored in this browser only, and is only ever sent to GitHub. Anyone who can use this browser
+                can publish with it — keep it off shared machines, and use <strong>Forget token</strong> when you are done.
+            </p>
+            <div class="modal-actions">
+                <button class="btn ghost" onclick="forgetToken()">Forget token</button>
+                <span class="spacer"></span>
+                <button class="btn ghost" onclick="closeSetup()">Close</button>
+                <button class="btn primary" onclick="saveSetup()">Save &amp; check</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/venue.js"></script>
+    <script src="js/story.js"></script>
+    <script src="js/admin/publish.js"></script>
+    <script src="js/admin/import.js"></script>
+    <script src="js/admin/admin.js"></script>
+</body>
+</html>
