@@ -14,7 +14,8 @@
       },
       "locationPatterns": [
         "UT\\s*Dallas\\s*#?0*(\\d+)",
-        "UTD[-\\s]#?0*(\\d+)"
+        "UTD[-\\s]#?0*(\\d+)",
+        "University\\s*of\\s*Texas\\s*(?:at\\s*)?Dallas\\s*-?\\s*#?0*(\\d+)"
       ],
       "fieldLabelPrefix": "UTD-",
       "legend": [
@@ -1217,6 +1218,16 @@
           "size": "11v11"
         }
       ]
+    },
+    {
+      "id": "athleticclub",
+      "name": "The Athletic Club (Five Star Complex)",
+      "shortName": "The Athletic Club",
+      "address": "4100 Blair Oaks Dr · The Colony TX 75056",
+      "locationPatterns": [
+        "(?:The\\s*)?Athletic\\s*Club(?:\\s*-\\s*Field)*\\s*-?\\s*(?:Field\\s*)?#?0*(\\d+)"
+      ],
+      "fields": []
     }
   ]
 }

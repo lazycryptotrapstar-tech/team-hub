@@ -1,102 +1,741 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-31",
+  "updatedAt": "2026-09-02",
   "teams": {
     "u13": {
       "branding": {
         "name": "Sting McNeal 13G",
-        "league": "GCL U13 DIV 2",
-        "season": "Spring 2026",
+        "league": "GCL U13 Div 2 · N1 South",
+        "season": "2026-27",
         "motto": "Pride · Passion · Performance",
         "website": "StingSoccer.com",
         "primaryColor": "#00234b",
         "secondaryColor": "#ffcc00",
         "sport": "Soccer",
-        "terms": { "match": "Match", "goalsFor": "Goals", "goalsAgainst": "GA" }
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
       },
-      "pointsConfig": { "win": 3, "draw": 1, "loss": 0, "drawsAllowed": true },
-      "lastUpdate": "Mar 31, 2026",
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "lastUpdate": "Sep 1, 2026",
       "games": [
-        { "id": "u13-g01", "date": "2025-08-23", "opponent": "Frisco Fusion 13G NPL NTX Blue", "oppRank": 12, "score": { "us": 3, "them": 1 }, "status": "played", "competition": "league" },
-        { "id": "u13-g02", "date": "2025-09-07", "opponent": "Atletico Dallas Youth 13G Blue Colon", "oppRank": 8, "score": { "us": 0, "them": 2 }, "status": "played", "competition": "league" },
-        { "id": "u13-g03", "date": "2025-09-20", "opponent": "FC Dallas Youth 13G White", "oppRank": 18, "score": { "us": 5, "them": 1 }, "status": "played", "competition": "league" },
-        { "id": "u13-g04", "date": "2025-10-04", "opponent": "Sting G13 E Rodriguez", "oppRank": 3, "score": { "us": 1, "them": 3 }, "status": "played", "competition": "league" },
-        { "id": "u13-g05", "date": "2025-10-08", "opponent": "Dallas Cosmos 13G Red", "oppRank": 13, "score": { "us": 0, "them": 1 }, "status": "played", "competition": "league" },
-        { "id": "u13-g06", "date": "2025-10-18", "opponent": "FCD FC DIVAS XIII", "oppRank": 2, "score": { "us": 1, "them": 2 }, "status": "played", "competition": "league" },
-        { "id": "u13-g07", "date": "2025-10-19", "opponent": "Atletico Dallas Youth 14G Gomez", "oppRank": 16, "score": { "us": 3, "them": 1 }, "status": "played", "competition": "league" },
-        { "id": "u13-g08", "date": "2025-11-01", "opponent": "FCD-ETX '13G Premier", "oppRank": 11, "score": { "us": 0, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u13-g09", "date": "2025-11-11", "opponent": "Coppell FC 13G Oland Red", "oppRank": 1, "score": { "us": 2, "them": 5 }, "status": "played", "competition": "league" },
-        { "id": "u13-g10", "date": "2026-02-03", "opponent": "LC United 13G Evans", "oppRank": 6, "score": { "us": 2, "them": 1 }, "status": "played", "competition": "league" },
-        { "id": "u13-g11", "date": "2026-02-22", "opponent": "NTX Lioness Select 13G", "oppRank": 7, "score": { "us": 1, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u13-g12", "date": "2026-02-28", "opponent": "Panthers Black 13G", "oppRank": 5, "score": { "us": 2, "them": 3 }, "status": "played", "competition": "league" },
-        { "id": "u13-g13", "date": "2026-03-01", "opponent": "ULETE FC 2013G Chris", "oppRank": 15, "score": { "us": 1, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u13-g14", "date": "2026-03-21", "opponent": "Sting Attack G13 H Pantoja", "oppRank": 4, "score": { "us": 2, "them": 5 }, "status": "played", "competition": "league", "highlight": true },
-        { "id": "u13-g15", "date": "2026-04-14", "time": "18:30", "opponent": "Sting G13 Hubbard", "oppRank": 17, "status": "scheduled", "competition": "league", "venueId": "utd", "fieldId": "7", "locText": "UT Dallas #07",
-          "oppLastMatch": { "date": "2026-02-28", "rank": 10, "opp": "Victory SC", "score": "0 - 5", "res": "L" } }
+        {
+          "id": "gcl-951",
+          "date": "2026-08-29",
+          "time": "11:00",
+          "opponent": "Falls Town FC 2013/14 - LD",
+          "status": "played",
+          "competition": "gcl",
+          "homeAway": "home",
+          "locText": "University of Texas Dallas - #02",
+          "score": {
+            "us": 2,
+            "them": 2
+          },
+          "oppRank": 11,
+          "venueId": "utd",
+          "fieldId": "2"
+        },
+        {
+          "id": "gcl-967",
+          "date": "2026-09-08",
+          "time": "18:30",
+          "opponent": "Atletico Dallas Youth DFW-C G2013/14 Sanchez",
+          "status": "scheduled",
+          "competition": "gcl",
+          "homeAway": "home",
+          "locText": "University of Texas Dallas - #09",
+          "oppRank": 16,
+          "venueId": "utd",
+          "fieldId": "9"
+        },
+        {
+          "id": "gcl-991",
+          "date": "2026-09-13",
+          "time": "08:00",
+          "opponent": "Atletico Dallas Youth 15G Welge",
+          "status": "scheduled",
+          "competition": "gcl",
+          "homeAway": "home",
+          "locText": "University of Texas Dallas - #05",
+          "oppRank": 5,
+          "venueId": "utd",
+          "fieldId": "5"
+        },
+        {
+          "id": "gcl-984",
+          "date": "2026-09-27",
+          "time": "09:00",
+          "opponent": "BVB International Academy DFW BVBIA 12/13G Yellow U14",
+          "status": "scheduled",
+          "competition": "gcl",
+          "homeAway": "away",
+          "locText": "The Athletic Club - Field - Field #6",
+          "oppRank": 7,
+          "venueId": "athleticclub",
+          "fieldId": "6"
+        }
       ],
       "standings": {
-        "updatedAt": "2026-03-31",
-        "source": "manual",
-        "ourRowName": "Sting McNeal 13G",
-        "rows": [
-          { "rank": 1, "name": "Coppell FC 13G Oland Red", "mp": 14, "w": 12, "d": 0, "l": 2, "gf": 53, "ga": 12 },
-          { "rank": 2, "name": "FCD FC DIVAS XIII", "mp": 13, "w": 10, "d": 1, "l": 2, "gf": 34, "ga": 14 },
-          { "rank": 3, "name": "Sting G13 E Rodriguez", "mp": 15, "w": 9, "d": 4, "l": 2, "gf": 45, "ga": 16 },
-          { "rank": 4, "name": "Sting Attack G13 H Pantoja", "mp": 14, "w": 10, "d": 0, "l": 4, "gf": 38, "ga": 12 },
-          { "rank": 5, "name": "LC United 13G Evans", "mp": 14, "w": 8, "d": 2, "l": 4, "gf": 31, "ga": 17 },
-          { "rank": 6, "name": "Victory SC 2013 Girls Fort Worth", "mp": 14, "w": 8, "d": 1, "l": 5, "gf": 43, "ga": 21 },
-          { "rank": 7, "name": "FCD-ETX '13G Premier", "mp": 13, "w": 7, "d": 2, "l": 4, "gf": 23, "ga": 11 },
-          { "rank": 8, "name": "Panthers Black 13G", "mp": 13, "w": 7, "d": 0, "l": 6, "gf": 18, "ga": 24 },
-          { "rank": 9, "name": "NTX Lioness Select 13G", "mp": 12, "w": 6, "d": 2, "l": 4, "gf": 26, "ga": 18 },
-          { "rank": 10, "name": "Atletico Dallas Youth 13G Blue Colon", "mp": 13, "w": 6, "d": 1, "l": 6, "gf": 25, "ga": 23 },
-          { "rank": 11, "name": "Sting McNeal 13G", "mp": 14, "w": 6, "d": 1, "l": 7, "gf": 23, "ga": 25 },
-          { "rank": 12, "name": "Frisco Fusion 13G NPL NTX Blue", "mp": 15, "w": 4, "d": 1, "l": 10, "gf": 16, "ga": 38 },
-          { "rank": 13, "name": "Dallas Cosmos 13G Red", "mp": 12, "w": 3, "d": 1, "l": 8, "gf": 11, "ga": 34 },
-          { "rank": 14, "name": "Atletico Dallas Youth 13-GA Blanton", "mp": 3, "w": 3, "d": 0, "l": 0, "gf": 17, "ga": 3 },
-          { "rank": 15, "name": "ULETE FC 2013G Chris", "mp": 12, "w": 3, "d": 0, "l": 9, "gf": 13, "ga": 25 },
-          { "rank": 16, "name": "Atletico Dallas Youth 14G Gomez", "mp": 9, "w": 1, "d": 0, "l": 8, "gf": 6, "ga": 39 },
-          { "rank": 17, "name": "Sting G13 Hubbard", "mp": 13, "w": 1, "d": 0, "l": 12, "gf": 10, "ga": 55 },
-          { "rank": 18, "name": "FC Dallas Youth 13G White", "mp": 13, "w": 1, "d": 0, "l": 12, "gf": 14, "ga": 59 }
-        ]
+        "updatedAt": null,
+        "source": "gotsport",
+        "ourRowName": null,
+        "rows": []
       },
-      "leagueSource": { "provider": null, "url": null },
       "tournaments": {
         "history": [
-          { "name": "Fall Premier Showcase", "date": "Nov 2025", "result": "Group Stage", "record": "1-1-1", "notes": "W 6-0 vs Atletico · D vs FWYSA · L vs Evolution" },
-          { "name": "2026 Winter Frost Cup", "date": "Feb 2026", "result": "Consolation", "record": "0-2-1", "notes": "L vs Atletico NPL · D vs Dallas Surf · Consolation loss" }
+          {
+            "name": "Fall Premier Showcase",
+            "date": "Nov 2025",
+            "result": "Group Stage",
+            "record": "1-1-1",
+            "notes": "W 6-0 vs Atletico · D vs FWYSA · L vs Evolution"
+          },
+          {
+            "name": "2026 Winter Frost Cup",
+            "date": "Feb 2026",
+            "result": "Consolation",
+            "record": "0-2-1",
+            "notes": "L vs Atletico NPL · D vs Dallas Surf · Consolation loss"
+          }
         ],
-        "current": {
-          "name": "Liberty Invitational",
-          "dates": "Apr 10–12, 2026",
-          "location": "Carpenter Park, Plano TX",
-          "format": "5-team Bracket A · 2 group games each · Semis + Final Apr 12",
-          "bracketSet": true,
-          "group": {
-            "name": "Bracket A",
-            "teams": ["Atletico Dallas 13G Blue Colon", "Coppell FC 13G Oland Red", "Sting G13 McNeal", "FWYSA Lady Strikers FC 13G", "Imperial SC 14G Black"],
-            "ourTeam": "Sting G13 McNeal",
-            "matches": [
-              { "date": "Fri Apr 10", "time": "6:00 PM", "home": "Atletico Dallas 13G Blue Colon", "away": "Coppell FC 13G Oland Red", "score": null, "field": "Carpenter Park C · #208" },
-              { "date": "Fri Apr 10", "time": "7:30 PM", "home": "Sting G13 McNeal", "away": "FWYSA Lady Strikers FC 13G", "score": null, "field": "Carpenter Park D · #209" },
-              { "date": "Sat Apr 11", "time": "9:30 AM", "home": "FWYSA Lady Strikers FC 13G", "away": "Imperial SC 14G Black", "score": null, "field": "Carpenter Park M · #212" },
-              { "date": "Sat Apr 11", "time": "9:30 AM", "home": "Coppell FC 13G Oland Red", "away": "Sting G13 McNeal", "score": null, "field": "Carpenter Park A · #211" },
-              { "date": "Sat Apr 11", "time": "2:00 PM", "home": "Imperial SC 14G Black", "away": "Atletico Dallas 13G Blue Colon", "score": null, "field": "Carpenter Park B · #210" }
+        "current": null
+      },
+      "story": null,
+      "archive": {
+        "spring-2026": {
+          "label": "Spring 2026 — GCL U13 Div 2",
+          "games": [
+            {
+              "id": "u13-g01",
+              "date": "2025-08-23",
+              "opponent": "Frisco Fusion 13G NPL NTX Blue",
+              "oppRank": 12,
+              "score": {
+                "us": 3,
+                "them": 1
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g02",
+              "date": "2025-09-07",
+              "opponent": "Atletico Dallas Youth 13G Blue Colon",
+              "oppRank": 8,
+              "score": {
+                "us": 0,
+                "them": 2
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g03",
+              "date": "2025-09-20",
+              "opponent": "FC Dallas Youth 13G White",
+              "oppRank": 18,
+              "score": {
+                "us": 5,
+                "them": 1
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g04",
+              "date": "2025-10-04",
+              "opponent": "Sting G13 E Rodriguez",
+              "oppRank": 3,
+              "score": {
+                "us": 1,
+                "them": 3
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g05",
+              "date": "2025-10-08",
+              "opponent": "Dallas Cosmos 13G Red",
+              "oppRank": 13,
+              "score": {
+                "us": 0,
+                "them": 1
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g06",
+              "date": "2025-10-18",
+              "opponent": "FCD FC DIVAS XIII",
+              "oppRank": 2,
+              "score": {
+                "us": 1,
+                "them": 2
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g07",
+              "date": "2025-10-19",
+              "opponent": "Atletico Dallas Youth 14G Gomez",
+              "oppRank": 16,
+              "score": {
+                "us": 3,
+                "them": 1
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g08",
+              "date": "2025-11-01",
+              "opponent": "FCD-ETX '13G Premier",
+              "oppRank": 11,
+              "score": {
+                "us": 0,
+                "them": 0
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g09",
+              "date": "2025-11-11",
+              "opponent": "Coppell FC 13G Oland Red",
+              "oppRank": 1,
+              "score": {
+                "us": 2,
+                "them": 5
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g10",
+              "date": "2026-02-03",
+              "opponent": "LC United 13G Evans",
+              "oppRank": 6,
+              "score": {
+                "us": 2,
+                "them": 1
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g11",
+              "date": "2026-02-22",
+              "opponent": "NTX Lioness Select 13G",
+              "oppRank": 7,
+              "score": {
+                "us": 1,
+                "them": 0
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g12",
+              "date": "2026-02-28",
+              "opponent": "Panthers Black 13G",
+              "oppRank": 5,
+              "score": {
+                "us": 2,
+                "them": 3
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g13",
+              "date": "2026-03-01",
+              "opponent": "ULETE FC 2013G Chris",
+              "oppRank": 15,
+              "score": {
+                "us": 1,
+                "them": 0
+              },
+              "status": "played",
+              "competition": "league"
+            },
+            {
+              "id": "u13-g14",
+              "date": "2026-03-21",
+              "opponent": "Sting Attack G13 H Pantoja",
+              "oppRank": 4,
+              "score": {
+                "us": 2,
+                "them": 5
+              },
+              "status": "played",
+              "competition": "league",
+              "highlight": true
+            },
+            {
+              "id": "u13-g15",
+              "date": "2026-04-14",
+              "time": "18:30",
+              "opponent": "Sting G13 Hubbard",
+              "oppRank": 17,
+              "status": "scheduled",
+              "competition": "league",
+              "venueId": "utd",
+              "fieldId": "7",
+              "locText": "UT Dallas #07",
+              "oppLastMatch": {
+                "date": "2026-02-28",
+                "rank": 10,
+                "opp": "Victory SC",
+                "score": "0 - 5",
+                "res": "L"
+              }
+            }
+          ],
+          "standings": {
+            "updatedAt": "2026-03-31",
+            "source": "manual",
+            "ourRowName": "Sting McNeal 13G",
+            "rows": [
+              {
+                "rank": 1,
+                "name": "Coppell FC 13G Oland Red",
+                "mp": 14,
+                "w": 12,
+                "d": 0,
+                "l": 2,
+                "gf": 53,
+                "ga": 12
+              },
+              {
+                "rank": 2,
+                "name": "FCD FC DIVAS XIII",
+                "mp": 13,
+                "w": 10,
+                "d": 1,
+                "l": 2,
+                "gf": 34,
+                "ga": 14
+              },
+              {
+                "rank": 3,
+                "name": "Sting G13 E Rodriguez",
+                "mp": 15,
+                "w": 9,
+                "d": 4,
+                "l": 2,
+                "gf": 45,
+                "ga": 16
+              },
+              {
+                "rank": 4,
+                "name": "Sting Attack G13 H Pantoja",
+                "mp": 14,
+                "w": 10,
+                "d": 0,
+                "l": 4,
+                "gf": 38,
+                "ga": 12
+              },
+              {
+                "rank": 5,
+                "name": "LC United 13G Evans",
+                "mp": 14,
+                "w": 8,
+                "d": 2,
+                "l": 4,
+                "gf": 31,
+                "ga": 17
+              },
+              {
+                "rank": 6,
+                "name": "Victory SC 2013 Girls Fort Worth",
+                "mp": 14,
+                "w": 8,
+                "d": 1,
+                "l": 5,
+                "gf": 43,
+                "ga": 21
+              },
+              {
+                "rank": 7,
+                "name": "FCD-ETX '13G Premier",
+                "mp": 13,
+                "w": 7,
+                "d": 2,
+                "l": 4,
+                "gf": 23,
+                "ga": 11
+              },
+              {
+                "rank": 8,
+                "name": "Panthers Black 13G",
+                "mp": 13,
+                "w": 7,
+                "d": 0,
+                "l": 6,
+                "gf": 18,
+                "ga": 24
+              },
+              {
+                "rank": 9,
+                "name": "NTX Lioness Select 13G",
+                "mp": 12,
+                "w": 6,
+                "d": 2,
+                "l": 4,
+                "gf": 26,
+                "ga": 18
+              },
+              {
+                "rank": 10,
+                "name": "Atletico Dallas Youth 13G Blue Colon",
+                "mp": 13,
+                "w": 6,
+                "d": 1,
+                "l": 6,
+                "gf": 25,
+                "ga": 23
+              },
+              {
+                "rank": 11,
+                "name": "Sting McNeal 13G",
+                "mp": 14,
+                "w": 6,
+                "d": 1,
+                "l": 7,
+                "gf": 23,
+                "ga": 25
+              },
+              {
+                "rank": 12,
+                "name": "Frisco Fusion 13G NPL NTX Blue",
+                "mp": 15,
+                "w": 4,
+                "d": 1,
+                "l": 10,
+                "gf": 16,
+                "ga": 38
+              },
+              {
+                "rank": 13,
+                "name": "Dallas Cosmos 13G Red",
+                "mp": 12,
+                "w": 3,
+                "d": 1,
+                "l": 8,
+                "gf": 11,
+                "ga": 34
+              },
+              {
+                "rank": 14,
+                "name": "Atletico Dallas Youth 13-GA Blanton",
+                "mp": 3,
+                "w": 3,
+                "d": 0,
+                "l": 0,
+                "gf": 17,
+                "ga": 3
+              },
+              {
+                "rank": 15,
+                "name": "ULETE FC 2013G Chris",
+                "mp": 12,
+                "w": 3,
+                "d": 0,
+                "l": 9,
+                "gf": 13,
+                "ga": 25
+              },
+              {
+                "rank": 16,
+                "name": "Atletico Dallas Youth 14G Gomez",
+                "mp": 9,
+                "w": 1,
+                "d": 0,
+                "l": 8,
+                "gf": 6,
+                "ga": 39
+              },
+              {
+                "rank": 17,
+                "name": "Sting G13 Hubbard",
+                "mp": 13,
+                "w": 1,
+                "d": 0,
+                "l": 12,
+                "gf": 10,
+                "ga": 55
+              },
+              {
+                "rank": 18,
+                "name": "FC Dallas Youth 13G White",
+                "mp": 13,
+                "w": 1,
+                "d": 0,
+                "l": 12,
+                "gf": 14,
+                "ga": 59
+              }
             ]
           },
-          "bracket": {
-            "semis": [
-              { "slot": "Semi-Finals", "time": "Sun Apr 12 · 8:00 AM", "teamA": "Group Leader", "teamB": "Group 2nd", "score": null, "field": "Carpenter Park D · #214" },
-              { "slot": "Consolation", "time": "Sun Apr 12 · 8:00 AM", "teamA": "Group 3rd", "teamB": "Group 4th", "score": null, "field": "Carpenter Park M · #213" }
+          "story": {
+            "text": "Saturday's 2-5 loss to #4 Sting Attack was a gut punch — no other way to say it. Against one of the division's best, McNeal gave up three in the second half when it mattered most. That stings.\n\nBut here's what doesn't change: 6 wins, 19 points, and one game left. This team has beaten teams ranked ahead of them all season. They've come back from multi-match losing skids before. The record shows a squad that competes — 23 goals scored, a win over #6 LC United, back-to-back wins in February when the season needed it most.\n\nThe final opponent is #17 Sting G13 Hubbard. On paper, this is a winnable game. But the only way it matters is if this team shows up with something to prove. A loss on Saturday can't define the season — the response to it can.\n\nSit at #11 of 18 with 19 points, and 3 more on the table Tuesday night. One game. One chance to finish with your head up.\n\nThe season isn't over. Write a better ending.",
+            "source": "manual",
+            "generatedAt": "2026-03-31"
+          },
+          "tournaments": {
+            "history": [
+              {
+                "name": "Fall Premier Showcase",
+                "date": "Nov 2025",
+                "result": "Group Stage",
+                "record": "1-1-1",
+                "notes": "W 6-0 vs Atletico · D vs FWYSA · L vs Evolution"
+              },
+              {
+                "name": "2026 Winter Frost Cup",
+                "date": "Feb 2026",
+                "result": "Consolation",
+                "record": "0-2-1",
+                "notes": "L vs Atletico NPL · D vs Dallas Surf · Consolation loss"
+              }
             ],
-            "final": { "slot": "Final", "time": "Sun Apr 12 · 11:00 AM", "teamA": "Semi Winner", "teamB": "Semi Winner", "score": null, "field": "Carpenter Park B · #215" }
+            "current": null
           }
         }
       },
-      "story": {
-        "text": "Saturday's 2-5 loss to #4 Sting Attack was a gut punch — no other way to say it. Against one of the division's best, McNeal gave up three in the second half when it mattered most. That stings.\n\nBut here's what doesn't change: 6 wins, 19 points, and one game left. This team has beaten teams ranked ahead of them all season. They've come back from multi-match losing skids before. The record shows a squad that competes — 23 goals scored, a win over #6 LC United, back-to-back wins in February when the season needed it most.\n\nThe final opponent is #17 Sting G13 Hubbard. On paper, this is a winnable game. But the only way it matters is if this team shows up with something to prove. A loss on Saturday can't define the season — the response to it can.\n\nSit at #11 of 18 with 19 points, and 3 more on the table Tuesday night. One game. One chance to finish with your head up.\n\nThe season isn't over. Write a better ending.",
-        "source": "manual",
-        "generatedAt": "2026-03-31"
-      }
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "GCL U13 Division 2",
+          "shortLabel": "GCL",
+          "season": "Fall 2026",
+          "standings": {
+            "updatedAt": "2026-09-02",
+            "source": "gotsport",
+            "bracket": "Bracket A",
+            "ourRowName": "Sting Soccer Club G2013/14 McNeal",
+            "rows": [
+              {
+                "rank": 1,
+                "name": "Stephenville SA Quest FC 14 Girls - T",
+                "mp": 2,
+                "w": 2,
+                "l": 0,
+                "d": 0,
+                "gf": 9,
+                "ga": 1
+              },
+              {
+                "rank": 2,
+                "name": "Victory SC 13/14 Girls Fort Worth",
+                "mp": 1,
+                "w": 1,
+                "l": 0,
+                "d": 0,
+                "gf": 4,
+                "ga": 0
+              },
+              {
+                "rank": 3,
+                "name": "ULETE FC 13-14G Carlo",
+                "mp": 1,
+                "w": 1,
+                "l": 0,
+                "d": 0,
+                "gf": 3,
+                "ga": 0
+              },
+              {
+                "rank": 4,
+                "name": "Dallas Surf U13G Hadwick",
+                "mp": 1,
+                "w": 1,
+                "l": 0,
+                "d": 0,
+                "gf": 2,
+                "ga": 0
+              },
+              {
+                "rank": 5,
+                "name": "Atletico Dallas Youth 15G Welge",
+                "mp": 1,
+                "w": 1,
+                "l": 0,
+                "d": 0,
+                "gf": 1,
+                "ga": 0
+              },
+              {
+                "rank": 6,
+                "name": "TOKA FUTBOL CLUB FC - 2013/2014G Red",
+                "mp": 1,
+                "w": 1,
+                "l": 0,
+                "d": 0,
+                "gf": 1,
+                "ga": 0
+              },
+              {
+                "rank": 7,
+                "name": "BVB International Academy DFW BVBIA 12/13G Yellow U14",
+                "mp": 1,
+                "w": 1,
+                "l": 0,
+                "d": 0,
+                "gf": 4,
+                "ga": 3
+              },
+              {
+                "rank": 8,
+                "name": "Dallas Cosmos Soccer Club 14G White",
+                "mp": 1,
+                "w": 0,
+                "l": 0,
+                "d": 1,
+                "gf": 1,
+                "ga": 1
+              },
+              {
+                "rank": 9,
+                "name": "FC Dallas Youth Gold G2013/14",
+                "mp": 1,
+                "w": 0,
+                "l": 0,
+                "d": 1,
+                "gf": 1,
+                "ga": 1
+              },
+              {
+                "rank": 10,
+                "name": "Sting Soccer Club G2013/14 McNeal",
+                "mp": 1,
+                "w": 0,
+                "l": 0,
+                "d": 1,
+                "gf": 2,
+                "ga": 2
+              },
+              {
+                "rank": 11,
+                "name": "Falls Town FC 2013/14 - LD",
+                "mp": 1,
+                "w": 0,
+                "l": 0,
+                "d": 1,
+                "gf": 2,
+                "ga": 2
+              },
+              {
+                "rank": 12,
+                "name": "Frisco Fusion Navy G2013/14",
+                "mp": 1,
+                "w": 0,
+                "l": 1,
+                "d": 0,
+                "gf": 0,
+                "ga": 1
+              },
+              {
+                "rank": 13,
+                "name": "FC Dallas Youth Black G2013/14",
+                "mp": 1,
+                "w": 0,
+                "l": 1,
+                "d": 0,
+                "gf": 0,
+                "ga": 1
+              },
+              {
+                "rank": 14,
+                "name": "Fortress Wolves FC FWFC 13/14G Mittendorf",
+                "mp": 1,
+                "w": 0,
+                "l": 1,
+                "d": 0,
+                "gf": 0,
+                "ga": 2
+              },
+              {
+                "rank": 15,
+                "name": "Dallas Legacy South",
+                "mp": 1,
+                "w": 0,
+                "l": 1,
+                "d": 0,
+                "gf": 0,
+                "ga": 2
+              },
+              {
+                "rank": 16,
+                "name": "Atletico Dallas Youth DFW-C G2013/14 Sanchez",
+                "mp": 1,
+                "w": 0,
+                "l": 1,
+                "d": 0,
+                "gf": 0,
+                "ga": 3
+              },
+              {
+                "rank": 17,
+                "name": "FC Dallas ETX FCD- U13 Sabillon - LD",
+                "mp": 1,
+                "w": 0,
+                "l": 1,
+                "d": 0,
+                "gf": 3,
+                "ga": 4
+              },
+              {
+                "rank": 18,
+                "name": "Invictus United 2014 Girls Mcmenamy",
+                "mp": 2,
+                "w": 0,
+                "l": 2,
+                "d": 0,
+                "gf": 1,
+                "ga": 11
+              }
+            ]
+          },
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4180087,
+            "groupId": 507053,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4180087"
+          }
+        },
+        {
+          "id": "n1",
+          "label": "National 1 League · South District 2",
+          "shortLabel": "N1",
+          "season": "2026-27",
+          "standings": {
+            "updatedAt": null,
+            "source": "gotsport",
+            "ourRowName": null,
+            "rows": []
+          },
+          "source": {
+            "provider": "gotsport",
+            "eventId": 54028,
+            "teamId": 4051543,
+            "url": "https://system.gotsport.com/org_event/events/54028/schedules?team=4051543"
+          }
+        }
+      ]
     },
     "u12": {
       "branding": {
@@ -108,59 +747,416 @@
         "primaryColor": "#00234b",
         "secondaryColor": "#ffcc00",
         "sport": "Soccer",
-        "terms": { "match": "Match", "goalsFor": "Goals", "goalsAgainst": "GA" }
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
       },
-      "pointsConfig": { "win": 3, "draw": 1, "loss": 0, "drawsAllowed": true },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
       "lastUpdate": "Mar 31, 2026",
       "games": [
-        { "id": "u12-g01", "date": "2025-09-07", "opponent": "Dallas Surf 14G East Silver", "oppRank": 15, "score": { "us": 3, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u12-g02", "date": "2025-09-14", "opponent": "Atletico Dallas Youth Pre ECNL G15 Blanton", "oppRank": 6, "score": { "us": 2, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u12-g03", "date": "2025-09-27", "opponent": "NTX Celtic 14G Bravo South", "oppRank": 2, "score": { "us": 1, "them": 2 }, "status": "played", "competition": "league" },
-        { "id": "u12-g04", "date": "2025-10-11", "opponent": "Pony Xpress 14/15G Castillo", "oppRank": 9, "score": { "us": 5, "them": 4 }, "status": "played", "competition": "league" },
-        { "id": "u12-g05", "date": "2025-10-12", "opponent": "Solar Byars 14G", "oppRank": 5, "score": { "us": 1, "them": 2 }, "status": "played", "competition": "league" },
-        { "id": "u12-g06", "date": "2025-10-14", "opponent": "Sting G14 Fuentes", "oppRank": 14, "score": { "us": 5, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u12-g07", "date": "2025-11-05", "opponent": "Solar 14G Carrillo.E", "oppRank": 3, "score": { "us": 1, "them": 2 }, "status": "played", "competition": "league" },
-        { "id": "u12-g08", "date": "2025-11-08", "opponent": "Juventus Premier FC 2014G Cantu", "oppRank": 1, "score": { "us": 1, "them": 1 }, "status": "played", "competition": "league" },
-        { "id": "u12-g09", "date": "2025-11-09", "opponent": "Waco Texans 2014 Girls Andrade", "oppRank": 7, "score": { "us": 0, "them": 2 }, "status": "played", "competition": "league" },
-        { "id": "u12-g10", "date": "2026-02-21", "opponent": "NTX Celtic 14G Bravo South", "oppRank": 2, "score": { "us": 1, "them": 1 }, "status": "played", "competition": "league" },
-        { "id": "u12-g11", "date": "2026-02-28", "opponent": "Waco Texans 2014 Girls Andrade", "oppRank": 7, "score": { "us": 2, "them": 2 }, "status": "played", "competition": "league" },
-        { "id": "u12-g12", "date": "2026-03-21", "opponent": "FW All Stars FC 2014G", "oppRank": 16, "score": { "us": 6, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u12-g13", "date": "2026-03-22", "opponent": "FC Dallas Youth 14G West", "oppRank": 10, "score": { "us": 1, "them": 0 }, "status": "played", "competition": "league" },
-        { "id": "u12-g14", "date": "2026-03-29", "opponent": "Sting G14 J Salazar", "oppRank": 5, "score": { "us": 4, "them": 0 }, "status": "played", "competition": "league", "highlight": true },
-        { "id": "u12-g15", "date": "2026-04-01", "time": "18:30", "opponent": "Dallas Surf 14G East Silver", "oppRank": 14, "status": "scheduled", "competition": "league", "venueId": "utd", "fieldId": "9", "locText": "UT Dallas #09",
-          "oppLastMatch": { "date": "2026-03-21", "rank": 14, "opp": "Dallas Surf 14G North", "score": "2 - 1", "res": "W" } },
-        { "id": "u12-g16", "date": "2026-04-28", "time": "19:45", "opponent": "FC Dallas Youth 14G Black", "oppRank": 13, "status": "scheduled", "competition": "league", "venueId": "utd", "fieldId": "7", "locText": "UT Dallas #07" }
+        {
+          "id": "u12-g01",
+          "date": "2025-09-07",
+          "opponent": "Dallas Surf 14G East Silver",
+          "oppRank": 15,
+          "score": {
+            "us": 3,
+            "them": 0
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g02",
+          "date": "2025-09-14",
+          "opponent": "Atletico Dallas Youth Pre ECNL G15 Blanton",
+          "oppRank": 6,
+          "score": {
+            "us": 2,
+            "them": 0
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g03",
+          "date": "2025-09-27",
+          "opponent": "NTX Celtic 14G Bravo South",
+          "oppRank": 2,
+          "score": {
+            "us": 1,
+            "them": 2
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g04",
+          "date": "2025-10-11",
+          "opponent": "Pony Xpress 14/15G Castillo",
+          "oppRank": 9,
+          "score": {
+            "us": 5,
+            "them": 4
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g05",
+          "date": "2025-10-12",
+          "opponent": "Solar Byars 14G",
+          "oppRank": 5,
+          "score": {
+            "us": 1,
+            "them": 2
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g06",
+          "date": "2025-10-14",
+          "opponent": "Sting G14 Fuentes",
+          "oppRank": 14,
+          "score": {
+            "us": 5,
+            "them": 0
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g07",
+          "date": "2025-11-05",
+          "opponent": "Solar 14G Carrillo.E",
+          "oppRank": 3,
+          "score": {
+            "us": 1,
+            "them": 2
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g08",
+          "date": "2025-11-08",
+          "opponent": "Juventus Premier FC 2014G Cantu",
+          "oppRank": 1,
+          "score": {
+            "us": 1,
+            "them": 1
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g09",
+          "date": "2025-11-09",
+          "opponent": "Waco Texans 2014 Girls Andrade",
+          "oppRank": 7,
+          "score": {
+            "us": 0,
+            "them": 2
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g10",
+          "date": "2026-02-21",
+          "opponent": "NTX Celtic 14G Bravo South",
+          "oppRank": 2,
+          "score": {
+            "us": 1,
+            "them": 1
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g11",
+          "date": "2026-02-28",
+          "opponent": "Waco Texans 2014 Girls Andrade",
+          "oppRank": 7,
+          "score": {
+            "us": 2,
+            "them": 2
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g12",
+          "date": "2026-03-21",
+          "opponent": "FW All Stars FC 2014G",
+          "oppRank": 16,
+          "score": {
+            "us": 6,
+            "them": 0
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g13",
+          "date": "2026-03-22",
+          "opponent": "FC Dallas Youth 14G West",
+          "oppRank": 10,
+          "score": {
+            "us": 1,
+            "them": 0
+          },
+          "status": "played",
+          "competition": "league"
+        },
+        {
+          "id": "u12-g14",
+          "date": "2026-03-29",
+          "opponent": "Sting G14 J Salazar",
+          "oppRank": 5,
+          "score": {
+            "us": 4,
+            "them": 0
+          },
+          "status": "played",
+          "competition": "league",
+          "highlight": true
+        },
+        {
+          "id": "u12-g15",
+          "date": "2026-04-01",
+          "time": "18:30",
+          "opponent": "Dallas Surf 14G East Silver",
+          "oppRank": 14,
+          "status": "scheduled",
+          "competition": "league",
+          "venueId": "utd",
+          "fieldId": "9",
+          "locText": "UT Dallas #09",
+          "oppLastMatch": {
+            "date": "2026-03-21",
+            "rank": 14,
+            "opp": "Dallas Surf 14G North",
+            "score": "2 - 1",
+            "res": "W"
+          }
+        },
+        {
+          "id": "u12-g16",
+          "date": "2026-04-28",
+          "time": "19:45",
+          "opponent": "FC Dallas Youth 14G Black",
+          "oppRank": 13,
+          "status": "scheduled",
+          "competition": "league",
+          "venueId": "utd",
+          "fieldId": "7",
+          "locText": "UT Dallas #07"
+        }
       ],
       "standings": {
         "updatedAt": "2026-03-31",
         "source": "manual",
         "ourRowName": "Sting Pre-ECNL G14 McNeal",
         "rows": [
-          { "rank": 1, "name": "Juventus Premier FC 2014G Cantu", "mp": 14, "w": 11, "d": 2, "l": 1, "gf": 45, "ga": 14 },
-          { "rank": 2, "name": "NTX Celtic 14G Bravo South", "mp": 14, "w": 9, "d": 3, "l": 2, "gf": 44, "ga": 17 },
-          { "rank": 3, "name": "Solar 14G Carrillo.E", "mp": 11, "w": 7, "d": 3, "l": 1, "gf": 29, "ga": 18 },
-          { "rank": 4, "name": "Sting Pre-ECNL G14 McNeal", "mp": 14, "w": 7, "d": 3, "l": 4, "gf": 33, "ga": 16 },
-          { "rank": 5, "name": "Sting G14 J Salazar", "mp": 14, "w": 6, "d": 5, "l": 3, "gf": 26, "ga": 19 },
-          { "rank": 6, "name": "Atletico Dallas Pre ECNL G15 Blanton", "mp": 13, "w": 7, "d": 1, "l": 5, "gf": 18, "ga": 18 },
-          { "rank": 7, "name": "Waco Texans 2014 Girls Andrade", "mp": 13, "w": 6, "d": 4, "l": 3, "gf": 22, "ga": 15 },
-          { "rank": 8, "name": "Solar Byars 14G", "mp": 12, "w": 7, "d": 0, "l": 5, "gf": 26, "ga": 20 },
-          { "rank": 9, "name": "Pony Xpress 14/15G Castillo", "mp": 14, "w": 5, "d": 0, "l": 9, "gf": 18, "ga": 31 },
-          { "rank": 10, "name": "Dallas Surf 14G North", "mp": 14, "w": 4, "d": 2, "l": 8, "gf": 17, "ga": 24 },
-          { "rank": 11, "name": "FC Dallas Youth 14G West", "mp": 11, "w": 4, "d": 1, "l": 6, "gf": 8, "ga": 21 },
-          { "rank": 12, "name": "NTX Celtic Pre-ECNL G14 McCallum", "mp": 5, "w": 4, "d": 0, "l": 1, "gf": 10, "ga": 2 },
-          { "rank": 13, "name": "FC Dallas Youth 14G Black", "mp": 14, "w": 3, "d": 2, "l": 9, "gf": 14, "ga": 30 },
-          { "rank": 14, "name": "Dallas Surf 14G East Silver", "mp": 13, "w": 3, "d": 2, "l": 8, "gf": 12, "ga": 32 },
-          { "rank": 15, "name": "Sting G14 Fuentes", "mp": 15, "w": 2, "d": 4, "l": 9, "gf": 10, "ga": 25 },
-          { "rank": 16, "name": "FW All Stars FC 2014G", "mp": 15, "w": 1, "d": 2, "l": 12, "gf": 10, "ga": 40 }
+          {
+            "rank": 1,
+            "name": "Juventus Premier FC 2014G Cantu",
+            "mp": 14,
+            "w": 11,
+            "d": 2,
+            "l": 1,
+            "gf": 45,
+            "ga": 14
+          },
+          {
+            "rank": 2,
+            "name": "NTX Celtic 14G Bravo South",
+            "mp": 14,
+            "w": 9,
+            "d": 3,
+            "l": 2,
+            "gf": 44,
+            "ga": 17
+          },
+          {
+            "rank": 3,
+            "name": "Solar 14G Carrillo.E",
+            "mp": 11,
+            "w": 7,
+            "d": 3,
+            "l": 1,
+            "gf": 29,
+            "ga": 18
+          },
+          {
+            "rank": 4,
+            "name": "Sting Pre-ECNL G14 McNeal",
+            "mp": 14,
+            "w": 7,
+            "d": 3,
+            "l": 4,
+            "gf": 33,
+            "ga": 16
+          },
+          {
+            "rank": 5,
+            "name": "Sting G14 J Salazar",
+            "mp": 14,
+            "w": 6,
+            "d": 5,
+            "l": 3,
+            "gf": 26,
+            "ga": 19
+          },
+          {
+            "rank": 6,
+            "name": "Atletico Dallas Pre ECNL G15 Blanton",
+            "mp": 13,
+            "w": 7,
+            "d": 1,
+            "l": 5,
+            "gf": 18,
+            "ga": 18
+          },
+          {
+            "rank": 7,
+            "name": "Waco Texans 2014 Girls Andrade",
+            "mp": 13,
+            "w": 6,
+            "d": 4,
+            "l": 3,
+            "gf": 22,
+            "ga": 15
+          },
+          {
+            "rank": 8,
+            "name": "Solar Byars 14G",
+            "mp": 12,
+            "w": 7,
+            "d": 0,
+            "l": 5,
+            "gf": 26,
+            "ga": 20
+          },
+          {
+            "rank": 9,
+            "name": "Pony Xpress 14/15G Castillo",
+            "mp": 14,
+            "w": 5,
+            "d": 0,
+            "l": 9,
+            "gf": 18,
+            "ga": 31
+          },
+          {
+            "rank": 10,
+            "name": "Dallas Surf 14G North",
+            "mp": 14,
+            "w": 4,
+            "d": 2,
+            "l": 8,
+            "gf": 17,
+            "ga": 24
+          },
+          {
+            "rank": 11,
+            "name": "FC Dallas Youth 14G West",
+            "mp": 11,
+            "w": 4,
+            "d": 1,
+            "l": 6,
+            "gf": 8,
+            "ga": 21
+          },
+          {
+            "rank": 12,
+            "name": "NTX Celtic Pre-ECNL G14 McCallum",
+            "mp": 5,
+            "w": 4,
+            "d": 0,
+            "l": 1,
+            "gf": 10,
+            "ga": 2
+          },
+          {
+            "rank": 13,
+            "name": "FC Dallas Youth 14G Black",
+            "mp": 14,
+            "w": 3,
+            "d": 2,
+            "l": 9,
+            "gf": 14,
+            "ga": 30
+          },
+          {
+            "rank": 14,
+            "name": "Dallas Surf 14G East Silver",
+            "mp": 13,
+            "w": 3,
+            "d": 2,
+            "l": 8,
+            "gf": 12,
+            "ga": 32
+          },
+          {
+            "rank": 15,
+            "name": "Sting G14 Fuentes",
+            "mp": 15,
+            "w": 2,
+            "d": 4,
+            "l": 9,
+            "gf": 10,
+            "ga": 25
+          },
+          {
+            "rank": 16,
+            "name": "FW All Stars FC 2014G",
+            "mp": 15,
+            "w": 1,
+            "d": 2,
+            "l": 12,
+            "gf": 10,
+            "ga": 40
+          }
         ]
       },
-      "leagueSource": { "provider": null, "url": null },
+      "leagueSource": {
+        "provider": null,
+        "url": null
+      },
       "tournaments": {
         "venueType": "utd",
         "history": [
-          { "name": "Fall Kickoff Classic", "date": "Aug 2025", "result": "Quarterfinalist", "record": "2-1-0", "notes": "Strong run, tough draw in quarters" },
-          { "name": "Winter Warm-Up", "date": "Jan 2026", "result": "Champion 🏆", "record": "4-0-0", "notes": "Won every game, shut out in the final" },
-          { "name": "Presidents Cup", "date": "Feb 2026", "result": "Semifinalist", "record": "2-1-0", "notes": "Lost on PKs after a strong run" }
+          {
+            "name": "Fall Kickoff Classic",
+            "date": "Aug 2025",
+            "result": "Quarterfinalist",
+            "record": "2-1-0",
+            "notes": "Strong run, tough draw in quarters"
+          },
+          {
+            "name": "Winter Warm-Up",
+            "date": "Jan 2026",
+            "result": "Champion 🏆",
+            "record": "4-0-0",
+            "notes": "Won every game, shut out in the final"
+          },
+          {
+            "name": "Presidents Cup",
+            "date": "Feb 2026",
+            "result": "Semifinalist",
+            "record": "2-1-0",
+            "notes": "Lost on PKs after a strong run"
+          }
         ],
         "current": {
           "name": "Spring Classic 2026",
@@ -170,20 +1166,64 @@
           "bracketSet": true,
           "group": {
             "name": "Group A",
-            "teams": ["Sting McNeal 14G", "Juventus 2014G", "NTX Celtic 14G", "Solar 14G Red"],
+            "teams": [
+              "Sting McNeal 14G",
+              "Juventus 2014G",
+              "NTX Celtic 14G",
+              "Solar 14G Red"
+            ],
             "ourTeam": "Sting McNeal 14G",
             "matches": [
-              { "date": "Sat Apr 19", "time": "10:00 AM", "home": "Sting McNeal 14G", "away": "Juventus 2014G", "score": null, "field": "Field #1" },
-              { "date": "Sat Apr 19", "time": "2:00 PM", "home": "NTX Celtic 14G", "away": "Sting McNeal 14G", "score": null, "field": "Field #1" },
-              { "date": "Sun Apr 20", "time": "9:00 AM", "home": "Sting McNeal 14G", "away": "Solar 14G Red", "score": null, "field": "Field #2" }
+              {
+                "date": "Sat Apr 19",
+                "time": "10:00 AM",
+                "home": "Sting McNeal 14G",
+                "away": "Juventus 2014G",
+                "score": null,
+                "field": "Field #1"
+              },
+              {
+                "date": "Sat Apr 19",
+                "time": "2:00 PM",
+                "home": "NTX Celtic 14G",
+                "away": "Sting McNeal 14G",
+                "score": null,
+                "field": "Field #1"
+              },
+              {
+                "date": "Sun Apr 20",
+                "time": "9:00 AM",
+                "home": "Sting McNeal 14G",
+                "away": "Solar 14G Red",
+                "score": null,
+                "field": "Field #2"
+              }
             ]
           },
           "bracket": {
             "semis": [
-              { "slot": "SF1", "time": "Sun Apr 20 · 1:00 PM", "teamA": "Group A Winner", "teamB": "Group B Runner-Up", "score": null },
-              { "slot": "SF2", "time": "Sun Apr 20 · 1:00 PM", "teamA": "Group B Winner", "teamB": "Group A Runner-Up", "score": null }
+              {
+                "slot": "SF1",
+                "time": "Sun Apr 20 · 1:00 PM",
+                "teamA": "Group A Winner",
+                "teamB": "Group B Runner-Up",
+                "score": null
+              },
+              {
+                "slot": "SF2",
+                "time": "Sun Apr 20 · 1:00 PM",
+                "teamA": "Group B Winner",
+                "teamB": "Group A Runner-Up",
+                "score": null
+              }
             ],
-            "final": { "slot": "Final", "time": "Sun Apr 20 · 4:00 PM", "teamA": "SF1 Winner", "teamB": "SF2 Winner", "score": null }
+            "final": {
+              "slot": "Final",
+              "time": "Sun Apr 20 · 4:00 PM",
+              "teamA": "SF1 Winner",
+              "teamB": "SF2 Winner",
+              "score": null
+            }
           }
         }
       },

@@ -1,5 +1,9 @@
-/* Regression oracle: derived values must exactly match the old hand-typed
-   TEAMS block from the v1-legacy single-file app. */
+/* Two jobs:
+   1. Regression oracle — derived values from the FROZEN Spring 2026 fixture
+      must exactly match the old hand-typed TEAMS block from the v1-legacy
+      app. This pins the derivation logic, not the live data.
+   2. Live sanity — whatever data/teams.json currently holds (the league
+      pull rewrites it) must derive cleanly and stay internally consistent. */
 import fs from 'fs';
 import vm from 'vm';
 import { fileURLToPath } from 'url';
@@ -7,14 +11,24 @@ import path from 'path';
 
 const repo = path.join(path.dirname(fileURLToPath(import.meta.url)), '..') + path.sep;
 const dataJs = fs.readFileSync(repo + 'js/data.js', 'utf8');
-const teams = JSON.parse(fs.readFileSync(repo + 'data/teams.json', 'utf8'));
+const fixture = JSON.parse(fs.readFileSync(repo + 'test/fixtures/teams-spring2026.json', 'utf8'));
+const live = JSON.parse(fs.readFileSync(repo + 'data/teams.json', 'utf8'));
 
 // Run data.js in a sandbox with a stubbed fetch (we call deriveTeam directly)
 const ctx = { console, fetch: () => Promise.reject(new Error('no fetch in test')) };
 vm.createContext(ctx);
 vm.runInContext(dataJs, ctx);
-ctx.HUB_DATA = teams;
 
+let pass = 0, fail = 0;
+function check(label, got, want) {
+  const g = JSON.stringify(got), w = JSON.stringify(want);
+  if (g === w) { pass++; }
+  else { fail++; console.log(`  FAIL ${label}\n       got:  ${g}\n       want: ${w}`); }
+}
+
+/* ============================================================
+   1 · FROZEN FIXTURE ORACLE (Spring 2026 hand-typed values)
+============================================================ */
 const EXPECTED = {
   u13: {
     record: { wins: 6, losses: 7, draws: 1 },
@@ -27,13 +41,13 @@ const EXPECTED = {
     nextMatch: { oppName: 'Sting G13 Hubbard', date: 'Tue Apr 14', time: '6:30 PM', oppRank: 17, oppTotalTeams: 18, oppRecord: '1-12-0' },
     firstMatch: { date: 'Aug 23', opp: 'Frisco Fusion 13G NPL NTX Blue', score: '3 - 1', res: 'W' },
     lastMatch:  { date: 'Mar 21', opp: 'Sting Attack G13 H Pantoja', score: '2 - 5', res: 'L' },
-    // spot-check standings rows (gd/pts now computed)
     standingsSpot: [
       { rank: 1,  name: 'Coppell FC 13G Oland Red', gd: '+41', pts: 36 },
       { rank: 11, name: 'Sting McNeal 13G',         gd: '-2',  pts: 19 },
       { rank: 18, name: 'FC Dallas Youth 13G White', gd: '-45', pts: 3 },
     ],
     ourRowHighlighted: 'Sting McNeal 13G',
+    highlightCount: 1,
   },
   u12: {
     record: { wins: 7, losses: 4, draws: 3 },
@@ -51,20 +65,15 @@ const EXPECTED = {
       { rank: 16, name: 'FW All Stars FC 2014G',           gd: '-30', pts: 5 },
     ],
     ourRowHighlighted: 'Sting Pre-ECNL G14 McNeal',
+    highlightCount: 1,
   },
 };
 
-let pass = 0, fail = 0;
-function check(label, got, want) {
-  const g = JSON.stringify(got), w = JSON.stringify(want);
-  if (g === w) { pass++; }
-  else { fail++; console.log(`  FAIL ${label}\n       got:  ${g}\n       want: ${w}`); }
-}
-
+ctx.HUB_DATA = fixture;
 for (const id of Object.keys(EXPECTED)) {
   const e = EXPECTED[id];
-  const d = ctx.deriveTeam(id, teams.teams[id]);
-  console.log(`\n[${id}] ${d.branding.name}`);
+  const d = ctx.deriveTeam(id, fixture.teams[id]);
+  console.log(`\n[fixture · ${id}] ${d.branding.name}`);
 
   check('record', d.record, e.record);
   check('goals', d.goals, e.goals);
@@ -91,12 +100,58 @@ for (const id of Object.keys(EXPECTED)) {
   check('our row highlighted (exactly 1)', ours.length, 1);
   check('our row name', ours[0] && ours[0].name, e.ourRowHighlighted);
 
-  // sanity: standings pts must be internally consistent with w/d/l
   const badPts = d.standings.filter(r => r.pts !== r.w * 3 + r.d * 1);
   check('all pts consistent w/ 3-1-0', badPts.length, 0);
+  check('highlight flag matches', d.matches.filter(m => m.highlight).length, e.highlightCount);
+}
 
-  // highlight flag preserved
-  check('highlight flag on one match', d.matches.filter(m => m.highlight).length, 1);
+/* ============================================================
+   2 · LIVE DATA SANITY (structure, not pinned values)
+============================================================ */
+ctx.HUB_DATA = live;
+for (const id of Object.keys(live.teams)) {
+  const team = live.teams[id];
+  let d;
+  console.log(`\n[live · ${id}] ${team.branding && team.branding.name}`);
+  try { d = ctx.deriveTeam(id, team); pass++; }
+  catch (err) { fail++; console.log('  FAIL derives without throwing: ' + err.message); continue; }
+
+  // every game well-formed
+  const badGames = (team.games || []).filter(g =>
+    !g.id || !/^\d{4}-\d{2}-\d{2}$/.test(g.date || '') || !g.opponent ||
+    (g.status === 'played') !== (!!g.score && Number.isInteger(g.score.us) && Number.isInteger(g.score.them)));
+  check('games well-formed', badGames.map(g => g.id), []);
+
+  // game ids unique
+  const ids = (team.games || []).map(g => g.id);
+  check('game ids unique', ids.length, new Set(ids).size);
+
+  // record adds up against played games
+  const playedCount = (team.games || []).filter(g => g.status === 'played').length;
+  check('record totals played games', d.record.wins + d.record.losses + d.record.draws, playedCount);
+
+  // each competition internally consistent
+  for (const c of d.comps) {
+    const bad = c.rows.filter(r =>
+      r.pts !== r.w * (team.pointsConfig || { win: 3 }).win + r.d * 1 ||
+      r.mp !== r.w + r.d + r.l);
+    check(`comp ${c.id}: rows consistent`, bad.map(r => r.name), []);
+    check(`comp ${c.id}: at most one our-row`, c.rows.filter(r => r.isOurs).length <= 1, true);
+    if (c.rows.length) check(`comp ${c.id}: our row present`, c.rows.some(r => r.isOurs), true);
+  }
+
+  // synced competitions: games agree with the table's rank for that opponent
+  // (hand-typed teams may keep the rank as it stood on game day)
+  const syncedIds = new Set((team.competitions || [])
+    .filter(c => c.source && c.source.provider).map(c => c.id));
+  for (const c of d.comps.filter(c => syncedIds.has(c.id))) {
+    const rankByName = {};
+    c.rows.forEach(r => { rankByName[r.name] = r.rank; });
+    const stale = (team.games || []).filter(g =>
+      g.competition === c.id && g.oppRank != null && rankByName[g.opponent] != null &&
+      g.oppRank !== rankByName[g.opponent]);
+    check(`comp ${c.id}: game oppRank matches table`, stale.map(g => g.id), []);
+  }
 }
 
 console.log(`\n${'='.repeat(50)}\n${pass} passed, ${fail} failed`);

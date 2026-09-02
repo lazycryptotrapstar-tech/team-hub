@@ -46,7 +46,24 @@ function gameResult(g) {              // 'W' | 'L' | 'D' from our perspective
 }
 
 function standingsRow(team, name) {
-    return (team.standings && team.standings.rows || []).find(r => r.name === name) || null;
+    for (const c of competitionDefs(team)) {
+        const hit = (c.standings && c.standings.rows || []).find(r => r.name === name);
+        if (hit) return hit;
+    }
+    return null;
+}
+
+/* A team can play in several leagues at once (GCL + N1). New data lists
+   them under competitions[]; a single standings block still works. */
+function competitionDefs(team) {
+    if (team.competitions && team.competitions.length) return team.competitions;
+    if (team.standings) return [{
+        id: 'league',
+        label: team.branding.league || 'League',
+        shortLabel: 'League',
+        standings: team.standings
+    }];
+    return [];
 }
 
 function rowGD(r) { return (r.gf || 0) - (r.ga || 0); }
@@ -62,6 +79,9 @@ function deriveTeam(teamId, team) {
     const upcoming = team.games.filter(g => g.status === 'scheduled')
         .slice().sort((a, b) => a.date < b.date ? -1 : 1);
 
+    const compShort = {};
+    competitionDefs(team).forEach(c => { compShort[c.id] = c.shortLabel || c.label || c.id; });
+
     // Legacy match shape for tables/timeline
     const matches = played.map(g => ({
         date: fmtDateShort(g.date),
@@ -69,7 +89,9 @@ function deriveTeam(teamId, team) {
         opp: g.opponent,
         score: g.score.us + ' - ' + g.score.them,
         res: gameResult(g),
-        highlight: !!g.highlight
+        highlight: !!g.highlight,
+        comp: compShort[g.competition] || '',
+        ha: g.homeAway || ''
     }));
 
     const record = {
@@ -82,18 +104,46 @@ function deriveTeam(teamId, team) {
         against: played.reduce((s, g) => s + g.score.them, 0)
     };
 
-    // League block from our standings row (rank/points track the official table)
-    const ourName = (team.standings && team.standings.ourRowName) || team.branding.name;
-    const ourRow = standingsRow(team, ourName);
-    const totalTeams = (team.standings && team.standings.rows || []).length;
-    let league;
-    if (ourRow) {
-        const pts = rowPts(ourRow, pc);
-        league = {
-            rank: ourRow.rank, totalTeams: totalTeams, points: pts,
-            ppg: ourRow.mp ? (pts / ourRow.mp).toFixed(2) : '0.00',
-            goalDiff: fmtSigned(rowGD(ourRow))
+    // One derived block per competition: display rows + our league status.
+    // gd/pts are computed, never hand-typed.
+    const comps = competitionDefs(team).map(c => {
+        const rows = (c.standings && c.standings.rows) || [];
+        const compOurName = (c.standings && c.standings.ourRowName) || team.branding.name;
+        const ourRow = rows.find(r => r.name === compOurName) || null;
+        let league = null;
+        if (ourRow) {
+            const pts = rowPts(ourRow, pc);
+            league = {
+                rank: ourRow.rank, totalTeams: rows.length, points: pts,
+                ppg: ourRow.mp ? (pts / ourRow.mp).toFixed(2) : '0.00',
+                goalDiff: fmtSigned(rowGD(ourRow)),
+                record: ourRow.w + '-' + ourRow.l + '-' + ourRow.d
+            };
+        }
+        return {
+            id: c.id,
+            label: c.label || c.id,
+            shortLabel: c.shortLabel || c.label || c.id,
+            season: c.season || '',
+            bracket: (c.standings && c.standings.bracket) || '',
+            updatedAt: (c.standings && c.standings.updatedAt) || '',
+            ourName: compOurName,
+            league,
+            rows: rows.map(r => ({
+                rank: r.rank, name: r.name, mp: r.mp, w: r.w, d: r.d, l: r.l,
+                gf: r.gf, ga: r.ga, gd: fmtSigned(rowGD(r)), pts: rowPts(r, pc),
+                isOurs: r.name === compOurName
+            }))
         };
+    });
+
+    // Primary competition fills the legacy top-level league/standings slots
+    const primary = comps.find(c => c.rows.length) || comps[0] || null;
+    const ourName = primary ? primary.ourName : team.branding.name;
+    const totalTeams = primary ? primary.rows.length : 0;
+    let league;
+    if (primary && primary.league) {
+        league = { ...primary.league };
     } else {
         const pts = record.wins * pc.win + record.draws * pc.draw + record.losses * pc.loss;
         const mp = matches.length;
@@ -103,13 +153,9 @@ function deriveTeam(teamId, team) {
             goalDiff: fmtSigned(goals.for - goals.against)
         };
     }
+    delete league.record;
 
-    // Standings display rows (gd/pts computed, never hand-typed)
-    const standings = (team.standings && team.standings.rows || []).map(r => ({
-        rank: r.rank, name: r.name, mp: r.mp, w: r.w, d: r.d, l: r.l,
-        gf: r.gf, ga: r.ga, gd: fmtSigned(rowGD(r)), pts: rowPts(r, pc),
-        isOurs: r.name === ourName
-    }));
+    const standings = primary ? primary.rows : [];
 
     // Remaining schedule (legacy shape) + next match card
     const remainingSchedule = upcoming.map(g => ({
@@ -118,6 +164,8 @@ function deriveTeam(teamId, team) {
         opp: g.opponent,
         time: fmtTime12(g.time),
         loc: g.locText || '',
+        comp: compShort[g.competition] || '',
+        ha: g.homeAway || '',
         game: g
     }));
 
@@ -151,6 +199,7 @@ function deriveTeam(teamId, team) {
         goals: goals,
         league: league,
         standings: standings,
+        comps: comps,
         remainingSchedule: remainingSchedule,
         nextMatch: nextMatch,
         tournaments: team.tournaments || null,
