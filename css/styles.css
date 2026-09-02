@@ -296,8 +296,7 @@ body{
 }
 .next-up-where{font-family:var(--mono);font-size:12px;color:var(--text2);margin-top:8px;}
 .next-up .venue-map-section{margin-top:20px;}
-.next-up .venue-map-outer{grid-template-columns:1fr;}
-.next-up .venue-map-frame{max-width:400px;}
+.next-up .venue-map-frame{max-width:430px;}
 
 /* ===== FIXTURE LIST ===== */
 .fixture-list{display:flex;flex-direction:column;}
@@ -311,12 +310,16 @@ body{
     font-family:var(--mono);font-size:11px;color:var(--text3);
     width:92px;flex-shrink:0;white-space:nowrap;
 }
+/* fixed slot for the league chip so rows column-align */
+.fx-comp{width:44px;flex-shrink:0;display:flex;}
 .fx-opp{flex:1;min-width:0;font-size:13.5px;font-weight:600;color:var(--text2);}
 .fx-opp i{font-family:var(--mono);font-style:normal;font-size:10.5px;color:var(--text3);margin-right:5px;}
 .fx-meta{font-family:var(--mono);font-size:11px;color:var(--text3);text-align:right;}
 .fx-score{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;}
 .fixture.fx-featured .fx-opp{color:var(--text);font-weight:700;}
 .fixture.fx-featured{box-shadow:inset 2px 0 0 var(--accent);}
+/* breathing room when one fixture section follows another */
+.fixture-list + .section-title{margin-top:30px;}
 
 /* ===== EMPTY STATE ===== */
 .empty-state{
@@ -470,6 +473,8 @@ body{
 .st-w{color:var(--green);}
 .st-d{color:var(--amber);}
 .st-l{color:var(--red);}
+/* zeroes carry no information — keep them quiet so real results pop */
+.st-table td.st-zero{color:var(--text3);opacity:.55;}
 .st-pts{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--text);}
 .gd-pos{color:var(--green);}
 .gd-neg{color:var(--red);}
@@ -1074,6 +1079,9 @@ body{
     .next-up-opp{font-size:20px;}
     .fx-date{width:66px;font-size:10px;}
     .fx-opp{font-size:12.5px;}
+    /* phone: opponent keeps the line, time+ground drop to their own row */
+    .fixture{flex-wrap:wrap;row-gap:2px;}
+    .fx-meta{flex-basis:100%;text-align:left;color:var(--text3);}
     .site-logo{font-size:16px;}
     .season-pulse{border-radius:var(--r-sm);}
     /* the inline flex ratios come from the markup, so they need overriding here */
@@ -1105,6 +1113,8 @@ body{
     .st-table{font-size:12px;}
     .st-table td{padding:9px 6px;}
     .st-name{padding-left:10px!important;}
+    /* phone: GD already tells the goals story — drop GF/GA so PTS stays on screen */
+    .st-table .st-gf,.st-table .st-ga{display:none;}
     .tourn-hist-row{flex-direction:column;align-items:flex-start;gap:10px;}
 
     /* mobile bottom nav */

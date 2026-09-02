@@ -25,8 +25,19 @@ function generateAutoNarrative(team) {
     const recentWins = form.filter(x => x === 'W').length;
     const avail = team.remainingSchedule.length * team.pointsConfig.win;
 
+    const played = team.matches.length;
+
     let opener = '';
-    if (streak.type === 'W' && streak.count >= 3) {
+    if (played === 0) {
+        opener = `The season hasn't kicked off yet — but the schedule is set and ${team.branding.name} is ready to write the first chapter.`;
+    } else if (played <= 3) {
+        // early season: don't talk like the finish line is in sight
+        const startBits = [];
+        if (r.wins) startBits.push(r.wins + ' win' + (r.wins === 1 ? '' : 's'));
+        if (r.draws) startBits.push(r.draws + ' draw' + (r.draws === 1 ? '' : 's'));
+        if (r.losses) startBits.push(r.losses + ' loss' + (r.losses === 1 ? '' : 'es'));
+        opener = `${played} game${played === 1 ? '' : 's'} into the new season — ${startBits.join(', ') || 'all square'} so far — ${team.branding.name} is just getting started, and every match is a chance to set the tone.`;
+    } else if (streak.type === 'W' && streak.count >= 3) {
         opener = `On the back of a ${streak.count}-match win streak, ${team.branding.name} is building serious momentum as the season enters its final stretch.`;
     } else if (streak.type === 'W' && streak.count === 2) {
         opener = `Back-to-back wins have ${team.branding.name} finding their rhythm at exactly the right moment in the season.`;
@@ -37,7 +48,9 @@ function generateAutoNarrative(team) {
     } else {
         opener = `${r.wins} wins, ${r.losses} losses, ${r.draws} draw${r.draws === 1 ? '' : 's'} — ${team.branding.name} knows exactly what's at stake as the final games approach.`;
     }
-    const rankContext = (l.rank && l.totalTeams && l.rank <= Math.ceil(l.totalTeams / 2))
+    const rankContext = (played <= 3 && l.rank)
+        ? `The table is barely a week old, but ${team.branding.name} sits #${l.rank} of ${l.totalTeams} —`
+        : (l.rank && l.totalTeams && l.rank <= Math.ceil(l.totalTeams / 2))
         ? `Holding down the #${l.rank} spot — comfortably in the top half of a ${l.totalTeams}-team division —`
         : l.rank
         ? `Sitting at #${l.rank} of ${l.totalTeams} with games left to play and plenty of room to climb,`
@@ -46,8 +59,8 @@ function generateAutoNarrative(team) {
     const diffContext = gd > 0
         ? `A positive ${l.goalDiff} goal differential (${team.goals.for} scored, ${team.goals.against} conceded) shows this team competes hard on both ends of the pitch.`
         : gd < 0
-        ? `The ${l.goalDiff} goal differential signals an area to tighten up — limiting chances against will be key in the final run.`
-        : `An even goal differential reflects a closely fought season where every goal matters.`;
+        ? `The ${l.goalDiff} goal differential signals an area to tighten up — limiting chances against will be key${played <= 3 ? '' : ' in the final run'}.`
+        : `An even goal differential${played <= 3 ? ' so far — every goal from here shapes the story' : ' reflects a closely fought season where every goal matters'}.`;
     let nextContext = '';
     if (nm) {
         nextContext = (l.rank && l.rank < nm.oppRank)

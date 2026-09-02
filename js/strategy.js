@@ -30,7 +30,7 @@ const STRATEGY_433 = {
     ],
 
     phases: [
-        { id: 'overview', label: 'Full Team', title: '4-3-3 · Your Formation',
+        { id: 'overview', label: 'Full Team', title: 'Your Formation',
           highlight: 'all',
           items: [
             { role: 'GK·DEF', rc: 'def', t: 'Defend as a Unit',

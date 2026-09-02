@@ -335,15 +335,17 @@ function renderLeagueTable(container) {
     const rows = compRows.map(t => {
         const gdNum = parseInt(t.gd, 10);
         const gdClass = gdNum > 0 ? 'gd-pos' : (gdNum < 0 ? 'gd-neg' : '');
+        // zeroes stay grey — colour only where something actually happened
+        const z = n => n === 0 ? ' st-zero' : '';
         return `<tr class="${t.isOurs ? 'current-team' : ''}">
             <td class="st-rank">${t.rank}</td>
             <td class="st-name${t.isOurs ? ' st-name-us' : ''}">${t.name}</td>
             <td class="st-num">${t.mp}</td>
-            <td class="st-num st-w">${t.w}</td>
-            ${drawsOn ? `<td class="st-num st-d">${t.d}</td>` : ''}
-            <td class="st-num st-l">${t.l}</td>
-            <td class="st-num">${t.gf}</td>
-            <td class="st-num">${t.ga}</td>
+            <td class="st-num st-w${z(t.w)}">${t.w}</td>
+            ${drawsOn ? `<td class="st-num st-d${z(t.d)}">${t.d}</td>` : ''}
+            <td class="st-num st-l${z(t.l)}">${t.l}</td>
+            <td class="st-num st-gf">${t.gf}</td>
+            <td class="st-num st-ga">${t.ga}</td>
             <td class="st-num ${gdClass}">${t.gd}</td>
             <td class="st-pts">${t.pts}</td>
         </tr>`;
@@ -370,8 +372,8 @@ function renderLeagueTable(container) {
                         <th title="Wins">W</th>
                         ${drawsOn ? '<th title="Draws">D</th>' : ''}
                         <th title="Losses">L</th>
-                        <th title="Goals For">GF</th>
-                        <th title="Goals Against">GA</th>
+                        <th title="Goals For" class="st-gf">GF</th>
+                        <th title="Goals Against" class="st-ga">GA</th>
                         <th title="Goal Difference">GD</th>
                         <th title="Points">Pts</th>
                     </tr></thead>
@@ -488,13 +490,13 @@ function renderStory(container) {
                 </div>
                 <div class="momentum-wrap">
                     <div class="momentum-header">
-                        <span class="momentum-title">Momentum · Last 5</span>
+                        <span class="momentum-title">Momentum · Last ${Math.min(played, 5) || 0} game${Math.min(played, 5) === 1 ? '' : 's'}</span>
                         <span class="momentum-label-val" style="color:${momentum.color};">${momentum.label}</span>
                     </div>
                     <div class="momentum-track">
                         <div class="momentum-fill" id="momentumFill" style="width:0%;background:${momentum.color};"></div>
                     </div>
-                    <div class="momentum-sublabel">${momentum.sublabel} &nbsp;·&nbsp; ${momentum.score} / ${momentum.max} pts from last 5</div>
+                    <div class="momentum-sublabel">${momentum.sublabel} &nbsp;·&nbsp; ${momentum.score} / ${momentum.max} pts available</div>
                 </div>
                 <div class="story-section-title">The Story So Far</div>
                 <p class="story-narrative" id="storyNarrativeText">${narrative.replace(/\n\n/g, '</p><p class="story-narrative" style="margin-top:12px;">')}</p>
@@ -573,7 +575,8 @@ function renderSchedule(container) {
     } else {
         const parts = next.date.split(' ');
         const mapHTML = venue
-            ? buildVenueSection(venue, mapGames, { title: null, showPanel: false })
+            ? buildVenueSection(venue, mapGames, { title: null,
+                panelHint: 'Tap a gold field to see that game' })
             : buildUnknownVenueCard([next.loc]);
         nextBlock =
             '<div class="next-up">' +
@@ -594,26 +597,28 @@ function renderSchedule(container) {
     }
 
     /* --- the rest of the fixtures, compact --- */
-    const laterBlock = later.length ? sectionTitle('Also coming up', later.length) +
+    /* The league chip sits in a fixed slot right after the date, so every
+       row's columns line up no matter how long the opponent name runs. */
+    const laterBlock = later.length ? sectionTitle('Also coming up', later.length + ' game' + (later.length === 1 ? '' : 's')) +
         '<div class="fixture-list">' + later.map(m => {
             const parts = m.date.split(' ');
             return '<div class="fixture">' +
                 '<span class="fx-date">' + parts[0] + ' ' + parts.slice(1).join(' ') + '</span>' +
+                '<span class="fx-comp">' + (m.comp ? '<span class="comp-chip">' + m.comp + '</span>' : '') + '</span>' +
                 '<span class="fx-opp">' + (m.ha ? '<em class="fx-ha">' + (m.ha === 'away' ? '@' : 'vs') + '</em> ' : '') +
                     (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
-                (m.comp ? '<span class="comp-chip">' + m.comp + '</span>' : '') +
                 '<span class="fx-meta">' + m.time + (m.loc ? ' · ' + m.loc : '') + '</span>' +
             '</div>';
         }).join('') + '</div>' : '';
 
     /* --- results, newest first: gives the tab substance late in a season --- */
-    const resultsBlock = results.length ? sectionTitle('Results', results.length) +
+    const resultsBlock = results.length ? sectionTitle('Results', results.length + ' played') +
         '<div class="fixture-list">' + results.map(m =>
             '<div class="fixture' + (m.highlight ? ' fx-featured' : '') + '">' +
                 '<span class="fx-date">' + m.date + '</span>' +
+                '<span class="fx-comp">' + (m.comp ? '<span class="comp-chip">' + m.comp + '</span>' : '') + '</span>' +
                 '<span class="fx-opp">' + (m.ha ? '<em class="fx-ha">' + (m.ha === 'away' ? '@' : 'vs') + '</em> ' : '') +
                     (m.rank ? '<i>#' + m.rank + '</i> ' : '') + m.opp + '</span>' +
-                (m.comp ? '<span class="comp-chip">' + m.comp + '</span>' : '') +
                 '<span class="fx-score">' + m.score + '</span>' +
                 '<span class="res-badge res-' + m.res + '">' + m.res + '</span>' +
             '</div>'
@@ -633,6 +638,8 @@ function sectionTitle(label, count) {
 function renderTournament(container) {
     const td = TEAM_CONFIG.tournaments;
     if (!td) { container.innerHTML = '<div class="content-area"><div class="empty-state">No tournament running right now.</div></div>'; return; }
+    // no live tournament -> the Bracket/Venue Map switcher leads nowhere; hide it
+    if (!td.current) tournView = 'bracket';
     if (tournView==='map') { renderTournMap(container, td); return; }
     renderTournBracket(container, td);
 }
@@ -758,11 +765,13 @@ function renderTournBracket(container, td) {
             </div>`;
     }
 
-    container.innerHTML = tournSubnav() +
+    container.innerHTML = (ct ? tournSubnav() : '') +
         '<div class="content-area">' +
         currentHTML +
-        '<div class="tourn-hist-title-row">' +
-            '<div class="tourn-sub-label" style="margin-top:24px;margin-bottom:0;">Tournament history</div>' +
+        (ct ? '' : '<div class="empty-state" style="margin-bottom:24px;"><strong>No tournament running right now.</strong>' +
+            '<span>Past tournaments are below; the bracket and venue map light up when the next one starts.</span></div>') +
+        '<div class="tourn-hist-title-row"' + (ct ? ' style="margin-top:24px;"' : '') + '>' +
+            '<div class="tourn-sub-label" style="margin-bottom:0;">Tournament history</div>' +
             histSummary +
         '</div>' +
         '<div class="tourn-hist-list" style="margin-top:12px;">' + histHTML + '</div>' +
