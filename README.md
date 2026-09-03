@@ -25,6 +25,14 @@ data/teams.json       all team data — the single source of truth
 test/                 regression checks
 ```
 
+## Cache busting
+
+Cloudflare serves js/css with a 4-hour browser cache; the HTML
+revalidates on every load. Asset URLs in index.html carry a `?v=`
+stamp — **bump it whenever js or css changes**, or phones keep running
+the old code for hours. Data is immune (`fetch(..., cache: no-store)`),
+so the league sync needs no bump.
+
 ## League sync
 
 A team plays in one or more competitions (`competitions[]` in teams.json).
