@@ -14,19 +14,24 @@ let strategySetPiece = 'atk-corner';
 const STRATEGY_433 = {
     formation: '4-3-3',
 
-    /* [x, y] as % of the pitch, per phase. Attack runs up the screen. */
+    /* [x, y] as % of the pitch, per phase. Attack runs up the screen.
+       Shape rules (Dee, 2026-09-02): the midfield is a staggered spine —
+       #10 attacking mid at the top of the center circle, #8 center mid,
+       #6 defensive mid; fullbacks live on the touchline and higher; and
+       nothing sits three-in-a-line, so every player always has a
+       two-way pass. */
     players: [
-        { id: 1,  type: 'gk',  pos: 'GK',  base: [50,92], defense: [50,85], midfield: [50,92], attack: [50,85] },
-        { id: 2,  type: 'def', pos: 'RB',  base: [85,75], defense: [90,60], midfield: [85,60], attack: [90,30] },
-        { id: 3,  type: 'def', pos: 'LB',  base: [15,75], defense: [10,60], midfield: [15,60], attack: [10,30] },
-        { id: 4,  type: 'def', pos: 'RCB', base: [65,80], defense: [82,85], midfield: [65,75], attack: [75,55] },
-        { id: 5,  type: 'def', pos: 'LCB', base: [35,80], defense: [18,85], midfield: [35,75], attack: [25,55] },
-        { id: 6,  type: 'mid', pos: 'DM',  base: [50,65], defense: [50,75], midfield: [50,67], attack: [50,45] },
-        { id: 8,  type: 'mid', pos: 'LCM', base: [30,50], defense: [35,55], midfield: [25,48], attack: [35,25] },
-        { id: 10, type: 'mid', pos: 'RCM', base: [70,50], defense: [65,55], midfield: [75,48], attack: [65,25] },
-        { id: 7,  type: 'att', pos: 'RW',  base: [85,30], defense: [85,40], midfield: [88,28], attack: [75,15] },
-        { id: 11, type: 'att', pos: 'LW',  base: [15,30], defense: [15,40], midfield: [12,28], attack: [25,15] },
-        { id: 9,  type: 'att', pos: 'ST',  base: [50,20], defense: [50,40], midfield: [50,20], attack: [50,10] },
+        { id: 1,  type: 'gk',  pos: 'GK', base: [50,92], defense: [50,91], midfield: [50,90], attack: [50,86] },
+        { id: 2,  type: 'def', pos: 'RB', base: [92,68], defense: [93,56], midfield: [92,55], attack: [93,28] },
+        { id: 3,  type: 'def', pos: 'LB', base: [8,68],  defense: [7,56],  midfield: [8,55],  attack: [7,28] },
+        { id: 4,  type: 'def', pos: 'RCB', base: [65,80], defense: [80,84], midfield: [66,74], attack: [72,52] },
+        { id: 5,  type: 'def', pos: 'LCB', base: [35,80], defense: [20,84], midfield: [34,74], attack: [28,52] },
+        { id: 6,  type: 'mid', pos: 'DM', base: [47,64], defense: [50,74], midfield: [47,63], attack: [50,46] },
+        { id: 8,  type: 'mid', pos: 'CM', base: [30,50], defense: [35,54], midfield: [30,50], attack: [38,28] },
+        { id: 10, type: 'mid', pos: 'AM', base: [50,42], defense: [52,44], midfield: [50,42], attack: [52,22] },
+        { id: 7,  type: 'att', pos: 'RW', base: [85,30], defense: [86,40], midfield: [86,28], attack: [78,14] },
+        { id: 11, type: 'att', pos: 'LW', base: [15,30], defense: [14,40], midfield: [14,28], attack: [22,14] },
+        { id: 9,  type: 'att', pos: 'ST', base: [50,20], defense: [50,34], midfield: [50,20], attack: [50,10] },
     ],
 
     phases: [
@@ -60,10 +65,10 @@ const STRATEGY_433 = {
           highlight: [6, 8, 10],
           items: [
             { role: '#6·8·10', rc: 'mid', t: 'Always Form a Triangle',
-              b: 'The three midfielders should never stand in a straight line. One sits deep, one goes left, one goes right — this gives the ball carrier two passing options at all times and makes it almost impossible to defend.',
-              tip: 'If two of you are side by side, one of you is in the wrong spot.' },
-            { role: '#8·10', rc: 'mid', t: 'Get Between Their Lines',
-              b: "The attacking midfielders (#8 and #10) should look for the gap between the opponent's defenders and midfielders. Receive the ball facing forward in that space — that's where you can turn and attack.",
+              b: 'The midfield is a staggered spine: #6 sits deep, #8 connects in the middle, #10 plays at the top of the circle. Never flatten into a line — the stagger is what gives the ball carrier two passing options at all times.',
+              tip: 'If two of you are level with each other, one of you is in the wrong spot.' },
+            { role: '#10', rc: 'mid', t: 'Get Between Their Lines',
+              b: "The attacking mid lives in the gap between the opponent's defenders and midfielders. Receive facing forward in that pocket — that's where the game breaks open. #8 steps up to join once the ball is secure.",
               tip: "Face the opponent's goal when you receive. Don't take it with your back to play." },
             { role: '#6', rc: 'mid', t: '#6: Switch the Field',
               b: 'If the center of the field is blocked, the #6 receives and immediately switches the ball to the other side. This shifts the whole opponent team and creates space on the weak side.',
@@ -122,9 +127,9 @@ const STRATEGY_433 = {
                       midfield: 'Stay wide and high — your width is what opens the middle for #8 and #10.',
                       attack: 'Press their left back the moment the trigger comes. With the ball: attack the defender, or arrive at the back post at full speed.' },
               key: 'Arrive late, arrive fast. Back-post goals are timing, not luck.' },
-        8:  { pos: 'LCM', name: 'Center Midfielder', summary: 'The engine. You connect every line on the field.',
+        8:  { pos: 'CM', name: 'Center Midfielder', summary: 'The engine. You connect every line on the field.',
               jobs: { defense: 'Show for the ball to give the back line an exit. Then move again — a standing midfielder is a marked midfielder.',
-                      midfield: 'Find the gap between their defenders and midfielders. Receive facing forward — that is where the game breaks open.',
+                      midfield: 'Middle of the spine: link #6 below you to #10 above you, and keep the triangle staggered — never level with either of them.',
                       attack: 'Push into the box late. The best chances fall to the midfielder nobody tracked.' },
               key: 'Face forward when you receive. Never take it with your back to play if you can help it.' },
         9:  { pos: 'ST', name: 'Striker', summary: 'First defender, last finisher. You set the tone for the press.',
@@ -132,9 +137,9 @@ const STRATEGY_433 = {
                       midfield: 'Stay on the last shoulder. Stretch their line so the midfield has room to play.',
                       attack: 'Watch the trigger — a bad touch, a back pass — and press as a pack with #7 and #11. With the ball: run in behind, finish early.' },
               key: 'Press together or not at all. One player pressing alone never works.' },
-        10: { pos: 'RCM', name: 'Attacking Midfielder', summary: 'The creator. Find the pass nobody else sees.',
-              jobs: { defense: 'Show for the ball to give the back line an exit. Keep the triangle alive.',
-                      midfield: 'Live between their lines. Receive half-turned, play forward first — sideways is the backup plan.',
+        10: { pos: 'AM', name: 'Attacking Midfielder', summary: 'Top of the triangle. Find the pass nobody else sees.',
+              jobs: { defense: 'Stay high at the top of the circle as the forward outlet. When the back line escapes pressure, you are the first pass into their half.',
+                      midfield: 'Live in the pocket between their defenders and midfielders. Receive half-turned, play forward first — sideways is the backup plan.',
                       attack: 'Slide the final pass, or arrive at the edge of the box for the cutback. Shoot when they back off.' },
               key: 'Think one touch ahead. Know your next pass before the ball arrives.' },
         11: { pos: 'LW', name: 'Left Winger', summary: 'Speed and width on the left. Stretch them until they snap.',
@@ -198,28 +203,99 @@ function accentSoftFill() {
 }
 function strategyOverlays(phaseId) {
     if (phaseId === 'defense') return (
-        ovQ([12,80],[12,60],[12,35],'a') +
-        ovQ([88,80],[88,60],[88,35],'a') +
-        ovL([31,85],[18,85],'w') +
-        ovL([69,85],[82,85],'w'));
+        // fullbacks climb the touchline; CBs split to the corners of the box
+        ovQ([7,72],[7,58],[7,42],'a') +
+        ovQ([93,72],[93,58],[93,42],'a') +
+        ovL([34,81],[24,83],'w') +
+        ovL([66,81],[76,83],'w'));
     if (phaseId === 'midfield') return (
-        `<polygon points="${sx(50)},67 ${sx(25)},48 ${sx(75)},48" fill="${accentSoftFill()}" stroke="${teamAccent()}" stroke-width=".45" stroke-dasharray="2 1.4"/>` +
-        ovQ([25,48],[30,35],[38,22],'a') +
-        ovQ([75,48],[70,35],[62,22],'a'));
+        // the staggered spine: 6 deep, 8 middle, 10 at the top of the circle
+        `<polygon points="${sx(50)},42 ${sx(30)},50 ${sx(47)},63" fill="${accentSoftFill()}" stroke="${teamAccent()}" stroke-width=".45" stroke-dasharray="2 1.4"/>` +
+        ovL([50,37],[52,26],'a') +                 // 10 into the pocket
+        ovQ([50,61],[68,50],[80,36],'a'));         // 6 switches to the weak side
     if (phaseId === 'attack') return (
-        ovQ([12,28],[20,15],[35,12],'w') +
-        ovQ([88,28],[80,15],[65,12],'w') +
-        ovQ([50,28],[50,15],[50,8],'w') +
-        ovL([25,48],[25,35],'a') +
-        ovL([75,48],[75,35],'a'));
+        // crosses in from both wings, striker attacks the box, fullbacks overlap
+        ovQ([25,12],[36,4],[46,7],'w') +
+        ovQ([75,12],[64,4],[54,7],'w') +
+        ovL([50,17],[50,8],'w') +
+        ovL([93,42],[93,31],'a') +
+        ovL([7,42],[7,31],'a'));
     return '';
 }
 
+/* ---- MOTION ----
+   All movement runs through the Web Animations API (transform/opacity
+   only — the safe path on this machine, see the SVG rules in README).
+
+   The ball: each flow phase carries a passing pattern the ball loops
+   through, pausing at each player's feet. */
+const BALL_PATHS = {
+    defense:  [[80,84],[50,91],[20,84],[7,56]],   // CB -> GK -> CB -> LB up the line
+    midfield: [[47,63],[30,50],[50,42],[14,28]],  // 6 -> 8 -> 10 -> switch to the LW
+    attack:   [[50,46],[93,28],[78,14],[50,10]],  // 6 -> overlapping RB -> RW -> 9 finishes
+};
+let strategyBallAnim = null;
+
+function stopStrategyBall() {
+    if (strategyBallAnim) { try { strategyBallAnim.cancel(); } catch (e) {} strategyBallAnim = null; }
+}
+
+function startStrategyBall(phaseId) {
+    stopStrategyBall();
+    const wrap = document.querySelector('.strategy-board .pitch-wrap');
+    const ball = wrap && wrap.querySelector('.sp-ball');
+    if (!ball) return;
+    // The board's motion IS the content (it demonstrates the tactic), so it
+    // plays even when the OS reports prefers-reduced-motion — that flag is
+    // commonly set by Windows "animation effects off", not a deliberate choice.
+    const path = BALL_PATHS[phaseId];
+    if (!path || !ball.animate) { ball.style.opacity = '0'; return; }
+    const r = wrap.getBoundingClientRect();
+    if (!r.width) { ball.style.opacity = '0'; return; }
+
+    // rest just below each player's dot ("at her feet") so the ball is
+    // never hidden behind the bigger player marker while it waits
+    const pt = p => `translate(${(r.width * p[0] / 100 - 7).toFixed(1)}px, ${(r.height * Math.min(p[1] + 3.4, 97) / 100 - 7).toFixed(1)}px)`;
+    const TRAVEL = 650, HOLD = 480, END_PAUSE = 1500;
+    const legs = path.length - 1;
+    const total = legs * (TRAVEL + HOLD) + END_PAUSE;
+
+    // arrive -> hold at feet -> travel to the next player
+    const frames = [];
+    let t = 0;
+    path.forEach((p, i) => {
+        frames.push({ offset: t / total, transform: pt(p) });
+        if (i < legs) {
+            t += HOLD;
+            frames.push({ offset: t / total, transform: pt(p), easing: 'cubic-bezier(.45,.05,.35,1)' });
+            t += TRAVEL;
+        }
+    });
+    frames.push({ offset: 1, transform: pt(path[legs]) });
+
+    ball.style.opacity = '1';
+    strategyBallAnim = ball.animate(frames, {
+        duration: total, delay: 850, iterations: Infinity, fill: 'backwards'
+    });
+}
+
+/* Arrows appear after the shape settles, not while dots are in flight */
+function animateOverlayIn(delay) {
+    const ov = document.querySelector('.strategy-board .pitch-ov');
+    if (!ov || !ov.animate) return;
+    ov.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 420, delay: delay || 0, fill: 'backwards' });
+}
+
+/* Line-by-line wave: the back line moves first, then the midfield,
+   then the front three — the shape change reads like a team moving. */
+const LINE_DELAY = { gk: 0, def: 0, mid: 150, att: 300 };
+
 /* The pitch: markings + overlay arrows in one SVG, player dots as
    absolutely-positioned divs so phase changes animate in CSS. */
-function strategyPitch(phase) {
+function strategyPitch(phase, opts) {
     const S = STRATEGY_433;
     const W = PITCH_W;
+    const withBall = !!(opts && opts.ball);
     const dots = S.players.map(p => {
         const posArr = p[phase.id === 'overview' ? 'base' : phase.id] || p.base;
         const hl = phase.highlight === 'all' || (phase.highlight || []).includes(p.id);
@@ -241,6 +317,7 @@ function strategyPitch(phase) {
             <g class="pitch-ov">${strategyOverlays(phase.id)}</g>
         </svg>
         ${dots}
+        ${withBall ? '<div class="sp-ball" aria-hidden="true"></div>' : ''}
     </div>`;
 }
 
@@ -369,8 +446,8 @@ function switchStrategyPhase(p) {
         return;
     }
 
+    stopStrategyBall();
     const dots = wrap.querySelectorAll('.sp-dot');
-    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     S.players.forEach((pl, i) => {
         const d = dots[i];
         if (!d) return;
@@ -380,19 +457,23 @@ function switchStrategyPhase(p) {
         const first = d.getBoundingClientRect();
         d.style.left = pos[0] + '%';
         d.style.top = pos[1] + '%';
-        if (!reduce && d.animate) {
+        if (d.animate) {
             const last = d.getBoundingClientRect();
             const dx = first.left - last.left, dy = first.top - last.top;
             if (dx || dy) d.animate([
                 { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))` },
                 { transform: 'translate(-50%, -50%)' }
-            ], { duration: 550, easing: 'cubic-bezier(.16,1,.3,1)' });
+            ], {
+                duration: 600, easing: 'cubic-bezier(.16,1,.3,1)',
+                delay: LINE_DELAY[pl.type] || 0, fill: 'backwards'
+            });
         }
         const hl = phase.highlight === 'all' || (phase.highlight || []).includes(pl.id);
         d.classList.toggle('sp-dim', !hl);
     });
     const ov = wrap.querySelector('.pitch-ov');
-    if (ov) ov.innerHTML = strategyOverlays(phase.id);
+    if (ov) { ov.innerHTML = strategyOverlays(phase.id); animateOverlayIn(500); }
+    startStrategyBall(phase.id);
 
     document.querySelectorAll('.phase-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.phase === phase.id);
@@ -438,12 +519,14 @@ function renderStrategyFormation(container) {
             </div>
             ${phaseBar}
             <div class="strategy-grid">
-                <div class="strategy-board">${strategyPitch(phase)}
+                <div class="strategy-board">${strategyPitch(phase, { ball: true })}
                     <div class="pitch-hint">Tap a player to see her position guide</div>
                 </div>
                 <div class="strategy-notes">${items}</div>
             </div>
         </div>`;
+    animateOverlayIn(250);
+    startStrategyBall(phase.id);
 }
 
 function renderStrategyPositions(container) {
@@ -517,6 +600,7 @@ function renderStrategySetPieces(container) {
 }
 
 function renderStrategy(container) {
+    stopStrategyBall();
     if (strategyView === 'positions') return renderStrategyPositions(container);
     if (strategyView === 'setpieces') return renderStrategySetPieces(container);
     renderStrategyFormation(container);

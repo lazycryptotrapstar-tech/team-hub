@@ -848,6 +848,7 @@ function setMapDay(day){tournMapDay=day;renderTournament(document.getElementById
 ============================================================ */
 function render() {
     renderNavBars();
+    if (typeof stopStrategyBall === 'function') stopStrategyBall();
     const c = document.getElementById('main-content');
     if      (currentTab === 'story')       renderStory(c);
     else if (currentTab === 'standings')   renderStandingsTab(c);

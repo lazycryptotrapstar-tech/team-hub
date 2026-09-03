@@ -941,6 +941,16 @@ body{
     font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
     color:var(--text3);text-align:center;margin-top:10px;
 }
+/* The ball: anchored at the pitch origin, moved purely by transform
+   (WAAPI keyframes) — positioned at each player's feet along the
+   phase's passing pattern. */
+.sp-ball{
+    position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;
+    background:radial-gradient(circle at 34% 30%,#fff 0 42%,#d8dce2 60%,#aab2bc 100%);
+    border:1px solid rgba(0,0,0,.55);
+    box-shadow:0 2px 6px rgba(0,0,0,.5), inset -2px -3px 4px rgba(0,0,0,.22);
+    opacity:0;pointer-events:none;z-index:3;
+}
 
 .strategy-notes{min-width:0;display:flex;flex-direction:column;gap:16px;}
 .tactic-item{display:flex;gap:14px;align-items:flex-start;}
