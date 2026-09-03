@@ -22,8 +22,8 @@ const STRATEGY_433 = {
        two-way pass. */
     players: [
         { id: 1,  type: 'gk',  pos: 'GK', base: [50,92], defense: [50,91], midfield: [50,90], attack: [50,86] },
-        { id: 2,  type: 'def', pos: 'RB', base: [92,68], defense: [93,56], midfield: [92,55], attack: [93,28] },
-        { id: 3,  type: 'def', pos: 'LB', base: [8,68],  defense: [7,56],  midfield: [8,55],  attack: [7,28] },
+        { id: 2,  type: 'def', pos: 'RB', base: [92,75], defense: [93,56], midfield: [92,55], attack: [93,28] },
+        { id: 3,  type: 'def', pos: 'LB', base: [8,75],  defense: [7,56],  midfield: [8,55],  attack: [7,28] },
         { id: 4,  type: 'def', pos: 'RCB', base: [65,80], defense: [80,84], midfield: [66,74], attack: [72,52] },
         { id: 5,  type: 'def', pos: 'LCB', base: [35,80], defense: [20,84], midfield: [34,74], attack: [28,52] },
         { id: 6,  type: 'mid', pos: 'DM', base: [47,64], defense: [50,74], midfield: [47,63], attack: [50,46] },
@@ -226,57 +226,128 @@ function strategyOverlays(phaseId) {
 /* ---- MOTION ----
    All movement runs through the Web Animations API (transform/opacity
    only — the safe path on this machine, see the SVG rules in README).
+   The board's motion IS the content (it demonstrates the tactic), so it
+   plays even when the OS reports prefers-reduced-motion — that flag is
+   commonly set by Windows "animation effects off", not a deliberate choice.
 
-   The ball: each flow phase carries a passing pattern the ball loops
-   through, pausing at each player's feet. */
-const BALL_PATHS = {
-    defense:  [[80,84],[50,91],[20,84],[7,56]],   // CB -> GK -> CB -> LB up the line
-    midfield: [[47,63],[30,50],[50,42],[14,28]],  // 6 -> 8 -> 10 -> switch to the LW
-    attack:   [[50,46],[93,28],[78,14],[50,10]],  // 6 -> overlapping RB -> RW -> 9 finishes
+   Tap-to-play: each flow phase carries a passing pattern. The ball waits
+   at the first player's feet; the Play button walks the pattern one pass
+   at a time — the receiver's dot pulses and the matching coaching card
+   lights up as each pass lands. Built for phones: one big button, no
+   battery-burning autoplay loop. */
+const STRATEGY_PLAYS = {
+    defense:  { steps: [4, 1, 5, 3], cards: [0, 0, 1] },   // CB -> GK -> CB -> LB up the line
+    midfield: { steps: [6, 8, 10, 11], cards: [0, 1, 2] }, // 6 -> 8 -> 10 -> out to the LW
+    attack:   { steps: [6, 2, 7, 9], cards: [1, 0, 0] },   // 6 -> overlapping RB -> RW -> 9
 };
-let strategyBallAnim = null;
+let strategyPlayToken = 0;    // bumping this cancels any running sequence
+let strategyBallAnimRef = null;
 
-function stopStrategyBall() {
-    if (strategyBallAnim) { try { strategyBallAnim.cancel(); } catch (e) {} strategyBallAnim = null; }
+function playerPhasePoint(id, phaseId) {
+    const pl = STRATEGY_433.players.find(p => p.id === id);
+    if (!pl) return null;
+    return pl[phaseId === 'overview' ? 'base' : phaseId] || pl.base;
 }
 
-function startStrategyBall(phaseId) {
-    stopStrategyBall();
+/* rest just below the player's dot ("at her feet") so the ball is never
+   hidden behind the bigger player marker */
+function ballTransformFor(id, phaseId, rect) {
+    const p = playerPhasePoint(id, phaseId);
+    if (!p) return null;
+    return `translate(${(rect.width * p[0] / 100 - 7).toFixed(1)}px, ${(rect.height * Math.min(p[1] + 3.4, 97) / 100 - 7).toFixed(1)}px)`;
+}
+
+function strategyPlayBits() {
     const wrap = document.querySelector('.strategy-board .pitch-wrap');
-    const ball = wrap && wrap.querySelector('.sp-ball');
+    return {
+        wrap,
+        ball: wrap && wrap.querySelector('.sp-ball'),
+        btn: document.querySelector('.strategy-board .pitch-play'),
+    };
+}
+
+/* Master stop — safe to call from anywhere, any number of times.
+   (Keeps the stopStrategyBall name: app.js calls it on every tab switch.) */
+function stopStrategyBall() {
+    strategyPlayToken++;
+    if (strategyBallAnimRef) { try { strategyBallAnimRef.cancel(); } catch (e) {} strategyBallAnimRef = null; }
+    document.querySelectorAll('.tactic-live').forEach(el => el.classList.remove('tactic-live'));
+}
+
+/* Park the ball at the pattern's first player and arm the Play button. */
+function resetStrategyBall(phaseId) {
+    stopStrategyBall();
+    const { wrap, ball, btn } = strategyPlayBits();
+    const play = STRATEGY_PLAYS[phaseId];
     if (!ball) return;
-    // The board's motion IS the content (it demonstrates the tactic), so it
-    // plays even when the OS reports prefers-reduced-motion — that flag is
-    // commonly set by Windows "animation effects off", not a deliberate choice.
-    const path = BALL_PATHS[phaseId];
-    if (!path || !ball.animate) { ball.style.opacity = '0'; return; }
+    if (!play) {
+        ball.style.opacity = '0';
+        if (btn) btn.hidden = true;
+        return;
+    }
     const r = wrap.getBoundingClientRect();
     if (!r.width) { ball.style.opacity = '0'; return; }
-
-    // rest just below each player's dot ("at her feet") so the ball is
-    // never hidden behind the bigger player marker while it waits
-    const pt = p => `translate(${(r.width * p[0] / 100 - 7).toFixed(1)}px, ${(r.height * Math.min(p[1] + 3.4, 97) / 100 - 7).toFixed(1)}px)`;
-    const TRAVEL = 650, HOLD = 480, END_PAUSE = 1500;
-    const legs = path.length - 1;
-    const total = legs * (TRAVEL + HOLD) + END_PAUSE;
-
-    // arrive -> hold at feet -> travel to the next player
-    const frames = [];
-    let t = 0;
-    path.forEach((p, i) => {
-        frames.push({ offset: t / total, transform: pt(p) });
-        if (i < legs) {
-            t += HOLD;
-            frames.push({ offset: t / total, transform: pt(p), easing: 'cubic-bezier(.45,.05,.35,1)' });
-            t += TRAVEL;
-        }
-    });
-    frames.push({ offset: 1, transform: pt(path[legs]) });
-
+    ball.style.transform = ballTransformFor(play.steps[0], phaseId, r);
     ball.style.opacity = '1';
-    strategyBallAnim = ball.animate(frames, {
-        duration: total, delay: 850, iterations: Infinity, fill: 'backwards'
-    });
+    if (btn) { btn.hidden = false; btn.textContent = '▶ Play the pattern'; btn.classList.remove('playing'); }
+}
+
+function pulseDot(id) {
+    const dot = document.querySelector('.strategy-board .sp-dot[data-player="' + id + '"]');
+    if (!dot || !dot.animate) return;
+    dot.animate([
+        { transform: 'translate(-50%,-50%) scale(1)',    boxShadow: '0 2px 8px rgba(0,0,0,.4)' },
+        { transform: 'translate(-50%,-50%) scale(1.3)',  boxShadow: '0 0 0 7px rgba(255,255,255,.28), 0 2px 10px rgba(0,0,0,.45)' },
+        { transform: 'translate(-50%,-50%) scale(1)',    boxShadow: '0 2px 8px rgba(0,0,0,.4)' }
+    ], { duration: 420, easing: 'cubic-bezier(.34,1.4,.64,1)' });
+}
+
+function highlightCard(idx) {
+    const items = document.querySelectorAll('.strategy-notes .tactic-item');
+    items.forEach((el, i) => el.classList.toggle('tactic-live', i === idx));
+}
+
+async function playStrategyPattern() {
+    const phaseId = strategyPhase;
+    const play = STRATEGY_PLAYS[phaseId];
+    const { wrap, ball, btn } = strategyPlayBits();
+    if (!play || !ball || !ball.animate || !wrap) return;
+
+    stopStrategyBall();                 // restart cleanly if already playing
+    const token = strategyPlayToken;
+    const r = wrap.getBoundingClientRect();
+    if (!r.width) return;
+
+    if (btn) { btn.textContent = 'Playing…'; btn.classList.add('playing'); }
+    ball.style.opacity = '1';
+    ball.style.transform = ballTransformFor(play.steps[0], phaseId, r);
+    pulseDot(play.steps[0]);
+
+    const TRAVEL = 640, SETTLE = 560;
+    const wait = ms => new Promise(res => setTimeout(res, ms));
+    await wait(380);
+
+    for (let i = 1; i < play.steps.length; i++) {
+        if (token !== strategyPlayToken) return;      // cancelled mid-flight
+        highlightCard(play.cards[i - 1]);
+        const from = ball.style.transform;
+        const to = ballTransformFor(play.steps[i], phaseId, r);
+        strategyBallAnimRef = ball.animate(
+            [{ transform: from }, { transform: to }],
+            { duration: TRAVEL, easing: 'cubic-bezier(.45,.05,.35,1)' });
+        await wait(TRAVEL);
+        if (token !== strategyPlayToken) return;
+        strategyBallAnimRef = null;
+        ball.style.transform = to;                    // land it, then celebrate
+        pulseDot(play.steps[i]);
+        await wait(SETTLE);
+    }
+
+    if (token !== strategyPlayToken) return;
+    await wait(500);
+    if (token !== strategyPlayToken) return;
+    document.querySelectorAll('.tactic-live').forEach(el => el.classList.remove('tactic-live'));
+    if (btn) { btn.textContent = '⟲ Replay'; btn.classList.remove('playing'); }
 }
 
 /* Arrows appear after the shape settles, not while dots are in flight */
@@ -299,7 +370,7 @@ function strategyPitch(phase, opts) {
     const dots = S.players.map(p => {
         const posArr = p[phase.id === 'overview' ? 'base' : phase.id] || p.base;
         const hl = phase.highlight === 'all' || (phase.highlight || []).includes(p.id);
-        return `<button class="sp-dot sp-${p.type}${hl ? '' : ' sp-dim'}"` +
+        return `<button class="sp-dot sp-${p.type}${hl ? '' : ' sp-dim'}" data-player="${p.id}"` +
             ` style="left:${posArr[0]}%;top:${posArr[1]}%;"` +
             ` onclick="strategyPickPosition(${p.id})" title="#${p.id} ${S.positions[p.id].name}">` +
             `<span class="sp-num">${p.id}</span><span class="sp-pos">${p.pos}</span></button>`;
@@ -318,7 +389,8 @@ function strategyPitch(phase, opts) {
         </svg>
         ${dots}
         ${withBall ? '<div class="sp-ball" aria-hidden="true"></div>' : ''}
-    </div>`;
+    </div>` +
+    (withBall ? '<button class="pitch-play" onclick="playStrategyPattern()" hidden>▶ Play the pattern</button>' : '');
 }
 
 /* ---- SET PIECES (corner plays, ported from v1) ---- */
@@ -473,7 +545,7 @@ function switchStrategyPhase(p) {
     });
     const ov = wrap.querySelector('.pitch-ov');
     if (ov) { ov.innerHTML = strategyOverlays(phase.id); animateOverlayIn(500); }
-    startStrategyBall(phase.id);
+    resetStrategyBall(phase.id);
 
     document.querySelectorAll('.phase-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.phase === phase.id);
@@ -526,7 +598,7 @@ function renderStrategyFormation(container) {
             </div>
         </div>`;
     animateOverlayIn(250);
-    startStrategyBall(phase.id);
+    resetStrategyBall(phase.id);
 }
 
 function renderStrategyPositions(container) {

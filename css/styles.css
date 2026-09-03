@@ -951,6 +951,24 @@ body{
     box-shadow:0 2px 6px rgba(0,0,0,.5), inset -2px -3px 4px rgba(0,0,0,.22);
     opacity:0;pointer-events:none;z-index:3;
 }
+/* Tap-to-play: one big thumb-sized button right under the board */
+.pitch-play{
+    display:block;margin:14px auto 0;
+    font-family:var(--display);font-size:16px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    color:#10233d;background:var(--accent);border:none;border-radius:999px;
+    min-height:44px;padding:10px 26px;cursor:pointer;white-space:nowrap;
+    box-shadow:0 4px 16px rgba(0,0,0,.35);
+    transition:opacity .15s;
+}
+.pitch-play:hover{opacity:.92;}
+.pitch-play.playing{opacity:.65;cursor:default;}
+.pitch-play[hidden]{display:none;}   /* display:block above would defeat the hidden attr */
+/* the coaching card the current pass is teaching */
+.tactic-item{border-radius:8px;padding:6px;margin:-6px;transition:background .25s,box-shadow .25s;}
+.tactic-item.tactic-live{
+    background:var(--accent-soft);
+    box-shadow:0 0 0 1px var(--accent-line), var(--glow);
+}
 
 .strategy-notes{min-width:0;display:flex;flex-direction:column;gap:16px;}
 .tactic-item{display:flex;gap:14px;align-items:flex-start;}
