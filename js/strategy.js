@@ -236,6 +236,7 @@ function strategyOverlays(phaseId) {
    lights up as each pass lands. Built for phones: one big button, no
    battery-burning autoplay loop. */
 const STRATEGY_PLAYS = {
+    overview: { steps: [1, 5, 8, 10, 9], cards: [0, 1, 1, 2] }, // whole idea: back to front
     defense:  { steps: [4, 1, 5, 3], cards: [0, 0, 1] },   // CB -> GK -> CB -> LB up the line
     midfield: { steps: [6, 8, 10, 11], cards: [0, 1, 2] }, // 6 -> 8 -> 10 -> out to the LW
     attack:   { steps: [6, 2, 7, 9], cards: [1, 0, 0] },   // 6 -> overlapping RB -> RW -> 9
