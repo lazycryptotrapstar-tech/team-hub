@@ -153,7 +153,6 @@ function applyFavicon() {
 const TAB_ICONS = {
     schedule:   '<path d="M3 9h18M7 3v3m10-3v3M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>',
     standings:  '<path d="M5 20v-8m7 8V4m7 16v-5"/>',
-    strategy:   '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
     story:      '<path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2zm9-2h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5z"/>',
     tournament: '<path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3m10-4h3v1a3 3 0 0 1-3 3M12 14v4m-3 3h6"/>',
 };
@@ -169,7 +168,6 @@ function getTabs() {
     const tabs = [
         { id: 'schedule',   label: 'Schedule' },
         { id: 'standings',  label: 'Standings' },
-        { id: 'strategy',   label: 'Strategy' },
         { id: 'story',      label: 'Story' },
     ];
     const td = TEAM_CONFIG.tournaments;
@@ -857,12 +855,9 @@ function setMapDay(day){tournMapDay=day;renderTournament(document.getElementById
 ============================================================ */
 function render() {
     renderNavBars();
-    if (typeof stopStrategyBall === 'function') stopStrategyBall();
-    if (typeof stopLineupTicker === 'function') stopLineupTicker();
     const c = document.getElementById('main-content');
     if      (currentTab === 'story')       renderStory(c);
     else if (currentTab === 'standings')   renderStandingsTab(c);
-    else if (currentTab === 'strategy')    renderStrategy(c);
     else if (currentTab === 'schedule')    renderSchedule(c);
     else if (currentTab === 'tournament')  renderTournament(c);
     else renderSchedule(c);

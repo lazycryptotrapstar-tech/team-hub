@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 const repo = path.join(path.dirname(fileURLToPath(import.meta.url)), '..') + path.sep;
 const css = fs.readFileSync(repo + 'css/styles.css', 'utf8');
-const code = ['index.html','js/app.js','js/venue.js','js/data.js','js/story.js','js/strategy.js','js/lineup.js']
+const code = ['index.html','js/app.js','js/venue.js','js/data.js','js/story.js']
   .map(f => fs.readFileSync(repo + f, 'utf8')).join('\n');
 const legacy = execSync('git show v1-legacy:index.html', { cwd: repo, maxBuffer: 1e8 }).toString();
 
