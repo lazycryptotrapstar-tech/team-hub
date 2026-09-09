@@ -327,6 +327,15 @@ function renderStandingsTab(container) {
     renderLeagueTable(container);
 }
 
+/* Club names come off the league sync, not from us. The phone view
+   truncates them to one line and keeps the full name in a title, so that
+   attribute has to survive a club called "St. Mary's & Co". */
+function attrEsc(s) {
+    return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function renderLeagueTable(container) {
     const comp = activeComp();
     if (comp) standingsView = comp.id;
@@ -339,7 +348,7 @@ function renderLeagueTable(container) {
         const z = n => n === 0 ? ' st-zero' : '';
         return `<tr class="${t.isOurs ? 'current-team' : ''}">
             <td class="st-rank">${t.rank}</td>
-            <td class="st-name${t.isOurs ? ' st-name-us' : ''}">${t.name}</td>
+            <td class="st-name${t.isOurs ? ' st-name-us' : ''}" title="${attrEsc(t.name)}">${t.name}</td>
             <td class="st-num">${t.mp}</td>
             <td class="st-num st-w${z(t.w)}">${t.w}</td>
             ${drawsOn ? `<td class="st-num st-d${z(t.d)}">${t.d}</td>` : ''}
@@ -849,6 +858,7 @@ function setMapDay(day){tournMapDay=day;renderTournament(document.getElementById
 function render() {
     renderNavBars();
     if (typeof stopStrategyBall === 'function') stopStrategyBall();
+    if (typeof stopLineupTicker === 'function') stopLineupTicker();
     const c = document.getElementById('main-content');
     if      (currentTab === 'story')       renderStory(c);
     else if (currentTab === 'standings')   renderStandingsTab(c);

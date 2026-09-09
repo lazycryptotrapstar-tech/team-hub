@@ -365,7 +365,9 @@ body{
     border:1px solid var(--border);
     border-radius:var(--r-lg);
     margin-top:24px;
-    overflow:hidden;
+    /* clip, not hidden: `hidden` makes this a scroll container, which
+       silently kills position:sticky on the phone strategy board. */
+    overflow:clip;
     box-shadow:var(--shadow-lg);
     opacity:1;transition:opacity .12s var(--ease);
 }
@@ -455,14 +457,20 @@ body{
 .st-card-title{font-size:14px;font-weight:800;letter-spacing:-.2px;color:var(--text);}
 .st-card-sub{font-size:11px;color:var(--text3);}
 .st-scroll{overflow-x:auto;}
-.st-table{width:100%;border-collapse:collapse;font-size:13px;}
+.st-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;}
+/* table-layout:fixed (above) needs the numeric columns sized, or the ten
+   columns split evenly and the club name loses most of its room. Sizing
+   them here also means a long club name can never widen the table past
+   the card — it truncates instead. It overflowed by 8px at 320px. */
 .st-table th{
-    background:var(--bg);text-align:center;
+    background:var(--bg);text-align:center;width:34px;
     font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text2);
     padding:11px 8px;border-bottom:2px solid var(--accent-line);white-space:nowrap;
 }
-.st-th-rank{width:44px;}
-.st-table th.st-th-name{text-align:left;padding-left:14px;}
+.st-th-rank,.st-table th.st-th-rank{width:44px;}
+.st-table th[title="Points"]{width:40px;}
+/* the club column takes whatever the numbers leave */
+.st-table th.st-th-name{text-align:left;padding-left:14px;width:auto;}
 .st-table td{padding:11px 8px;border-bottom:1px solid rgba(42,48,56,.55);text-align:center;}
 .st-table tr:last-child td{border-bottom:none;}
 .st-table tbody tr{transition:background .13s;}
@@ -886,11 +894,13 @@ body{
 /* ===== STRATEGY =====
    The game model: pitch board + phase views + per-position guide. */
 .strategy-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
-.strategy-formation-chip{
+.section-title .strategy-formation-chip,.strategy-formation-chip{
     font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:.06em;
     color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-line);
-    border-radius:6px;padding:4px 12px;
+    border-radius:6px;padding:4px 12px;margin-left:auto;flex-shrink:0;
 }
+/* the title's own text may wrap; the rule underneath still spans the card */
+.strategy-title-text{min-width:0;}
 .phase-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
 .phase-btn{
     font-family:var(--display);font-size:14.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
@@ -1042,6 +1052,439 @@ body{
 .sp-svg-num{font-family:var(--display);font-size:11px;font-weight:700;}
 .sp-svg-tag{font-family:var(--mono);font-size:7px;font-weight:700;}
 
+/* ===== LINEUP & SUBS =====
+   Coach-only, on-device. Same board as the tactics view, doing a
+   different job: who is in each position, and when they change. */
+.lu-private{
+    font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text3);background:var(--surface);
+    border:1px solid var(--border);border-radius:999px;padding:4px 10px;
+    margin-left:auto;flex-shrink:0;
+}
+.lu-modes{margin-bottom:14px;}
+/* which squad is loaded — one hub team, two leagues, two rosters */
+.lu-squads{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:12px;}
+.lu-squads-label{
+    font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text3);margin-right:2px;
+}
+.lu-squad{
+    min-height:34px;padding:6px 14px;cursor:pointer;
+    font-family:var(--display);font-size:14px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--text3);background:var(--surface);border:1px solid var(--border);
+    border-radius:999px;transition:all .13s;
+}
+.lu-squad:hover{color:var(--accent);border-color:var(--accent-line);}
+.lu-squad.active{color:var(--bg);background:var(--accent);border-color:var(--accent);}
+.phase-btn.lu-off{opacity:.5;}
+.lu-empty-note{
+    font-size:12.5px;color:var(--text2);background:var(--accent-soft);
+    border-left:3px solid var(--accent);border-radius:0 5px 5px 0;
+    padding:10px 13px;margin-bottom:16px;
+}
+
+/* dots in lineup mode carry a shirt number and a name, not a position code */
+.lu-dot .sp-num{font-size:15px;}
+.lu-dot .sp-pos{
+    bottom:-15px;font-family:var(--font);font-size:8.5px;font-weight:700;
+    letter-spacing:0;text-transform:none;
+}
+.lu-dot.lu-empty{
+    background:rgba(255,255,255,.10);color:var(--text3);
+    border:2px dashed rgba(255,255,255,.35);box-shadow:none;
+}
+.lu-dot.lu-empty .sp-num{font-size:11px;font-weight:700;}
+.lu-dot.lu-picking{box-shadow:0 0 0 4px var(--accent-line),0 2px 10px rgba(0,0,0,.5);}
+
+/* the chooser that opens under the board */
+.lu-picker{
+    background:var(--surface);border:1px solid var(--accent-line);
+    border-radius:var(--r);padding:13px 14px;
+}
+.lu-picker-head{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text2);margin-bottom:11px;
+}
+.lu-picker-head b{color:var(--accent);}
+.lu-pick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:7px;}
+.lu-pick{
+    display:flex;align-items:center;gap:8px;min-height:44px;text-align:left;
+    font-family:var(--font);font-size:12.5px;font-weight:600;color:var(--text2);
+    background:var(--card);border:1px solid var(--border);border-radius:8px;
+    padding:7px 10px;cursor:pointer;transition:all .13s;
+}
+.lu-pick:hover{border-color:var(--accent-line);color:var(--text);}
+.lu-pick.active{border-color:var(--accent);color:var(--text);background:var(--accent-soft);}
+.lu-pick b{
+    font-family:var(--display);font-size:16px;font-weight:700;color:var(--accent);
+    min-width:20px;flex-shrink:0;
+}
+.lu-pick span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lu-pick em{font-family:var(--mono);font-style:normal;font-size:10px;color:var(--text3);margin-left:auto;}
+.lu-pick i{
+    font-family:var(--mono);font-style:normal;font-size:8px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--bg);
+    background:var(--text3);border-radius:3px;padding:2px 4px;margin-left:auto;
+}
+.lu-pick-busy{opacity:.72;}
+.lu-clear{
+    display:block;width:100%;margin-top:9px;min-height:40px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text3);background:none;border:1px dashed var(--border2);
+    border-radius:7px;cursor:pointer;
+}
+.lu-clear:hover{color:var(--red);border-color:var(--red);}
+.lu-x{
+    flex-shrink:0;width:30px;height:30px;line-height:1;
+    font-size:12px;color:var(--text3);background:none;border:none;
+    border-radius:6px;cursor:pointer;
+}
+.lu-x:hover{color:var(--red);background:var(--elevated);}
+
+/* blocks */
+.lu-block{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--r);padding:14px 15px;
+}
+.lu-block-head{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:11px;
+}
+.lu-block-head span{color:var(--text3);font-weight:500;letter-spacing:.08em;}
+.lu-none{font-size:12px;color:var(--text3);}
+.lu-start p{font-size:13px;color:var(--text2);line-height:1.6;margin:0 0 12px;}
+
+/* bench */
+.lu-bench{margin-bottom:2px;}
+.lu-bench-label{
+    font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text3);margin-bottom:8px;
+}
+.lu-bench-row{display:flex;flex-wrap:wrap;gap:7px;}
+.lu-bench-chip{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:12px;font-weight:600;color:var(--text2);
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:999px;padding:6px 12px;
+}
+.lu-bench-chip b{font-family:var(--display);font-size:14px;color:var(--accent);}
+.lu-bench-chip em{font-family:var(--mono);font-style:normal;font-size:9.5px;color:var(--text3);}
+
+/* the clock — the one thing that must be readable at arm's length */
+.lu-clock{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    background:var(--surface);border:1px solid var(--border);
+    border-left:3px solid var(--accent);border-radius:var(--r);
+    padding:12px 16px;margin-bottom:16px;
+}
+.lu-clock-period{
+    font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text3);
+}
+.lu-clock-time{
+    font-family:var(--display);font-size:38px;font-weight:700;line-height:1;
+    letter-spacing:.01em;color:var(--text);font-variant-numeric:tabular-nums;
+}
+.lu-clock-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.lu-btn{
+    min-height:44px;padding:10px 18px;cursor:pointer;
+    font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;white-space:nowrap;
+    color:var(--text2);background:var(--card);border:1px solid var(--border2);
+    border-radius:8px;transition:all .13s;
+}
+.lu-btn:hover{color:var(--text);border-color:var(--accent-line);}
+.lu-btn-go{color:#10233d;background:var(--accent);border-color:var(--accent);}
+.lu-btn-go:hover{color:#10233d;opacity:.92;}
+.lu-btn-go.running{background:var(--surface);color:var(--accent);}
+.lu-btn[disabled]{opacity:.45;cursor:not-allowed;}
+
+/* a sub falling due */
+.lu-due{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    background:var(--accent-soft);border:1px solid var(--accent);
+    border-radius:var(--r);padding:13px 15px;
+    box-shadow:var(--glow);
+}
+.lu-due-text{font-size:13px;color:var(--text);line-height:1.5;min-width:0;}
+.lu-due-text b{font-weight:800;}
+.lu-due-flag{
+    display:block;font-family:var(--mono);font-size:8.5px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:3px;
+}
+.lu-due-btns{display:flex;gap:8px;}
+
+/* rotation plan */
+.lu-plan-list{display:flex;flex-direction:column;}
+.lu-plan-row{
+    display:flex;align-items:center;gap:11px;
+    padding:9px 0;border-bottom:1px solid rgba(42,48,56,.55);
+}
+.lu-plan-row:last-child{border-bottom:none;}
+.lu-plan-at{
+    font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);
+    width:36px;flex-shrink:0;
+}
+.lu-plan-pos{
+    font-family:var(--display);font-size:14px;font-weight:700;color:var(--text2);
+    width:38px;flex-shrink:0;
+}
+.lu-plan-swap{flex:1;min-width:0;font-size:12.5px;color:var(--text2);}
+.lu-plan-swap b{color:var(--text);font-weight:700;}
+.lu-plan-swap i{font-style:normal;color:var(--text3);}
+.lu-plan-add{
+    display:flex;gap:9px;flex-wrap:wrap;align-items:flex-end;
+    margin-top:13px;padding-top:13px;border-top:1px solid var(--border);
+}
+.lu-plan-add label,.lu-periods{
+    display:flex;flex-direction:column;gap:4px;min-width:0;
+    font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text3);
+}
+.lu-plan-add input,.lu-plan-add select,.lu-periods select,.lu-roster-add input{
+    font-family:var(--font);font-size:13px;font-weight:600;color:var(--text);
+    background:var(--card);border:1px solid var(--border2);border-radius:7px;
+    padding:9px 10px;min-height:42px;max-width:100%;
+}
+.lu-plan-add input{width:74px;}
+.lu-plan-add label:nth-child(2),.lu-plan-add label:nth-child(3){flex:1 1 120px;}
+.lu-add{
+    min-height:42px;padding:9px 16px;cursor:pointer;
+    font-family:var(--display);font-size:14px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;color:#10233d;background:var(--accent);
+    border:none;border-radius:7px;
+}
+.lu-add:hover{opacity:.92;}
+.lu-periods{
+    flex-direction:row;align-items:center;gap:9px;flex-wrap:wrap;
+    margin-top:12px;padding-top:12px;border-top:1px solid var(--border);
+}
+
+/* minutes */
+.lu-mins{display:flex;flex-direction:column;gap:7px;}
+.lu-min-row{display:flex;align-items:center;gap:9px;font-size:12.5px;}
+.lu-min-num{
+    font-family:var(--display);font-size:14px;font-weight:700;color:var(--text3);
+    width:22px;flex-shrink:0;text-align:right;
+}
+.lu-min-name{
+    flex:0 1 108px;min-width:0;color:var(--text2);font-weight:600;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.lu-min-row.on .lu-min-name,.lu-min-row.on .lu-min-num{color:var(--text);}
+.lu-min-flag{
+    width:22px;flex-shrink:0;
+    font-family:var(--mono);font-size:7.5px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--text3);
+}
+.lu-min-row.on .lu-min-flag{color:var(--accent);}
+.lu-min-bar{flex:1;min-width:24px;height:6px;background:var(--elevated);border-radius:999px;overflow:hidden;}
+.lu-min-bar span{display:block;height:100%;background:var(--accent);border-radius:999px;}
+.lu-min-row.on .lu-min-bar span{background:var(--accent);}
+.lu-min-val{
+    font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--text2);
+    width:34px;flex-shrink:0;text-align:right;
+}
+
+/* log */
+.lu-log{display:flex;flex-direction:column;}
+.lu-log-row{
+    display:flex;align-items:center;gap:10px;font-size:12px;
+    padding:8px 0;border-bottom:1px solid rgba(42,48,56,.55);
+}
+.lu-log-row:last-child{border-bottom:none;}
+.lu-log-min{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);width:32px;flex-shrink:0;}
+.lu-log-pos{font-family:var(--display);font-size:13px;font-weight:700;color:var(--text2);width:34px;flex-shrink:0;}
+.lu-log-txt{flex:1;min-width:0;color:var(--text2);}
+.lu-log-txt i{font-style:normal;color:var(--text3);}
+.lu-log-tag{
+    font-family:var(--mono);font-size:7.5px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text3);border:1px solid var(--border2);
+    border-radius:3px;padding:2px 5px;flex-shrink:0;
+}
+
+/* roster */
+.lu-roster-toggle{
+    align-self:flex-start;min-height:40px;padding:8px 14px;cursor:pointer;
+    font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text3);background:none;
+    border:1px dashed var(--border2);border-radius:7px;
+}
+.lu-roster-toggle:hover{color:var(--accent);border-color:var(--accent-line);}
+.lu-roster{display:flex;flex-direction:column;}
+.lu-roster-row{
+    display:flex;align-items:center;gap:11px;
+    padding:8px 0;border-bottom:1px solid rgba(42,48,56,.55);
+}
+.lu-roster-row:last-child{border-bottom:none;}
+.lu-roster-num{
+    font-family:var(--display);font-size:16px;font-weight:700;color:var(--accent);
+    width:26px;flex-shrink:0;text-align:right;
+}
+.lu-roster-name{flex:1;min-width:0;font-size:13px;font-weight:600;color:var(--text2);}
+.lu-roster-name i{font-family:var(--mono);font-style:normal;font-size:9px;color:var(--accent);margin-left:6px;}
+.lu-roster-num.clash{color:var(--red);}
+.lu-warn{
+    font-size:12px;color:var(--text2);line-height:1.55;
+    background:var(--red-bg);border-left:3px solid var(--red);
+    border-radius:0 5px 5px 0;padding:9px 12px;margin-bottom:11px;
+}
+.lu-roster-add{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.lu-roster-add input:first-child{width:58px;flex-shrink:0;text-align:center;}
+.lu-roster-add input:nth-child(2){flex:1;min-width:0;}
+.lu-import{margin-top:12px;}
+.lu-import summary{
+    font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text3);cursor:pointer;padding:6px 0;
+}
+.lu-import summary:hover{color:var(--accent);}
+.lu-import p{font-size:12px;color:var(--text3);line-height:1.6;margin:6px 0 9px;}
+.lu-import code{
+    font-family:var(--mono);font-size:11px;color:var(--text2);
+    background:var(--card);border-radius:4px;padding:1px 5px;
+}
+.lu-import textarea{
+    width:100%;font-family:var(--mono);font-size:12px;color:var(--text);
+    background:var(--card);border:1px solid var(--border2);border-radius:7px;
+    padding:10px;resize:vertical;margin-bottom:9px;
+}
+.lu-reset{
+    align-self:flex-start;min-height:42px;padding:9px 16px;cursor:pointer;
+    font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text3);background:none;
+    border:1px dashed var(--border2);border-radius:7px;
+}
+.lu-reset:hover{color:var(--red);border-color:var(--red);}
+.lu-reset-go{color:#10233d;background:var(--accent);border:none;font-size:11px;}
+.lu-reset-go:hover{color:#10233d;opacity:.92;}
+
+/* ---- the playing-time indicator ----
+   One vocabulary everywhere: on the board, on the bench, in both lists.
+   Amber = owed time, red = had plenty, nothing = about right. Colour is
+   never the only signal — the minutes are always written next to it. */
+.lu-t-under{--t-ink:var(--amber);}
+.lu-t-over{--t-ink:var(--red);}
+.lu-t-even{--t-ink:var(--text3);}
+
+/* a ring on the dot of anyone well above or below their share */
+.lu-dot.lu-t-under{box-shadow:0 0 0 3px var(--amber),0 2px 8px rgba(0,0,0,.45);}
+.lu-dot.lu-t-over{box-shadow:0 0 0 3px var(--red),0 2px 8px rgba(0,0,0,.45);}
+.lu-dot.lu-picking{box-shadow:0 0 0 4px var(--accent-line),0 2px 10px rgba(0,0,0,.5);}
+
+.lu-bench-chip.lu-t-under{border-color:var(--amber);}
+.lu-bench-chip.lu-t-over{border-color:var(--red);opacity:.8;}
+.lu-bench-chip.lu-t-under b{color:var(--amber);}
+
+.lu-pick em.lu-t-under{color:var(--amber);}
+.lu-pick em.lu-t-over{color:var(--red);}
+/* a player who does not cover this position still shows, just quieter */
+.lu-pick-off{opacity:.5;}
+
+.lu-min-row.lu-t-under .lu-min-val{color:var(--amber);}
+.lu-min-row.lu-t-over .lu-min-val{color:var(--red);}
+.lu-min-row.lu-t-under .lu-min-bar span{background:var(--amber);}
+.lu-min-row.lu-t-over .lu-min-bar span{background:var(--red);}
+
+/* the even-share tick sitting on each bar */
+.lu-min-bar{position:relative;}
+.lu-min-bar i{
+    position:absolute;top:-2px;bottom:-2px;width:2px;
+    background:var(--text);opacity:.55;border-radius:1px;
+}
+
+.lu-legend{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    margin-top:11px;padding-top:10px;border-top:1px solid var(--border);
+    font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text3);
+}
+.lu-legend span{display:inline-flex;align-items:center;gap:5px;}
+.lu-legend span::before{
+    content:'';width:9px;height:9px;border-radius:50%;
+    background:var(--t-ink,var(--text3));
+}
+.lu-legend-tick::before{
+    width:2px!important;height:11px!important;border-radius:1px!important;
+    background:var(--text)!important;opacity:.55;
+}
+
+/* ---- season / playing time page ---- */
+.lu-season{display:flex;flex-direction:column;gap:7px;}
+.lu-season-row{display:flex;align-items:center;gap:9px;font-size:12.5px;}
+.lu-season-name{
+    flex:0 1 118px;min-width:0;color:var(--text2);font-weight:600;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.lu-season-row.lu-t-under .lu-season-name{color:var(--text);}
+.lu-season-games{
+    font-family:var(--mono);font-size:10.5px;color:var(--text3);
+    width:26px;flex-shrink:0;text-align:right;
+}
+.lu-season-games i{font-style:normal;opacity:.6;margin-left:1px;}
+.lu-season-tot{
+    font-family:var(--mono);font-size:12px;font-weight:700;color:var(--text2);
+    width:40px;flex-shrink:0;text-align:right;
+}
+.lu-season-row.lu-t-under .lu-season-tot{color:var(--amber);}
+.lu-season-row.lu-t-over .lu-season-tot{color:var(--red);}
+.lu-season-row.lu-t-under .lu-min-bar span{background:var(--amber);}
+.lu-season-row.lu-t-over .lu-min-bar span{background:var(--red);}
+.lu-season-note{font-size:12px;color:var(--text3);line-height:1.6;margin:0 0 11px;}
+.lu-owed{
+    font-size:12.5px;color:var(--text2);line-height:1.6;
+    background:var(--amber-bg);border-left:3px solid var(--amber);
+    border-radius:0 5px 5px 0;padding:9px 12px;margin-bottom:12px;
+}
+.lu-owed b{color:var(--text);font-weight:700;}
+
+.lu-games{display:flex;flex-direction:column;}
+.lu-game-row{
+    display:flex;align-items:center;gap:10px;font-size:12px;
+    padding:9px 0;border-bottom:1px solid rgba(42,48,56,.55);
+}
+.lu-game-row:last-child{border-bottom:none;}
+.lu-game-date{font-family:var(--mono);font-size:10.5px;color:var(--text3);width:74px;flex-shrink:0;}
+.lu-game-opp{flex:1;min-width:0;font-weight:700;color:var(--text2);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lu-game-meta{font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;}
+
+/* the data page has no board, so let the table use the whole card */
+.strategy-grid.lu-wide{grid-template-columns:1fr;}
+
+/* ---- positions on the roster ---- */
+.lu-pos-btn{
+    flex-shrink:0;min-height:30px;padding:5px 10px;cursor:pointer;
+    font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;
+    color:var(--accent);background:var(--accent-soft);
+    border:1px solid var(--accent-line);border-radius:6px;
+}
+.lu-pos-btn.empty{color:var(--text3);background:none;border-style:dashed;border-color:var(--border2);}
+.lu-pos-btn:hover{border-color:var(--accent);}
+.lu-roster-row.open{border-bottom:none;}
+.lu-pos-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px;
+    padding:10px 0 12px;border-bottom:1px solid rgba(42,48,56,.55);
+}
+.lu-pos-chip{
+    min-height:38px;cursor:pointer;
+    font-family:var(--display);font-size:14px;font-weight:700;letter-spacing:.04em;
+    color:var(--text3);background:var(--card);
+    border:1px solid var(--border);border-radius:7px;transition:all .13s;
+}
+.lu-pos-chip:hover{color:var(--text);border-color:var(--border2);}
+.lu-pos-chip.on{color:var(--bg);background:var(--accent);border-color:var(--accent);}
+
+.lu-fill{
+    align-self:flex-start;min-height:42px;padding:9px 16px;cursor:pointer;
+    font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);background:var(--accent-soft);
+    border:1px solid var(--accent-line);border-radius:7px;
+}
+.lu-fill:hover{color:var(--bg);background:var(--accent);}
+
 /* ===== BOTTOM NAV (mobile) ===== */
 .bottom-nav{display:none;}
 
@@ -1107,9 +1550,21 @@ body{
     .next-up-opp{font-size:20px;}
     .fx-date{width:66px;font-size:10px;}
     .fx-opp{font-size:12.5px;}
-    /* phone: opponent keeps the line, time+ground drop to their own row */
-    .fixture{flex-wrap:wrap;row-gap:2px;}
-    .fx-meta{flex-basis:100%;text-align:left;color:var(--text3);}
+    /* phone: the desktop five-column row cannot hold a club name — it was
+       squeezing "Falls Town FC 2013/14 - LD" into 81px over three lines,
+       and the meta line restarted at the card edge while the opponent
+       began 140px in, so one row had three different left edges.
+       Rebuilt as three stacked bands that all share one left edge:
+         date · league · score
+         opponent
+         time · ground                                                   */
+    .fixture{flex-wrap:wrap;align-items:baseline;gap:0 10px;row-gap:3px;padding:13px 4px;}
+    .fx-date{order:1;width:auto;flex:0 0 auto;}
+    .fx-comp{order:2;width:auto;flex:0 0 auto;}
+    .fx-score{order:3;margin-left:auto;flex:0 0 auto;}
+    .res-badge{order:4;flex:0 0 auto;}
+    .fx-opp{order:5;flex:1 0 100%;font-size:14.5px;color:var(--text);}
+    .fx-meta{order:6;flex:1 0 100%;text-align:left;color:var(--text3);}
     .site-logo{font-size:16px;}
     .season-pulse{border-radius:var(--r-sm);}
     /* the inline flex ratios come from the markup, so they need overriding here */
@@ -1143,6 +1598,13 @@ body{
     .st-name{padding-left:10px!important;}
     /* phone: GD already tells the goals story — drop GF/GA so PTS stays on screen */
     .st-table .st-gf,.st-table .st-ga{display:none;}
+    /* One line per club. Wrapping names gave rows of 55-90px and left the
+       numbers floating mid-row against three-line names, so nothing scanned
+       across. The full name stays in the cell's title attribute. */
+    .st-table td.st-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .st-table th{width:27px;padding:11px 4px;}
+    .st-th-rank,.st-table th.st-th-rank{width:30px;}
+    .st-table th[title="Points"]{width:32px;}
     .tourn-hist-row{flex-direction:column;align-items:flex-start;gap:10px;}
 
     /* mobile bottom nav */
@@ -1161,4 +1623,94 @@ body{
     }
     .bnav-btn.active{color:var(--accent);}
     .bnav-svg{width:19px;height:19px;display:block;}
+
+    /* ===== STRATEGY ON A PHONE =====
+       Measured on a 390x844 screen: the board ended at y=835 and the
+       coaching cards began at y=939, so tapping "Play the pattern" lit up
+       a card 100px below the fold — the ball moved where nobody could see
+       the explanation it was teaching. The board now pins to the top and
+       the cards scroll underneath it, so both are on screen at once.
+       (This is why .main-card uses overflow:clip, not hidden.) */
+    .strategy-board{
+        position:sticky;top:6px;z-index:4;
+        background:var(--card);padding-bottom:10px;
+    }
+    .strategy-grid{gap:16px;}
+
+    /* Four phase buttons wrapped 3+1, orphaning "Attack" on its own row.
+       A scroll strip that bleeds to the card edge reads as scrollable and
+       keeps the shape one line — same pattern as the desktop tab bar. */
+    .phase-bar{
+        flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+        margin:0 -16px 14px;padding:0 16px 2px;
+        scroll-snap-type:x proximity;
+    }
+    .phase-bar::-webkit-scrollbar{display:none;}
+    .phase-btn{flex:0 0 auto;scroll-snap-align:start;}
+
+    /* the view switcher wraps once a fourth view exists - same treatment */
+    .stats-subnav{
+        flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+        scroll-snap-type:x proximity;
+    }
+    .stats-subnav::-webkit-scrollbar{display:none;}
+    .stats-subnav-btn{flex:0 0 auto;scroll-snap-align:start;}
+
+    /* 44px minimum on anything you tap at a field, in the cold, one-handed.
+       These were 29-37px. */
+    .phase-btn,.stats-subnav-btn{min-height:44px;padding-top:0;padding-bottom:0;}
+    .sp-dot{width:40px;height:40px;}
+    .sp-dot .sp-num{font-size:17px;}
+
+    /* 11 chips over two ragged flex rows became a grid that lines up */
+    .pos-picker{
+        display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));
+        gap:8px;margin-bottom:18px;
+    }
+    .pos-chip{width:auto;min-height:44px;justify-content:center;}
+
+    /* the section rule stopped at 47% of the card because the formation
+       chip sat beside the title in a flex row; the chip now lives inside
+       the title, so the rule spans the card like every other tab */
+    .strategy-head{margin-bottom:14px;}
+    .pf-site{padding:4px 0;}
+
+    /* Lineup on a phone: the clock is the thing you read from the touchline,
+       so it stays pinned above the board while everything else scrolls. */
+    .lu-clock{
+        position:sticky;top:0;z-index:6;margin:0 -16px 12px;
+        border-radius:0;border-left:none;border-top:none;
+        border-bottom:2px solid var(--accent);
+    }
+    .lu-clock-time{font-size:34px;}
+    .lu-block{padding:13px 13px;}
+    /* minmax(0,1fr), not 1fr: a plain 1fr floors at the track's min-content,
+       so a long player name pushed the two columns to 360px inside a 280px
+       card and .main-card's overflow:clip silently cut the second column off
+       at 320px. */
+    .lu-pick-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .lu-plan-add{gap:8px;}
+    .lu-plan-add label:nth-child(2),.lu-plan-add label:nth-child(3){flex:1 1 100%;}
+    .lu-min-name{flex:0 1 84px;}
+    .lu-season-name{flex:0 1 92px;}
+    .lu-legend{gap:9px;font-size:8px;}
+    .lu-game-date{width:64px;}
+    .lu-game-meta{font-size:9px;}
+    .lu-pos-grid{grid-template-columns:repeat(auto-fill,minmax(46px,1fr));}
+    /* roster setup is done sitting down, but still give the thumb something */
+    .lu-pos-chip{min-height:44px;}
+    .lu-pos-btn{min-height:38px;}
+    /* a real opponent name needs the width, so the game meta drops a line */
+    .lu-game-row{flex-wrap:wrap;row-gap:3px;}
+    .lu-game-opp{flex:1 1 auto;}
+    .lu-game-meta{flex:1 0 100%;}
+    /* the board is sticky; the clock sits above it */
+    .strategy-board{top:78px;}
+}
+
+/* Landscape phone: a 3:4 board is taller than the screen, so the sticky
+   board would cover everything. Sit it beside the cards instead. */
+@media(max-width:900px) and (max-height:520px) and (orientation:landscape){
+    .strategy-grid{grid-template-columns:minmax(0,44%) 1fr;}
+    .strategy-board{position:static;max-width:none;}
 }

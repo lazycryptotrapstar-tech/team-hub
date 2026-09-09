@@ -306,6 +306,27 @@ function pulseDot(id) {
 function highlightCard(idx) {
     const items = document.querySelectorAll('.strategy-notes .tactic-item');
     items.forEach((el, i) => el.classList.toggle('tactic-live', i === idx));
+    /* On a phone the board is sticky and the cards scroll under it, so the
+       card being taught has to come to the reader - otherwise the pass
+       lands against an explanation still off the bottom of the screen.
+       scrollIntoView is no good here: it knows nothing about the sticky
+       board, and parks the card's heading behind it. Measure the board and
+       put the card in the gap underneath. */
+    const live = items[idx];
+    const board = document.querySelector('.strategy-board');
+    if (live && board && window.matchMedia('(max-width:640px)').matches) {
+        /* Aim at an absolute scroll position, not a delta: before the board
+           has stuck, its bottom is still below the fold, so every "is the
+           card hidden?" test reads false and nothing scrolls. Park the page
+           where the board is pinned and the card sits in the gap under it. */
+        const stickyTop = parseFloat(getComputedStyle(board).top) || 0;
+        const boardH = board.getBoundingClientRect().height;
+        const cardDocTop = live.getBoundingClientRect().top + window.scrollY;
+        const target = Math.max(0, cardDocTop - stickyTop - boardH - 10);
+        if (Math.abs(target - window.scrollY) > 4) {
+            window.scrollTo({ top: target, behavior: 'smooth' });
+        }
+    }
 }
 
 async function playStrategyPattern() {
@@ -362,11 +383,27 @@ function animateOverlayIn(delay) {
    then the front three — the shape change reads like a team moving. */
 const LINE_DELAY = { gk: 0, def: 0, mid: 150, att: 300 };
 
+/* The pitch markings on their own, so the lineup board can draw the same
+   surface without duplicating the geometry. `overlayFor` is the phase id
+   whose movement arrows to include, or null for a bare pitch. */
+function pitchSurfaceSVG(overlayFor) {
+    const W = PITCH_W;
+    return `<svg class="pitch-svg" viewBox="0 0 ${W} 100" aria-hidden="true">
+            <rect x="1" y="1" width="${W - 2}" height="98" fill="none" stroke="rgba(255,255,255,.5)" stroke-width=".5"/>
+            <line x1="1" y1="50" x2="${W - 1}" y2="50" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
+            <circle cx="${W / 2}" cy="50" r="9" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
+            <rect x="${sx(28)}" y="1" width="${sx(44)}" height="14" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
+            <rect x="${sx(28)}" y="85" width="${sx(44)}" height="14" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
+            <rect x="${sx(40)}" y="1" width="${sx(20)}" height="5.5" fill="none" stroke="rgba(255,255,255,.28)" stroke-width=".3"/>
+            <rect x="${sx(40)}" y="93.5" width="${sx(20)}" height="5.5" fill="none" stroke="rgba(255,255,255,.28)" stroke-width=".3"/>
+            <g class="pitch-ov">${overlayFor ? strategyOverlays(overlayFor) : ''}</g>
+        </svg>`;
+}
+
 /* The pitch: markings + overlay arrows in one SVG, player dots as
    absolutely-positioned divs so phase changes animate in CSS. */
 function strategyPitch(phase, opts) {
     const S = STRATEGY_433;
-    const W = PITCH_W;
     const withBall = !!(opts && opts.ball);
     const dots = S.players.map(p => {
         const posArr = p[phase.id === 'overview' ? 'base' : phase.id] || p.base;
@@ -378,16 +415,7 @@ function strategyPitch(phase, opts) {
     }).join('');
 
     return `<div class="pitch-wrap">
-        <svg class="pitch-svg" viewBox="0 0 ${W} 100" aria-hidden="true">
-            <rect x="1" y="1" width="${W - 2}" height="98" fill="none" stroke="rgba(255,255,255,.5)" stroke-width=".5"/>
-            <line x1="1" y1="50" x2="${W - 1}" y2="50" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
-            <circle cx="${W / 2}" cy="50" r="9" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
-            <rect x="${sx(28)}" y="1" width="${sx(44)}" height="14" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
-            <rect x="${sx(28)}" y="85" width="${sx(44)}" height="14" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".35"/>
-            <rect x="${sx(40)}" y="1" width="${sx(20)}" height="5.5" fill="none" stroke="rgba(255,255,255,.28)" stroke-width=".3"/>
-            <rect x="${sx(40)}" y="93.5" width="${sx(20)}" height="5.5" fill="none" stroke="rgba(255,255,255,.28)" stroke-width=".3"/>
-            <g class="pitch-ov">${strategyOverlays(phase.id)}</g>
-        </svg>
+        ${pitchSurfaceSVG(phase.id)}
         ${dots}
         ${withBall ? '<div class="sp-ball" aria-hidden="true"></div>' : ''}
     </div>` +
@@ -497,6 +525,7 @@ function strategySubnav() {
         { id: 'formation', label: 'Formation' },
         { id: 'positions', label: 'Your Position' },
         { id: 'setpieces', label: 'Set Pieces' },
+        { id: 'lineup',    label: 'Lineup & Subs' },
     ];
     return '<div class="stats-subnav">' + views.map(v =>
         `<button class="stats-subnav-btn ${strategyView === v.id ? 'active' : ''}"` +
@@ -504,6 +533,21 @@ function strategySubnav() {
 }
 
 function switchStrategyView(v) { strategyView = v; renderStrategy(document.getElementById('main-content')); }
+
+/* The view switcher and the phase bar scroll sideways on a phone rather
+   than wrapping, which means the selected one can sit off the right edge
+   — "Lineup & Subs" was half cut off while it was the active view. Nudge
+   whichever is active back into the strip. */
+function keepActiveVisible() {
+    document.querySelectorAll('.stats-subnav, .phase-bar').forEach(bar => {
+        if (bar.scrollWidth <= bar.clientWidth) return;      // not scrolling
+        const act = bar.querySelector('.active');
+        if (!act) return;
+        const b = bar.getBoundingClientRect(), a = act.getBoundingClientRect();
+        if (a.right > b.right - 4) bar.scrollLeft += (a.right - b.right) + 16;
+        else if (a.left < b.left + 4) bar.scrollLeft -= (b.left - a.left) + 16;
+    });
+}
 
 /* Phase changes move the existing dots (CSS-transitioned) instead of
    rebuilding the board — that's what animates the shape change, and it
@@ -551,7 +595,7 @@ function switchStrategyPhase(p) {
     document.querySelectorAll('.phase-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.phase === phase.id);
     });
-    const title = document.querySelector('.strategy-head .section-title');
+    const title = document.querySelector('.strategy-title-text');
     if (title) title.textContent = phase.title;
     const notes = document.querySelector('.strategy-notes');
     if (notes) notes.innerHTML = strategyPhaseItems(phase);
@@ -586,8 +630,8 @@ function renderStrategyFormation(container) {
 
     container.innerHTML = strategySubnav() +
         `<div class="content-area">
-            <div class="strategy-head">
-                <div class="section-title" style="margin:0;">${phase.title}</div>
+            <div class="section-title strategy-head">
+                <span class="strategy-title-text">${phase.title}</span>
                 <span class="strategy-formation-chip">${S.formation}</span>
             </div>
             ${phaseBar}
@@ -658,8 +702,8 @@ function renderStrategySetPieces(container) {
 
     container.innerHTML = strategySubnav() +
         `<div class="content-area">
-            <div class="strategy-head">
-                <div class="section-title" style="margin:0;">${play.label}</div>
+            <div class="section-title strategy-head">
+                <span class="strategy-title-text">${play.label}</span>
             </div>
             ${picker}
             <div class="strategy-grid">
@@ -674,7 +718,9 @@ function renderStrategySetPieces(container) {
 
 function renderStrategy(container) {
     stopStrategyBall();
-    if (strategyView === 'positions') return renderStrategyPositions(container);
-    if (strategyView === 'setpieces') return renderStrategySetPieces(container);
-    renderStrategyFormation(container);
+    if (strategyView === 'positions')      renderStrategyPositions(container);
+    else if (strategyView === 'setpieces') renderStrategySetPieces(container);
+    else if (strategyView === 'lineup')    renderLineup(container);
+    else                                   renderStrategyFormation(container);
+    keepActiveVisible();
 }

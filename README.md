@@ -8,7 +8,8 @@ Built so a parent or player landing on it can answer three questions fast:
 2. **How are we doing?** — live standings and stats, synced from the league site
 3. **What's my job out there?** — the strategy page: formation, per-position guide, set pieces
 
-Plus AI storylines and tournament brackets.
+Plus AI storylines and tournament brackets, and a coach-only lineup and
+substitution board.
 
 ## Layout
 
@@ -19,6 +20,7 @@ js/data.js            loads data/teams.json, derives every stat
 js/venue.js           venue map rendering
 js/story.js           narrative engine + AI enhancement
 js/strategy.js        strategy tab: formation board, position guide, set pieces
+js/lineup.js          lineup & subs: the same board, used to run a game
 js/app.js             tab renderers (Schedule / Standings / Strategy / Story / Tournament)
 scripts/pull-league.mjs  league sync: pulls schedule + standings from GotSport
 data/teams.json       all team data — the single source of truth
@@ -45,6 +47,118 @@ opponent ranks come from the live table. `--push` commits and pushes
 The admin editor's league-table screen is for teams *without* a
 connected competition; connected tables would just be overwritten by
 the next sync.
+
+## Lineup & subs (coach-only)
+
+The fourth view on the Strategy tab runs a game on the same formation
+board. Three lanes:
+
+- **Plan** — the starting XI, the period shape (2x30, 4x15, whatever the
+  age group plays), and substitutions written as *minute + position +
+  who comes on*. The plan works out who goes off for you, following the
+  earlier subs in that position. **Fill by position** puts the
+  least-played eligible player into every empty spot as a starting point.
+- **Live** — a match clock. When a planned sub's minute arrives the app
+  raises it as a prompt: make it, or skip it. Every player accrues
+  minutes while they are on the pitch.
+- **Playing time** — the accumulating season record: total minutes and
+  games per player across every filed game plus the one in progress,
+  least-played first, with the games themselves listed underneath.
+
+### Positions and the time indicator
+
+Each player carries the positions they cover (TeamSnap's single position
+seeds the list). Tapping a spot on the board then offers the players who
+cover it first, and among those the ones owed time.
+
+**Fair share** is the pitch time available divided by the squad: eleven
+players on for T seconds is 11*T of playing time to hand out. A player
+more than a minute — or 15%, whichever is larger — below that reads
+*owed time*, above it reads *had plenty*. One vocabulary carries it
+everywhere: a ring on the board dot, the bench chip border, the bar
+colour in both lists, and a tick on every bar marking an even share.
+Colour is never the only signal; the minutes are always written beside
+it.
+
+A game is filed into the season record when you press **End game**, and
+also if you clear a game that has time on it — a coach who just closes
+the app at full time should not lose the minutes. `archived` guards
+against the same game being counted twice.
+
+**None of this is published.** It lives in `localStorage` under
+`th_lineup_v2_<teamId>_<competitionId>` and never touches
+`data/teams.json`. The site has no accounts, so private has to mean
+*never leaves the browser*. That matters more than usual here: it is a
+roster of children. **Never commit a real roster to this repo** — the
+test fixtures use invented names for that reason.
+
+**One store per competition.** A hub team can play two leagues with two
+different squads: the McNeal team's GCL and N1 rosters share only five
+players. Each competition gets its own roster, starting XI, rotation plan
+and game, and the squad switcher picks between them — defaulting to the
+competition of the next fixture.
+
+**Players are keyed by a generated id, never by shirt number.** The real
+GCL roster has two girls on #2 and two on #8. Keying by number silently
+dropped players on import and would have subbed the wrong child on. The
+roster panel flags a shared number; the board tells them apart by the
+name under the dot.
+
+Three more rules the code depends on:
+
+- **`catchUpClock()` must persist what it credits.** Every interaction
+  re-renders, and every render calls `loadLineup()`, which re-reads
+  localStorage. A minutes credit left only in memory is thrown away by
+  the next tap.
+- **The clock is derived from timestamps, not counted by the ticker.**
+  `runningSince` and `lastTick` mean a locked phone, a closed tab or a
+  reload all resume with the right time, and half-time never accrues.
+- **A shirt-number line in a paste must be a number and nothing else.**
+  `#28` alone on a line starts a block; `#9 Nora Diaz` is one whole
+  player. Confusing the two makes the parser eat preceding lines as that
+  player's contact block.
+
+### Importing a roster
+
+Open the team's roster page in TeamSnap, select all, copy, paste into the
+box. `parseRoster` reads the page's block shape — name, then a pile of
+parent names, emails and phone numbers, then the shirt number on its own
+line — and keeps **only** the player's name and number. Everything after
+the Non-Players heading is dropped, so coaches and managers never land in
+the roster. `7 Ava Martin` per line works too. Re-importing matches on
+name and updates rather than duplicating.
+
+`node test/verify-roster-parse.mjs` covers both paste shapes, the
+contact-stripping, and the shared-number case.
+
+## Phones (learned the hard way)
+
+The hub is read at a field, on a phone, one-handed. Rules that came out
+of measuring it at 390px and 320px:
+
+- **The strategy board is `position:sticky` on phones**, so the coaching
+  cards scroll underneath it. At full height the board filled the screen
+  and pushed every card below the fold — tapping "Play the pattern" lit
+  up an explanation nobody could see. This is why `.main-card` uses
+  `overflow:clip` and **not** `overflow:hidden`: `hidden` makes it a
+  scroll container and silently kills sticky inside it.
+- `highlightCard()` scrolls to an **absolute** target computed from the
+  board's height, not a delta. Before the board sticks, its bottom is
+  below the fold, so every "is the card hidden?" test reads false.
+- **Button rows scroll, they don't wrap.** Four phase buttons wrapped 3+1
+  and orphaned "Attack"; the view switcher did the same once it gained a
+  fourth item. Both are now nowrap scroll strips bleeding to the card edge.
+- **44px minimum on anything tappable.** These were 29-37px.
+- **Fixture rows become three stacked bands sharing one left edge.** The
+  desktop five-column row squeezed a club name into 81px over three
+  lines while the meta line restarted at the card edge — three different
+  left edges in one row.
+- **Standings truncate the club name to one line** (`table-layout:fixed`
+  plus sized numeric columns). Wrapping names gave rows of 55-90px with
+  the numbers floating mid-row, and the table overflowed the card by 8px
+  at 320px. The full name stays in the cell's `title`.
+- **`minmax(0,1fr)`, never bare `1fr`,** for grid tracks holding names: a
+  plain `1fr` floors at min-content and overflows.
 
 ## SVG rules for the strategy board (learned the hard way)
 
@@ -135,10 +249,12 @@ stops and asks rather than overwriting their work.
 ## Tests
 
 ```
-node test/verify-derivation.mjs   # every stat matches the pre-rewrite values
-node test/verify-venues.mjs       # venue geometry + field resolution
-node test/verify-css.mjs          # nothing on screen lost its styling
-node test/verify-publish.mjs      # encoding, conflicts, retries (no network)
+node test/verify-derivation.mjs    # every stat matches the pre-rewrite values
+node test/verify-venues.mjs        # venue geometry + field resolution
+node test/verify-css.mjs           # nothing on screen lost its styling
+node test/verify-publish.mjs       # encoding, conflicts, retries (no network)
+node test/verify-roster-parse.mjs  # roster paste: both shapes, no contacts kept
+node test/verify-playing-time.mjs  # minutes accumulate correctly across games
 ```
 
 ## Importing
