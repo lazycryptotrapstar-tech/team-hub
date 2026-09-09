@@ -216,8 +216,21 @@ async function pull() {
                 fail(comp.id + ': fetch failed — ' + e.message + ' (keeping existing data)');
                 continue;
             }
+            /* Since 2026-09-09 GotSport puts a bot check in front of these
+               pages: an automated request bounces through /verify_captchas
+               and comes back as a ~91KB shell with no fixtures in it. Name
+               that specifically, because "page did not mention team" reads
+               like a bad id and sent the last person looking in the wrong
+               place. Do NOT drive a browser past the gate to fix this — the
+               durable answer is a feed from the league. */
+            if (/verify_captchas|g-recaptcha|recaptcha\/api\.js/.test(html)) {
+                fail(comp.id + ': BLOCKED — GotSport served its bot check instead of the schedule. '
+                     + 'No team can sync until the league provides a feed. (keeping existing data)');
+                continue;
+            }
             if (html.indexOf('team=' + src.teamId) === -1) {
-                fail(comp.id + ': page did not mention team ' + src.teamId + ' (keeping existing data)');
+                fail(comp.id + ': page did not mention team ' + src.teamId
+                     + ' — either the id is wrong or GotSport changed the page (keeping existing data)');
                 continue;
             }
 
