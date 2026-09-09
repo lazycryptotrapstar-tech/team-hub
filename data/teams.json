@@ -2,9 +2,9 @@
   "version": 1,
   "updatedAt": "2026-09-02",
   "teams": {
-    "u13": {
+    "g2013-14-mcneal": {
       "branding": {
-        "name": "Sting McNeal G2013/14",
+        "name": "G2013/14 McNeal",
         "league": "GCL U13 Div 2 · N1 South",
         "season": "2026-27",
         "motto": "Pride · Passion · Performance",
@@ -16,7 +16,8 @@
           "match": "Match",
           "goalsFor": "Goals",
           "goalsAgainst": "GA"
-        }
+        },
+        "ageGroup": "2013/14 Girls"
       },
       "pointsConfig": {
         "win": 3,
@@ -718,6 +719,708 @@
           }
         }
       ]
+    },
+    "g2015-16-oliver": {
+      "branding": {
+        "name": "G2015/16 Oliver",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4104221,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4104221"
+          }
+        }
+      ]
+    },
+    "royal-pre-ecnl-g2014-15-brave": {
+      "branding": {
+        "name": "Royal Pre-ECNL G2014/15 Brave",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2014/15 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4180449,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4180449"
+          }
+        }
+      ]
+    },
+    "g2015-16-brady": {
+      "branding": {
+        "name": "G2015/16 Brady",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4184577,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4184577"
+          }
+        }
+      ]
+    },
+    "pre-ecnl-g2014-15-rey": {
+      "branding": {
+        "name": "Pre-ECNL G2014/15 Rey",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2014/15 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4184806,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4184806"
+          }
+        }
+      ]
+    },
+    "g2015-16-tapia": {
+      "branding": {
+        "name": "G2015/16 Tapia",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4185129,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4185129"
+          }
+        }
+      ]
+    },
+    "pre-ecnl-g2014-15-tapia": {
+      "branding": {
+        "name": "Pre-ECNL G2014/15 Tapia",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2014/15 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4185135,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4185135"
+          }
+        }
+      ]
+    },
+    "pre-ecnl-g2015-16-girau": {
+      "branding": {
+        "name": "Pre-ECNL G2015/16 Girau",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4185943,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4185943"
+          }
+        }
+      ]
+    },
+    "pre-ecnl-g2014-15-girau": {
+      "branding": {
+        "name": "Pre-ECNL G2014/15 Girau",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2014/15 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4193907,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4193907"
+          }
+        }
+      ]
+    },
+    "royal-ecnl-rl-ntx-g2013-14": {
+      "branding": {
+        "name": "Royal ECNL RL NTX G2013/14",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2013/14 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4211160,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4211160"
+          }
+        }
+      ]
+    },
+    "brave-ecnl-rl-ntx-g2012-13": {
+      "branding": {
+        "name": "Brave ECNL RL NTX G2012/13",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2012/13 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4215249,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4215249"
+          }
+        }
+      ]
+    },
+    "pre-ecnl-g2015-16-bagwell": {
+      "branding": {
+        "name": "Pre-ECNL G2015/16 Bagwell",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4227347,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4227347"
+          }
+        }
+      ]
+    },
+    "pre-ecnl-g2014-15-wong": {
+      "branding": {
+        "name": "Pre-ECNL G2014/15 Wong",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2014/15 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4232744,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4232744"
+          }
+        }
+      ]
+    },
+    "black-ecnl-rl-ntx-g2012-13": {
+      "branding": {
+        "name": "Black ECNL RL NTX G2012/13",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2012/13 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4248159,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4248159"
+          }
+        }
+      ]
+    },
+    "pre-ecnl-g2015-16-fuentes-brave": {
+      "branding": {
+        "name": "Pre-ECNL G2015/16 Fuentes Brave",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4253583,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4253583"
+          }
+        }
+      ]
+    },
+    "g2013-14-robles": {
+      "branding": {
+        "name": "G2013/14 Robles",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2013/14 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4267831,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4267831"
+          }
+        }
+      ]
+    },
+    "g2015-16-holland": {
+      "branding": {
+        "name": "G2015/16 Holland",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4274494,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4274494"
+          }
+        }
+      ]
+    },
+    "g2015-16-zambrano": {
+      "branding": {
+        "name": "G2015/16 Zambrano",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2015/16 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4289915,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4289915"
+          }
+        }
+      ]
+    },
+    "g2013-14-wong": {
+      "branding": {
+        "name": "G2013/14 Wong",
+        "league": "Girls Classic League",
+        "season": "2026-27",
+        "motto": "Pride · Passion · Performance",
+        "website": "StingSoccer.com",
+        "primaryColor": "#00234b",
+        "secondaryColor": "#ffcc00",
+        "sport": "Soccer",
+        "ageGroup": "2013/14 Girls",
+        "terms": {
+          "match": "Match",
+          "goalsFor": "Goals",
+          "goalsAgainst": "GA"
+        }
+      },
+      "pointsConfig": {
+        "win": 3,
+        "draw": 1,
+        "loss": 0,
+        "drawsAllowed": true
+      },
+      "games": [],
+      "competitions": [
+        {
+          "id": "gcl",
+          "label": "Girls Classic League",
+          "shortLabel": "Girls",
+          "season": "2026-27",
+          "source": {
+            "provider": "gotsport",
+            "eventId": 55246,
+            "teamId": 4345801,
+            "url": "https://system.gotsport.com/org_event/events/55246/schedules?team=4345801"
+          }
+        }
+      ]
     }
   },
   "archivedTeams": {
@@ -1212,6 +1915,22 @@
         }
       },
       "story": null
+    }
+  },
+  "club": {
+    "name": "Sting Soccer Club",
+    "shortName": "Sting",
+    "website": "StingSoccer.com",
+    "motto": "Pride · Passion · Performance",
+    "primaryColor": "#00234b",
+    "secondaryColor": "#ffcc00",
+    "season": "2026-27",
+    "defaultLeague": "Girls Classic League",
+    "defaultCompetitionId": "gcl",
+    "source": {
+      "provider": "gotsport",
+      "eventId": 55246,
+      "clubId": 4763
     }
   }
 }

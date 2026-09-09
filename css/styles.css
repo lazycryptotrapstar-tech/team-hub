@@ -891,6 +891,86 @@ body{
 .next-mini-meta{font-family:var(--mono);font-size:11.5px;color:var(--text2);margin-top:6px;}
 .fx-ha{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--accent);margin-right:2px;}
 
+/* ===== CLUB DIRECTORY =====
+   The front door. Nineteen teams is a list you search, not a row of pills
+   you scan, so this is one flat searchable list grouped by age. Teams with
+   no schedule yet still appear — leaving one out would say it does not
+   exist, which is a worse lie than saying its fixtures are not up. */
+.club-view{padding:26px 28px 34px;}
+.club-hero{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.club-hero .crest{flex-shrink:0;margin-top:0;}
+.club-hero h1{
+    font-family:var(--display);font-size:32px;font-weight:700;letter-spacing:.02em;
+    text-transform:uppercase;line-height:1.05;color:var(--text);margin:0;
+}
+.club-sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--text3);margin-top:5px;}
+
+.club-search{
+    width:100%;min-height:50px;margin-bottom:8px;
+    font-family:var(--font);font-size:16px;font-weight:600;color:var(--text);
+    background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);
+    padding:12px 15px;
+}
+.club-search::placeholder{color:var(--text3);font-weight:400;}
+.club-search:focus{border-color:var(--accent);outline:none;}
+
+.club-group{margin-top:22px;}
+.club-group[hidden]{display:none;}
+.club-group-head{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);
+    padding-bottom:9px;margin:0 0 4px;border-bottom:2px solid var(--border);
+}
+.club-group-head span{font-family:var(--mono);color:var(--text3);letter-spacing:.08em;}
+
+.club-team-list{display:flex;flex-direction:column;}
+.club-team{
+    display:flex;align-items:center;gap:14px;width:100%;min-height:58px;
+    padding:13px 2px;text-align:left;cursor:pointer;
+    background:none;border:none;border-bottom:1px solid var(--border);
+    font-family:var(--font);transition:background .13s;
+}
+.club-team:last-child{border-bottom:none;}
+.club-team:hover{background:var(--surface);}
+.club-team[hidden]{display:none;}
+.ct-name{
+    flex:1;min-width:0;font-size:15px;font-weight:700;color:var(--text);
+    line-height:1.3;
+}
+.ct-meta{display:flex;align-items:baseline;gap:12px;flex-shrink:0;text-align:right;}
+.ct-rec{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap;}
+.ct-rec i{color:var(--text3);font-style:normal;margin:0 2px;font-weight:400;}
+.ct-next{font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;}
+.ct-empty{font-family:var(--mono);font-size:10px;color:var(--text3);font-style:normal;}
+.ct-go{font-size:20px;color:var(--text3);flex-shrink:0;line-height:1;}
+.club-team:hover .ct-go{color:var(--accent);}
+
+.club-foot{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--text3);
+    margin-top:26px;padding-top:14px;border-top:1px solid var(--border);
+}
+
+/* the way back, in the header where the switcher used to be */
+.club-back{
+    display:inline-flex;align-items:center;gap:6px;min-height:44px;
+    font-family:var(--font);font-size:12.5px;font-weight:700;
+    color:var(--text2);background:var(--surface);
+    border:1px solid var(--border);border-radius:999px;padding:9px 16px;cursor:pointer;
+    transition:all .13s;white-space:nowrap;
+}
+.club-back:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft);}
+
+/* the club name above the team name in the team bar */
+.tb-club{
+    font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text3);margin-bottom:4px;
+}
+
+/* on the directory there is no team, so the team chrome is not there either */
+body.club-route .team-bar,body.club-route .toolbar,body.club-route .bottom-nav{display:none!important;}
+body.club-route{padding-bottom:40px;}
+
 /* ===== BOTTOM NAV (mobile) ===== */
 .bottom-nav{display:none;}
 
@@ -1009,6 +1089,14 @@ body{
     .st-table th{width:27px;padding:11px 4px;}
     .st-th-rank,.st-table th.st-th-rank{width:30px;}
     .st-table th[title="Points"]{width:32px;}
+
+    /* club directory on a phone */
+    .club-view{padding:20px 16px 28px;}
+    .club-hero h1{font-size:25px;}
+    .club-team{gap:10px;min-height:62px;flex-wrap:wrap;}
+    .ct-name{flex:1 1 100%;font-size:14.5px;}
+    .ct-meta{flex:1;justify-content:flex-start;text-align:left;gap:10px;}
+    .ct-go{margin-left:auto;}
     .tourn-hist-row{flex-direction:column;align-items:flex-start;gap:10px;}
 
     /* mobile bottom nav */

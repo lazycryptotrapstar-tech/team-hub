@@ -1,8 +1,12 @@
 # Team Hub
 
-Youth-sports team hub — live at [teamhub.simplegenius.io](https://teamhub.simplegenius.io).
+A **club** hub — live at [teamhub.simplegenius.io](https://teamhub.simplegenius.io).
 
-Built so a parent or player landing on it can answer three questions fast:
+One club, every one of its teams, and a parent who picks theirs once. Sting
+run nineteen teams across four age groups; the front door is a searchable
+directory, and the app remembers the team you chose.
+
+Built so a parent or player landing on it can answer these fast:
 
 1. **Where is the next game?** — schedule with venue field maps and directions
 2. **How are we doing?** — live standings and stats, synced from the league site
@@ -17,6 +21,7 @@ substitution board.
 index.html            family app shell
 css/styles.css        all styles
 js/data.js            loads data/teams.json, derives every stat
+js/club.js            the club directory: every team, searchable, remembered
 js/venue.js           venue map rendering
 js/story.js           narrative engine + AI enhancement
 js/strategy.js        strategy tab: formation board, position guide, set pieces
@@ -26,6 +31,44 @@ scripts/pull-league.mjs  league sync: pulls schedule + standings from GotSport
 data/teams.json       all team data — the single source of truth
 test/                 regression checks
 ```
+
+## The club layer
+
+`data/teams.json` carries a `club` block above the teams — name, colours,
+season, and a `source` pointing at the club's page inside a league event on
+GotSport. `scripts/seed-club.mjs` reads that page and writes an entry per
+team, so adding a club is one command rather than typing twenty GotSport ids:
+
+```
+node scripts/seed-club.mjs            # dry run
+node scripts/seed-club.mjs --write    # apply
+```
+
+Teams already in the file are left alone — they carry real synced games and
+standings that a stub must not overwrite.
+
+**A team with no schedule still appears in the directory**, labelled
+"no schedule published yet". Leaving it out would say the team does not
+exist, which is the worse lie. The same honesty applies inside a team: the
+Schedule tab distinguishes a finished season from an unpublished one, and the
+Story tab says nothing rather than letting the narrative engine invent
+"tough run of form" from an empty record.
+
+## ⚠ The league sync is currently blocked
+
+`scripts/pull-league.mjs` **cannot reach GotSport any more.** As of
+2026-09-09 every automated request to a schedules page redirects through
+`/verify_captchas/new` and returns a ~91KB shell with no fixtures in it. The
+script's guard catches this and keeps the existing data rather than wiping
+it, so the failure is silent — check `lastUpdate` in `data/teams.json` to see
+how stale a team is.
+
+The data is visible to a normal browser session. **Do not route the scraper
+through a headless browser to get past the gate** — that is defeating bot
+protection, and it is the kind of thing that gets an account blocked. The
+real fix is a feed or API access from the league; the interim fix is the
+admin editor's Import tab, which parses a schedule or league table pasted
+straight off the league site.
 
 ## Cache busting
 

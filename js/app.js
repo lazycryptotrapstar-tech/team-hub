@@ -193,8 +193,9 @@ function renderTeamBar() {
         `<div class="tb-identity">
             ${teamCrest(TEAM_CONFIG, 44)}
             <div class="tb-id-text">
+                ${CLUB && CLUB.name ? `<div class="tb-club">${CLUB.name}</div>` : ''}
                 <h1 class="tb-name">${b.name}</h1>
-                <div class="tb-sub">${b.league} <span>·</span> ${b.season}</div>
+                <div class="tb-sub">${b.league || (CLUB && CLUB.defaultLeague) || ''} <span>·</span> ${b.season || (CLUB && CLUB.season) || ''}</div>
             </div>
         </div>
         <div class="tb-stats">
@@ -228,43 +229,21 @@ function renderPageFooter() {
         `<span class="pf-updated">Updated ${TEAM_CONFIG.lastUpdate}</span>`;
 }
 
-/* Past a handful of teams a row of pills stops being a switcher and starts
-   being a wall, so a club running twenty teams gets a picker instead. */
-const PILL_LIMIT = 6;
+/* A club running nineteen teams is past the point where a row of pills is
+   a switcher. The directory in club.js is the front door now; up here the
+   header just says which team you are in and offers the way back. */
 
+/* The header's job in a club hub is small: say which team you are in and
+   offer the way back to the directory. The old pill row and grouped select
+   are gone — nineteen teams is a directory's problem, not a switcher's. */
 function renderTeamSwitcher() {
     const c = document.getElementById('team-switcher');
+    if (!c) return;
     const ids = Object.keys(TEAMS);
-    if (ids.length < 2) { c.innerHTML = ''; return; }
-
-    if (ids.length <= PILL_LIMIT) {
-        c.className = 'no-print switcher-pills';
-        c.innerHTML = ids.map(id =>
-            `<button onclick="switchTeam('${id}')" class="team-switcher-btn ${id === currentTeamId ? 'active' : ''}"` +
-            ` aria-pressed="${id === currentTeamId}">` +
-            teamCrest(TEAMS[id], 22) + TEAMS[id].branding.name + '</button>'
-        ).join('');
-        return;
-    }
-
-    // Grouped by league so a big club's list stays navigable
-    const groups = {};
-    ids.forEach(id => {
-        const key = TEAMS[id].branding.league || 'Other';
-        (groups[key] = groups[key] || []).push(id);
-    });
-    c.className = 'no-print switcher-select';
-    c.innerHTML =
-        teamCrest(TEAMS[currentTeamId], 26) +
-        `<select onchange="switchTeam(this.value)" aria-label="Choose a team">` +
-        Object.keys(groups).sort().map(league =>
-            `<optgroup label="${league}">` +
-            groups[league].map(id =>
-                `<option value="${id}"${id === currentTeamId ? ' selected' : ''}>${TEAMS[id].branding.name}</option>`
-            ).join('') + '</optgroup>'
-        ).join('') +
-        '</select>' +
-        `<span class="switcher-count">${ids.length} teams</span>`;
+    if (route === 'club' || ids.length < 2) { c.innerHTML = ''; c.className = 'no-print'; return; }
+    c.className = 'no-print';
+    c.innerHTML = `<button class="club-back" onclick="browseClub()">` +
+        `<span aria-hidden="true">‹</span> All ${ids.length} teams</button>`;
 }
 
 function renderNavBars() {
@@ -279,9 +258,7 @@ function renderNavBars() {
 
 function switchTeam(id) {
     tournView = 'bracket'; tournMapDay = 'All'; standingsView = 'table';
-    currentTeamId = id; TEAM_CONFIG = TEAMS[id];
-    applyTheme(); applyFavicon(); renderSiteBrand();
-    renderTeamSwitcher(); renderTeamBar(); renderPageFooter(); renderNavBars(); render();
+    openTeam(id);
 }
 
 function switchTab(tab) {
@@ -466,6 +443,17 @@ function renderStatsReport(container) {
    STORY TAB  (AI storylines)
 ============================================================ */
 function renderStory(container) {
+    /* A team with no results has no season to narrate. The narrative engine
+       will happily produce "needs a spark - tough run of form" from an empty
+       record, and across eighteen teams whose fixtures the league has not
+       published yet, that is eighteen invented stories. Say nothing instead. */
+    if (!TEAM_CONFIG.matches.length) {
+        container.innerHTML = '<div class="content-area">' +
+            '<div class="empty-state"><strong>No story yet.</strong>' +
+            '<span>The season write-up appears once ' + esc(TEAM_CONFIG.branding.name) +
+            ' has played a game.</span></div></div>';
+        return;
+    }
     const l = TEAM_CONFIG.league;
     const avail = TEAM_CONFIG.remainingSchedule.length * TEAM_CONFIG.pointsConfig.win;
     const maxPts = l.points + avail;
@@ -577,8 +565,16 @@ function renderSchedule(container) {
     /* --- next game: the one thing most people opened this for --- */
     let nextBlock;
     if (!next) {
-        nextBlock = '<div class="empty-state"><strong>Season complete.</strong>' +
-            '<span>No more games on the schedule.</span></div>';
+        /* Two different silences: a season that finished, and a schedule the
+           league has not published. Saying "season complete" to the second
+           one is a lie the club hub tells nineteen times over. */
+        const played = TEAM_CONFIG.matches.length;
+        nextBlock = played
+            ? '<div class="empty-state"><strong>Season complete.</strong>' +
+              '<span>No more games on the schedule.</span></div>'
+            : '<div class="empty-state"><strong>No schedule published yet.</strong>' +
+              '<span>' + esc(TEAM_CONFIG.branding.name) + ' is registered, but the league has not posted its ' +
+              'fixtures. They appear here as soon as it does.</span></div>';
     } else {
         const parts = next.date.split(' ');
         const mapHTML = venue
@@ -853,6 +849,31 @@ function setMapDay(day){tournMapDay=day;renderTournament(document.getElementById
 /* ============================================================
    ROUTER + BOOT
 ============================================================ */
+/* One entry point for both routes: the directory replaces the whole
+   team chrome rather than sitting inside it. */
+function renderShell() {
+    const isClub = route === 'club';
+    document.body.classList.toggle('club-route', isClub);
+    ['teamBar', 'bottomNav'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.hidden = isClub;
+    });
+    const toolbar = document.querySelector('.toolbar');
+    if (toolbar) toolbar.hidden = isClub;
+
+    renderSiteBrand();
+    renderTeamSwitcher();
+    renderPageFooter();
+
+    if (isClub) {
+        document.getElementById('main-content').innerHTML = renderClub();
+        window.scrollTo(0, 0);
+        return;
+    }
+    renderTeamBar();
+    render();
+}
+
 function render() {
     renderNavBars();
     const c = document.getElementById('main-content');
@@ -874,15 +895,18 @@ function boot() {
     Promise.all([loadHubData(), loadVenues()]).then(() => {
         const ids = Object.keys(TEAMS);
         if (!ids.length) throw new Error('No teams in data/teams.json');
-        currentTeamId = ids[0];
+
+        /* A club with one team has no directory worth showing. With more,
+           a returning parent goes straight to the team they picked. */
+        const remembered = rememberedTeam();
+        if (ids.length === 1) { currentTeamId = ids[0]; route = 'team'; }
+        else if (remembered) { currentTeamId = remembered; route = 'team'; }
+        else { currentTeamId = ids[0]; route = 'club'; }
+
         TEAM_CONFIG = TEAMS[currentTeamId];
         applyTheme();
         applyFavicon();
-        renderSiteBrand();
-        renderTeamSwitcher();
-        renderTeamBar();
-        renderPageFooter();
-        render();
+        renderShell();
     }).catch(err => {
         document.getElementById('main-content').innerHTML =
             '<div style="padding:40px;text-align:center;color:var(--red);">' +

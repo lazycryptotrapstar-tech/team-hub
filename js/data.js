@@ -249,6 +249,7 @@ function loadHubData() {
         })
         .then(json => {
             HUB_DATA = json;
+            CLUB = json.club || { name: 'Team Hub', season: '' };
             TEAMS = {};
             Object.keys(json.teams).forEach(id => { TEAMS[id] = deriveTeam(id, json.teams[id]); });
             return TEAMS;
