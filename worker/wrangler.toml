@@ -1,0 +1,7 @@
+name = "sting-hub-ai"
+main = "worker.js"
+# The Cloudflare connector does not expose the deployed compatibility date.
+# 2026-03-31 is the date the worker was created and last modified on Cloudflare;
+# any date on or after that is safe for this worker (it uses only fetch, URL,
+# Response, and request.json()).
+compatibility_date = "2026-03-31"
